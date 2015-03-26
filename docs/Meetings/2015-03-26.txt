@@ -1,0 +1,38 @@
+Meeting Agenda
+
+  Date: 2015-03-26
+
+  Facilitator: Marcus Aurén
+
+  Participants: Jonathan Helsing, Amar Kulaglic, Anton Törnqvist
+
+1. Objectives (5 min). Resolve any issues preventing the team to 
+  continue.
+	
+	Create the file structure in git
+	Write Section 1 and 2.3 in the RAD
+	Finish the design of the program
+	Determine how we will build the program, class structure and UML
+
+2. Reports (15 min) from previous meeting
+
+	First meeting.
+
+3. Discussion items (35 min) 
+
+	Same as in 1
+	How will be build it? MVC already in Android?
+
+4. Outcomes and assignments (5 min) 
+	
+	Everyone will get familiar with the libraries and with Android in general
+
+	Amar - Write RAD
+	Anton - Make necessary classes
+	Jonathan - Make the enemy and player classes, write to teacher about MVC
+	Marcus - Write RAD
+
+5. Wrap up
+
+	Discuss whether or not MVC is the best way. Built in?
+
