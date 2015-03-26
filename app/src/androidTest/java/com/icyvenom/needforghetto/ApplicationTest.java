@@ -1,4 +1,4 @@
-package com.needforghetto.icyvenom.needforghetto;
+package com.icyvenom.needforghetto;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
