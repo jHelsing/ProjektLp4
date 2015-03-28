@@ -42,8 +42,6 @@ public abstract class Unit extends Observable {
     private FireMode fireMode;
     private Observer observer;
 
-    public Unit(){}
-
     public void addObserver(Observer observer){
         this.observer=observer;
     }

@@ -18,33 +18,58 @@ public class Player extends Unit {
      */
     private int nbrOfLives;
 
+    /**
+     * The amount of points the player have amassed.
+     */
+    private int score;
+
+    /**
+     * The singleton instance of Player.
+     */
     private final static Player instance = new Player();
 
     private Player() {
-        super();
         nbrOfLives = 3; // Default amount of Lives
+        score = 0;
         super.setHealth(1);
         super.setFireMode(FireMode.ONE_WEAPON);
         // TODO super.setSprite(new ImageView(getResource(R.drawable.)));
     }
 
     /**
-     * Resets the Player instance. Called on when the user starts a new game.
+     * Resets the Player instance. Called on when the user starts a new game. All values reset to
+     * default.
      */
     public void resetPlayer() {
         nbrOfLives=3;
+        score = 0;
         super.setHealth(1);
         super.setFireMode(FireMode.ONE_WEAPON);
         //TODO add everything else that's added to the constructor.
     }
 
     /**
+     * Adds the amount of points specified in the parameter to the player's score.
+     * @param points The amount of points to be added to the player's score.
+     */
+    public void addPointsToScore(int points) {
+        score += points;
+    }
+
+    /**
      * Getter for the Player instance.
      * @return The Player instance
      */
-
     public static Player getInstance() {
         return instance;
+    }
+
+    /**
+     * Getter for the amount of points (the total score) the player currently has.
+     * @return Score, the amount of points the player currently has.
+     */
+    public int getScore() {
+        return this.score;
     }
 
     /**
