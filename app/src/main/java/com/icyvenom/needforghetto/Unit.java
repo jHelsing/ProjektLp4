@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
+ * @version 1.1
  * @author Amar Kulaglic. Revisited 2015-03-28 by Jonathan Helsing
  */
 public abstract class Unit extends Observable {
@@ -118,13 +119,20 @@ public abstract class Unit extends Observable {
     public void setFireMode(FireMode mode) {
         this.fireMode = mode;
     }
-    
+
+    /**
+     *
+     * @param sprite Sets the sprite for the unit.
+     */
+    public void setSprite(ImageView sprite) {
+        this.sprite = sprite;
+    }
 
     /**
      *
      * @param position Sets the position of the unit.
      */
-    public void setPosition(int position){
+    public void setPosition(Point position){
         this.position=position;
     }
 }
