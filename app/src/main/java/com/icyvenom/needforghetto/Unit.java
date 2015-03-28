@@ -7,7 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Created by Amar Kulaglic on 2015-03-27.
+ * @author Amar Kulaglic. Revisited 2015-03-28 by Jonathan Helsing
  */
 public abstract class Unit extends Observable {
 
@@ -40,6 +40,8 @@ public abstract class Unit extends Observable {
      */
     private FireMode fireMode;
     private Observer observer;
+
+    public Unit(){}
 
     public void addObserver(Observer observer){
         this.observer=observer;
@@ -102,9 +104,27 @@ public abstract class Unit extends Observable {
     }
 
     /**
-     * Sets a new position of the creature.
+     *
+     * @param health Sets the health of the unit.
      */
-    public void setPosition(){
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    /**
+     *
+     * @param mode Sets the FireMode enum for the unit.
+     */
+    public void setFireMode(FireMode mode) {
+        this.fireMode = mode;
+    }
+    
+
+    /**
+     *
+     * @param position Sets the position of the unit.
+     */
+    public void setPosition(int position){
         this.position=position;
     }
 }
