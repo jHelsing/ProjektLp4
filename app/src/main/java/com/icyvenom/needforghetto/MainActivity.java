@@ -1,17 +1,26 @@
 package com.icyvenom.needforghetto;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
-
-public class MainActivity extends ActionBarActivity {
+//TODO: Change GUI for this (?)
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button startButton = (Button) findViewById(R.id.startButton);
+        Button exitButton = (Button) findViewById(R.id.exitButton);
+        startButton.setOnClickListener(this);
+        exitButton.setOnClickListener(this);
     }
 
 
@@ -35,5 +44,19 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.startButton:
+                Intent i = new Intent(getApplicationContext(), GameActivity.class);
+                startActivity(i);
+                break;
+            case R.id.exitButton:
+                finish();
+                break;
+        }
     }
 }
