@@ -7,7 +7,7 @@ import android.widget.ImageView;
  * at a time. When a new game is started the method resetPlayer() will reset the Player object to
  * it's original state.
  * @version 1.0
- * @author Jonathan Helsing
+ * @author Jonathan Helsing. Revisited 2015-03-30 by Amar Kulaglic.
  */
 public class Player extends Unit {
 
@@ -32,8 +32,16 @@ public class Player extends Unit {
         nbrOfLives = 3; // Default amount of Lives
         score = 0;
         super.setHealth(1);
-        super.setFireMode(FireMode.ONE_WEAPON);
         // TODO super.setSprite(new ImageView(getResource(R.drawable.)));
+    }
+
+    /**
+     * Moves the player from the old position to this new position with a specific x- and y-coordinate.
+     * @param x Moves the player to this x-coordinate.
+     * @param y Moves the player to this y-coordinate
+     */
+    public void move(int x,int y){
+        //Code here
     }
 
     /**
@@ -44,7 +52,6 @@ public class Player extends Unit {
         nbrOfLives=3;
         score = 0;
         super.setHealth(1);
-        super.setFireMode(FireMode.ONE_WEAPON);
         //TODO add everything else that's added to the constructor.
     }
 
@@ -54,6 +61,21 @@ public class Player extends Unit {
      */
     public void addPointsToScore(int points) {
         score += points;
+    }
+    /**
+     * Kills the player.
+     */
+    @Override
+    protected void kill(){
+        nbrOfLives--;
+    }
+
+    /**
+     * Attacks a enemy from the player's weapon.
+     */
+    @Override
+    public void attack(){
+        //Code here.
     }
 
     /**

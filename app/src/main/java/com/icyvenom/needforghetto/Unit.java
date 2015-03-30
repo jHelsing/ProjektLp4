@@ -7,18 +7,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * @version 1.1
- * @author Amar Kulaglic. Revisited 2015-03-28 by Jonathan Helsing
+ * @version 1.2
+ * @author Amar Kulaglic. Revisited 2015-03-28 by Jonathan Helsing. Revisited 2015-03-30 by Amar Kulaglic.
  */
 public abstract class Unit extends Observable {
-
-    public enum FireMode {
-        /**
-         * Different way of firing a weapon.
-         */
-        ONE_WEAPON,TWO_WEAPONS,THREE_WEAPONS;
-
-    }
 
     /**
      * The health is the creature's life.
@@ -29,6 +21,10 @@ public abstract class Unit extends Observable {
      */
     private int speed;
     /**
+     * The weapon of the creature.
+     */
+    private Weapon weapon;
+    /**
      * Position of the creature. The position is in the center of the sprite.
      */
     private Point position;
@@ -36,10 +32,7 @@ public abstract class Unit extends Observable {
      * The sprite is the appearance of the creature.
      */
     private ImageView sprite;
-    /**
-     * The fire mode is how the creature is firing a weapon.
-     */
-    private FireMode fireMode;
+
     private Observer observer;
 
     public void addObserver(Observer observer){
@@ -59,23 +52,18 @@ public abstract class Unit extends Observable {
     /**
      * Kills the creature.
      */
-    private void kill(){
-        this.notifyObservers();
-    }
+    protected abstract void kill();
+
+    /**
+     * Attacks a target from the creature's weapon.
+     */
+    public abstract void attack();
     /**
      *
      * @return  Returns the position of the creature.
      */
     public Point getPosition(){
         return position;
-    }
-
-    /**
-     *
-     * @return  Returns the fire mode of the creature.
-     */
-    public FireMode getFireMode(){
-        return fireMode;
     }
 
     /**
@@ -104,18 +92,18 @@ public abstract class Unit extends Observable {
 
     /**
      *
-     * @param health Sets the health of the unit.
+     * @return Returns the weapon of the creature.
      */
-    public void setHealth(int health) {
-        this.health = health;
+    public Weapon getWeapon() {
+        return weapon;
     }
 
     /**
      *
-     * @param mode Sets the FireMode enum for the unit.
+     * @param health Sets the health of the unit.
      */
-    public void setFireMode(FireMode mode) {
-        this.fireMode = mode;
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     /**
