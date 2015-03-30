@@ -1,0 +1,40 @@
+Meeting Agenda
+
+  Date: 2015-03-30
+
+  Facilitator: Marcus Auren
+
+  Participants: Jonathan Helsing, Anton Tornqvist, Amar Kulaglic
+
+1. Objectives (5 min). Resolve any issues preventing the team to 
+  continue.
+
+	Same issues as last meeting.
+
+2. Reports (15 min) from previous meeting
+
+	Anton: Worked on the UML, went fine
+	Marcus: Put a lot of time into android but haven't finished the RAD
+	Jonathan: Finished but wondering about how to proceed with classes.
+	Amar: Same as Jonathan.
+
+3. Discussion items (35 min) 
+
+	Still need to figure out how android implements MVC.
+	
+
+4. Outcomes and assignments (5 min) 
+	
+	Preliminary idea of how to build the app. 
+	Time to create a prototype.
+	
+	Jonathan: Focus on the UML, start working on sprites
+	Anton: Will work on a rough prototype of the 
+	Marcus: Finish RAD section 2
+	Amar: Fix code for player, enemy, unit, weapon, bullet
+
+5. Wrap up
+
+ 	Wait for the supervised meeting to discuss MVC
+
+  	2015-04-01 in 3215
