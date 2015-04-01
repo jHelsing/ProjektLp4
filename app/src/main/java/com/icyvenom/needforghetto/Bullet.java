@@ -5,7 +5,8 @@ import android.graphics.Point;
 import android.widget.ImageView;
 
 /**
- * Created by Amar Kulaglic on 2015-03-30.
+ * @author Amar Kulaglic
+ * @version 1.0
  */
 public abstract class Bullet {
     /**
@@ -26,7 +27,7 @@ public abstract class Bullet {
     private Path bulletPath;
 
     /**
-     * Moves the bullet in a specific path.
+     * Moves the bullet to the next Point in the path that was given when instanced.
      */
     public void move(){
         //code here
@@ -62,5 +63,13 @@ public abstract class Bullet {
      */
     public Path getBulletPath(){
         return bulletPath;
+    }
+
+    /**
+     *
+     * @param damageModifier is the extra damage that the bullet causes.
+     */
+    public void setDamageModifier(int damageModifier) {
+        this.damageModifier = damageModifier;
     }
 }
