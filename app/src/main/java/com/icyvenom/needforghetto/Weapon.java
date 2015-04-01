@@ -1,7 +1,8 @@
 package com.icyvenom.needforghetto;
 
 /**
- * Created by Amar Kulaglic on 2015-03-30.
+ * @author Amar Kulaglic
+ * @version 1.0
  */
 public abstract class Weapon {
 
@@ -15,7 +16,7 @@ public abstract class Weapon {
      *
      * @return  Returns the attack rate of the weapon.
      */
-    private int AttackRate;
+    private int attackRate;
 
     /**
      *
@@ -36,7 +37,7 @@ public abstract class Weapon {
      * @return  Returns the attack rate of the weapon.
      */
     public int getAttackRate() {
-        return AttackRate;
+        return attackRate;
     }
 
     /**

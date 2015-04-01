@@ -3,7 +3,8 @@ package com.icyvenom.needforghetto;
 import android.graphics.Path;
 
 /**
- * Created by Amar Kulaglic on 2015-03-27.
+ * @author Amar Kulaglic
+ * @version 1.0
  */
 public abstract class Enemy extends Unit{
     /**

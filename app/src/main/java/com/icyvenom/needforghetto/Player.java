@@ -66,8 +66,13 @@ public class Player extends Unit {
      * Kills the player.
      */
     @Override
-    protected void kill(){
-        nbrOfLives--;
+    protected void kill() throws GameOverException {
+        if(nbrOfLives<1){
+            throw new GameOverException();
+        }
+        else{
+            nbrOfLives--;
+        }
     }
 
     /**

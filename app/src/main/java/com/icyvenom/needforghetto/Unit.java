@@ -44,15 +44,16 @@ public abstract class Unit extends Observable {
      * The damage this creature gets.
      * @param damage
      */
-    public void destroy(int damage) {
+    public void destroy(int damage) throws GameOverException {
         health = health-damage;
         if(health<= 0)
             kill();
     }
     /**
      * Kills the creature.
+     * @throws GameOverException is thrown when the game is over.
      */
-    protected abstract void kill();
+    protected abstract void kill() throws GameOverException;
 
     /**
      * Attacks a target from the creature's weapon.
