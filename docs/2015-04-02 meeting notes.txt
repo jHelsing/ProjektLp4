@@ -1,0 +1,8 @@
+raka sträck inga pilar i UML. Visa upp den utan pilar på redovisning måndag om 3 veckor.
+Fixa Use Case och schema.
+Motivera varje klass och varje klass ska ha ett väldefinerat syfte.
+Sekvensdiagram. Efter : är det objekt typen. Köra GUI direkt mot NeedForGhetto istället för World. (NFG=NeedForGhetto)
+Metodanrop = ifylld pilspets. streckad linje är när något retuneras. 
+
+Måndag:
+1-2 slides, 10min. Stillbilder på layouten. Bara för att se att alla har rätt analys-del. 
