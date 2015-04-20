@@ -10,6 +10,8 @@ import android.graphics.Picture;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 
+import java.util.List;
+
 /**
  * Created by anton on 2015-03-30.
  *
@@ -25,14 +27,20 @@ public class Game {
     private int gameTimeSec;
     private Resources resources;
     private Player player;
+    private List<Enemy> enemies;
+    private List<Bullet> bullets;
+
     Game(Resources resources) {
         this.resources = resources;
         this.player = this.player.getInstance();
+        player.setSprite(BitmapFactory.decodeResource(this.resources, R.drawable.car));
     }
 
     public void update(long gameTime) {
 
         gameTimeSec = (int) (gameTime/1000);
+        playerCollision();
+        enemyCollision();
 
     }
 
@@ -44,10 +52,32 @@ public class Game {
         p.setStyle(Paint.Style.FILL);
         p.setTextSize(40);
         c.drawText(String.valueOf(gameTimeSec), 400, 400, p);
-        c.drawBitmap(player.getSprite(), player.getPosition().x, player.getPosition().y);
+        c.drawBitmap(player.getSprite(), player.getPosition().x, player.getPosition().y, null);
     }
 
     public void move(float x, float y) {
-        player.setPosition(new Point((int)x, (int)y));
+        player.move((int) x, (int) y);
     }
+
+    public void playerCollision(){
+        for (Enemy e : enemies) {
+            if(player.getHitbox().intersect(e.getHitbox())){
+                player.kill();
+                e.kill();
+                enemies.remove(e);
+            }
+        }
+    }
+    public void enemyCollision(){
+        for (Enemy e : enemies){
+            for (Bullet b : bullets){
+                if(e.getHitbox().intersect(b.getHitbox())){
+                    e.kill();
+                    enemies.remove(e);
+                    bullets.remove(b);
+                }
+            }
+        }
+    }
+
 }

@@ -24,7 +24,7 @@ public abstract class Enemy extends Unit{
      * Moves the enemy in a specific path.
      */
     public void move(){
-        //Code here.
+        this.setHitbox(getSprite());
     }
 
     /**

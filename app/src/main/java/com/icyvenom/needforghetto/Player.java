@@ -1,5 +1,7 @@
 package com.icyvenom.needforghetto;
 
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.widget.ImageView;
 
 /**
@@ -41,7 +43,8 @@ public class Player extends Unit {
      * @param y Moves the player to this y-coordinate
      */
     public void move(int x,int y){
-        //Code here
+        this.setPosition(new Point(x,y));
+        this.setHitbox(getSprite());
     }
 
     /**
@@ -66,9 +69,10 @@ public class Player extends Unit {
      * Kills the player.
      */
     @Override
-    protected void kill() throws GameOverException {
+    protected void kill() /* throws GameOverException */{
         if(nbrOfLives<1){
-            throw new GameOverException();
+            //throw new GameOverException();
+            //TODO Handle game over way better?
         }
         else{
             nbrOfLives--;
@@ -107,7 +111,5 @@ public class Player extends Unit {
     public int getNbrOfLives() {
         return this.nbrOfLives;
     }
-
-
 
 }
