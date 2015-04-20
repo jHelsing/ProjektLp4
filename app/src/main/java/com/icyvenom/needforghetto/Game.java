@@ -1,8 +1,13 @@
 package com.icyvenom.needforghetto;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Picture;
+import android.graphics.Point;
 import android.graphics.PorterDuff;
 
 /**
@@ -18,11 +23,17 @@ import android.graphics.PorterDuff;
 public class Game {
 
     private int gameTimeSec;
+    private Resources resources;
+    private Player player;
+    Game(Resources resources) {
+        this.resources = resources;
+        this.player = this.player.getInstance();
+    }
 
     public void update(long gameTime) {
 
         gameTimeSec = (int) (gameTime/1000);
-        
+
     }
 
     public void draw(Canvas c) {
@@ -31,8 +42,12 @@ public class Game {
         Paint p = new Paint();
         p.setColor(Color.WHITE);
         p.setStyle(Paint.Style.FILL);
-
-        c.drawText(String.valueOf(gameTimeSec), 100, 100, p);
+        p.setTextSize(40);
+        c.drawText(String.valueOf(gameTimeSec), 400, 400, p);
+        c.drawBitmap(player.getSprite(), player.getPosition().x, player.getPosition().y);
     }
 
+    public void move(float x, float y) {
+        player.setPosition(new Point((int)x, (int)y));
+    }
 }

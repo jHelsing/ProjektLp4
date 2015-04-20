@@ -1,7 +1,9 @@
 package com.icyvenom.needforghetto;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -35,7 +37,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private void startGame(){
-        game = new Game();
+        game = new Game(getResources());
 
         gameLoop = new GameLoop(this.getHolder(), game);
 
@@ -62,17 +64,20 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         int action = event.getAction();
 
         if(action == MotionEvent.ACTION_DOWN){
-            Log.v("com.icyvenom.needforghetto", "user pressed down");
+            Log.v("com.icyvenom.needforghetto", "user pressed down (" + event.getRawX() + ", " + event.getRawY() + ")");
+            game.move(event.getRawX(), event.getRawY());
         }
 
         if(action == MotionEvent.ACTION_MOVE) {
-            Log.v("com.icyvenom.needforghetto", "user moved finger");
+            Log.v("com.icyvenom.needforghetto", "user moved finger (" + event.getRawX() +", "+ event.getRawY() + ")");
+
         }
 
         if(action == MotionEvent.ACTION_UP){
-            Log.v("com.icyvenom.needforghetto", "user stopped pressing");
+            Log.v("com.icyvenom.needforghetto", "user stopped pressing (" + event.getRawX() +", "+ event.getRawY()+")");
         }
 
         return true;
     }
+
 }
