@@ -1,0 +1,43 @@
+Meeting Agenda
+
+  Date: 2015-04-21
+
+  Facilitator: Marcus Auren
+
+  Participants: Jonathan Helsing, Anton Tornqvist, Amar Kulaglic
+
+1. Objectives (5 min). Resolve any issues preventing the team to 
+  continue.
+
+	Time to get a demo working.
+
+2. Reports (15 min) from previous meeting
+
+	No one has been doing much work on the project during the weeks since the last meeting.
+
+3. Discussion items (35 min) 
+
+	What we need to do for the demo:
+		Get movement working
+		Make it possible to shoot
+		Implement some hardcoded enemy for demo?
+	
+
+4. Outcomes and assignments (5 min) 
+	
+	Jonathan: Work on the shooting with Amar
+	Amar: 
+	Anton: Get the movement working with Marcus
+	Marcus:
+
+
+5. Wrap up
+
+ 	Get these two parts done ASAP and hopefully get some enemy up and working as well.
+	Demo on the 23rd!
+
+  	Next meeting 2015-04-22
+
+
+
+Had apparently put this document in the wrong folder hence it coming up so late.
