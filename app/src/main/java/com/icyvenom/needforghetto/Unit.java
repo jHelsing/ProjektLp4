@@ -130,7 +130,7 @@ public abstract class Unit extends Observable {
      * @param position Sets the position of the unit.
      */
     public void setPosition(Point position){
-        this.position=position;
+        this.position = (new Point(position.x - getSprite().getWidth()/2, position.y - getSprite().getHeight()/2));
     }
 
     public void setHitbox(Bitmap Sprite){

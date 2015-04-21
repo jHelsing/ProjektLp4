@@ -60,21 +60,25 @@ public class Game {
     }
 
     public void playerCollision(){
-        for (Enemy e : enemies) {
-            if(player.getHitbox().intersect(e.getHitbox())){
-                player.kill();
-                e.kill();
-                enemies.remove(e);
+        if(enemies != null) {
+            for (Enemy e : enemies) {
+                if (player.getHitbox().intersect(e.getHitbox())) {
+                    player.kill();
+                    e.kill();
+                    enemies.remove(e);
+                }
             }
         }
     }
     public void enemyCollision(){
-        for (Enemy e : enemies){
-            for (Bullet b : bullets){
-                if(e.getHitbox().intersect(b.getHitbox())){
-                    e.kill();
-                    enemies.remove(e);
-                    bullets.remove(b);
+        if(enemies != null && bullets != null) {
+            for (Enemy e : enemies) {
+                for (Bullet b : bullets) {
+                    if (e.getHitbox().intersect(b.getHitbox())) {
+                        e.kill();
+                        enemies.remove(e);
+                        bullets.remove(b);
+                    }
                 }
             }
         }

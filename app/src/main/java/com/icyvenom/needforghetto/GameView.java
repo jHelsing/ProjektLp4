@@ -70,7 +70,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         if(action == MotionEvent.ACTION_MOVE) {
             Log.v("com.icyvenom.needforghetto", "user moved finger (" + event.getRawX() +", "+ event.getRawY() + ")");
-
+            game.move(event.getRawX(), event.getRawY());
         }
 
         if(action == MotionEvent.ACTION_UP){
