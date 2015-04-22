@@ -25,7 +25,7 @@ public abstract class Bullet {
     /**
      * The sprite is the appearance of the bullet.
      */
-    private Bitmap sprite;
+    public static Bitmap sprite;
     /**
      * The bulletPath is the path of the bullet.
      */
@@ -37,16 +37,14 @@ public abstract class Bullet {
 
     public Bullet(Context context, Point position, int damageModifier, BulletDirection direction) {
         this.damageModifier = damageModifier;
-        this.sprite = BitmapFactory.decodeResource(context.getResources(), R.drawable.mmbullet);
         this.direction = direction;
         this.position = position;
     }
 
-    public Bullet(Bullet b) {
-        this.position=Player.getInstance().getPosition();
-        this.direction=b.getDirection();
-        this.damageModifier=b.getDamageModifier();
-        this.sprite=b.getSprite();
+    public Bullet() {
+        this.position= Player.getInstance().getPosition();
+        this.direction=BulletDirection.UP;
+        this.damageModifier=1;
     }
 
     /**
@@ -54,9 +52,9 @@ public abstract class Bullet {
      */
     public void move(){
         if(direction==BulletDirection.DOWN) {
-            this.position.offset(0,30);
+            this.position.offset(0,5);
         } else {
-            this.position.offset(0,-30);
+            this.position.offset(0,-5);
         }
 
     }

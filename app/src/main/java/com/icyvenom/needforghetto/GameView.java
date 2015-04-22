@@ -14,6 +14,7 @@ import android.view.SurfaceView;
 /**
  * Created by anton on 2015-03-30.
  */
+
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private Game game;
     private GameLoop gameLoop;

@@ -11,4 +11,8 @@ public class BulletStandard extends Bullet {
     public BulletStandard(Context context, Point position, BulletDirection direction) {
         super(context, position, 1, direction);
     }
+
+    public BulletStandard() {
+        super();
+    }
 }

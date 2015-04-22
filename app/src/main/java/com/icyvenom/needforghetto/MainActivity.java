@@ -2,6 +2,7 @@ package com.icyvenom.needforghetto;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Button exitButton = (Button) findViewById(R.id.exitButton);
         startButton.setOnClickListener(this);
         exitButton.setOnClickListener(this);
+        Bullet.sprite = BitmapFactory.decodeResource(getResources(), R.drawable.mmbullet);
         Player.getInstance().setWeapon(new WeaponStandard(this,
                 new BulletStandard(this, new Point(0,0),BulletDirection.UP)));
     }

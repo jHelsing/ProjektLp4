@@ -39,7 +39,7 @@ public abstract class Weapon {
         timer = new CountDownTimer(Long.MAX_VALUE, attackRate) {
             @Override
             public void onTick(long millisUntilFinished) {
-                BulletList.addBullet(bullet);
+                BulletList.addBullet(new BulletStandard());
             }
 
             @Override
