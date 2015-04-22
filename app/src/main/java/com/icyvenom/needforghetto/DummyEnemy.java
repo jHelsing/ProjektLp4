@@ -7,9 +7,9 @@ import android.graphics.Point;
  * Created by Marcus on 2015-04-22.
  */
 public class DummyEnemy extends Enemy {
-    public DummyEnemy(Bitmap sprite){
+    public DummyEnemy(Bitmap sprite, Point p){
         setSprite(sprite);
-        setPosition(new Point(400,250));
+        setPosition(p);
         setHitbox(sprite);
     }
 }

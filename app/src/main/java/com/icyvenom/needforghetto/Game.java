@@ -39,7 +39,10 @@ public class Game {
         this.bullets = BulletList.getInstance();
         player.setSprite(BitmapFactory.decodeResource(this.resources, R.drawable.car));
         player.setHitbox(player.getSprite());
-        enemies.add(new DummyEnemy(BitmapFactory.decodeResource(this.resources, R.drawable.enemycar)));
+        enemies.add(new DummyEnemy(BitmapFactory.decodeResource(this.resources, R.drawable.enemycar), new Point(200, 200)));
+        enemies.add(new DummyEnemy(BitmapFactory.decodeResource(this.resources, R.drawable.enemycar), new Point(500, 500)));
+        enemies.add(new DummyEnemy(BitmapFactory.decodeResource(this.resources, R.drawable.enemycar), new Point(200, 700)));
+        enemies.add(new DummyEnemy(BitmapFactory.decodeResource(this.resources, R.drawable.enemycar), new Point(900, 200)));
     }
 
     public void update(long gameTime) {
