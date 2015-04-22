@@ -2,6 +2,7 @@ package com.icyvenom.needforghetto;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Point;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Button exitButton = (Button) findViewById(R.id.exitButton);
         startButton.setOnClickListener(this);
         exitButton.setOnClickListener(this);
+        Player.getInstance().setWeapon(new WeaponStandard(this,
+                new BulletStandard(this, new Point(0,0),BulletDirection.UP)));
     }
 
 

@@ -28,24 +28,29 @@ public class Game {
     private Resources resources;
     private Player player;
     private List<Enemy> enemies;
-    private List<Bullet> bullets;
+    private BulletList bullets;
+    //private static List<Bullet> bullets;
 
     Game(Resources resources) {
         this.resources = resources;
-        this.player = this.player.getInstance();
+        this.player = Player.getInstance();
+        this.bullets = BulletList.getInstance();
         player.setSprite(BitmapFactory.decodeResource(this.resources, R.drawable.car));
     }
 
     public void update(long gameTime) {
-
         gameTimeSec = (int) (gameTime/1000);
         playerCollision();
         enemyCollision();
-
+        if(bullets.size() != 0) {
+            for(Bullet b : bullets) {
+                b.move();
+            }
+        }
     }
 
     public void draw(Canvas c) {
-        c.drawColor(Color.BLACK);
+        c.drawColor(Color.WHITE);
 
         Paint p = new Paint();
         p.setColor(Color.WHITE);
@@ -53,6 +58,13 @@ public class Game {
         p.setTextSize(40);
         c.drawText(String.valueOf(gameTimeSec), 400, 400, p);
         c.drawBitmap(player.getSprite(), player.getPosition().x, player.getPosition().y, null);
+        if(bullets.size() != 0) {
+            for(Bullet b : bullets) {
+                b.move();
+                c.drawBitmap(b.getSprite(),b.getPosition().x, b.getPosition().y, null);
+
+            }
+        }
     }
 
     public void move(float x, float y) {

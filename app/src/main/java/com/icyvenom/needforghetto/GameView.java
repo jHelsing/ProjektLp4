@@ -66,6 +66,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         if(action == MotionEvent.ACTION_DOWN){
             Log.v("com.icyvenom.needforghetto", "user pressed down (" + event.getRawX() + ", " + event.getRawY() + ")");
             game.move(event.getRawX(), event.getRawY());
+            Player.getInstance().getWeapon().startFire();
         }
 
         if(action == MotionEvent.ACTION_MOVE) {
@@ -75,6 +76,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         if(action == MotionEvent.ACTION_UP){
             Log.v("com.icyvenom.needforghetto", "user stopped pressing (" + event.getRawX() +", "+ event.getRawY()+")");
+            Player.getInstance().getWeapon().stopFire();
         }
 
         return true;

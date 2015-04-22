@@ -1,9 +1,12 @@
 package com.icyvenom.needforghetto;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 /**
@@ -28,13 +31,34 @@ public abstract class Bullet {
      */
     private Path bulletPath;
 
+    private BulletDirection direction;
+
     private Rect hitbox;
+
+    public Bullet(Context context, Point position, int damageModifier, BulletDirection direction) {
+        this.damageModifier = damageModifier;
+        this.sprite = BitmapFactory.decodeResource(context.getResources(), R.drawable.mmbullet);
+        this.direction = direction;
+        this.position = position;
+    }
+
+    public Bullet(Bullet b) {
+        this.position=Player.getInstance().getPosition();
+        this.direction=b.getDirection();
+        this.damageModifier=b.getDamageModifier();
+        this.sprite=b.getSprite();
+    }
 
     /**
      * Moves the bullet to the next Point in the path that was given when instanced.
      */
     public void move(){
-        //code here
+        if(direction==BulletDirection.DOWN) {
+            this.position.offset(0,30);
+        } else {
+            this.position.offset(0,-30);
+        }
+
     }
 
     /**
@@ -84,5 +108,9 @@ public abstract class Bullet {
     public void setHitbox(){
         hitbox = new Rect(this.getPosition().x - sprite.getWidth()/2, this.getPosition().y - sprite.getHeight()/2,
                 this.getPosition().x + sprite.getWidth()/2, this.getPosition().y + sprite.getHeight()/2);
+    }
+
+    public BulletDirection getDirection() {
+        return direction;
     }
 }

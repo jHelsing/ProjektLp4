@@ -103,6 +103,10 @@ public abstract class Unit extends Observable {
         return weapon;
     }
 
+    public void setWeapon(Weapon weapon) {
+        this.weapon=weapon;
+    }
+
     /*
      * @return Returns the hitbox of the creature.
      */

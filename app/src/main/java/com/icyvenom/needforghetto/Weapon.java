@@ -1,5 +1,8 @@
 package com.icyvenom.needforghetto;
 
+import android.content.Context;
+import android.os.CountDownTimer;
+
 /**
  * @author Amar Kulaglic
  * @version 1.0
@@ -22,7 +25,29 @@ public abstract class Weapon {
      *
      * @return  Returns the bullet type of the weapon.
      */
-    private Bullet bullet;
+    private final Bullet bullet;
+
+    private Context context;
+
+    private CountDownTimer timer;
+
+    public Weapon(Context context, int weaponDamage, int attackRate, final Bullet bullet) {
+        this.context=context;
+        this.weaponDamage=weaponDamage;
+        this.attackRate=attackRate;
+        this.bullet=bullet;
+        timer = new CountDownTimer(Long.MAX_VALUE, attackRate) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                BulletList.addBullet(bullet);
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+    }
 
     /**
      *
@@ -46,5 +71,13 @@ public abstract class Weapon {
      */
     public Bullet getBullet() {
         return bullet;
+    }
+
+    public void startFire() {
+        timer.start();
+    }
+
+    public void stopFire() {
+        timer.cancel();
     }
 }
