@@ -42,7 +42,7 @@ public abstract class Bullet {
     }
 
     public Bullet() {
-        this.position= Player.getInstance().getPosition();
+        this.position= new Point(Player.getInstance().getPosition().x, Player.getInstance().getPosition().y);
         this.direction=BulletDirection.UP;
         this.damageModifier=1;
     }
