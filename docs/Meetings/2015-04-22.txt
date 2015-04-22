@@ -1,0 +1,36 @@
+Meeting Agenda
+
+  Date: 2015-04-22
+
+  Facilitator: Marcus Auren
+
+  Participants: Jonathan Helsing, Anton Tornqvist, Amar Kulaglic
+
+1. Objectives (5 min). Resolve any issues preventing the team to 
+  continue.
+
+	Get the bullets to move as intended.
+	Create an enemy and test collision
+
+2. Reports (15 min) from previous meeting
+
+	Anton & Marcus: Movement seems to be working as intended, wrote a check for collision but haven't been tested.
+
+	Amar & Jonathan: Shooting is working, some minor bugs to look into.
+
+3. Discussion items (35 min) 
+
+	There might be potiential problem with passing around a context item, look into it although it's not urgent.	
+
+4. Outcomes and assignments (5 min) 
+	
+	Looking fine for the demo, some minor things to look into
+	
+	Jonathan & Amar: Keep working on looking into the last few details of the shooting
+	Anton & Marcus: Make an enemy and get collision tested and working
+
+	Secondary: Everyone should start thinking about a serious design of the code for next week.
+
+5. Wrap up
+
+  	Next meeting: 2015-04-27 
