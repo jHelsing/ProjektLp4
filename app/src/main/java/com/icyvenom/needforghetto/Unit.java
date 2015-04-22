@@ -111,7 +111,7 @@ public abstract class Unit extends Observable {
      * @return Returns the hitbox of the creature.
      */
 
-    public Rect getHitbox() {return hitbox; }
+    public Rect getHitbox() { return hitbox; }
 
     /**
      *
@@ -134,11 +134,15 @@ public abstract class Unit extends Observable {
      * @param position Sets the position of the unit.
      */
     public void setPosition(Point position){
-        this.position = (new Point(position.x - getSprite().getWidth()/2, position.y - getSprite().getHeight()/2));
+        if(getSprite() != null) {
+            this.position = (new Point(position.x - getSprite().getWidth()/2, position.y - getSprite().getHeight()/2));
+        }else{
+            this.position = position;
+        }
     }
 
     public void setHitbox(Bitmap Sprite){
-        hitbox = new Rect(this.getPosition().x - sprite.getWidth()/2, this.getPosition().y - sprite.getHeight()/2,
-                this.getPosition().x + sprite.getWidth()/2, this.getPosition().y + sprite.getHeight()/2);
+        hitbox = new Rect(this.getPosition().x, this.getPosition().y,
+                this.getPosition().x + sprite.getWidth(), this.getPosition().y + sprite.getHeight());
     }
 }

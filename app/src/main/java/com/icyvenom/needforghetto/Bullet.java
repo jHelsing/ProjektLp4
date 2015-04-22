@@ -39,12 +39,14 @@ public abstract class Bullet {
         this.damageModifier = damageModifier;
         this.direction = direction;
         this.position = position;
+        setHitbox(getSprite());
     }
 
     public Bullet() {
         this.position= new Point(Player.getInstance().getPosition().x, Player.getInstance().getPosition().y);
         this.direction=BulletDirection.UP;
         this.damageModifier=1;
+        setHitbox(getSprite());
     }
 
     /**
@@ -53,10 +55,11 @@ public abstract class Bullet {
     public void move(){
         if(direction==BulletDirection.DOWN) {
             this.position.offset(0,5);
+
         } else {
             this.position.offset(0,-5);
         }
-
+        setHitbox(getSprite());
     }
 
     /**
@@ -103,9 +106,9 @@ public abstract class Bullet {
         this.damageModifier = damageModifier;
     }
 
-    public void setHitbox(){
-        hitbox = new Rect(this.getPosition().x - sprite.getWidth()/2, this.getPosition().y - sprite.getHeight()/2,
-                this.getPosition().x + sprite.getWidth()/2, this.getPosition().y + sprite.getHeight()/2);
+    public void setHitbox(Bitmap sprite){
+        hitbox = new Rect(this.getPosition().x, this.getPosition().y,
+                this.getPosition().x + sprite.getWidth(), this.getPosition().y + sprite.getHeight());
     }
 
     public BulletDirection getDirection() {

@@ -10,6 +10,7 @@ import android.graphics.Picture;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,8 +27,9 @@ public class Game {
 
     private int gameTimeSec;
     private Resources resources;
-    private Player player;
-    private List<Enemy> enemies;
+    private Player player; //CHANGE BACK
+    private List<Enemy> enemies = new ArrayList<Enemy>();
+
     private BulletList bullets;
     //private static List<Bullet> bullets;
 
@@ -36,6 +38,8 @@ public class Game {
         this.player = Player.getInstance();
         this.bullets = BulletList.getInstance();
         player.setSprite(BitmapFactory.decodeResource(this.resources, R.drawable.car));
+        player.setHitbox(player.getSprite());
+        enemies.add(new DummyEnemy(BitmapFactory.decodeResource(this.resources, R.drawable.enemycar)));
     }
 
     public void update(long gameTime) {
@@ -52,16 +56,26 @@ public class Game {
     public void draw(Canvas c) {
         c.drawColor(Color.WHITE);
 
+        /*
         Paint p = new Paint();
-        p.setColor(Color.WHITE);
-        p.setStyle(Paint.Style.FILL);
-        p.setTextSize(40);
-        c.drawText(String.valueOf(gameTimeSec), 400, 400, p);
+        p.setColor(Color.CYAN);
+        p.setStrokeWidth(10);
+        c.drawRect(enemies.get(0).getHitbox(), p);
+
+        p.setColor(Color.RED);
+        c.drawRect(player.getHitbox(), p);
+        */
+
         c.drawBitmap(player.getSprite(), player.getPosition().x, player.getPosition().y, null);
         if(bullets.size() != 0) {
             for(Bullet b : bullets) {
                 b.move();
                 c.drawBitmap(b.getSprite(),b.getPosition().x, b.getPosition().y, null);
+            }
+        }
+        if(enemies.size() != 0) {
+            for(Enemy e : enemies) {
+                c.drawBitmap(e.getSprite(),e.getPosition().x, e.getPosition().y, null);
             }
         }
     }

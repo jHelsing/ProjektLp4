@@ -34,8 +34,7 @@ public class Player extends Unit {
         nbrOfLives = 3; // Default amount of Lives
         score = 0;
         super.setHealth(1);
-
-        // TODO super.setSprite(new ImageView(getResource(R.drawable.)));
+        setPosition(new Point(500, 1000));
     }
 
     /**
