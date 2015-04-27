@@ -1,0 +1,33 @@
+    Meeting Agenda
+
+      Date: 27/4-16
+
+      Facilitator: Jonathan
+
+      Participants: Jonathan, Anton, Amar and Marcus
+
+    1. Objectives (5 min). Resolve any issues preventing the team to 
+      continue.
+
+      - The bad hardcoded design. Solved by recoding.
+
+    2. Reports (15 min) from previous meeting
+
+      - Everyone looked at OpenGL and libGDX. We decided to use that in new version.
+    3. Discussion items (35 min) 
+
+      - We are all new to OpenGL and libGDX so we’ll have to start from scratch with that.
+    Most important thing is rewriting the program.
+    After that it’s starting with SDD and graphical design
+
+    4. Outcomes and assignments (5 min) 
+
+    Anton and Marcus starts converting code to libGDX, so that we use MVC and libGDX and OpenGL
+    Amar starts with testing and Jonathan join when he’s done with SDD.
+    Jonathan begins writing the SDD.
+
+    5. Wrap up
+
+      - No unresolved issues for next meeting.
+
+      - 30/4 2015 in EDIT.
