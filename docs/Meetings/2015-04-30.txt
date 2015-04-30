@@ -1,0 +1,40 @@
+﻿    Meeting Agenda
+
+      Date: 30/4-16
+
+      Facilitator: Marcus
+
+      Participants: Jonathan, Anton, Amar and Marcus
+
+    1. Objectives (5 min). Resolve any issues preventing the team to 
+      continue.
+
+      - Size of car Sprites
+      - Public instance in player/enemy
+      - Discuss Handling of touch event
+      - Box2D
+      - inputProcessor in another place?
+
+    2. Reports (15 min) from previous meeting
+
+      - Transitioned to libGDX
+      - RAD has been continued      
+
+    3. Discussion items (35 min) 
+
+      - Box2d might be useful but is not included and we'll not use it right now.
+      - Size and instance - OKAY
+      - Check if the inputProcessor might be in the controller instead
+      - Make a crude physics engine?
+      - Make a rolling background 
+
+    4. Outcomes and assignments (5 min)
+ 
+      Anton: Implement bullet and weapon again
+      Marcus: Start drawing for RAD 
+      Jonathan: Start working on tests
+      Amar: Start working on tests
+
+    5. Wrap up
+
+      - 4/5 2015 in EDIT.
