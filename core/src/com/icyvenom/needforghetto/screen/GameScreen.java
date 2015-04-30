@@ -77,6 +77,7 @@ public class GameScreen implements Screen, InputProcessor{
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         drive(screenX, screenY);
+        fire();
         return true;
     }
 
@@ -88,6 +89,7 @@ public class GameScreen implements Screen, InputProcessor{
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         drive(screenX, screenY);
+        fire();
         return true;
     }
 
@@ -100,8 +102,13 @@ public class GameScreen implements Screen, InputProcessor{
     public boolean scrolled(int amount) {
         return false;
     }
+
     private void drive(int x, int y){
         Vector3 vec = renderer.getCamera().unproject(new Vector3(x, y,0));
         controller.move(new Vector2(vec.x, vec.y));
+    }
+
+    private void fire() {
+        controller.fire();
     }
 }

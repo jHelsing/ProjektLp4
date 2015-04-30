@@ -17,6 +17,7 @@ public class Player {
     Vector2 acceleration = new Vector2();
     Vector2 velocity = new Vector2();
     Rectangle bounds = new Rectangle();
+    Weapon weapon = new Weapon();
 
     public Player(Vector2 position){
         this.position = position;
@@ -49,5 +50,13 @@ public class Player {
     public void kill(){
         lifes--;
         System.err.println(lifes);
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void fire() {
+        weapon.addBullet(this.position.cpy());
     }
 }

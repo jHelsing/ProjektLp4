@@ -22,6 +22,7 @@ public class Bullet {
         this.bounds.width = SIZE;
         this.bounds.setX(position.x);
         this.bounds.setY(position.y);
+        this.velocity.set(0, 0.5f);
     }
 
     public Rectangle getBounds() {
@@ -32,6 +33,10 @@ public class Bullet {
         return position;
     }
 
+    public Vector2 getVelocity() {
+        return velocity;
+    }
+
     public void setPosition(Vector2 position) {
         this.position = position;
         this.bounds.setX(this.position.x);
@@ -40,5 +45,9 @@ public class Bullet {
 
     public boolean isColliding (Rectangle object){
         return (bounds.overlaps(object));
+    }
+
+    public void update() {
+        setPosition(getPosition().add(velocity));
     }
 }
