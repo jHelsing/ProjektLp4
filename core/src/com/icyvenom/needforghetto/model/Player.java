@@ -37,14 +37,15 @@ public class Player {
         this.position = new Vector2(position.x - SIZE/2, position.y - SIZE/5);
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
-
     }
+
     public boolean isColliding (Rectangle object){
         if (bounds.overlaps(object)){
             kill();
         }
         return (bounds.overlaps(object));
     }
+
     public void kill(){
         lifes--;
         System.err.println(lifes);
