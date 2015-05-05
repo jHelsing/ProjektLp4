@@ -9,7 +9,6 @@
     <facet type="java-gradle" name="Java-Gradle">
       <configuration>
         <option name="BUILD_FOLDER_PATH" value="$MODULE_DIR$/build" />
-        <option name="BUILDABLE" value="true" />
       </configuration>
     </facet>
   </component>
@@ -30,3 +29,4 @@
     <orderEntry type="library" exported="" name="gdx-1.5.6" level="project" />
   </component>
 </module>
+
