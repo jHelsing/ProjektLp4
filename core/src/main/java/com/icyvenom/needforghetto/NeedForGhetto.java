@@ -15,6 +15,6 @@ public class NeedForGhetto extends Game {
         World world = WorldFactory.getWorld();
         GameScreen gameScreen = new GameScreen(world);
         setScreen(gameScreen);
-        Gdx.input.setInputProcessor(new PlayerController(world, gameScreen.getRenderer().getCamera()));
+        Gdx.input.setInputProcessor(gameScreen.getPlayerController());
     }
 }

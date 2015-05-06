@@ -17,10 +17,12 @@ public class GameScreen implements Screen {
 
     private World world;
     private WorldRenderer renderer;
+    private PlayerController playerController;
 
     public GameScreen(World world) {
         this.world = world;
         renderer = new WorldRenderer(world, true);
+        playerController = new PlayerController(world, renderer.getCamera());
     }
 
     @Override
@@ -32,6 +34,7 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderer.render();
+        playerController.update();
     }
 
     @Override
@@ -61,5 +64,9 @@ public class GameScreen implements Screen {
 
     public WorldRenderer getRenderer() {
         return renderer;
+    }
+
+    public PlayerController getPlayerController() {
+        return playerController;
     }
 }
