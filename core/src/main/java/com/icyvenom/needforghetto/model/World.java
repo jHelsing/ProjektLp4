@@ -1,9 +1,6 @@
 package com.icyvenom.needforghetto.model;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +11,6 @@ import java.util.List;
 public class World {
 
     private List<Enemy> enemies = new ArrayList<Enemy>();
-
     Player player;
 
     public  List<Enemy> getEnemies(){
@@ -34,7 +30,6 @@ public class World {
     }
 
     public void checkCollision(){
-        Gdx.app.log("Coll", "coll pre");
         if(enemies != null) {
             //If enemies exist we check collisions between player and enemies.
             //Creates a column and row where enemies might exist for crash to be possible.
@@ -43,17 +38,14 @@ public class World {
             float minY = player.getPosition().y;
             float maxY = player.getBounds().getHeight() + minY;
 
-
             for(Enemy e: enemies) {
                 //Loops all the enemies on screen
                 float enemyMinX = e.getPosition().x;
                 float enemyMaxX = e.getBounds().getWidth() + enemyMinX;
                 float enemyMinY = e.getPosition().y;
                 float enemyMaxY = e.getBounds().getHeight() + enemyMinY;
-                Gdx.app.log("Coll", "coll loop");
 
                 if(minY <= enemyMaxY && enemyMinY <= minY) {
-                    Gdx.app.log("Coll","collision type 1");
                     if(minX <= enemyMaxX && enemyMinX <= minX) {
                         //Enemy is in the 2:nd quadrant of a system with player as origin
                         enemies.remove(e);
@@ -63,8 +55,7 @@ public class World {
                         enemies.remove(e);
                         player.kill();
                     }
-                } else if (enemyMinY <= minY && maxY <= enemyMaxX) {
-                    Gdx.app.log("Coll","collision type 2");
+                } else if(enemyMinY <= minY && maxY <= enemyMaxX) {
                     if(minX <= enemyMaxX && enemyMinX <= minX) {
                         //Enemy is in the 3:rd quadrant of a system with player as origin
                         enemies.remove(e);
@@ -76,7 +67,6 @@ public class World {
                     }
                 }
             }
-
         }
     }
 }
