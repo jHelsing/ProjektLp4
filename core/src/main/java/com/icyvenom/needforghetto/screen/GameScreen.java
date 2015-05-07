@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.icyvenom.needforghetto.controller.PlayerController;
 import com.icyvenom.needforghetto.model.World;
+import com.icyvenom.needforghetto.model.WorldFactory;
 import com.icyvenom.needforghetto.view.WorldRenderer;
 
 /**
@@ -19,14 +20,12 @@ public class GameScreen implements Screen {
     private WorldRenderer renderer;
     private PlayerController playerController;
 
-    public GameScreen(World world) {
-        this.world = world;
-        renderer = new WorldRenderer(world, true);
-        playerController = new PlayerController(world, renderer.getCamera());
-    }
-
     @Override
     public void show() {
+        world = WorldFactory.getWorld();
+        renderer = new WorldRenderer(world, true);
+        playerController = new PlayerController(world, renderer.getCamera());
+        Gdx.input.setInputProcessor(playerController);
     }
 
     @Override
