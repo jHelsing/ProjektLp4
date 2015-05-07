@@ -5,6 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -20,11 +23,6 @@ import com.icyvenom.needforghetto.model.WorldFactory;
  */
 public class StartScreen implements Screen{
 
-    Game game;
-
-    TextButton button;
-    TextButton.TextButtonStyle buttonStyle;
-
     Stage stage = new Stage();
     Table table = new Table();
 
@@ -33,18 +31,27 @@ public class StartScreen implements Screen{
 
     TextButton buttonPlay = new TextButton("Play", skin);
     TextButton buttonExit = new TextButton("Exit", skin);
+    TextButton buttonSettings = new TextButton("Settings", skin);
+    TextButton buttonHighscores = new TextButton("Highscores", skin);
 
-    Label title = new Label("NeedForGhetto", skin);
+    Label title1 = new Label("Need", skin);
+    Label title2 = new Label("For", skin);
+    Label title3 = new Label("Ghetto", skin);
 
-    public StartScreen(Game game) {
-        this.game = game;
+
+    SpriteBatch spriteBatch = new SpriteBatch();
+    Texture bgTexture = new Texture("images/car.png");
+    Sprite bgSprite = new Sprite(bgTexture);
+
+    public StartScreen() {
+
     }
 
     @Override
     public void show() {
         buttonPlay.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen());
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen());
             }
         });
 
@@ -54,20 +61,39 @@ public class StartScreen implements Screen{
             }
         });
 
-        table.add(title).padBottom(40).row();
-        table.add(buttonPlay).size(150,60).padBottom(20).row();
-        table.add(buttonExit).size(150,60).padBottom(20).row();
+        buttonSettings.addListener(new ClickListener(){
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.exit();
+            }
+        });
+
+        buttonHighscores.addListener(new ClickListener(){
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.exit();
+            }
+        });
+
+        table.add(title1).padBottom(-10).row();
+        table.add(title2).padBottom(-10).row();
+        table.add(title3).padBottom(50).row();
+        table.add(buttonPlay).size(150,40).padBottom(20).row();
+        table.add(buttonHighscores).size(150,40).padBottom(20).row();
+        table.add(buttonSettings).size(150,40).padBottom(20).row();
+        table.add(buttonExit).size(150,40).padBottom(20).row();
 
         table.setFillParent(true);
         stage.addActor(table);
 
         Gdx.input.setInputProcessor(stage);
+        //Gdx.input.setCatchBackKey(false);
+
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 0, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        spriteBatch.begin();
+            bgSprite.draw(spriteBatch);
+        spriteBatch.end();
 
         stage.act();
         stage.draw();
@@ -98,4 +124,5 @@ public class StartScreen implements Screen{
         stage.dispose();
         skin.dispose();
     }
+
 }

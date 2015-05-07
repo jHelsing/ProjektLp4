@@ -13,7 +13,6 @@ public class NeedForGhetto extends Game {
 
 	@Override
 	public void create () {
-        setScreen(new StartScreen(this));
-        //Gdx.input.setInputProcessor(new MenuController());
+        setScreen(new StartScreen());
     }
 }
