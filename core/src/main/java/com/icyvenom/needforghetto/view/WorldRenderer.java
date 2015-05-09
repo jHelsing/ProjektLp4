@@ -30,9 +30,6 @@ public class WorldRenderer {
     private Texture playerTexture;
     private Texture enemyTexture;
     private Texture bulletTexture;
-    private Texture backgroundTexture;
-
-    private Sprite backgroundSprite;
 
     private SpriteBatch spriteBatch;
     private boolean debug = false;
@@ -49,11 +46,9 @@ public class WorldRenderer {
         spriteBatch = new SpriteBatch();
         this.debug = debug;
         loadTextures();
-        loadBackground();
     }
     public void render(){
         spriteBatch.begin();
-            backgroundSprite.draw(spriteBatch);
             drawEnemies();
             drawPlayer();
             drawBullets();
@@ -95,11 +90,6 @@ public class WorldRenderer {
         playerTexture = new Texture(Gdx.files.internal("images/car.png"));
         enemyTexture = new Texture(Gdx.files.internal("images/enemyCar.jpg"));
         bulletTexture = new Texture(Gdx.files.internal("images/bullet.png"));
-    }
-
-    private void loadBackground() {
-        backgroundTexture = new Texture(Gdx.files.internal("images/car.png"));
-        backgroundSprite = new Sprite(backgroundTexture);
     }
 
     public OrthographicCamera getCamera(){

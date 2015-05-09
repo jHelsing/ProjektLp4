@@ -21,6 +21,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.icyvenom.needforghetto.controller.PlayerController;
 import com.icyvenom.needforghetto.model.World;
 import com.icyvenom.needforghetto.model.WorldFactory;
+import com.icyvenom.needforghetto.parallax.ParallaxBackground;
+import com.icyvenom.needforghetto.parallax.ParallaxLayer;
 import com.icyvenom.needforghetto.view.WorldRenderer;
 
 /**
@@ -36,6 +38,8 @@ public class GameScreen implements Screen {
     private World world;
     private WorldRenderer renderer;
     private PlayerController playerController;
+    private TextureAtlas backgroundAtlas = new TextureAtlas(Gdx.files.internal("skins/testbg.atlas"));
+    private ParallaxBackground background;
 
     //current state of the game, we start with a running game
     private State state = State.Running;
@@ -71,7 +75,7 @@ public class GameScreen implements Screen {
 
         // Load textures and other things necessary for rendering menu on the top of the screen
         loadTopMenu();
-
+        loadBackground();
         // Adds inputprocessors to multiplexer
         inputMultiplexerPaused.addProcessor(stage);
         inputMultiplexerPaused.addProcessor(backProcessor);
@@ -90,7 +94,7 @@ public class GameScreen implements Screen {
 
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        background.render(delta);
         // if we are in a paused state we dont update model
         switch (state) {
             case Running:
@@ -164,6 +168,14 @@ public class GameScreen implements Screen {
             }
         });
         stage.addActor(table);
+    }
+
+    private void loadBackground(){
+        background = new ParallaxBackground(new ParallaxLayer[]{
+                //new ParallaxLayer(backgroundAtlas.findRegion("road"),new Vector2(),new Vector2(0, 0)),
+                new ParallaxLayer(backgroundAtlas.findRegion("road"),new Vector2(1.0f,1.0f),new Vector2(0, 0)),
+                //new ParallaxLayer(backgroundAtlas.findRegion("road"),new Vector2(0.1f,1.0f),new Vector2(00, 0),new Vector2(0, 0)),
+        }, 800, 480,new Vector2(0,300));
     }
 
 }
