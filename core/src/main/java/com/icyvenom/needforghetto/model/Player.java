@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Player {
     static final float SPEED = 2f;
     public static final float SIZE = 1f;
+    public static final Vector2 DEFAULTPOSITION = new Vector2(5, 1);
 
     private int lifes = 3;
 
@@ -49,6 +50,7 @@ public class Player {
 
     public void kill(){
         lifes--;
+        setPosition(DEFAULTPOSITION);
         System.err.println(lifes);
     }
 
@@ -58,5 +60,9 @@ public class Player {
 
     public void fire() {
         weapon.addBullet(this.position.cpy());
+    }
+
+    public int getLifes() {
+        return lifes;
     }
 }

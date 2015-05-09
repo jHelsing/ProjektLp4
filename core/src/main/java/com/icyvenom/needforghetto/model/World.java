@@ -31,7 +31,7 @@ public class World {
     }
 
     public void createBasicWorld(){
-        player = new Player(new Vector2(7, 2));
+        player = new Player(Player.DEFAULTPOSITION);
         /*enemies.add(new Enemy(new Vector2(3,4)));
         enemies.add(new Enemy(new Vector2(2,6)));
         enemies.add(new Enemy(new Vector2(1,2)));

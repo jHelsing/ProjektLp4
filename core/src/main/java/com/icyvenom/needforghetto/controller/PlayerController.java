@@ -35,6 +35,10 @@ public class PlayerController implements InputProcessor{
     //todo move this to model?
     public void update(){
         world.checkCollision();
+        if(world.getPlayer().getLifes() <= 0) {
+            // TODO: call method gameOver() and stop enemies from spawning and show gameover screen
+            System.err.println("Game Over");
+        }
         for(Bullet b : player.getWeapon().getBullets()) {
             b.update();
         }
