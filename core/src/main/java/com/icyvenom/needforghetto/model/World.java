@@ -27,6 +27,7 @@ public class World {
     public void createBasicWorld(){
         player = new Player(new Vector2(7, 2));
         enemies.add(new Enemy(new Vector2(3,4)));
+        enemies.add(new Enemy(new Vector2(2,6)));
     }
 
     /**
@@ -43,7 +44,8 @@ public class World {
             float maxY = player.getBounds().getHeight() + minY;
 
             //Checking collisions between all enemies and the player
-            for(Enemy e: enemies) {
+            for(int i = 0; i<enemies.size(); i++) {
+                Enemy e = enemies.get(i);
                 //Loops all the enemies on screen
                 float enemyMinX = e.getBounds().getX();
                 float enemyMaxX = e.getBounds().getWidth() + enemyMinX;
