@@ -53,7 +53,7 @@ public class GameScreen implements Screen {
     private InputMultiplexer inputMultiplexerPaused = new InputMultiplexer();
 
     // Inputprocessor for back key since we want to override the default behaviour
-    // TODO: It is still killing the current screen, should we save state somehow??
+    // TODO: It is still killing the current screen, should we save state somehow?? maybe call pause()
     private InputAdapter backProcessor = new InputAdapter() {
         @Override
         public boolean keyDown(int keycode) {
@@ -142,8 +142,8 @@ public class GameScreen implements Screen {
                 new TextureAtlas(Gdx.files.internal("skins/uiskin.atlas")));
 
         final TextButton buttonPause = new TextButton("Pause", skin);
-        Label lifeStatus = new Label("Life: ", skin);
-        Label scoreStatus = new Label("Score: ", skin);
+        Label lifeStatus = new Label("Life: "+world.getPlayer().getLifes(), skin);
+        Label scoreStatus = new Label("Score: 0", skin);
 
         table.setDebug(false);
         table.setFillParent(true);

@@ -27,21 +27,21 @@ public class PlayerController implements InputProcessor{
     }
 
     public void move(Vector2 vec){
-        player.setPosition(vec);
+        player.setVelocity(vec);
     }
 
     public void fire(){ player.fire(); }
 
-    //todo move this to model?
     public void update(){
         world.checkCollision();
         if(world.getPlayer().getLifes() <= 0) {
             // TODO: call method gameOver() and stop enemies from spawning and show gameover screen
-            System.err.println("Game Over");
+            //System.err.println("Game Over");
         }
         for(Bullet b : player.getWeapon().getBullets()) {
             b.update();
         }
+        world.getPlayer().updatePosition();
     }
 
     @Override
@@ -61,8 +61,6 @@ public class PlayerController implements InputProcessor{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        //TODO: how should we convert x and y?
-        //TODO: implement fireStart(); this should start the timer for bullets
         Vector3 pos = camera.unproject(new Vector3(screenX, screenY, 0));
         move(new Vector2(pos.x, pos.y));
 
