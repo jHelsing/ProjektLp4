@@ -1,6 +1,8 @@
 package com.icyvenom.needforghetto.model;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,14 +22,22 @@ public class World {
         return player;
     }
 
+    public Timer spawnTimer = new Timer();
+
     public World() {
+        initSpawnTimer();
         createBasicWorld();
+        spawnTimer.start();
     }
 
     public void createBasicWorld(){
         player = new Player(new Vector2(7, 2));
-        enemies.add(new Enemy(new Vector2(3,4)));
+        /*enemies.add(new Enemy(new Vector2(3,4)));
         enemies.add(new Enemy(new Vector2(2,6)));
+        enemies.add(new Enemy(new Vector2(1,2)));
+        enemies.add(new Enemy(new Vector2(1,3)));
+        enemies.add(new Enemy(new Vector2(1,4)));
+        enemies.add(new Enemy(new Vector2(1,5)));*/
     }
 
     /**
@@ -134,5 +144,19 @@ public class World {
         }
 
 
+    }
+
+    // Something like this should suffice for spawning enemies,
+    // in the case that we need a more advanced system we could always make a custom timer/task
+    private void initSpawnTimer() {
+        spawnTimer.scheduleTask(new Timer.Task() {
+            int dummy = 0;
+
+            @Override
+            public void run() {
+                enemies.add(new Enemy(new Vector2(dummy,dummy)));
+                dummy++;
+            }
+        }, 0, 1, 10);
     }
 }
