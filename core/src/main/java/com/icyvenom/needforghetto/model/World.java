@@ -54,7 +54,7 @@ public class World {
                 float enemyMaxY = e.getBounds().getHeight() + enemyMinY;
 
                 if(minY <= enemyMinY && enemyMinY <= maxY) {
-                    //Player coming from the bottom (3rd and 4th quadrant)
+                    //Enemy coming from the bottom (3rd and 4th quadrant)
                     if(minX <= enemyMaxX && enemyMinX <= minX) {
                         //Enemy is in the 3rd quadrant of a system with player as origin
                         enemies.remove(e);
@@ -65,6 +65,7 @@ public class World {
                         player.kill();
                     }
                 } else if(minY <= enemyMaxY && enemyMaxY <= maxY) {
+                    //Enemy coming from the bottom (1st and 2nd quadrant)
                     if(minX <= enemyMaxX && enemyMaxX <= maxX) {
                         //Enemy is in the 2nd quadrant of a system with player as origin
                         enemies.remove(e);
@@ -74,8 +75,64 @@ public class World {
                     }
                 }
             }
+
+            //checking if there are any bullets that belongs to the player on the screen
+            if(!player.getWeapon().getBullets().isEmpty()) {
+                //We are now checking for collisions between Player bullets and enemies
+
+                List<Bullet> playerBullets = player.getWeapon().getBullets();
+
+                for(int i = 0; i<enemies.size(); i++) {
+                    Enemy e = enemies.get(i);
+
+                    float enemyMinX = e.getBounds().getX();
+                    float enemyMaxX = e.getBounds().getWidth() + enemyMinX;
+                    float enemyMinY = e.getBounds().getY();
+                    float enemyMaxY = e.getBounds().getHeight() + enemyMinY;
+
+                    for(int j=0; i<playerBullets.size(); j++) {
+                        Bullet b = playerBullets.get(j);
+
+                        float bulletMinX = b.getBounds().getX();
+                        float bulletMaxX = b.getBounds().getWidth() + bulletMinX;
+                        float bulletMinY = b.getBounds().getY();
+                        float bulletMaxY = b.getBounds().getHeight() + bulletMinY;
+
+                        if(enemyMinY <= bulletMinY && bulletMinY <= enemyMaxY) {
+                            //Bullet coming from the bottom (3rd and 4th quadrant)
+                            if(enemyMinX <= bulletMaxX && bulletMinX <= enemyMinX) {
+                                //Bullet is in the 3rd quadrant of a system with Enemy as origin
+                                enemies.remove(e);
+                                player.getWeapon().getBullets().remove(b);
+                            } else if(bulletMinX <= enemyMaxX && enemyMaxX <= bulletMaxX) {
+                                //Bullet is in the 4th quadrant of a system with Enemy as origin
+                                enemies.remove(e);
+                                player.getWeapon().getBullets().remove(b);
+                            }
+                        } else if(enemyMinY <= bulletMaxY && bulletMaxY <= enemyMaxY) {
+                            //Bullet coming from the top (1st and 2nd quadrant)
+                            if(enemyMinX <= bulletMaxX && bulletMaxX <= enemyMaxX) {
+                                //Bullet is in the 2nd quadrant of a system with Enemy as origin
+                                enemies.remove(e);
+                                player.getWeapon().getBullets().remove(b);
+                            } else if(enemyMinX <= bulletMinX && bulletMinX <= enemyMaxX) {
+                                //Bullet is in the 1st quadrant of a system with Enemy as origin
+                                enemies.remove(e);
+                                player.getWeapon().getBullets().remove(b);
+                            }
+                        }
+
+
+                    }
+
+
+
+                }
+
+            }
+
         }
 
-        
+
     }
 }
