@@ -21,7 +21,7 @@ public class Player {
     Vector2 acceleration = new Vector2();
     Vector2 velocity = new Vector2(0,0);
     Rectangle bounds = new Rectangle();
-    Weapon weapon = new Weapon();
+    Weapon weapon = new SimpleWeapon();
 
     public Player(Vector2 position){
         this.position = position;
@@ -29,6 +29,7 @@ public class Player {
         this.bounds.width = SIZE;
         this.bounds.setX(position.x);
         this.bounds.setY(position.y);
+        this.weapon.setPosition(position);
     }
 
     public Rectangle getBounds() {
@@ -38,12 +39,14 @@ public class Player {
     public Vector2 getPosition() {
         return position;
     }
+
     public void setPosition(Vector2 position){
         // this messes with my physics, comment out for now
         //this.position = new Vector2(position.x - SIZE/2, position.y - SIZE/5);
         this.position = position;
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
+        this.weapon.setPosition(position);
     }
 
     public boolean isColliding (Rectangle object){
