@@ -2,6 +2,7 @@ package com.icyvenom.needforghetto.model;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
 
 import java.util.Vector;
 
@@ -22,6 +23,7 @@ public class Player {
     Vector2 velocity = new Vector2(0,0);
     Rectangle bounds = new Rectangle();
     Weapon weapon = new SimpleWeapon();
+    Timer attackSpeed= new Timer();
 
     public Player(Vector2 position){
         this.position = position;
@@ -30,6 +32,15 @@ public class Player {
         this.bounds.setX(position.x);
         this.bounds.setY(position.y);
         this.weapon.setPosition(position);
+        attackSpeed.scheduleTask(new Timer.Task() {
+
+            @Override
+            public void run() {
+                weapon.addBullet();
+            }
+
+        }, 0, weapon.getAttackRate());
+        attackSpeed.stop();
     }
 
     public Rectangle getBounds() {
@@ -46,7 +57,7 @@ public class Player {
         this.position = position;
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
-        this.weapon.setPosition(position);
+        this.weapon.setPosition(new Vector2(position.x, position.y));
     }
 
     public boolean isColliding (Rectangle object){
@@ -68,7 +79,11 @@ public class Player {
     }
 
     public void fire() {
-        weapon.addBullet(this.position.cpy());
+        attackSpeed.start();
+    }
+
+    public void stopFire() {
+        attackSpeed.stop();
     }
 
     public int getLifes() {

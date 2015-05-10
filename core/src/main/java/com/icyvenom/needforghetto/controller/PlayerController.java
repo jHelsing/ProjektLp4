@@ -63,15 +63,14 @@ public class PlayerController implements InputProcessor{
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Vector3 pos = camera.unproject(new Vector3(screenX, screenY, 0));
         move(new Vector2(pos.x, pos.y));
-
-        //fireStart();
+        player.fire();
         return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         //TODO: implement fireStop(); this should stop the timer for bullets
-        //fireStop();
+        player.stopFire();
         return true;
     }
 

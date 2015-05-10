@@ -18,7 +18,7 @@ public abstract class Weapon {
     /**
      * The attack rate of the weapon. Decides how often the weapon will fire bullets
      */
-    private int attackRate;
+    private static float attackRate = 0.2f;
 
     /**
      * The position of the weapon
@@ -72,10 +72,13 @@ public abstract class Weapon {
 
     /**
      * Used to add a bullets to the bullet-list
-     * @param position The position of the bullet
      */
-    public void addBullet(Vector2 position) {
-        bullets.add(new Bullet(position));
+    public void addBullet() {
+        bullets.add(new Bullet(this.position.cpy()));
+    }
+
+    public float getAttackRate() {
+        return attackRate;
     }
 
 }
