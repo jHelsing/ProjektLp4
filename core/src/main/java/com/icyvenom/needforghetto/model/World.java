@@ -2,49 +2,56 @@ package com.icyvenom.needforghetto.model;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Marcus. Revisited by Jonathan 2015-05-06.
- * @version 1.1
+ * The model of the world. This is the main Model-object. It has access to all the other Model
+ * objects.
+ * @author Marcus. Revisited by Jonathan 2015-05-06. Revisited by Amar.
+ * @version 1.15
  */
 public class World {
 
+    /**
+     * This is a list containing all the Enemies that matter to the game. Enemies that are not on
+     * the screen are not in this list.
+     */
     private List<Enemy> enemies = new ArrayList<Enemy>();
-    Player player;
 
-    public  List<Enemy> getEnemies(){
-        return enemies;
-    }
-    public Player getPlayer(){
-        return player;
-    }
+    /**
+     * The Player object that is in the game.
+     */
+    private Player player;
 
-    public Timer spawnTimer = new Timer();
+    /**
+     * This is the spawn timer for enemies. The time between each enemy to come on the screen.
+     */
+    private Timer spawnTimer = new Timer();
 
+    /**
+     * The standard constructor for a new World. Makes sure that the spawn timer
+     * for enemies has started and that the basic world exists.
+     */
     public World() {
         initSpawnTimer();
         createBasicWorld();
         spawnTimer.start();
     }
 
+    /**
+     * Creates the basic world where there's only 1 Player and makes sure that it starts in the
+     * right position.
+     */
     public void createBasicWorld(){
         player = new Player(Player.DEFAULTPOSITION);
-        /*enemies.add(new Enemy(new Vector2(3,4)));
-        enemies.add(new Enemy(new Vector2(2,6)));
-        enemies.add(new Enemy(new Vector2(1,2)));
-        enemies.add(new Enemy(new Vector2(1,3)));
-        enemies.add(new Enemy(new Vector2(1,4)));
-        enemies.add(new Enemy(new Vector2(1,5)));*/
     }
 
     /**
-     * Checks for collisions between player and enemies.
+     * Checks for collisions between player and enemies and bullets.
      */
     public void checkCollision(){
-        //TODO add support for player vs. bullets and enemies vs. bullets
+        //TODO add support for player vs. bullets
         if(enemies != null) {
             //If enemies exist we check collisions between player and enemies.
 
@@ -133,17 +140,35 @@ public class World {
         }
     }
 
-    // Something like this should suffice for spawning enemies,
-    // in the case that we need a more advanced system we could always make a custom timer/task
+    /**
+     * Initiates the spawn timer for enemies.
+     */
     private void initSpawnTimer() {
+        // in the case that we need a more advanced system we could always make a custom timer/task
         spawnTimer.scheduleTask(new Timer.Task() {
             int dummy = 0;
 
             @Override
             public void run() {
-                enemies.add(new Enemy(new Vector2(dummy,dummy)));
+                enemies.add(new EnemySimple(new Vector2(dummy,dummy)));
                 dummy++;
             }
         }, 0, 1, 10);
+    }
+
+    /**
+     * Getter for the list of enemies that are relevant to the game.
+     * @return A list of enemies.
+     */
+    public List<Enemy> getEnemies(){
+        return enemies;
+    }
+
+    /**
+     * A getter for the Player object that is playing this game.
+     * @return The Player object.
+     */
+    public Player getPlayer(){
+        return player;
     }
 }

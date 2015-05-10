@@ -5,12 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -26,35 +24,72 @@ import com.icyvenom.needforghetto.parallax.ParallaxLayer;
 import com.icyvenom.needforghetto.view.WorldRenderer;
 
 /**
- * Created by Marcus on 2015-04-29.
+ * This class handles the graphics for the game when the game is played
+ * (not when it's in the main menu).
+ * @author Marcus. Revisited by Amar.
+ * @version 1.05
  */
 public class GameScreen implements Screen {
 
-    // state of the game
+    /**
+     * An enum that says which state the game is in.
+     */
     private static enum State{
         Running, Paused
     };
 
+    /**
+     * The world model that is being played and supposed to be showed on screen.
+     */
     private World world;
+
+    /**
+     * The render object.
+     */
     private WorldRenderer renderer;
+
+    /**
+     * The controller for the game.
+     */
     private PlayerController playerController;
+
     private TextureAtlas backgroundAtlas = new TextureAtlas(Gdx.files.internal("skins/testbg.atlas"));
+
+    /**
+     * The background that is moving when the game is played.
+     */
     private ParallaxBackground background;
 
     //current state of the game, we start with a running game
+    /**
+     * The current state that the game is in. It will always start running.
+     */
     private State state = State.Running;
 
-    //Stage for topMenu
+    /**
+     * The stage for topMenu.
+     */
     private Stage stage = new Stage();
 
     //We need a inputmultiplexer since we need to delegate events to diffrent inputcontrollers
     //One for Running state and one for paused state
+    /**
+     * The inputmultiplexer that is used to delegate events to different inputcontrollers. This
+     * one is used when the game is running.
+     */
     private InputMultiplexer inputMultiplexerRunning = new InputMultiplexer();
+
+    /**
+     * The inputmultiplexer that is used to delegate events to different inputcontrollers. This
+     * one is used when the game is paused.
+     */
     private InputMultiplexer inputMultiplexerPaused = new InputMultiplexer();
 
-    // Inputprocessor for back key since we want to override the default behaviour
-    // TODO: It is still killing the current screen, should we save state somehow?? maybe call pause()
+    /**
+     * The inputprocessor for the back-key on the phone. We want to override the default behavior.
+     */
     private InputAdapter backProcessor = new InputAdapter() {
+        // TODO: It is still killing the current screen, should we save state somehow?? maybe call pause()
         @Override
         public boolean keyDown(int keycode) {
             if(keycode == Input.Keys.BACK) {
@@ -136,6 +171,10 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(null);
     }
 
+    /**
+     * Loads the top menu. This menu is at the top of the screen and contains the number of lives
+     * the player has, the play/paus button and the score that the Player has.
+     */
     private void loadTopMenu() {
         Table table = new Table();
         Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"),
@@ -169,6 +208,9 @@ public class GameScreen implements Screen {
         stage.addActor(table);
     }
 
+    /**
+     * This method loads the moving background and makes sure that it's moving.
+     */
     private void loadBackground(){
         background = new ParallaxBackground(new ParallaxLayer[]{
                 //new ParallaxLayer(backgroundAtlas.findRegion("road"),new Vector2(),new Vector2(0, 0)),
@@ -176,5 +218,4 @@ public class GameScreen implements Screen {
                 //new ParallaxLayer(backgroundAtlas.findRegion("road"),new Vector2(0.1f,1.0f),new Vector2(00, 0),new Vector2(0, 0)),
         }, 800, 480,new Vector2(0,300));
     }
-
 }

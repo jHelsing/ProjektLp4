@@ -74,7 +74,7 @@ public abstract class Weapon {
      * Used to add a bullets to the bullet-list
      */
     public void addBullet() {
-        bullets.add(new Bullet(this.position.cpy()));
+        bullets.add(new BulletSimple(this.position.cpy()));
     }
 
     public float getAttackRate() {

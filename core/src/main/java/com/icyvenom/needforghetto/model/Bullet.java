@@ -3,51 +3,83 @@ package com.icyvenom.needforghetto.model;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.Vector;
+
 /**
- * Created by anton on 2015-04-30.
+ * This abstract class is a superclass to all existing bullets and contains basic
+ * functionality.
+ * @author Anton. Revisited by Amar.
+ * @version 2.0
  */
-public class Bullet {
-
+public abstract class Bullet {
+    /**
+     * The width and the height of the bullet.
+     */
     public static final float SIZE = 0.5f;
-
-    private Vector2 position = new Vector2();
-    private Vector2 velocity = new Vector2();
-    private Vector2 direction = new Vector2();
-
+    /**
+     * The position of the bullet.
+     */
+    private Vector2 position;
+    /**
+     * The velocity of the bullet.
+     */
+    private Vector2 velocityVector;
+    /**
+     * The hitbox of the bullet.
+     */
     private Rectangle bounds = new Rectangle();
-
-    public Bullet(Vector2 position) {
-        this.position = position;
+    /**
+     *  When a bullet is created, it's position, hitbox and velocity are set according to the parameter
+     *  and variables.
+     * @param position This is the given position for the bullet.
+     */
+    public Bullet(Vector2 position, Vector2 velocityVector) {
+        this.position = position.cpy();
+        this.velocityVector=velocityVector.cpy();
         this.bounds.height = SIZE;
         this.bounds.width = SIZE;
-        this.bounds.setX(position.x);
-        this.bounds.setY(position.y);
-        this.velocity.set(0, 0.5f);
-    }
-
-    public Rectangle getBounds() {
-        return bounds;
-    }
-
-    public Vector2 getPosition() {
-        return position;
-    }
-
-    public Vector2 getVelocity() {
-        return velocity;
-    }
-
-    public void setPosition(Vector2 position) {
-        this.position = position;
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
     }
 
-    public boolean isColliding (Rectangle object){
-        return (bounds.overlaps(object));
+    /**
+     * Gets the bounds of the bullet.
+     * @return Returns the bounds.
+     */
+    public Rectangle getBounds() {
+        return bounds;
     }
 
+    /**
+     *  Gets the position of the bullet.
+     * @return Returns the position.
+     */
+    public Vector2 getPosition() {
+        return position.cpy();
+    }
+
+    /**
+     *  Gets the velocity of the bullet.
+     * @return Returns the velocity.
+     */
+    public Vector2 getVelocityVector() {
+        return velocityVector.cpy();
+    }
+
+    /**
+     *  Sets the position of the bullet.
+     * @param position This is the given position for the bullet.
+     */
+    public void setPosition(Vector2 position) {
+        this.position = position.cpy();
+        this.bounds.setX(this.position.x);
+        this.bounds.setY(this.position.y);
+    }
+
+    /**
+     * This method moves the bullet in a direction with a defined velocity.
+     */
     public void update() {
-        setPosition(getPosition().add(velocity));
+        setPosition(getPosition().add(velocityVector));
     }
 }

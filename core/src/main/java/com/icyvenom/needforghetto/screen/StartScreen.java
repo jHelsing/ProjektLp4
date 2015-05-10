@@ -2,9 +2,7 @@ package com.icyvenom.needforghetto.screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,32 +14,63 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.icyvenom.needforghetto.model.WorldFactory;
 
 /**
- * Created by anton on 2015-05-07.
+ * This is the first screen that is shown when the application is first opened.
+ * It basically contains a start menu. There's a button to start playing the game, exit the game,
+ * change the settings of the game and to view the highscore's list.
+ * @author Anton. Revisited by Amar.
+ * @version 1.05
  */
 public class StartScreen implements Screen{
 
-    Stage stage = new Stage();
-    Table table = new Table();
+    /**
+     * Sets the stage.
+     */
+    private Stage stage = new Stage();
 
-    Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"),
+    /**
+     * Creates a new table.
+     */
+    private Table table = new Table();
+
+    /**
+     * Sets the skin to be used.
+     */
+    private Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"),
             new TextureAtlas(Gdx.files.internal("skins/uiskin.atlas")));
 
-    TextButton buttonPlay = new TextButton("Play", skin);
-    TextButton buttonExit = new TextButton("Exit", skin);
-    TextButton buttonSettings = new TextButton("Settings", skin);
-    TextButton buttonHighscores = new TextButton("Highscores", skin);
+    /**
+     * Creates a new play button that will hold the text Play.
+     */
+    private TextButton buttonPlay = new TextButton("Play", skin);
 
-    Label title1 = new Label("Need", skin);
-    Label title2 = new Label("For", skin);
-    Label title3 = new Label("Ghetto", skin);
+    /**
+     * Creates a new exit button that will hold the text Exit.
+     */
+    private TextButton buttonExit = new TextButton("Exit", skin);
+
+    /**
+     * Creates a new settings button that will hold the text Settings.
+     */
+    private TextButton buttonSettings = new TextButton("Settings", skin);
+
+    /**
+     * Creates a new highscore button that will hold the text Highscore
+     */
+    private TextButton buttonHighscores = new TextButton("Highscore", skin);
+
+    /**
+     * Creates 3 new title label that are used to show the game title.
+     */
+    private Label title1 = new Label("Need", skin);
+    private Label title2 = new Label("For", skin);
+    private Label title3 = new Label("Ghetto", skin);
 
 
-    SpriteBatch spriteBatch = new SpriteBatch();
-    Texture bgTexture = new Texture("images/car.png");
-    Sprite bgSprite = new Sprite(bgTexture);
+    private SpriteBatch spriteBatch = new SpriteBatch();
+    private Texture bgTexture = new Texture("images/car.png");
+    private Sprite bgSprite = new Sprite(bgTexture);
 
     public StartScreen() {
 
