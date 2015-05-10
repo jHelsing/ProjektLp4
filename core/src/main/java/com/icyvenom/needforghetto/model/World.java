@@ -92,58 +92,45 @@ public class World {
 
                 List<Bullet> playerBullets = player.getWeapon().getBullets();
 
-                for(int i = 0; i<enemies.size(); i++) {
-                    Enemy e = enemies.get(i);
+                List<Enemy> enemiesToRemove = new ArrayList<Enemy>();
+                List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
 
-                    float enemyMinX = e.getBounds().getX();
-                    float enemyMaxX = e.getBounds().getWidth() + enemyMinX;
-                    float enemyMinY = e.getBounds().getY();
-                    float enemyMaxY = e.getBounds().getHeight() + enemyMinY;
+                for(int i=0; i<playerBullets.size(); i++) {
+                    Bullet b = playerBullets.get(i);
 
-                    for(int j=0; i<playerBullets.size(); j++) {
-                        Bullet b = playerBullets.get(j);
+                    float bulletMinX = b.getBounds().getX();
+                    float bulletMaxX = b.getBounds().getWidth() + minX;
 
-                        float bulletMinX = b.getBounds().getX();
-                        float bulletMaxX = b.getBounds().getWidth() + bulletMinX;
-                        float bulletMinY = b.getBounds().getY();
-                        float bulletMaxY = b.getBounds().getHeight() + bulletMinY;
+                    for(int j=0; j<enemies.size(); j++) {
+                        Enemy e = enemies.get(j);
 
-                        if(enemyMinY <= bulletMinY && bulletMinY <= enemyMaxY) {
-                            //Bullet coming from the bottom (3rd and 4th quadrant)
-                            if(enemyMinX <= bulletMaxX && bulletMinX <= enemyMinX) {
-                                //Bullet is in the 3rd quadrant of a system with Enemy as origin
-                                enemies.remove(e);
-                                player.getWeapon().getBullets().remove(b);
-                            } else if(bulletMinX <= enemyMaxX && enemyMaxX <= bulletMaxX) {
-                                //Bullet is in the 4th quadrant of a system with Enemy as origin
-                                enemies.remove(e);
-                                player.getWeapon().getBullets().remove(b);
+                        float enemyMinX = e.getBounds().getX();
+                        float enemyMaxX = e.getBounds().getWidth() + enemyMinX;
+                        float enemyMinY = e.getBounds().getY();
+                        float enemyMaxY = e.getBounds().getHeight() + enemyMinY;
+
+                        if(bulletMinX <= enemyMaxX && enemyMaxX <= bulletMaxX) {
+                            if(b.getBounds().getY() <= enemyMinY
+                                    && enemyMaxY <= b.getBounds().getY()) {
+                                enemiesToRemove.add(e);
+                                bulletsToRemove.add(b);
                             }
-                        } else if(enemyMinY <= bulletMaxY && bulletMaxY <= enemyMaxY) {
-                            //Bullet coming from the top (1st and 2nd quadrant)
-                            if(enemyMinX <= bulletMaxX && bulletMaxX <= enemyMaxX) {
-                                //Bullet is in the 2nd quadrant of a system with Enemy as origin
-                                enemies.remove(e);
-                                player.getWeapon().getBullets().remove(b);
-                            } else if(enemyMinX <= bulletMinX && bulletMinX <= enemyMaxX) {
-                                //Bullet is in the 1st quadrant of a system with Enemy as origin
-                                enemies.remove(e);
-                                player.getWeapon().getBullets().remove(b);
+                        } else if(bulletMinX <= enemyMinX && enemyMinX <= bulletMaxX) {
+                            if(b.getBounds().getY() <= enemyMinY
+                                    && enemyMaxY <= b.getBounds().getY()) {
+                                enemiesToRemove.add(e);
+                                bulletsToRemove.add(b);
                             }
                         }
-
-
                     }
-
-
-
                 }
 
+                if(!enemiesToRemove.isEmpty() && !bulletsToRemove.isEmpty()) {
+                    enemies.removeAll(enemiesToRemove);
+                    player.getWeapon().getBullets().removeAll(bulletsToRemove);
+                }
             }
-
         }
-
-
     }
 
     // Something like this should suffice for spawning enemies,

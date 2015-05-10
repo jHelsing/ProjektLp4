@@ -3,10 +3,13 @@ package com.icyvenom.needforghetto.model;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.List;
+
 /**
  * Created by Marcus on 2015-04-29.
  */
 public class Enemy {
+
     static final float SPEED = 2f;
     public static final float SIZE = 1f;
 
