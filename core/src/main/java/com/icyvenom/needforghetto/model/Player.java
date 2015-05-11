@@ -63,7 +63,7 @@ public class Player {
     /**
      * The Players weapon.
      */
-    private Weapon weapon = new WeaponSimple();
+    private Weapon weapon = new WeaponNineMM();
 
     /**
      * The timer for the attack speed of the player. Sets how often
@@ -136,6 +136,7 @@ public class Player {
         lifes--;
         setPosition(DEFAULTPOSITION);
         goalPosition.set(DEFAULTPOSITION);
+        weapon.setPosition(DEFAULTPOSITION);
         System.err.println(lifes);
     }
 
