@@ -86,9 +86,11 @@ public class World {
                     if(minX <= enemyMaxX && enemyMaxX <= maxX) {
                         //Enemy is in the 2nd quadrant of a system with player as origin
                         enemies.remove(e);
+                        player.kill();
                     } else if(minX <= enemyMinX && enemyMinX <= maxX) {
                         //Enemy is in the 1st quadrant of a system with player as origin
                         enemies.remove(e);
+                        player.kill();
                     }
                 }
             }
@@ -97,47 +99,45 @@ public class World {
             if(!player.getWeapon().getBullets().isEmpty()) {
                 //We are now checking for collisions between Player bullets and enemies
 
-                List<Bullet> playerBullets = player.getWeapon().getBullets();
-
-                List<Enemy> enemiesToRemove = new ArrayList<Enemy>();
-                List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
-
-                for(int i=0; i<playerBullets.size(); i++) {
-                    Bullet b = playerBullets.get(i);
-
-                    float bulletMinX = b.getBounds().getX();
-                    float bulletMaxX = b.getBounds().getWidth() + minX;
-
-                    for(int j=0; j<enemies.size(); j++) {
-                        Enemy e = enemies.get(j);
-
-                        float enemyMinX = e.getBounds().getX();
-                        float enemyMaxX = e.getBounds().getWidth() + enemyMinX;
-                        float enemyMinY = e.getBounds().getY();
-                        float enemyMaxY = e.getBounds().getHeight() + enemyMinY;
-
-                        if(bulletMinX <= enemyMaxX && enemyMaxX <= bulletMaxX) {
-                            if(b.getBounds().getY() <= enemyMinY
-                                    && enemyMaxY <= b.getBounds().getY()) {
-                                enemiesToRemove.add(e);
-                                bulletsToRemove.add(b);
-                            }
-                        } else if(bulletMinX <= enemyMinX && enemyMinX <= bulletMaxX) {
-                            if(b.getBounds().getY() <= enemyMinY
-                                    && enemyMaxY <= b.getBounds().getY()) {
-                                enemiesToRemove.add(e);
-                                bulletsToRemove.add(b);
-                            }
-                        }
-                    }
-                }
-
-                if(!enemiesToRemove.isEmpty() && !bulletsToRemove.isEmpty()) {
-                    enemies.removeAll(enemiesToRemove);
-                    player.getWeapon().getBullets().removeAll(bulletsToRemove);
+                for(int i=0; i<player.getWeapon().getBullets().size(); i++) {
+                    Bullet b = player.getWeapon().getBullets().get(i);
+                    System.err.println("Started checking for bullet: " + b.toString());
+                    checkPlayerBulletCollision(b);
                 }
             }
         }
+    }
+
+    private boolean checkPlayerBulletCollision(Bullet b) {
+        float bulletMinX = b.getBounds().getX();
+        float bulletMaxX = b.getBounds().getWidth() + bulletMinX;
+        float bulletMinY = b.getBounds().getY();
+
+        for(int j=0; j<enemies.size(); j++) {
+            Enemy e = enemies.get(j);
+
+            float enemyMinX = e.getBounds().getX();
+            float enemyMaxX = e.getBounds().getWidth() + enemyMinX;
+            float enemyMinY = e.getBounds().getY();
+            float enemyMaxY = e.getBounds().getHeight() + enemyMinY;
+
+            if(bulletMinX <= enemyMaxX && enemyMaxX <= bulletMaxX) {
+                System.err.println("Error in first loop: " + b.toString() + " " + e.toString());
+                if(enemyMaxY <= bulletMinY && bulletMinY <= enemyMinY) {
+                    enemies.remove(e);
+                    player.getWeapon().getBullets().remove(b);
+                    return true;
+                }
+            } else if(bulletMinX <= enemyMinX && enemyMinX <= bulletMaxX) {
+                System.err.println("Error in 2nd loop: " + b.toString() + " " + e.toString());
+                if(enemyMaxY <= bulletMinY && bulletMinY <= enemyMinY) {
+                    enemies.remove(e);
+                    player.getWeapon().getBullets().remove(b);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
