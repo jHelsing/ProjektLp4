@@ -33,7 +33,7 @@ public abstract class Enemy {
     /**
      * The enemy's weapon.
      */
-    private Weapon weapon = new WeaponSimple();
+    private Weapon weapon;
 
     /**
      * The timer for the attack speed of the enemy. Sets how often
@@ -46,13 +46,14 @@ public abstract class Enemy {
      *  the parameter and variables.
      * @param position This is the given position for the enemy.
      */
-    public Enemy(Vector2 position, float speed){
+    public Enemy(Vector2 position, float speed, final Weapon weapon){
         this.position = position.cpy();
         this.speed=speed;
         this.bounds.height = SIZE;
         this.bounds.width = SIZE;
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
+        this.weapon= weapon;
         this.weapon.setPosition(this.position);
         //Schedule's a new task for the enemy weapons attack speed.
         attackSpeed.scheduleTask(new Timer.Task() {
