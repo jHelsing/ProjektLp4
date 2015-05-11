@@ -96,6 +96,7 @@ public class Player {
         //Force stop the timer so that it doesn't fire bullets as
         //soon as the Player object is created
         attackSpeed.stop();
+        System.err.print("Player shoot");
     }
 
     /**

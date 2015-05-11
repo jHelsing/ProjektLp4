@@ -2,6 +2,7 @@ package com.icyvenom.needforghetto.model;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
 
 /**
  * This abstract class is a superclass to all existing enemies and contains basic
@@ -30,6 +31,17 @@ public abstract class Enemy {
     private Rectangle bounds = new Rectangle();
 
     /**
+     * The enemy's weapon.
+     */
+    private Weapon weapon = new WeaponSimple();
+
+    /**
+     * The timer for the attack speed of the enemy. Sets how often
+     * the enemy should fire bullets.
+     */
+    private Timer attackSpeed= new Timer();
+
+    /**
      *  When a enemy is created, it's position, the hitbox and the speed are set according to
      *  the parameter and variables.
      * @param position This is the given position for the enemy.
@@ -41,6 +53,33 @@ public abstract class Enemy {
         this.bounds.width = SIZE;
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
+        this.weapon.setPosition(this.position);
+        //Schedule's a new task for the enemy weapons attack speed.
+        attackSpeed.scheduleTask(new Timer.Task() {
+
+            @Override
+            public void run() {
+                weapon.addBullet();
+            }
+
+        }, 0, weapon.getAttackRate());
+        fire();
+    }
+
+    /**
+     * Start method for the enemy's firing. Starts the timer. The enemy should
+     * now be firing bullets.
+     */
+    public void fire() {
+        attackSpeed.start();
+    }
+
+    /**
+     * Stop method for the enemy's firing. Stops the timer. The enemy should no longer be firing
+     * bullets.
+     */
+    public void stopFire() {
+        attackSpeed.stop();
     }
 
     /**
