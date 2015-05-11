@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Anton. Revicited by Jonathan (2015-05-10) (made abstract)
+ * @author Anton. Revicited by Jonathan (2015-05-10) (made abstract). Revisited by
+ * Amar (2015-05-11).
  * @version 2.0
  */
 public abstract class Weapon {
@@ -18,7 +19,7 @@ public abstract class Weapon {
     /**
      * The attack rate of the weapon. Decides how often the weapon will fire bullets
      */
-    private static float attackRate = 0.2f;
+    private static float attackRate;
 
     /**
      * The position of the weapon
@@ -58,7 +59,7 @@ public abstract class Weapon {
      * Sets the attack rate of the weapon. How fast it will fire bullets.
      * @param attackRate The attack rate of the weapon.
      */
-    public void setAttackRate(int attackRate) {
+    public void setAttackRate(float attackRate) {
         this.attackRate = attackRate;
     }
 

@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * A class for a M4A1 assault rifle. Can be used by both enemies and Players.
- * @author Jonathan.
+ * @author Jonathan. Revisited by Amar (2015-05-11).
  * @version 1.0
  */
 public class WeaponMFourAOne extends Weapon {
@@ -17,7 +17,7 @@ public class WeaponMFourAOne extends Weapon {
     /**
      * The attack rate of the M4A1 (assault rifle)
      */
-    private static final int WEAPON_ATTACK_RATE = 1;
+    private static final float WEAPON_ATTACK_RATE = 0.3f;
 
     /**
      * Constructor for a new M4A1
