@@ -25,6 +25,10 @@ public abstract class Bullet {
      */
     private Vector2 velocityVector;
     /**
+     * The direction of the bullet.
+     */
+    private BulletDirection bulletDirection;
+    /**
      * The hitbox of the bullet.
      */
     private Rectangle bounds = new Rectangle();
@@ -33,9 +37,10 @@ public abstract class Bullet {
      *  and variables.
      * @param position This is the given position for the bullet.
      */
-    public Bullet(Vector2 position, Vector2 velocityVector) {
+    public Bullet(Vector2 position, Vector2 velocityVector, BulletDirection bulletDirection) {
         this.position = position.cpy();
         this.velocityVector=velocityVector.cpy();
+        this.bulletDirection=bulletDirection;
         this.bounds.height = SIZE;
         this.bounds.width = SIZE;
         this.bounds.setX(this.position.x);
@@ -80,6 +85,6 @@ public abstract class Bullet {
      * This method moves the bullet in a direction with a defined velocity.
      */
     public void update() {
-        setPosition(getPosition().add(velocityVector));
+        setPosition(getPosition().add(velocityVector.scl(bulletDirection.getDirectionValue())));
     }
 }

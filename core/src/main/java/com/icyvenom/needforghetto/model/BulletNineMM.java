@@ -19,7 +19,7 @@ public class BulletNineMM extends Bullet {
      *  and variables.
      * @param position This is the given position for the bullet.
      */
-    public BulletNineMM(Vector2 position) {
-        super(position, VELOCITY_VECTOR.cpy());
+    public BulletNineMM(Vector2 position, BulletDirection bulletDirection) {
+        super(position, VELOCITY_VECTOR.cpy(), bulletDirection);
     }
 }

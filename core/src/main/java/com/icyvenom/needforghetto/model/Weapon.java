@@ -27,9 +27,20 @@ public abstract class Weapon {
     private Vector2 position = new Vector2();
 
     /**
+     * The direction of the weapon's bullet.
+     */
+    private BulletDirection bulletDirection;
+
+    /**
      * A list of all the bullets that are in the game that belongs to this weapon.
      */
     private List<Bullet> bullets = new ArrayList<Bullet>();
+
+    public Weapon(){}
+
+    public Weapon(BulletDirection bulletDirection) {
+        this.bulletDirection=bulletDirection;
+    }
 
     /**
      * Getter for the bullet's that belongs to this weapon
@@ -84,4 +95,11 @@ public abstract class Weapon {
         return attackRate;
     }
 
+    /**
+     *
+     * @return Returns the direction of the weapon's bullet.
+     */
+    public BulletDirection getBulletDirection() {
+        return bulletDirection;
+    }
 }

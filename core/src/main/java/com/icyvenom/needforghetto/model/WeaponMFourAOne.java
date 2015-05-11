@@ -33,13 +33,14 @@ public class WeaponMFourAOne extends Weapon {
     /**
      * Constructor for a new M4A1
      */
-    public WeaponMFourAOne() {
+    public WeaponMFourAOne(BulletDirection bulletDirection) {
+        super(bulletDirection);
         super.setAttackRate(WEAPON_ATTACK_RATE);
         super.setDamage(WEAPON_DAMAGE);
     }
 
     @Override
     public void addBullet() {
-        super.getBullets().add(new BulletNatoFive(super.getPosition().cpy()));
+        super.getBullets().add(new BulletNatoFive(super.getPosition().cpy(), super.getBulletDirection()));
     }
 }

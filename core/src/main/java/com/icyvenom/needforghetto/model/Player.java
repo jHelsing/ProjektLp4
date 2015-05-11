@@ -63,8 +63,7 @@ public class Player {
     /**
      * The Players weapon.
      */
-    private Weapon weapon = new WeaponNineMM();
-
+    private Weapon weapon = new WeaponNineMM(BulletDirection.UP);
     /**
      * The timer for the attack speed of the player. Sets how often
      * the Player should fire bullets.

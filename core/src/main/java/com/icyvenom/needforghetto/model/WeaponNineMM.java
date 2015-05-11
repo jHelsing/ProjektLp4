@@ -25,13 +25,14 @@ public class WeaponNineMM extends Weapon {
         super.setDamage(WEAPON_DAMAGE);
     }
 
-    public WeaponNineMM() {
+    public WeaponNineMM(BulletDirection bulletDirection) {
+        super(bulletDirection);
         super.setAttackRate(WEAPON_ATTACK_RATE);
         super.setDamage(WEAPON_DAMAGE);
     }
 
     @Override
     public void addBullet() {
-        super.getBullets().add(new BulletNineMM(super.getPosition().cpy()));
+        super.getBullets().add(new BulletNineMM(super.getPosition().cpy(), super.getBulletDirection()));
     }
 }
