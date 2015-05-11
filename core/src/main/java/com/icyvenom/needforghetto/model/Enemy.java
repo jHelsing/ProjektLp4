@@ -41,6 +41,8 @@ public abstract class Enemy {
      */
     private Timer attackSpeed= new Timer();
 
+    BulletDirection.
+
     /**
      *  When a enemy is created, it's position, the hitbox and the speed are set according to
      *  the parameter and variables.
