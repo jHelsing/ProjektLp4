@@ -112,6 +112,7 @@ public class World {
         float bulletMinX = b.getBounds().getX();
         float bulletMaxX = b.getBounds().getWidth() + bulletMinX;
         float bulletMinY = b.getBounds().getY();
+        float bulletMaxY = b.getBounds().getHeight() + bulletMinY;
 
         for(int j=0; j<enemies.size(); j++) {
             Enemy e = enemies.get(j);
@@ -121,16 +122,28 @@ public class World {
             float enemyMinY = e.getBounds().getY();
             float enemyMaxY = e.getBounds().getHeight() + enemyMinY;
 
-            if(bulletMinX <= enemyMaxX && enemyMaxX <= bulletMaxX) {
-                System.err.println("Error in first loop: " + b.toString() + " " + e.toString());
-                if(enemyMaxY <= bulletMinY && bulletMinY <= enemyMinY) {
+            if(bulletMinY <= enemyMinY && enemyMinY <= bulletMaxY) {
+                //Enemy coming from the bottom (3rd and 4th quadrant)
+                if(bulletMinX <= enemyMaxX && enemyMinX <= bulletMinX) {
+                    //Enemy is in the 3rd quadrant of a system with player as origin
+                    enemies.remove(e);
+                    player.getWeapon().getBullets().remove(b);
+                    return true;
+                } else if(enemyMinX <= bulletMaxX && enemyMaxX <= bulletMaxX) {
+                    //Enemy is in the 4th quadrant of a system with player as origin
                     enemies.remove(e);
                     player.getWeapon().getBullets().remove(b);
                     return true;
                 }
-            } else if(bulletMinX <= enemyMinX && enemyMinX <= bulletMaxX) {
-                System.err.println("Error in 2nd loop: " + b.toString() + " " + e.toString());
-                if(enemyMaxY <= bulletMinY && bulletMinY <= enemyMinY) {
+            } else if(bulletMinY <= enemyMaxY && enemyMaxY <= bulletMaxY) {
+                //Enemy coming from the bottom (1st and 2nd quadrant)
+                if(bulletMinX <= enemyMaxX && enemyMaxX <= bulletMaxX) {
+                    //Enemy is in the 2nd quadrant of a system with player as origin
+                    enemies.remove(e);
+                    player.getWeapon().getBullets().remove(b);
+                    return true;
+                } else if(bulletMinX <= enemyMinX && enemyMinX <= bulletMaxX) {
+                    //Enemy is in the 1st quadrant of a system with player as origin
                     enemies.remove(e);
                     player.getWeapon().getBullets().remove(b);
                     return true;
