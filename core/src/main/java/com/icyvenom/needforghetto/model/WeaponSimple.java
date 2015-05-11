@@ -28,4 +28,11 @@ public class WeaponSimple extends Weapon {
         super.setDamage(WEAPON_DAMAGE);
     }
 
+    /**
+     * Used to add a bullets to the bullet-list
+     */
+    public void addBullet(){
+        super.getBullets().add(new BulletSimple(super.getPosition().cpy()));
+    }
+
 }

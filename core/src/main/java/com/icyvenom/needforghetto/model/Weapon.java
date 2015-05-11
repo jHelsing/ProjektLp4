@@ -73,10 +73,12 @@ public abstract class Weapon {
     /**
      * Used to add a bullets to the bullet-list
      */
-    public void addBullet() {
-        bullets.add(new BulletSimple(this.position.cpy()));
-    }
+    public abstract void addBullet();
 
+    /**
+     * Gets the attackrate of the weapon.
+     * @return The current attackrate of the weapon.
+     */
     public float getAttackRate() {
         return attackRate;
     }
