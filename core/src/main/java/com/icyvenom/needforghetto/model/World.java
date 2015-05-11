@@ -86,9 +86,11 @@ public class World {
                     if(minX <= enemyMaxX && enemyMaxX <= maxX) {
                         //Enemy is in the 2nd quadrant of a system with player as origin
                         enemies.remove(e);
+                        player.kill();
                     } else if(minX <= enemyMinX && enemyMinX <= maxX) {
                         //Enemy is in the 1st quadrant of a system with player as origin
                         enemies.remove(e);
+                        player.kill();
                     }
                 }
             }
