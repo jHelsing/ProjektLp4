@@ -1,7 +1,8 @@
 package com.icyvenom.needforghetto.model;
 
 /**
- * Created by anton on 2015-05-05.
+ * @author Anton (2015-05-05).
+ * @version 1.0
  */
 public class WorldFactory {
 

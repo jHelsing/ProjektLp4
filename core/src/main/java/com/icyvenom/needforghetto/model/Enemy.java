@@ -36,6 +36,11 @@ public abstract class Enemy {
     private Weapon weapon;
 
     /**
+     * The direction of the bullet of the enemy's weapon.
+     */
+    private static BulletDirection bulletDirection = BulletDirection.DOWN;
+
+    /**
      * The timer for the attack speed of the enemy. Sets how often
      * the enemy should fire bullets.
      */
@@ -97,5 +102,9 @@ public abstract class Enemy {
      */
     public Vector2 getPosition() {
         return position.cpy();
+    }
+
+    public static BulletDirection getBulletDirection() {
+        return bulletDirection;
     }
 }

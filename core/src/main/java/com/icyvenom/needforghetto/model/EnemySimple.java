@@ -16,7 +16,7 @@ public class EnemySimple extends Enemy {
     /**
      * The speed of the enemy.
      */
-    private static final Weapon weapon = new WeaponNineMM();
+    private static final Weapon weapon = new WeaponNineMM(Enemy.getBulletDirection());
 
     /**
      *  When a enemy is created, it's position, the hitbox and the speed are set according to

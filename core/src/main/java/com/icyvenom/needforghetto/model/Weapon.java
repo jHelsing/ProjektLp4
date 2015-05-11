@@ -37,7 +37,6 @@ public abstract class Weapon {
     private List<Bullet> bullets = new ArrayList<Bullet>();
 
     public Weapon(){}
-
     public Weapon(BulletDirection bulletDirection) {
         this.bulletDirection=bulletDirection;
     }
