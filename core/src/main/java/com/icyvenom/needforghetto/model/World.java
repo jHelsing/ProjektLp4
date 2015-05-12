@@ -55,40 +55,39 @@ public class World {
         if(enemies != null) {
             //If enemies exist we check collisions between player and enemies.
 
-            //Creates a column and row where enemies might exist for crash to be possible.
-            float minX = player.getBounds().getX() - player.getBounds().getWidth();
-            float maxX = player.getBounds().getX();
-            float minY = player.getBounds().getY() - player.getBounds().getWidth();
-            float maxY = player.getBounds().getY();
+            float pMinX = player.getBounds().getX();
+            float pMaxX = pMinX + player.getBounds().getWidth();
+            float pMinY = player.getBounds().getY();
+            float pMaxY = pMinY + player.getBounds().getHeight();
 
             //Checking collisions between all enemies and the player
             for(int i = 0; i<enemies.size(); i++) {
                 Enemy e = enemies.get(i);
 
-                float enemyMinX = e.getBounds().getX() - e.getBounds().getWidth();
-                float enemyMaxX = e.getBounds().getX();
-                float enemyMinY = e.getBounds().getY() - e.getBounds().getHeight();
-                float enemyMaxY = e.getBounds().getY();
+                float eMinX = e.getBounds().getX();
+                float eMaxX = eMinX + e.getBounds().getWidth();
+                float eMinY = e.getBounds().getY();
+                float eMaxY = eMinY + e.getBounds().getHeight();
 
-                if(minY <= enemyMinY && enemyMinY <= maxY) {
-                    //Enemy coming from the bottom (3rd and 4th quadrant)
-                    if(minX <= enemyMaxX && enemyMinX <= minX) {
-                        //Enemy is in the 3rd quadrant of a system with player as origin
+                if(eMinY <= pMaxY && pMinY <= eMinY) {
+                    // From above
+                    if(pMinX <= eMaxX && eMaxX <= pMaxX) {
+                        // From the left
                         enemies.remove(e);
                         player.kill();
-                    } else if(enemyMinX <= maxX && maxX <= enemyMaxX) {
-                        //Enemy is in the 4th quadrant of a system with player as origin
+                    } else if(eMinX <= pMaxX && pMinX <= eMinX) {
+                        // From the right
                         enemies.remove(e);
                         player.kill();
                     }
-                } else if(minY <= enemyMaxY && enemyMaxY <= maxY) {
-                    //Enemy coming from the bottom (1st and 2nd quadrant)
-                    if(minX <= enemyMaxX && enemyMaxX <= maxX) {
-                        //Enemy is in the 2nd quadrant of a system with player as origin
+                } else if(pMinY <= eMaxY && eMaxY <= pMaxY) {
+                    // From below
+                    if(pMinX <= eMaxX && eMaxX <= pMaxX) {
+                        // From the left
                         enemies.remove(e);
                         player.kill();
-                    } else if(minX <= enemyMinX && enemyMinX <= maxX) {
-                        //Enemy is in the 1st quadrant of a system with player as origin
+                    } else if(eMinX <= pMaxX && pMinX <= eMinX) {
+                        // From the right
                         enemies.remove(e);
                         player.kill();
                     }
@@ -121,29 +120,7 @@ public class World {
             float enemyMinY = e.getBounds().getY() - e.getBounds().getHeight();
             float enemyMaxY = e.getBounds().getY();
 
-            if(minY <= enemyMinY && enemyMinY <= maxY) {
-                //Enemy coming from the bottom (3rd and 4th quadrant)
-                if(minX <= enemyMaxX && enemyMinX <= minX) {
-                    //Enemy is in the 3rd quadrant of a system with player as origin
-                    enemies.remove(e);
-                    player.getWeapon().getBullets().remove(b);
-                } else if(enemyMinX <= maxX && maxX <= enemyMaxX) {
-                    //Enemy is in the 4th quadrant of a system with player as origin
-                    enemies.remove(e);
-                    player.getWeapon().getBullets().remove(b);
-                }
-            } else if(minY <= enemyMaxY && enemyMaxY <= maxY) {
-                //Enemy coming from the bottom (1st and 2nd quadrant)
-                if(minX <= enemyMaxX && enemyMaxX <= maxX) {
-                    //Enemy is in the 2nd quadrant of a system with player as origin
-                    enemies.remove(e);
-                    player.getWeapon().getBullets().remove(b);
-                } else if(minX <= enemyMinX && enemyMinX <= maxX) {
-                    //Enemy is in the 1st quadrant of a system with player as origin
-                    enemies.remove(e);
-                    player.getWeapon().getBullets().remove(b);
-                }
-            }
+
         }
         return false;
     }
