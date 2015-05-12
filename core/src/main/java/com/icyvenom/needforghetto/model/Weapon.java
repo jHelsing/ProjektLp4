@@ -81,6 +81,9 @@ public abstract class Weapon {
         this.position = position;
     }
 
+    /**
+     * This method removes bullets that are out of bounds of the screen.
+     */
     public void removeUselessBullet(){
         List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
         if(!bullets.isEmpty()){
