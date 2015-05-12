@@ -102,7 +102,6 @@ public class TestWorld extends TestCase {
         assertTrue(testTopRightCorner);
         assertTrue(testBottomLeftCorner);
         assertTrue(testBottomRightCorner);
-        assertTrue(testTopLeftCorner);
 
     }
 }
