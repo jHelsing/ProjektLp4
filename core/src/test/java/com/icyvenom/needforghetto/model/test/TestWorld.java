@@ -1,7 +1,6 @@
 package com.icyvenom.needforghetto.model.test;
 
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.backends.headless.HeadlessApplication;
+
 import com.badlogic.gdx.math.Vector2;
 import com.icyvenom.needforghetto.model.Enemy;
 import com.icyvenom.needforghetto.model.EnemySimple;
@@ -55,7 +54,7 @@ public class TestWorld extends TestCase {
         Vector2 testVector = new Vector2(0.0001f, 0.0001f).add(topLeftCorner);
         player.setPosition(testVector);
         world.checkCollision();
-        boolean testTopLeftCorner;
+        boolean testTopLeftCorner = false;
         if(world.getEnemies().isEmpty()) {
             testTopLeftCorner = false;
             world.getEnemies().add(e);
@@ -98,11 +97,12 @@ public class TestWorld extends TestCase {
         } else
             testBottomRightCorner = true; //Test passed. There should not be any collisions
 
-        boolean playerVsEnemyCollision = testTopLeftCorner && testTopRightCorner &&
-                testBottomLeftCorner && testBottomRightCorner;
-
         boolean enemyVsBulletCollision = true;
+        
+        assertTrue(testTopRightCorner);
+        assertTrue(testBottomLeftCorner);
+        assertTrue(testBottomRightCorner);
+        assertTrue(testTopLeftCorner);
 
-        assertTrue(true);
     }
 }
