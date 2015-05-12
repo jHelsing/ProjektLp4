@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.icyvenom.needforghetto.model.Bullet;
+import com.icyvenom.needforghetto.model.Enemy;
 import com.icyvenom.needforghetto.model.Player;
 import com.icyvenom.needforghetto.model.World;
 
@@ -62,6 +63,12 @@ public class PlayerController implements InputProcessor{
         for(Bullet b : player.getWeapon().getBullets()) {
             b.update();
         }
+        for(Enemy e: world.getEnemies()){
+            for(Bullet b: e.getWeapon().getBullets()){
+                b.update();
+            }
+        }
+
         world.getPlayer().updatePosition();
     }
 

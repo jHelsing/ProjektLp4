@@ -79,6 +79,16 @@ public class WorldRenderer {
                         b.SIZE * ppuX, b.SIZE * ppuY);
             }
         }
+        if(!world.getEnemies().isEmpty()) {
+            for(Enemy e: world.getEnemies()){
+                if(!e.getWeapon().getBullets().isEmpty()){
+                    for (Bullet b : e.getWeapon().getBullets()) {
+                        spriteBatch.draw(bulletTexture, b.getPosition().x * ppuX, b.getPosition().y
+                                * ppuY, b.SIZE * ppuX, b.SIZE * ppuY);
+                    }
+                }
+            }
+        }
     }
     public void setSize(int w, int h){
         this.width = w;

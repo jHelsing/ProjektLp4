@@ -98,13 +98,25 @@ public abstract class Enemy {
 
     /**
      * Gets the position of the enemy.
-     * @return Returns the position.
+     * @return Returns the position of the enemy.
      */
     public Vector2 getPosition() {
         return position.cpy();
     }
 
+    /**
+     * Gets the direction of the bullet of the enemy's weapon
+     * @return Returns the direction of the bullet of the enemy's weapon.
+     */
     public static BulletDirection getBulletDirection() {
         return bulletDirection;
+    }
+
+    /**
+     * Gets the weapon of the enemy.
+     * @return  Returns the weapon of the enemy.
+     */
+    public Weapon getWeapon() {
+        return weapon;
     }
 }

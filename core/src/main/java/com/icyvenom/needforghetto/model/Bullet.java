@@ -39,7 +39,7 @@ public abstract class Bullet {
      */
     public Bullet(Vector2 position, Vector2 velocityVector, BulletDirection bulletDirection) {
         this.position = position.cpy();
-        this.velocityVector=velocityVector.cpy();
+        this.velocityVector=velocityVector.cpy().scl(bulletDirection.getDirectionValue());
         this.bulletDirection=bulletDirection;
         this.bounds.height = SIZE;
         this.bounds.width = SIZE;
@@ -85,6 +85,6 @@ public abstract class Bullet {
      * This method moves the bullet in a direction with a defined velocity.
      */
     public void update() {
-        setPosition(getPosition().add(velocityVector.scl(bulletDirection.getDirectionValue())));
+        setPosition(getPosition().add(this.velocityVector));
     }
 }
