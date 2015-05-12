@@ -1,5 +1,7 @@
 package com.icyvenom.needforghetto.model.test;
 
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.backends.headless.HeadlessApplication;
 import com.badlogic.gdx.math.Vector2;
 import com.icyvenom.needforghetto.model.Enemy;
 import com.icyvenom.needforghetto.model.EnemySimple;
@@ -26,9 +28,16 @@ public class TestWorld extends TestCase {
 
     @Test
     public void testCheckCollision() throws Exception {
+        String[] s = new String[20];
+        HeadlessLauncher.main(s);
+        SpecialApplication hej = HeadlessLauncher.test;
+        hej.getApplicationListener().create();
+
+        ApplicationListener test = hej.getApplicationListener();
+
         // Creates an instance of World so that we can test it. Also gets the often used
         // objects from World
-        World world = new World();
+
         Player player = world.getPlayer();
         Weapon playerWeapon = player.getWeapon();
 

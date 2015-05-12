@@ -218,4 +218,8 @@ public class GameScreen implements Screen {
                 //new ParallaxLayer(backgroundAtlas.findRegion("road"),new Vector2(0.1f,1.0f),new Vector2(00, 0),new Vector2(0, 0)),
         }, 800, 480,new Vector2(0,300));
     }
+
+    public World getWorld() {
+        return world;
+    }
 }
