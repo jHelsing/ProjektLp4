@@ -56,19 +56,19 @@ public class World {
             //If enemies exist we check collisions between player and enemies.
 
             //Creates a column and row where enemies might exist for crash to be possible.
-            float minX = player.getBounds().getX();
-            float maxX = player.getBounds().getWidth() + minX;
-            float minY = player.getBounds().getY();
-            float maxY = player.getBounds().getHeight() + minY;
+            float minX = player.getBounds().getX() - player.getBounds().getWidth();
+            float maxX = player.getBounds().getX();
+            float minY = player.getBounds().getY() - player.getBounds().getWidth();
+            float maxY = player.getBounds().getY();
 
             //Checking collisions between all enemies and the player
             for(int i = 0; i<enemies.size(); i++) {
                 Enemy e = enemies.get(i);
 
-                float enemyMinX = e.getBounds().getX();
-                float enemyMaxX = e.getBounds().getWidth() + enemyMinX;
-                float enemyMinY = e.getBounds().getY();
-                float enemyMaxY = e.getBounds().getHeight() + enemyMinY;
+                float enemyMinX = e.getBounds().getX() - e.getBounds().getWidth();
+                float enemyMaxX = e.getBounds().getX();
+                float enemyMinY = e.getBounds().getY() - e.getBounds().getHeight();
+                float enemyMaxY = e.getBounds().getY();
 
                 if(minY <= enemyMinY && enemyMinY <= maxY) {
                     //Enemy coming from the bottom (3rd and 4th quadrant)
@@ -109,18 +109,18 @@ public class World {
     }
 
     private boolean checkPlayerBulletCollision(Bullet b) {
-        float bulletMinX = b.getBounds().getX();
-        float bulletMaxX = b.getBounds().getWidth() + bulletMinX;
-        float bulletMinY = b.getBounds().getY();
-        float bulletMaxY = b.getBounds().getHeight() + bulletMinY;
+        float bulletMinX = b.getBounds().getX() - b.getBounds().getWidth();
+        float bulletMaxX = b.getBounds().getX();
+        float bulletMinY = b.getBounds().getY() - b.getBounds().getHeight();
+        float bulletMaxY = b.getBounds().getY();
 
         for(int j=0; j<enemies.size(); j++) {
             Enemy e = enemies.get(j);
 
-            float enemyMinX = e.getBounds().getX();
-            float enemyMaxX = e.getBounds().getWidth() + enemyMinX;
-            float enemyMinY = e.getBounds().getY();
-            float enemyMaxY = e.getBounds().getHeight() + enemyMinY;
+            float enemyMinX = e.getBounds().getX() - e.getBounds().getWidth();
+            float enemyMaxX = e.getBounds().getX();
+            float enemyMinY = e.getBounds().getY() - e.getBounds().getHeight();
+            float enemyMaxY = e.getBounds().getY();
 
             if(bulletMinY <= enemyMinY && enemyMinY <= bulletMaxY) {
                 //Enemy coming from the bottom (3rd and 4th quadrant)
