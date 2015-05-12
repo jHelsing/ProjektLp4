@@ -12,11 +12,10 @@ import com.icyvenom.needforghetto.model.World;
  */
 public class HeadlessLauncher {
 
-    public static SpecialApplication test;
-
     public static void main(final String[] args) {
         final HeadlessApplicationConfiguration config = new HeadlessApplicationConfiguration();
         config.renderInterval = 1f/60; // Likely want 1f/60 for 60 fps
-        test = new SpecialApplication(new NeedForGhettoTest());
+        HeadlessApplication app = new HeadlessApplication(new NeedForGhettoTest());
+        app.getApplicationListener().create();
     }
 }

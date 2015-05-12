@@ -30,8 +30,6 @@ public class TestWorld extends TestCase {
     public void testCheckCollision() throws Exception {
         String[] s = new String[20];
         HeadlessLauncher.main(s);
-        SpecialApplication hej = HeadlessLauncher.test;
-        hej.getApplicationListener().create();
         World world = NeedForGhettoTest.world;
 
         // Creates an instance of World so that we can test it. Also gets the often used
