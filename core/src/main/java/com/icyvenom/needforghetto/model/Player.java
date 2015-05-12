@@ -7,15 +7,15 @@ import com.badlogic.gdx.utils.Timer;
 /**
  * The Player class is the model for what the user does in game. Contains
  * the logic for the player.
- * @author Marcus. Revisited by Amar.
- * @version 2.0
+ * @author Marcus. Revisited by Amar. Revisited by Anton. Revisited by Marcus.
+ * @version 2.1
  */
 public class Player {
 
     /**
      * The movement speed of the Player.
      */
-    public static final float SPEED = 0.5f;
+    public static final float SPEED = 0.05f;
 
     /**
      * The size of the Player.
@@ -120,8 +120,6 @@ public class Player {
      * @param position The Player's new position.
      */
     public void setPosition(Vector2 position) {
-        // this messes with my physics, comment out for now
-        //this.position = new Vector2(position.x - SIZE/2, position.y - SIZE/5);
         this.position = position.cpy();
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
@@ -138,6 +136,7 @@ public class Player {
         goalPosition.set(DEFAULTPOSITION);
         weapon.setPosition(DEFAULTPOSITION);
         System.err.println(lifes);
+
     }
 
     /**
@@ -175,9 +174,11 @@ public class Player {
     /**
      * Updates the position of the Player. if the Player has reached it's goalPosition the Player
      * will stop moving. Otherwise it updates the position accordingly.
+     * The second value in the epsilonEquals is the epsilon value that dictates the approved
+     * interval.
      */
     public void updatePosition() {
-        if(position.epsilonEquals(goalPosition, 0.6f)) {
+        if(getPosition().epsilonEquals(goalPosition, 0.001f)) {
             velocity.x = 0;
             velocity.y = 0;
         }
@@ -185,13 +186,19 @@ public class Player {
     }
 
     /**
-     * The setter for the players velocity based on the goalPosition. The physics engine says
+     * The setter for the players velocity based on the goalPosition.
+     * The goalposition is offset to place the middle of the car on the touchevent.
+     * The physics engine says:
      * velocity = goalPosition - currentPosition.
      * @param goalPos The new goalPosition.
      */
     public void setVelocity(Vector2 goalPos) {
-        goalPosition = goalPos;
-        this.velocity = goalPos.cpy().sub(getPosition());
-        this.velocity.nor();
+        if (goalPos != null) {
+            goalPosition = goalPos.sub(new Vector2(SIZE / 2, SIZE / 5));
+            this.velocity = goalPos.cpy().sub(getPosition());
+            //this.velocity.nor();
+        } else{
+            this.velocity = new Vector2(0,0);
+        }
     }
 }

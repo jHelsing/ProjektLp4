@@ -101,7 +101,6 @@ public class World {
 
                 for(int i=0; i<player.getWeapon().getBullets().size(); i++) {
                     Bullet b = player.getWeapon().getBullets().get(i);
-                    System.err.println("Started checking for bullet: " + b.toString());
                     checkPlayerBulletCollision(b);
                 }
             }

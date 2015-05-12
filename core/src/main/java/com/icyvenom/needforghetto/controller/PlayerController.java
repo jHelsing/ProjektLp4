@@ -102,6 +102,7 @@ public class PlayerController implements InputProcessor{
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         //TODO: implement fireStop(); this should stop the timer for bullets
         player.stopFire();
+        move(null);
         return true;
     }
 
