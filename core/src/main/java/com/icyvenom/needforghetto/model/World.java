@@ -97,30 +97,114 @@ public class World {
             //checking if there are any bullets that belongs to the player on the screen
             if(!player.getWeapon().getBullets().isEmpty()) {
                 //We are now checking for collisions between Player bullets and enemies
-
+                List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
                 for(int i=0; i<player.getWeapon().getBullets().size(); i++) {
                     Bullet b = player.getWeapon().getBullets().get(i);
-                    checkPlayerBulletCollision(b);
+                    boolean temp = checkPlayerBulletCollision(b);
+                    if(temp)
+                        bulletsToRemove.add(b);
                 }
+
+                if(!bulletsToRemove.isEmpty())
+                    player.getWeapon().getBullets().removeAll(bulletsToRemove);
+
+            }
+
+            if(!enemies.isEmpty()) {
+                checkEnemyBulletCollision();
             }
         }
     }
 
     private boolean checkPlayerBulletCollision(Bullet b) {
-        float minX = b.getBounds().getX() - b.getBounds().getWidth();
-        float maxX = b.getBounds().getX();
-        float minY = b.getBounds().getY() - b.getBounds().getHeight();
-        float maxY = b.getBounds().getY();
+        float bMinX = b.getBounds().getX();
+        float bMaxX = bMinX + b.getBounds().getWidth();
+        float bMinY = b.getBounds().getY();
+        float bMaxY = bMinY + b.getBounds().getHeight();
 
-        for(int j=0; j<enemies.size(); j++) {
-            Enemy e = enemies.get(j);
+        for(int i = 0; i<enemies.size(); i++) {
+            Enemy e = enemies.get(i);
 
-            float enemyMinX = e.getBounds().getX() - e.getBounds().getWidth();
-            float enemyMaxX = e.getBounds().getX();
-            float enemyMinY = e.getBounds().getY() - e.getBounds().getHeight();
-            float enemyMaxY = e.getBounds().getY();
+            float eMinX = e.getBounds().getX();
+            float eMaxX = eMinX + e.getBounds().getWidth();
+            float eMinY = e.getBounds().getY();
+            float eMaxY = eMinY + e.getBounds().getHeight();
 
+            if(eMinY <= bMaxY && bMinY <= eMinY) {
+                // From above
+                if(bMinX <= eMaxX && eMaxX <= bMaxX) {
+                    // From the left
+                    enemies.remove(e);
+                    return true;
+                } else if(eMinX <= bMaxX && bMinX <= eMinX) {
+                    // From the right
+                    enemies.remove(e);
+                    return true;
+                }
+            } else if(bMinY <= eMaxY && eMaxY <= bMaxY) {
+                // From below
+                if(bMinX <= eMaxX && eMaxX <= bMaxX) {
+                    // From the left
+                    enemies.remove(e);
+                    return true;
+                } else if(eMinX <= bMaxX && bMinX <= eMinX) {
+                    // From the right
+                    enemies.remove(e);
+                    return true;
+                }
+            }
+        }
 
+        return false;
+    }
+
+    private boolean checkEnemyBulletCollision() {
+
+        float pMinX = player.getBounds().getX();
+        float pMaxX = pMinX + player.getBounds().getWidth();
+        float pMinY = player.getBounds().getY();
+        float pMaxY = pMinY + player.getBounds().getHeight();
+
+        for(int i=0; i<enemies.size(); i++) {
+            Enemy e = enemies.get(i);
+            if(!e.getWeapon().getBullets().isEmpty()) {
+                for(int j=0; j<e.getWeapon().getBullets().size(); j++) {
+                    Bullet b = e.getWeapon().getBullets().get(j);
+
+                    float bMinX = b.getBounds().getX();
+                    float bMaxX = bMinX + b.getBounds().getWidth();
+                    float bMinY = b.getBounds().getY();
+                    float bMaxY = bMinY + b.getBounds().getHeight();
+
+                    if(bMinY <= pMaxY && pMinY <= bMinY) {
+                        // From above
+                        if(pMinX <= bMaxX && bMaxX <= pMaxX) {
+                            // From the left
+                            e.getWeapon().getBullets().remove(b);
+                            player.kill();
+                            return true;
+                        } else if(bMinX <= pMaxX && pMinX <= bMinX) {
+                            // From the right
+                            e.getWeapon().getBullets().remove(b);
+                            player.kill();
+                            return true;
+                        }
+                    } else if(pMinY <= bMaxY && bMaxY <= pMaxY) {
+                        // From below
+                        if(pMinX <= bMaxX && bMaxX <= pMaxX) {
+                            // From the left
+                            e.getWeapon().getBullets().remove(b);
+                            player.kill();
+                            return true;
+                        } else if(bMinX <= pMaxX && pMinX <= bMinX) {
+                            // From the right
+                            e.getWeapon().getBullets().remove(b);
+                            player.kill();
+                            return true;
+                        }
+                    }
+                }
+            }
         }
         return false;
     }
