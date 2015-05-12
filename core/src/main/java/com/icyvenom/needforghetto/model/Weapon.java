@@ -81,6 +81,22 @@ public abstract class Weapon {
         this.position = position;
     }
 
+    public void removeUselessBullet(){
+        List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+        if(!bullets.isEmpty()){
+            for(Bullet b: bullets){
+                if(b.getPosition().x < 0f-b.getBounds().getWidth() || 10f < b.getPosition().x){
+                    bulletsToRemove.add(b);
+                }
+
+                else if(b.getPosition().y < 0f-b.getBounds().getHeight() || 10f < b.getPosition().y){
+                    bulletsToRemove.add(b);
+                }
+            }
+            bullets.removeAll(bulletsToRemove);
+        }
+    }
+
     /**
      * Used to add a bullets to the bullet-list
      */
