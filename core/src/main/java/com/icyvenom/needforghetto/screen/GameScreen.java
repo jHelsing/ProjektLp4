@@ -134,10 +134,12 @@ public class GameScreen implements Screen {
             case Running:
                 Gdx.input.setInputProcessor(inputMultiplexerRunning);
                 playerController.update();
+                world.getSpawnTimer().start();
                 break;
             case Paused:
                 playerController.move(null); //Resets the movement of the car
                 Gdx.input.setInputProcessor(inputMultiplexerPaused);
+                world.getSpawnTimer().stop();
                 break;
         }
         renderer.render();

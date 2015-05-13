@@ -196,7 +196,6 @@ public class Player {
         if (goalPos != null) {
             goalPosition = goalPos.sub(new Vector2(SIZE / 2, SIZE / 5));
             this.velocity = goalPos.cpy().sub(getPosition());
-            //this.velocity.nor();
         } else{
             this.velocity = new Vector2(0,0);
         }
