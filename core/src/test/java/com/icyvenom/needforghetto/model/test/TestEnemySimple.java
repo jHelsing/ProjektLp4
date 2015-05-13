@@ -8,6 +8,7 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Jonathan on 2015-05-13.
@@ -15,6 +16,9 @@ import static org.junit.Assert.*;
 public class TestEnemySimple extends TestCase {
 
     
-
+    @Test
+    public void testSomething() {
+        assertTrue(true);
+    }
 
 }
