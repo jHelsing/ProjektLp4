@@ -4,13 +4,24 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 
+import java.awt.Event;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * The Player class is the model for what the user does in game. Contains
  * the logic for the player.
  * @author Marcus. Revisited by Amar. Revisited by Anton. Revisited by Marcus.
  * @version 2.1
  */
-public class Player {
+public class Player extends Observable{
+
+    public static enum Event{
+        Gameover, Lostlife
+    };
+
+    private ArrayList<Observer> observers = new ArrayList<Observer>();
 
     /**
      * The movement speed of the Player.
@@ -136,7 +147,8 @@ public class Player {
         goalPosition.set(DEFAULTPOSITION);
         weapon.setPosition(DEFAULTPOSITION);
         System.err.println(lifes);
-
+        if(lifes <= 0) notifyObservers(this, Event.Gameover);
+        else notifyObservers(this, Event.Lostlife);
     }
 
     /**
@@ -198,6 +210,20 @@ public class Player {
             this.velocity = goalPos.cpy().sub(getPosition());
         } else{
             this.velocity = new Vector2(0,0);
+        }
+    }
+
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    public void notifyObservers(Observable observable, Event event) {
+        for(Observer observer : observers) {
+            observer.update(observable, event);
         }
     }
 }

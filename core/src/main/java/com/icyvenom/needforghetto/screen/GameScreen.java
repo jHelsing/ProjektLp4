@@ -16,12 +16,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Timer;
 import com.icyvenom.needforghetto.controller.PlayerController;
+import com.icyvenom.needforghetto.model.Player;
 import com.icyvenom.needforghetto.model.World;
 import com.icyvenom.needforghetto.model.WorldFactory;
 import com.icyvenom.needforghetto.parallax.ParallaxBackground;
 import com.icyvenom.needforghetto.parallax.ParallaxLayer;
 import com.icyvenom.needforghetto.view.WorldRenderer;
+
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * This class handles the graphics for the game when the game is played
@@ -29,7 +34,7 @@ import com.icyvenom.needforghetto.view.WorldRenderer;
  * @author Marcus. Revisited by Amar.
  * @version 1.05
  */
-public class GameScreen implements Screen {
+public class GameScreen implements Screen, Observer {
 
     /**
      * An enum that says which state the game is in.
@@ -104,6 +109,7 @@ public class GameScreen implements Screen {
     public void show() {
         //World
         world = WorldFactory.getWorld();
+        world.getPlayer().registerObserver(this);
         // true/false: debug flag
         renderer = new WorldRenderer(world, true);
         playerController = new PlayerController(world, renderer.getCamera());
@@ -225,4 +231,16 @@ public class GameScreen implements Screen {
     public World getWorld() {
         return world;
     }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if((Player.Event)arg == Player.Event.Gameover) {
+            //TODO maybe introduce new Gameover-state?
+            ((Game)Gdx.app.getApplicationListener()).setScreen(new StartScreen());
+        }
+        if((Player.Event)arg == Player.Event.Lostlife) {
+            System.err.println("pls no kill");
+        }
+    }
+
 }
