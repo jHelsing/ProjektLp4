@@ -13,10 +13,6 @@ public class EnemySimple extends Enemy {
      * The speed of the enemy.
      */
     private static final float SPEED=2f;
-    /**
-     * The speed of the enemy.
-     */
-    private static final Weapon weapon = new WeaponNineMM(Enemy.getBulletDirection());
 
     /**
      *  When a enemy is created, it's position, the hitbox and the speed are set according to
@@ -24,6 +20,6 @@ public class EnemySimple extends Enemy {
      * @param position This is the given position for the enemy.
      */
     public EnemySimple(Vector2 position){
-        super(position, SPEED, weapon);
+        super(position, SPEED, new WeaponNineMM(Enemy.getBulletDirection()));
     }
 }
