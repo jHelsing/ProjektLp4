@@ -18,9 +18,11 @@ import java.util.Vector;
 public class NeedForGhettoTest extends Game {
 
     public static World world = null;
+    public static EnemySimple enemy = null;
 
     @Override
     public void create () {
         world = new World();
+        enemy = new EnemySimple(new Vector2(1,1));
     }
 }
