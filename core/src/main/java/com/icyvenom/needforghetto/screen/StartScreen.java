@@ -99,7 +99,7 @@ public class StartScreen implements Screen{
 
         buttonHighscores.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new HighscoreScreen());
             }
         });
 
