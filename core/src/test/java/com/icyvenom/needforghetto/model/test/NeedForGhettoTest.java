@@ -26,7 +26,5 @@ public class NeedForGhettoTest extends Game {
     @Override
     public void create () {
         world = new World();
-        enemy = new EnemySimple(new Vector2(1,1));
-        awp = new WeaponAWP(BulletDirection.DOWN);
     }
 }
