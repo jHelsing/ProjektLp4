@@ -1,0 +1,33 @@
+﻿    Meeting Agenda
+
+      Date: 13/5-16
+
+      Facilitator: Marcus
+
+      Participants: Jonathan, Anton, Amar and Marcus
+
+    1. Objectives (5 min). Resolve any issues preventing the team to 
+      continue.
+	- Collisions aren't really working as intended yet
+	- Speed of the player-controlled might need to be changed
+
+    2. Reports (15 min) from previous meeting
+	
+	- Movement is a bit improved
+	- Enemies are shooting, just not completely as intended
+	- Testing has been started   
+
+    3. Discussion items (35 min) 
+	
+	- Nothing really
+	
+    4. Outcomes and assignments (5 min)
+ 
+      Anton: Keep doing same as previous meeting
+      Marcus: Get the enemies moving
+      Jonathan: Keep working on the collision, if finished start doing tests
+      Amar: make the enemies fire with a more consistent fire rate
+
+    5. Wrap up
+
+	- Meeting 18/5?
