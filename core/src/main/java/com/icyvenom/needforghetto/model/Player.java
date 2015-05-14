@@ -143,8 +143,8 @@ public class Player extends Observable{
     }
 
     /**
-     *
-     * @param add Add points to the current point of player.
+     *  Add points to the current point of player.
+     * @param add The added point.
      */
     public void addPoints(int add){
         this.score += add;

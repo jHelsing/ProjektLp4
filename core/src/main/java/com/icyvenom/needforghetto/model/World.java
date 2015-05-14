@@ -34,14 +34,18 @@ public class World {
      */
     private Timer spawnTimer = new Timer();
 
+    private Timer timePointsTimer = new Timer();
+
     /**
      * The standard constructor for a new World. Makes sure that the spawn timer
      * for enemies has started and that the basic world exists.
      */
     public World() {
         initSpawnTimer();
+        initTimePointsTimer();
         createBasicWorld();
         spawnTimer.start();
+        timePointsTimer.start();
     }
 
     /**
@@ -136,17 +140,21 @@ public class World {
                             if(eMinX <= bMaxX && bMaxX <= eMaxX) {
                                 bulletsToRemove.add(b);
                                 enemiesToRemove.add(e);
+                                player.addPoints(10);
                             } else if(eMinX <= bMinX && bMinX <= eMaxX) {
                                 bulletsToRemove.add(b);
                                 enemiesToRemove.add(e);
+                                player.addPoints(10);
                             }
                         } else if(eMinY <= bMaxY && bMinY <= eMaxY){
                             if(eMinX <= bMaxX && bMaxX <= eMaxX) {
                                 bulletsToRemove.add(b);
                                 enemiesToRemove.add(e);
+                                player.addPoints(10);
                             } else if(eMinX <= bMinX && bMinX <= eMaxX) {
                                 bulletsToRemove.add(b);
                                 enemiesToRemove.add(e);
+                                player.addPoints(10);
                             }
                         }
 
@@ -241,6 +249,20 @@ public class World {
                 dummy++;
             }
         }, 0, 1, 10);
+    }
+
+    /**
+     * Initiates the timer for Player to get more points by time.
+     */
+    private void initTimePointsTimer(){
+        timePointsTimer.scheduleTask(new Timer.Task() {
+
+            @Override
+            public void run() {
+                player.addPoints(100);
+            }
+
+        }, 0, 30);
     }
 
     /**
