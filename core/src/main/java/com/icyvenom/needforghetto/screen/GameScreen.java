@@ -218,10 +218,12 @@ public class GameScreen implements Screen, Observer {
                     case Running:
                         state = State.Paused;
                         buttonPause.setText("Resume");
+                        world.getTimePointsTimer().stop();
                         break;
                     case Paused:
                         state = State.Running;
                         buttonPause.setText("Pause");
+                        world.getTimePointsTimer().start();
                         break;
                 }
             }
