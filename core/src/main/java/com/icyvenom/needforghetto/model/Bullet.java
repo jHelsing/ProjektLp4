@@ -39,8 +39,8 @@ public abstract class Bullet {
      */
     public Bullet(Vector2 position, Vector2 velocityVector, BulletDirection bulletDirection) {
         this.position = position.cpy();
-        this.velocityVector=velocityVector.cpy().scl(bulletDirection.getDirectionValue());
-        this.bulletDirection=bulletDirection;
+        this.velocityVector = velocityVector.cpy().scl(bulletDirection.getDirectionValue());
+        this.bulletDirection = bulletDirection;
         this.bounds.height = SIZE;
         this.bounds.width = SIZE;
         this.bounds.setX(this.position.x);

@@ -9,10 +9,6 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -41,7 +37,7 @@ public class TestWeaponAWP extends TestCase {
         Weapon awp= new WeaponAWP(BulletDirection.DOWN);
         awp.setPosition(new Vector2(-5, -5));
         awp.addBullet();
-        awp.removeUselessBullet();
+        awp.removeOutOfBoundsBullets();
 
         boolean b = false;
         if(awp.getBullets().isEmpty()){

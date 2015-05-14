@@ -84,7 +84,7 @@ public abstract class Weapon {
     /**
      * This method removes bullets that are out of bounds of the screen.
      */
-    public void removeUselessBullet(){
+    public void removeOutOfBoundsBullets(){
         List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
         if(!bullets.isEmpty()){
             for(Bullet b: bullets){

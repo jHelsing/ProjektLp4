@@ -227,4 +227,20 @@ public class World {
     public Timer getSpawnTimer() {
         return spawnTimer;
     }
+
+    /**
+     * Checks the list of Enemies for any enemies that have out of the bounds of the game
+     * and removes them if they have.
+     */
+
+    public void removeOutOfBoundsEnemies(){
+        List<Enemy> enemiesToRemove = new ArrayList<Enemy>();
+        for (Enemy e : getEnemies()){
+            if ( (e.getBounds().getY() + e.getBounds().getHeight()) < 0f ){
+                enemiesToRemove.add(e);
+                System.err.println("e DIED RIP :(");
+            }
+        }
+        this.enemies.removeAll(enemiesToRemove);
+    }
 }

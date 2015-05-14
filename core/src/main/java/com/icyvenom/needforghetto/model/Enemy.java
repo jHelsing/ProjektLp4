@@ -15,7 +15,7 @@ public abstract class Enemy {
     /**
      * The speed of the enemy.
      */
-    private float speed;
+    private float SPEED;
     /**
      * The width and the height of the enemy.
      */
@@ -46,20 +46,35 @@ public abstract class Enemy {
      */
     private Timer attackSpeed= new Timer();
 
+    /* Float that will determine the direction of the enemy.
+     * Default for this will be downwards.
+     */
+    private float movementDirection = -1f;
+    /*
+     * Vector used to calculate the next position for the enemy.
+     */
+    private Vector2 goalPosition;
+
+    /*
+     * The Direction of the enemy movement.
+     */
+    private Vector2 direction;
+
     /**
      *  When a enemy is created, it's position, the hitbox and the speed are set according to
      *  the parameter and variables.
      * @param position This is the given position for the enemy.
      */
-    public Enemy(Vector2 position, float speed, final Weapon weapon){
+    public Enemy(Vector2 position, float speed, final Weapon weapon, Vector2 direction){
         this.position = position.cpy();
-        this.speed=speed;
+        this.SPEED = speed;
         this.bounds.height = SIZE;
         this.bounds.width = SIZE;
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
         this.weapon= weapon;
         this.weapon.setPosition(this.position);
+        this.direction = direction;
         //Schedule's a new task for the enemy weapons attack speed.
         attackSpeed.scheduleTask(new Timer.Task() {
 
@@ -120,7 +135,21 @@ public abstract class Enemy {
         return weapon;
     }
 
+    /**
+     * Sets the position of the enemy.
+     * @param position This will be the new position of the enemy
+     */
     public void setPosition(Vector2 position) {
         this.position = position.cpy();
+        this.bounds.setX(this.position.x);
+        this.bounds.setY(this.position.y);
+        this.weapon.setPosition(this.position);
+    }
+    /**
+    * Updates the position of the enemy depending on its direction and speed.
+    */
+    public void updatePosition() {
+        goalPosition  = getPosition().cpy().add(direction.cpy().scl(SPEED));
+        setPosition(goalPosition);
     }
 }

@@ -64,15 +64,17 @@ public class PlayerController implements InputProcessor{
             b.update();
         }
         for(Enemy e: world.getEnemies()){
+            e.updatePosition();
             for(Bullet b: e.getWeapon().getBullets()){
                 b.update();
             }
-            e.getWeapon().removeUselessBullet();
+            e.getWeapon().removeOutOfBoundsBullets();
         }
 
         world.getPlayer().updatePosition();
 
-        world.getPlayer().getWeapon().removeUselessBullet();
+        world.getPlayer().getWeapon().removeOutOfBoundsBullets();
+        world.removeOutOfBoundsEnemies();
     }
 
     @Override
