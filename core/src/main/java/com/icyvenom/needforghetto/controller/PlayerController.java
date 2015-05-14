@@ -125,6 +125,7 @@ public class PlayerController implements InputProcessor{
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         Vector3 pos = camera.unproject(new Vector3(screenX, screenY, 0));
         move(new Vector2(pos.x, pos.y));
+        this.move = true;
         return true;
     }
 
