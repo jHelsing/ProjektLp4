@@ -2,10 +2,14 @@ package com.icyvenom.needforghetto.model.test;
 
 
 import com.badlogic.gdx.math.Vector2;
+import com.icyvenom.needforghetto.model.Bullet;
+import com.icyvenom.needforghetto.model.BulletDirection;
+import com.icyvenom.needforghetto.model.BulletNineMM;
 import com.icyvenom.needforghetto.model.Enemy;
 import com.icyvenom.needforghetto.model.EnemySimple;
 import com.icyvenom.needforghetto.model.Player;
 import com.icyvenom.needforghetto.model.Weapon;
+import com.icyvenom.needforghetto.model.WeaponNineMM;
 import com.icyvenom.needforghetto.model.World;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -58,6 +62,8 @@ public class TestWorld extends TestCase {
             testRightSideVsEnemy = true;
         }
 
+        assertTrue(testRightSideVsEnemy);
+
         //Remove all enemies in the enemies list
         world.getEnemies().clear();
 
@@ -76,11 +82,12 @@ public class TestWorld extends TestCase {
         //Checks collisions
         world.checkCollision();
 
-
         boolean testLeftSideVsEnemy = false;
         if(world.getEnemies().size() == 100) {
             testLeftSideVsEnemy = true;
         }
+
+        assertTrue(testLeftSideVsEnemy);
 
         //Remove all enemies in the enemies list
         world.getEnemies().clear();
@@ -104,6 +111,7 @@ public class TestWorld extends TestCase {
             testTopSideVsEnemy = true;
         }
 
+        assertTrue(testTopSideVsEnemy);
 
         //Remove all enemies in the enemies list
         world.getEnemies().clear();
@@ -113,8 +121,8 @@ public class TestWorld extends TestCase {
          */
         for(int i=0; i<100; i++) {
             EnemySimple enemy = new EnemySimple(new Vector2());
-            float xCoord = (random.nextFloat()*(playerPosition.x+playerWidth)) + playerPosition.x;
-            float yCoord = playerPosition.y + diff;
+            float xCoord = (random.nextFloat()*(playerPosition.x + playerWidth)) + playerPosition.x;
+            float yCoord = playerPosition.y + diff + enemy.getBounds().getHeight();
             enemy.setPosition(new Vector2(xCoord, yCoord));
             world.getEnemies().add(enemy);
         }
@@ -127,10 +135,7 @@ public class TestWorld extends TestCase {
             testBottomSideVsEnemy = true;
         }
 
-
-        boolean b = testRightSideVsEnemy && testLeftSideVsEnemy &&
-                testTopSideVsEnemy && testBottomSideVsEnemy;
-        assertTrue(b);
+        assertTrue(testBottomSideVsEnemy);
     }
 
     @Test
@@ -150,8 +155,41 @@ public class TestWorld extends TestCase {
         float diff = 0.0001f;
         Random random = new Random();
 
-        EnemySimple enemyWeaponHolder = new EnemySimple(new Vector2(5f, 10f));
-        
+        // Makes sure that the weapon has a good position in front of Player
+
+        WeaponNineMM testWeapon = new WeaponNineMM(BulletDirection.DOWN);
+        testWeapon.addBullet();
+        Bullet bTemp = testWeapon.getBullets().get(0);
+        testWeapon.setPosition(playerPosition.add(0, playerHeight + bTemp.getBounds().getHeight()));
+        EnemySimple enemy = new EnemySimple(playerPosition.add(0, playerHeight + bTemp.getBounds().getHeight()));
+        testWeapon.getBullets().clear();
+
+        //A loop that will create 100 new bullets right in front of the player
+        for(int i=0; i<100; i++) {
+            Vector2 newPosition= new Vector2((random.nextFloat()*(playerPosition.x+playerWidth)) +
+                    playerPosition.x, playerPosition.y + playerHeight + bTemp.getBounds().getHeight());
+            enemy.getWeapon().setPosition(newPosition.cpy());
+            enemy.getWeapon().addBullet();
+        }
+
+        // Now moving these bullets forward and over the Player. If test is successful there should
+        // not be any bullets left in testWeapon.getBullets()
+        for(int i=0; i<1000; i++)
+            if (!enemy.getWeapon().getBullets().isEmpty()) {
+                for (Bullet b : enemy.getWeapon().getBullets()) {
+                    b.update();
+                }
+                world.checkCollision();
+            }
+
+        boolean bulletDownInFrontPlayer = false;
+        if(enemy.getWeapon().getBullets().isEmpty())
+            bulletDownInFrontPlayer = true;
+
+        assertTrue(bulletDownInFrontPlayer);
+
+
+
 
     }
 
