@@ -1,37 +1,7 @@
-﻿    Meeting Agenda
+﻿Thingies to doies
 
-      Date: 5/5-16
-
-      Facilitator: Marcus
-
-      Participants: Jonathan, Anton, Amar and Marcus
-
-    1. Objectives (5 min). Resolve any issues preventing the team to 
-      continue.
-	-Testing
-
-    2. Reports (15 min) from previous meeting
-	
-	- Looked into testing
-	- Figures for RAD are coming
-	- Weapon and Bullet implemented     
-
-    3. Discussion items (35 min) 
-	
-	- Testing
-	- Make the last part of collision detection and improve existing
-	- Get enemies firing and moving
-	- Fix player firing and moving
-	- Make screens (StartScreen, PauseScreen, GameOverScreen, SettingScreen(?))
-	
-    4. Outcomes and assignments (5 min)
- 
-      Anton: Testing, move inputprocessor to controller
-      Marcus: Do RAD, Run GITinspector, TODO-list
-      Jonathan: Collisions
-      Amar: Add timer to fix bullet firing
-
-    5. Wrap up
-
-      - 7/5 2015 in EDIT.
-	Marcus books a room if possible
+- Se till att bullets från enemies inte dör med enemyn
+- Implementera Hi-scores
+- Snygga till StartScreen
+- Skapa Paths för enemies
+- Skapa en vettig EnemySpawner
