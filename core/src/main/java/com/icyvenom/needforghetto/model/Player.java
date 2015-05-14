@@ -197,6 +197,12 @@ public class Player extends Observable{
     }
 
     /**
+     * Getter for the score of the player.
+     * @return  The score of the player.
+     */
+    public int getScore() {return score;}
+
+    /**
      * Updates the position of the Player. if the Player has reached it's goalPosition the Player
      * will stop moving. Otherwise it updates the position accordingly.
      * The second value in the epsilonEquals is the epsilon value that dictates the approved

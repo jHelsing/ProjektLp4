@@ -262,7 +262,7 @@ public class World {
                 player.addPoints(100);
             }
 
-        }, 0, 30);
+        }, 30, 30);
     }
 
     /**
