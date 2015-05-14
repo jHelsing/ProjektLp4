@@ -204,12 +204,10 @@ public class Player extends Observable{
      * velocity = goalPosition - currentPosition.
      * @param goalPos The new goalPosition.
      */
-    public void setVelocity(Vector2 goalPos) {
+    public void setGoalPosition(Vector2 goalPos) {
         if (goalPos != null) {
             goalPosition = goalPos.sub(new Vector2(SIZE / 2, SIZE / 5));
             this.velocity = goalPos.cpy().sub(getPosition());
-        } else{
-            this.velocity = new Vector2(0,0);
         }
     }
 

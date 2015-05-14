@@ -37,6 +37,12 @@ public class PlayerController implements InputProcessor{
      * @param world The world-model to control.
      * @param camera The camera to be used.
      */
+
+    /**
+     * Vector used to stop movement when finger leaves screen.
+     */
+    private boolean move = false;
+
     public PlayerController(World world, OrthographicCamera camera){
         this.world = world;
         this.player = world.getPlayer();
@@ -45,10 +51,10 @@ public class PlayerController implements InputProcessor{
 
     /**
      * The move method for the player. Gives the player a velocity.
-     * @param vec The vector that the player should move in.
+     * @param goalPos The vector that the player should move in.
      */
-    public void move(Vector2 vec){
-        player.setVelocity(vec);
+    public void move(Vector2 goalPos){
+        player.setGoalPosition(goalPos);
     }
 
     /**
@@ -70,8 +76,9 @@ public class PlayerController implements InputProcessor{
             }
             e.getWeapon().removeOutOfBoundsBullets();
         }
-
-        world.getPlayer().updatePosition();
+        if (move) {
+            world.getPlayer().updatePosition();
+        }
 
         world.getPlayer().getWeapon().removeOutOfBoundsBullets();
         world.removeOutOfBoundsEnemies();
@@ -97,6 +104,7 @@ public class PlayerController implements InputProcessor{
         Vector3 pos = camera.unproject(new Vector3(screenX, screenY, 0));
         move(new Vector2(pos.x, pos.y));
         player.fire();
+        this.move = true;
         return true;
     }
 
@@ -104,7 +112,7 @@ public class PlayerController implements InputProcessor{
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         //TODO: implement fireStop(); this should stop the timer for bullets
         player.stopFire();
-        move(null);
+        this.move = false;
         return true;
     }
 
