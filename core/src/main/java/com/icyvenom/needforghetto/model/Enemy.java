@@ -119,4 +119,8 @@ public abstract class Enemy {
     public Weapon getWeapon() {
         return weapon;
     }
+
+    public void setPosition(Vector2 position) {
+        this.position = position.cpy();
+    }
 }

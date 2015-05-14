@@ -11,6 +11,8 @@ import junit.framework.TestCase;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
@@ -31,77 +33,103 @@ public class TestWorld extends TestCase {
         HeadlessLauncher.main(s);
         World world = NeedForGhettoTest.world;
 
-        // Creates an instance of World so that we can test it. Also gets the often used
-        // objects from World
+        // Creates an instance of World so that we can test it. Also gets the often used objects
+        // from World.
 
         Player player = world.getPlayer();
-        Weapon playerWeapon = player.getWeapon();
+        Vector2 playerPosition = new Vector2(5f,5f);
+        player.setPosition(playerPosition);
+        float playerWidth = player.getBounds().getWidth();
+        float playerHeight = player.getBounds().getHeight();
+        float diff = 0.0001f;
+        Random random = new Random();
 
-        // Checking what happens to collision between player and enemy when Player is around Enemy
-        Enemy e = new EnemySimple(new Vector2(5,5));
-        world.getEnemies().add(e);
-
-        //Sets upp the vector positions that are in each corner of the enemy's hitbox
-        Vector2 topLeftCorner = new Vector2(e.getBounds().getX(), e.getBounds().getY());
-        Vector2 topRightCorner = new Vector2(e.getBounds().getX()+e.getBounds().getWidth(),
-                e.getBounds().getY());
-        Vector2 bottomRightCorner = new Vector2(e.getBounds().getX()+e.getBounds().getWidth(),
-                e.getBounds().getY()+e.getBounds().getHeight());
-        Vector2 bottomLeftCorner = new Vector2(e.getBounds().getX(), e.getBounds().getY() +
-                e.getBounds().getHeight());
-
-        //Start testing from the top left corner. The test vector should be very close to the enemy.
-        Vector2 testVector = new Vector2(0.0001f, 0.0001f).add(topLeftCorner);
-        player.setPosition(testVector);
+        for(int i=0; i<100; i++) {
+            float xCoord = playerPosition.x + playerWidth + diff;
+            float yCoord = (random.nextFloat()*(playerPosition.y+playerHeight)) + playerPosition.y;
+            EnemySimple enemy = new EnemySimple(new Vector2(xCoord,yCoord));
+            world.getEnemies().add(enemy);
+        }
+        //Checks collisions
         world.checkCollision();
-        boolean testTopLeftCorner = false;
-        if(world.getEnemies().isEmpty()) {
-            testTopLeftCorner = false;
-            world.getEnemies().add(e);
-        } else
-            testTopLeftCorner = true; //Test passed. There should not be any collisions
 
-        //Resetting the test vector and makes it ready for next position test
-        testVector.setZero();
-        testVector.add(0.0001f,0.0001f).add(topRightCorner);
-        player.setPosition(testVector);
+        boolean testRightSideVsEnemy = false;
+        if(world.getEnemies().size() == 100) {
+            testRightSideVsEnemy = true;
+        }
+
+        //Remove all enemies in the enemies list
+        world.getEnemies().clear();
+
+        /**
+         * Now testing placing 100 random enemies to the left of the player.
+         */
+
+        for(int i=0; i<100; i++) {
+            EnemySimple enemy = new EnemySimple(new Vector2());
+            float xCoord = playerPosition.x + diff + enemy.getBounds().getWidth()*2;
+            float yCoord = (random.nextFloat()*(playerPosition.y+playerHeight)) + playerPosition.y;
+            enemy.setPosition(new Vector2(xCoord, yCoord));
+            world.getEnemies().add(enemy);
+        }
+
+        //Checks collisions
         world.checkCollision();
-        boolean testTopRightCorner = false;
-        if(world.getEnemies().isEmpty()) {
-            testTopRightCorner = false;
-            world.getEnemies().add(e);
-        } else
-            testTopRightCorner = true; //Test passed. There should not be any collisions
 
-        //Resetting the test vector and makes it ready for next position test
-        testVector.setZero();
-        testVector.add(0.0001f,0.0001f).add(bottomLeftCorner);
-        player.setPosition(testVector);
+
+        boolean testLeftSideVsEnemy = false;
+        if(world.getEnemies().size() == 100) {
+            testLeftSideVsEnemy = true;
+        }
+
+        //Remove all enemies in the enemies list
+        world.getEnemies().clear();
+
+        /**
+         * Now testing placing 100 random enemies above the player.
+         */
+        for(int i=0; i<100; i++) {
+            EnemySimple enemy = new EnemySimple(new Vector2());
+            float xCoord = (random.nextFloat()*(playerPosition.x+playerWidth)) + playerPosition.x;
+            float yCoord = playerPosition.y + playerHeight + diff;
+            enemy.setPosition(new Vector2(xCoord, yCoord));
+            world.getEnemies().add(enemy);
+        }
+
+        //Checks collisions
         world.checkCollision();
-        boolean testBottomLeftCorner = false;
-        if(world.getEnemies().isEmpty()) {
-            testBottomLeftCorner = false;
-            world.getEnemies().add(e);
-        } else
-            testBottomLeftCorner = true; //Test passed. There should not be any collisions
 
-        //Resetting the test vector and makes it ready for next position test
-        testVector.setZero();
-        testVector.add(0.0001f,0.0001f).add(bottomRightCorner);
-        player.setPosition(testVector);
+        boolean testTopSideVsEnemy = false;
+        if(world.getEnemies().size() == 100) {
+            testTopSideVsEnemy = true;
+        }
+
+
+        //Remove all enemies in the enemies list
+        world.getEnemies().clear();
+
+        /**
+         * Now testing placing 100 random enemies below the player.
+         */
+        for(int i=0; i<100; i++) {
+            EnemySimple enemy = new EnemySimple(new Vector2());
+            float xCoord = (random.nextFloat()*(playerPosition.x+playerWidth)) + playerPosition.x;
+            float yCoord = playerPosition.y + diff;
+            enemy.setPosition(new Vector2(xCoord, yCoord));
+            world.getEnemies().add(enemy);
+        }
+
+        //Checks collisions
         world.checkCollision();
-        boolean testBottomRightCorner = false;
-        if(world.getEnemies().isEmpty()) {
-            testBottomRightCorner = false;
-            world.getEnemies().add(e);
-        } else
-            testBottomRightCorner = true; //Test passed. There should not be any collisions
 
-        boolean enemyVsBulletCollision = true;
-        
-        assertTrue(testTopRightCorner);
-        assertTrue(testBottomLeftCorner);
-        assertTrue(testBottomRightCorner);
+        boolean testBottomSideVsEnemy = false;
+        if(world.getEnemies().size() == 100) {
+            testBottomSideVsEnemy = true;
+        }
 
+
+        boolean b = testRightSideVsEnemy && testLeftSideVsEnemy &&
+                testTopSideVsEnemy && testBottomSideVsEnemy;
+        assertTrue(b);
     }
 }
