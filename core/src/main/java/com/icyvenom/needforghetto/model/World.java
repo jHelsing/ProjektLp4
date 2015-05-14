@@ -20,6 +20,11 @@ public class World {
     private List<Enemy> enemies = new ArrayList<Enemy>();
 
     /**
+     * This is a list containing the bullets of the enemies that have died.
+     */
+    private List<Bullet> bullets = new ArrayList<Bullet>();
+
+    /**
      * The Player object that is in the game.
      */
     private Player player;
@@ -73,13 +78,13 @@ public class World {
                     if(pMinX <= eMaxX && eMaxX <= pMaxX) {
                         //Collision between Player and Enemy has happened and we make sure to kill
                         //the player and remove the enemy from the game.
-                        enemies.remove(e);
+                        killEnemy(e);
                         player.kill();
                     // Checks if the enemy is coming from the right (from above)
                     } else if(eMinX <= pMaxX && pMinX <= eMinX) {
                         //Collision between Player and Enemy has happened and we make sure to kill
                         //the player and remove the enemy from the game.
-                        enemies.remove(e);
+                        killEnemy(e);
                         player.kill();
                     }
                 //Checks if the enemy is coming from below the player
@@ -88,13 +93,13 @@ public class World {
                     if(pMinX <= eMaxX && eMaxX <= pMaxX) {
                         //Collision between Player and Enemy has happened and we make sure to kill
                         //the player and remove the enemy from the game.
-                        enemies.remove(e);
+                        killEnemy(e);
                         player.kill();
                     // Checks if the enemy is coming from the right (from below)
                     } else if(eMinX <= pMaxX && pMinX <= eMinX) {
                         //Collision between Player and Enemy has happened and we make sure to kill
                         //the player and remove the enemy from the game.
-                        enemies.remove(e);
+                        killEnemy(e);
                         player.kill();
                     }
                 }
@@ -149,7 +154,9 @@ public class World {
 
                     player.getWeapon().getBullets().removeAll(bulletsToRemove);
                 }
-                enemies.removeAll(enemiesToRemove);
+                for (Enemy e : enemiesToRemove){
+                    killEnemy(e);
+                }
 
             }
 
@@ -228,6 +235,8 @@ public class World {
         return spawnTimer;
     }
 
+    public List<Bullet> getBullets() { return bullets; }
+
     /**
      * Checks the list of Enemies for any enemies that have out of the bounds of the game
      * and removes them if they have.
@@ -238,9 +247,19 @@ public class World {
         for (Enemy e : getEnemies()){
             if ( (e.getBounds().getY() + e.getBounds().getHeight()) < 0f ){
                 enemiesToRemove.add(e);
-                System.err.println("e DIED RIP :(");
             }
         }
-        this.enemies.removeAll(enemiesToRemove);
+        for (Enemy e : enemiesToRemove){
+            killEnemy(e);
+        }
+    }
+
+    /**
+     * Removes a killed enemy from the game and gives the bullets it owns to the world.
+     * @param e enemy to be removed
+     */
+    public void killEnemy(Enemy e){
+        bullets.addAll(e.getWeapon().getBullets());
+        enemies.remove(e);
     }
 }

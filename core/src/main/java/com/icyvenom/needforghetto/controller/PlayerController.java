@@ -69,6 +69,10 @@ public class PlayerController implements InputProcessor{
         for(Bullet b : player.getWeapon().getBullets()) {
             b.update();
         }
+        for(Bullet b : world.getBullets()) {
+            b.update();
+
+        }
         for(Enemy e: world.getEnemies()){
             e.updatePosition();
             for(Bullet b: e.getWeapon().getBullets()){
