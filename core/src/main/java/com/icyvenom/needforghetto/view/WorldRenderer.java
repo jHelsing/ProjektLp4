@@ -47,6 +47,11 @@ public class WorldRenderer {
         this.debug = debug;
         loadTextures();
     }
+
+    /**
+     * Calls the functions for drawing the objects on to the screen,
+     * is called continuously.
+     */
     public void render(){
         spriteBatch.begin();
             drawEnemies();
@@ -58,12 +63,18 @@ public class WorldRenderer {
         }
     }
 
+    /**
+     * Draws the player sprite on to the screen.
+     */
     public void drawPlayer(){
         Player player = world.getPlayer();
         spriteBatch.draw(playerTexture, player.getPosition().x * ppuX, player.getPosition().y * ppuY,
-                        player.SIZE * ppuX, player.SIZE * ppuY);
+                player.SIZE * ppuX, player.SIZE * ppuY);
     }
 
+    /**
+     * Draws the enemy spries on to the screen.
+     */
     public void drawEnemies(){
         for (Object e : world.getEnemies()) {
             Enemy enemy = (Enemy) e;
@@ -72,6 +83,9 @@ public class WorldRenderer {
         }
     }
 
+    /**
+     * Draws the bullets on to the screen.
+     */
     public void drawBullets(){
         if(!world.getPlayer().getWeapon().getBullets().isEmpty()) {
             for (Bullet b : world.getPlayer().getWeapon().getBullets()) {
@@ -89,13 +103,30 @@ public class WorldRenderer {
                 }
             }
         }
+        if(!world.getBullets().isEmpty()) {
+            for(Bullet b : world.getBullets()){
+                    spriteBatch.draw(bulletTexture, b.getPosition().x * ppuX, b.getPosition().y * ppuY,
+                            b.SIZE * ppuX, b.SIZE * ppuY);
+            }
+        }
     }
+
+    /**
+     * Translate pixels to the defined Camera layout.
+     *
+     * @param w
+     * @param h
+     */
     public void setSize(int w, int h){
         this.width = w;
         this.height = h;
         ppuX = (float)width / CAMERA_WIDTH;
         ppuY = (float)height / CAMERA_HEIGHT;
     }
+
+    /**
+     * Loads the correct textures into the memory for drawing purposes.
+     */
     public void loadTextures(){
         playerTexture = new Texture(Gdx.files.internal("images/car.png"));
         enemyTexture = new Texture(Gdx.files.internal("images/enemyCar.jpg"));
@@ -106,6 +137,10 @@ public class WorldRenderer {
         return cam;
     }
 
+    /**
+     * Function for debugging, draws additional rectangles which show the actual hitboxes and
+     * position of the objects in the game.
+     */
     public void drawDebug(){
         debugRenderer.setProjectionMatrix(cam.combined);
         debugRenderer.begin(ShapeRenderer.ShapeType.Line);

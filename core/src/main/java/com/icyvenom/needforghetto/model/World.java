@@ -244,13 +244,16 @@ public class World {
 
     public void removeOutOfBoundsEnemies(){
         List<Enemy> enemiesToRemove = new ArrayList<Enemy>();
-        for (Enemy e : getEnemies()){
-            if ( (e.getBounds().getY() + e.getBounds().getHeight()) < 0f ){
-                enemiesToRemove.add(e);
+        if (!enemies.isEmpty()) {
+            for (Enemy e : enemies) {
+                if ((e.getBounds().getY() + e.getBounds().getHeight()) < 0f || e.getBounds().getX() < 0.5f
+                        || e.getBounds().getX() + e.getBounds().getHeight() > 10.5f) {
+                    enemiesToRemove.add(e);
+                }
             }
-        }
-        for (Enemy e : enemiesToRemove){
-            killEnemy(e);
+            for (Enemy e : enemiesToRemove) {
+                killEnemy(e);
+            }
         }
     }
 
@@ -258,8 +261,25 @@ public class World {
      * Removes a killed enemy from the game and gives the bullets it owns to the world.
      * @param e enemy to be removed
      */
-    public void killEnemy(Enemy e){
+    public void killEnemy(Enemy e) {
         bullets.addAll(e.getWeapon().getBullets());
         enemies.remove(e);
+    }
+
+    /**
+     * Checks the list of the bullets in the world to see if they are still within bounds
+     * and removes them if they are not.
+     */
+    public void removeOutOfBoundsBullets(){
+        List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+        if(!bullets.isEmpty()) {
+            for (Bullet b : getBullets()) {
+                if ( (b.getBounds().getY() + b.getBounds().height < 0f) || b.getBounds().getX() < -0.5f
+                        || b.getBounds().getX() + b.getBounds().getWidth() > 10.5f){
+                    bulletsToRemove.add(b);
+                }
+            }
+            bullets.removeAll(bulletsToRemove);
+        }
     }
 }

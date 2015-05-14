@@ -86,6 +86,7 @@ public class PlayerController implements InputProcessor{
 
         world.getPlayer().getWeapon().removeOutOfBoundsBullets();
         world.removeOutOfBoundsEnemies();
+        world.removeOutOfBoundsBullets();
     }
 
     @Override
