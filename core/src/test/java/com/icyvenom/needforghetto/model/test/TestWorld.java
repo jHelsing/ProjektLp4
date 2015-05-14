@@ -28,7 +28,7 @@ public class TestWorld extends TestCase {
     }
 
     @Test
-    public void testCheckCollision() throws Exception {
+    public void testPlayerEnemyCollision() throws Exception {
         String[] s = new String[20];
         HeadlessLauncher.main(s);
         World world = NeedForGhettoTest.world;
@@ -132,4 +132,27 @@ public class TestWorld extends TestCase {
                 testTopSideVsEnemy && testBottomSideVsEnemy;
         assertTrue(b);
     }
+
+    @Test
+    public void testPlayerBulletCollision() throws Exception {
+        String[] s = new String[20];
+        HeadlessLauncher.main(s);
+        World world = NeedForGhettoTest.world;
+
+        // Creates an instance of World so that we can test it. Also gets the often used objects
+        // from World.
+
+        Player player = world.getPlayer();
+        Vector2 playerPosition = new Vector2(5f,5f);
+        player.setPosition(playerPosition);
+        float playerWidth = player.getBounds().getWidth();
+        float playerHeight = player.getBounds().getHeight();
+        float diff = 0.0001f;
+        Random random = new Random();
+
+        EnemySimple enemyWeaponHolder = new EnemySimple(new Vector2(5f, 10f));
+        
+
+    }
+
 }
