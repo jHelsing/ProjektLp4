@@ -1,7 +1,8 @@
 ﻿Thingies to doies
 
-- Se till att bullets från enemies inte dör med enemyn
 - Implementera Hi-scores
 - Snygga till StartScreen
 - Skapa Paths för enemies
 - Skapa en vettig EnemySpawner
+- Fixa score
+- Skapa fler fiender

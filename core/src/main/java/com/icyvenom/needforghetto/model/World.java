@@ -193,7 +193,35 @@ public class World {
                 }
                 e.getWeapon().getBullets().removeAll(bulletsToRemove);
             }
+            if (!bullets.isEmpty()){
+                List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+                for (Bullet b : bullets) {
+                    float bMinX = b.getBounds().getX();
+                    float bMaxX = bMinX + b.getBounds().getWidth();
+                    float bMinY = b.getBounds().getY();
+                    float bMaxY = bMinY + b.getBounds().getHeight();
 
+                    if(pMinY <= bMaxY && bMinY <= pMaxY){
+                        if(pMinX <= bMaxX && bMaxX <= pMaxX) {
+                            bulletsToRemove.add(b);
+                            player.kill();
+                        } else if(pMinX <= bMinX && bMinX <= pMaxX) {
+                            bulletsToRemove.add(b);
+                            player.kill();
+                        }
+                    } else if(pMinY <= bMaxY && bMaxY <= pMaxY) {
+                        if(pMinX <= bMaxX && bMaxX <= pMaxX) {
+                            bulletsToRemove.add(b);
+                            player.kill();
+                        } else if(pMinX <= bMinX && bMinX <= pMaxX) {
+                            bulletsToRemove.add(b);
+                            player.kill();
+                        }
+                    }
+
+                }
+                bullets.removeAll(bulletsToRemove);
+            }
         }
     }
 
