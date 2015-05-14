@@ -24,6 +24,11 @@ public class Player extends Observable{
     private ArrayList<Observer> observers = new ArrayList<Observer>();
 
     /**
+     * Score of the player.
+     */
+    private int score = 0;
+
+    /**
      * The movement speed of the Player.
      */
     public static final float SPEED = 0.05f;
@@ -135,6 +140,14 @@ public class Player extends Observable{
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
         this.weapon.setPosition(this.position);
+    }
+
+    /**
+     *
+     * @param add Add points to the current point of player.
+     */
+    public void addPoints(int add){
+        this.score += add;
     }
 
     /**
