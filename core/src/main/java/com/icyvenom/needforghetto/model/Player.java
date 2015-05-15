@@ -24,6 +24,11 @@ public class Player extends Observable{
     private ArrayList<Observer> observers = new ArrayList<Observer>();
 
     /**
+     * Score of the player.
+     */
+    private int score = 0;
+
+    /**
      * The movement speed of the Player.
      */
     public static final float SPEED = 0.05f;
@@ -138,6 +143,14 @@ public class Player extends Observable{
     }
 
     /**
+     *  Add points to the current point of player.
+     * @param add The added point.
+     */
+    public void addPoints(int add){
+        this.score += add;
+    }
+
+    /**
      * Kills the Player. The Player lose 1 life and has it's position reset
      * to the start position.
      */
@@ -182,6 +195,12 @@ public class Player extends Observable{
     public int getLifes() {
         return lifes;
     }
+
+    /**
+     * Getter for the score of the player.
+     * @return  The score of the player.
+     */
+    public int getScore() {return score;}
 
     /**
      * Updates the position of the Player. if the Player has reached it's goalPosition the Player

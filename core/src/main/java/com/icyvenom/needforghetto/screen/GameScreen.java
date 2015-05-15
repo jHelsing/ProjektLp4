@@ -91,6 +91,15 @@ public class GameScreen implements Screen, Observer {
     private InputMultiplexer inputMultiplexerPaused = new InputMultiplexer();
 
     /**
+     * The label on the gamescreen that shows the life of the player.
+     */
+    private Label lifeStatus;
+    /**
+     * The label on the gamescreen that shows the score of the player.
+     */
+    private Label scoreStatus;
+
+    /**
      * The inputprocessor for the back-key on the phone. We want to override the default behavior.
      */
     private InputAdapter backProcessor = new InputAdapter() {
@@ -153,6 +162,9 @@ public class GameScreen implements Screen, Observer {
         // this is for menu on top of the screen
         stage.act();
         stage.draw();
+
+        this.lifeStatus.setText("Life: " + world.getPlayer().getLifes());
+        this.scoreStatus.setText("Score: " + world.getPlayer().getScore());
     }
 
     @Override
@@ -190,8 +202,8 @@ public class GameScreen implements Screen, Observer {
                 new TextureAtlas(Gdx.files.internal("skins/uiskin.atlas")));
 
         final TextButton buttonPause = new TextButton("Pause", skin);
-        Label lifeStatus = new Label("Life: "+world.getPlayer().getLifes(), skin);
-        Label scoreStatus = new Label("Score: 0", skin);
+        this.lifeStatus = new Label("Life: "+world.getPlayer().getLifes(), skin);
+        this.scoreStatus = new Label("Score: " + world.getPlayer().getScore(), skin);
 
         table.setDebug(false);
         table.setFillParent(true);
@@ -206,10 +218,12 @@ public class GameScreen implements Screen, Observer {
                     case Running:
                         state = State.Paused;
                         buttonPause.setText("Resume");
+                        world.getTimePointsTimer().stop();
                         break;
                     case Paused:
                         state = State.Running;
                         buttonPause.setText("Pause");
+                        world.getTimePointsTimer().start();
                         break;
                 }
             }

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * The model of the world. This is the main Model-object. It has access to all the other Model
  * objects.
- * @author Marcus. Revisited by Jonathan 2015-05-13. Revisited by Amar.
+ * @author Marcus. Revisited by Jonathan 2015-05-13. Revisited by Amar by 2015-05-14.
  * @version 2.0
  */
 public class World {
@@ -34,14 +34,18 @@ public class World {
      */
     private Timer spawnTimer = new Timer();
 
+    private Timer timePointsTimer = new Timer();
+
     /**
      * The standard constructor for a new World. Makes sure that the spawn timer
      * for enemies has started and that the basic world exists.
      */
     public World() {
         initSpawnTimer();
+        initTimePointsTimer();
         createBasicWorld();
         spawnTimer.start();
+        timePointsTimer.start();
     }
 
     /**
@@ -80,12 +84,14 @@ public class World {
                         //the player and remove the enemy from the game.
                         killEnemy(e);
                         player.kill();
+                        restartTimePointsTimer();
                     // Checks if the enemy is coming from the right (from above)
                     } else if(eMinX <= pMaxX && pMinX <= eMinX) {
                         //Collision between Player and Enemy has happened and we make sure to kill
                         //the player and remove the enemy from the game.
                         killEnemy(e);
                         player.kill();
+                        restartTimePointsTimer();
                     }
                 //Checks if the enemy is coming from below the player
                 } else if(pMinY <= eMaxY && eMaxY <= pMaxY) {
@@ -95,12 +101,14 @@ public class World {
                         //the player and remove the enemy from the game.
                         killEnemy(e);
                         player.kill();
+                        restartTimePointsTimer();
                     // Checks if the enemy is coming from the right (from below)
                     } else if(eMinX <= pMaxX && pMinX <= eMinX) {
                         //Collision between Player and Enemy has happened and we make sure to kill
                         //the player and remove the enemy from the game.
                         killEnemy(e);
                         player.kill();
+                        restartTimePointsTimer();
                     }
                 }
             }
@@ -136,17 +144,21 @@ public class World {
                             if(eMinX <= bMaxX && bMaxX <= eMaxX) {
                                 bulletsToRemove.add(b);
                                 enemiesToRemove.add(e);
+                                player.addPoints(10);
                             } else if(eMinX <= bMinX && bMinX <= eMaxX) {
                                 bulletsToRemove.add(b);
                                 enemiesToRemove.add(e);
+                                player.addPoints(10);
                             }
                         } else if(eMinY <= bMaxY && bMinY <= eMaxY){
                             if(eMinX <= bMaxX && bMaxX <= eMaxX) {
                                 bulletsToRemove.add(b);
                                 enemiesToRemove.add(e);
+                                player.addPoints(10);
                             } else if(eMinX <= bMinX && bMinX <= eMaxX) {
                                 bulletsToRemove.add(b);
                                 enemiesToRemove.add(e);
+                                player.addPoints(10);
                             }
                         }
 
@@ -177,17 +189,21 @@ public class World {
                         if(pMinX <= bMaxX && bMaxX <= pMaxX) {
                             bulletsToRemove.add(b);
                             player.kill();
+                            restartTimePointsTimer();
                         } else if(pMinX <= bMinX && bMinX <= pMaxX) {
                             bulletsToRemove.add(b);
                             player.kill();
+                            restartTimePointsTimer();
                         }
                     } else if(pMinY <= bMaxY && bMaxY <= pMaxY) {
                         if(pMinX <= bMaxX && bMaxX <= pMaxX) {
                             bulletsToRemove.add(b);
                             player.kill();
+                            restartTimePointsTimer();
                         } else if(pMinX <= bMinX && bMinX <= pMaxX) {
                             bulletsToRemove.add(b);
                             player.kill();
+                            restartTimePointsTimer();
                         }
                     }
                 }
@@ -237,10 +253,29 @@ public class World {
 
             @Override
             public void run() {
-                enemies.add(new EnemySimple(new Vector2(dummy,dummy)));
+                enemies.add(new EnemySimple(new Vector2(dummy, dummy)));
                 dummy++;
             }
         }, 0, 1, 10);
+    }
+
+    /**
+     * Initiates the timer for Player to get more points by time.
+     */
+    private void initTimePointsTimer(){
+        timePointsTimer.scheduleTask(new Timer.Task() {
+
+            @Override
+            public void run() {
+                player.addPoints(100);
+            }
+
+        }, 30, 30);
+    }
+
+    public void restartTimePointsTimer(){
+        this.timePointsTimer.clear();
+        this.initTimePointsTimer();
     }
 
     /**
@@ -259,10 +294,24 @@ public class World {
         return player;
     }
 
+    /**
+     * Getter for the spawnTimer.
+     * @return The spawnTimer.
+     */
     public Timer getSpawnTimer() {
         return spawnTimer;
     }
 
+    /**
+     *  Getter for the TimePointsTimer.
+     * @return The TimePointsTimer.
+     */
+    public Timer getTimePointsTimer() {return timePointsTimer;}
+
+    /**
+     *  Getter for the list of bullet
+     * @return The list of bullets.
+     */
     public List<Bullet> getBullets() { return bullets; }
 
     /**
