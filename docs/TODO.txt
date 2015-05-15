@@ -6,3 +6,4 @@
 - Skapa en vettig EnemySpawner
 - Fixa score
 - Skapa fler fiender
+- Ändringar av hastigheter och storlekar på i princip allt
