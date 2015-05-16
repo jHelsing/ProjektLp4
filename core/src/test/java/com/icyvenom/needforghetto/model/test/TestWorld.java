@@ -290,6 +290,6 @@ public class TestWorld extends TestCase {
         assertTrue(bulletBelowPlayer);
     }
 
-
+    
 
 }
