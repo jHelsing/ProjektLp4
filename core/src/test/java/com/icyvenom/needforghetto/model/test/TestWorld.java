@@ -223,7 +223,23 @@ public class TestWorld extends TestCase {
         /**
          * Testing to the right of the player
          */
-        
+        enemy.getWeapon().getBullets().clear();
+
+        player.setPosition(playerPosition.cpy());
+        enemy.setPosition(new Vector2(player.getBounds().getWidth()+player.getPosition().x + 0.7f, player.getPosition().y+1.1f));
+        enemy.getWeapon().addBullet();
+        enemy.getWeapon().getBullets().get(0).update();
+
+        player.setPosition(new Vector2(4.5f + player.getBounds().getWidth(), 1f));
+
+        world.checkCollision();
+
+        boolean bulletToTheRightOfPlayer = false;
+        if(player.getLifes()==1 && enemy.getWeapon().getBullets().isEmpty()) {
+            bulletToTheRightOfPlayer = true;
+        }
+
+        assertTrue(bulletToTheRightOfPlayer);
 
     }
 
