@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * @author Jonathan.
- * @version 1.0
+ * @version 2.0
  */
 public class TestWorld extends TestCase {
 
@@ -242,5 +242,54 @@ public class TestWorld extends TestCase {
         assertTrue(bulletToTheRightOfPlayer);
 
     }
+
+    @Test
+    public void testPlayerBelowBulletCollision() {
+        String[] s = new String[20];
+        HeadlessLauncher.main(s);
+        World world = NeedForGhettoTest.world;
+
+        // Creates an instance of World so that we can test it. Also gets the often used objects
+        // from World.
+
+        Player player = world.getPlayer();
+        Vector2 playerPosition = new Vector2(4.5f, 5f);
+        player.setPosition(playerPosition.cpy());
+        player.setLifes(Integer.MAX_VALUE);
+        Random random = new Random();
+
+        // Makes sure that the weapon has a good position below the Player
+        world.getEnemies().clear();
+        EnemySimple enemy = new EnemySimple(new Vector2(4.5f, 1f));
+        enemy.stopFire();
+        world.getEnemies().add(enemy);
+        enemy.getWeapon().getBullets().clear();
+        enemy.getWeapon().setAttackRate(1000000000f);
+        enemy.getWeapon().setBulletDirection(BulletDirection.UP);
+
+        for(int i=0; i<100; i++) {
+            float xPos = random.nextFloat()*player.getBounds().getWidth() + 4.5f;
+            Vector2 newPosition = new Vector2(xPos, 1f);
+            enemy.setPosition(newPosition.cpy());
+            enemy.getWeapon().addBullet();
+        }
+
+        while(!enemy.getWeapon().getBullets().isEmpty()) {
+            player.setPosition(playerPosition);
+            world.checkCollision();
+            for(Bullet b : enemy.getWeapon().getBullets()) {
+                b.update();
+                player.setPosition(playerPosition);
+            }
+        }
+
+        boolean bulletBelowPlayer = false;
+        if(enemy.getWeapon().getBullets().isEmpty())
+            bulletBelowPlayer = true;
+
+        assertTrue(bulletBelowPlayer);
+    }
+
+
 
 }

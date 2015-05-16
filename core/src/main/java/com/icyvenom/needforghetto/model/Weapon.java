@@ -120,4 +120,12 @@ public abstract class Weapon {
     public BulletDirection getBulletDirection() {
         return bulletDirection;
     }
+
+    /**
+     * Setter for the direction for the bullets fired from this weapon.
+     * @param direction The direction of the bullets
+     */
+    public void setBulletDirection(BulletDirection direction) {
+        this.bulletDirection = direction;
+    }
 }
