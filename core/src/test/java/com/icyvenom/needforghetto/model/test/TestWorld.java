@@ -148,48 +148,40 @@ public class TestWorld extends TestCase {
         // from World.
 
         Player player = world.getPlayer();
-        Vector2 playerPosition = new Vector2(5f,5f);
-        player.setPosition(playerPosition);
-        float playerWidth = player.getBounds().getWidth();
-        float playerHeight = player.getBounds().getHeight();
-        float diff = 0.0001f;
+        Vector2 playerPosition = new Vector2(4.5f, 1f);
+        player.setPosition(playerPosition.cpy());
+        player.setLifes(Integer.MAX_VALUE);
         Random random = new Random();
 
         // Makes sure that the weapon has a good position in front of Player
+        world.getEnemies().clear();
+        EnemySimple enemy = new EnemySimple(new Vector2(4.5f, 5f));
+        enemy.stopFire();
+        world.getEnemies().add(enemy);
+        enemy.getWeapon().getBullets().clear();
+        enemy.getWeapon().setAttackRate(1000000000f);
 
-        WeaponNineMM testWeapon = new WeaponNineMM(BulletDirection.DOWN);
-        testWeapon.addBullet();
-        Bullet bTemp = testWeapon.getBullets().get(0);
-        testWeapon.setPosition(playerPosition.add(0, playerHeight + bTemp.getBounds().getHeight()));
-        EnemySimple enemy = new EnemySimple(playerPosition.add(0, playerHeight + bTemp.getBounds().getHeight()));
-        testWeapon.getBullets().clear();
+        System.out.println(" Player position: " + player.getPosition().toString());
 
-        //A loop that will create 100 new bullets right in front of the player
         for(int i=0; i<100; i++) {
-            Vector2 newPosition= new Vector2((random.nextFloat()*(playerPosition.x+playerWidth)) +
-                    playerPosition.x, playerPosition.y + playerHeight + bTemp.getBounds().getHeight());
-            enemy.getWeapon().setPosition(newPosition.cpy());
+            float xPos = random.nextFloat()*(player.getBounds().getWidth()) + 4.5f;
+            Vector2 newPosition = new Vector2(xPos, player.getPosition().y+5f);
+            enemy.setPosition(newPosition.cpy());
             enemy.getWeapon().addBullet();
         }
 
-        // Now moving these bullets forward and over the Player. If test is successful there should
-        // not be any bullets left in testWeapon.getBullets()
-        for(int i=0; i<1000; i++)
-            if (!enemy.getWeapon().getBullets().isEmpty()) {
-                for (Bullet b : enemy.getWeapon().getBullets()) {
-                    b.update();
-                }
-                world.checkCollision();
+        while(!enemy.getWeapon().getBullets().isEmpty()) {
+            world.checkCollision();
+            for(Bullet b : enemy.getWeapon().getBullets()) {
+                b.update();
             }
+        }
 
         boolean bulletDownInFrontPlayer = false;
         if(enemy.getWeapon().getBullets().isEmpty())
             bulletDownInFrontPlayer = true;
 
         assertTrue(bulletDownInFrontPlayer);
-
-
-
 
     }
 

@@ -243,4 +243,12 @@ public class Player extends Observable{
             observer.update(observable, event);
         }
     }
+
+    /**
+     * For testing purposes only!
+     * @param lifes The nbr of lifes the player should have
+     */
+    public void setLifes(int lifes) {
+        this.lifes = lifes;
+    }
 }
