@@ -139,7 +139,7 @@ public class TestWorld extends TestCase {
     }
 
     @Test
-    public void testPlayerBulletCollision() throws Exception {
+    public void testPlayerAboveBulletCollision() throws Exception {
         String[] s = new String[20];
         HeadlessLauncher.main(s);
         World world = NeedForGhettoTest.world;
@@ -161,10 +161,8 @@ public class TestWorld extends TestCase {
         enemy.getWeapon().getBullets().clear();
         enemy.getWeapon().setAttackRate(1000000000f);
 
-        System.out.println(" Player position: " + player.getPosition().toString());
-
         for(int i=0; i<100; i++) {
-            float xPos = random.nextFloat()*(player.getBounds().getWidth()) + 4.5f;
+            float xPos = random.nextFloat()*player.getBounds().getWidth() + 4.5f;
             Vector2 newPosition = new Vector2(xPos, player.getPosition().y+5f);
             enemy.setPosition(newPosition.cpy());
             enemy.getWeapon().addBullet();
@@ -182,6 +180,50 @@ public class TestWorld extends TestCase {
             bulletDownInFrontPlayer = true;
 
         assertTrue(bulletDownInFrontPlayer);
+
+    }
+
+    @Test
+    public void testPlayerMoveIntoBulletCollision() {
+        String[] s = new String[20];
+        HeadlessLauncher.main(s);
+        World world = NeedForGhettoTest.world;
+
+        // Creates an instance of World so that we can test it. Also gets the often used objects
+        // from World.
+
+        Player player = world.getPlayer();
+        Vector2 playerPosition = new Vector2(4.5f, 1f);
+        player.setPosition(playerPosition.cpy());
+        Random random = new Random();
+
+        world.getEnemies().clear();
+        EnemySimple enemy = new EnemySimple(new Vector2(4.5f-player.getBounds().getWidth(),
+                1.1f+player.getBounds().getHeight()));
+        enemy.stopFire();
+        world.getEnemies().add(enemy);
+        enemy.getWeapon().getBullets().clear();
+        enemy.getWeapon().setAttackRate(1000000000f);
+
+        enemy.getWeapon().addBullet();
+
+        enemy.getWeapon().getBullets().get(0).update();
+
+        player.setPosition(new Vector2(4.5f - player.getBounds().getWidth(), 1f));
+
+        world.checkCollision();
+
+        boolean bulletToTheLeftOfPlayer = false;
+        if(player.getLifes()==2 && enemy.getWeapon().getBullets().isEmpty()) {
+            bulletToTheLeftOfPlayer = true;
+        }
+
+        assertTrue(bulletToTheLeftOfPlayer);
+
+        /**
+         * Testing to the right of the player
+         */
+        
 
     }
 
