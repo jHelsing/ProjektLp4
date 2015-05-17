@@ -115,7 +115,7 @@ public class StartScreen implements Screen{
         stage.addActor(table);
 
         Gdx.input.setInputProcessor(stage);
-        //Gdx.input.setCatchBackKey(false);
+        Gdx.input.setCatchBackKey(false);
 
     }
 

@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 
-import java.awt.Event;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -15,11 +14,7 @@ import java.util.Observer;
  * @author Marcus. Revisited by Amar. Revisited by Anton. Revisited by Marcus.
  * @version 2.1
  */
-public class Player extends Observable{
-
-    public static enum Event{
-        Gameover, Lostlife
-    };
+public class Player {
 
     private ArrayList<Observer> observers = new ArrayList<Observer>();
 
@@ -86,6 +81,7 @@ public class Player extends Observable{
      */
     private Timer attackSpeed= new Timer();
 
+    private boolean isDead = false;
     /**
      * The constructor for a new Player object. The given position will be
      * used to determine where the player will start. Makes sure the attack rate
@@ -158,8 +154,7 @@ public class Player extends Observable{
         setPosition(DEFAULTPOSITION);
         goalPosition.set(DEFAULTPOSITION);
         weapon.setPosition(DEFAULTPOSITION);
-        if(lifes <= 0) notifyObservers(this, Event.Gameover);
-        else notifyObservers(this, Event.Lostlife);
+        if(lifes <= 0) isDead = true;
     }
 
     /**
@@ -228,25 +223,15 @@ public class Player extends Observable{
         }
     }
 
-    public void registerObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    public void notifyObservers(Observable observable, Event event) {
-        for(Observer observer : observers) {
-            observer.update(observable, event);
-        }
-    }
-
     /**
      * For testing purposes only!
      * @param lifes The nbr of lifes the player should have
      */
     public void setLifes(int lifes) {
         this.lifes = lifes;
+    }
+
+    public boolean isDead() {
+        return isDead;
     }
 }

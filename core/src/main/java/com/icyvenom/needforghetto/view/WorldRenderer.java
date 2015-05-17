@@ -162,6 +162,16 @@ public class WorldRenderer {
             debugRenderer.rect(x1, y1, rect.width, rect.height);
         }
 
+        for(Enemy e : world.getEnemies()) {
+            for(Bullet b : e.getWeapon().getBullets()){
+                Rectangle rect = b.getBounds();
+                float x1 = rect.x;
+                float y1 = rect.y;
+                debugRenderer.setColor(new Color(1, 0, 0, 1));
+                debugRenderer.rect(x1, y1, rect.width, rect.height);
+            }
+        }
+
         Player player = world.getPlayer();
         Rectangle rect = player.getBounds();
         float x1 = rect.x;

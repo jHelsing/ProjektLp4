@@ -14,7 +14,7 @@ public class EnemySimple extends Enemy {
     /**
      * The speed of the enemy.
      */
-    private static final float SPEED = 0.005f;
+    private static final float SPEED = 0.05f;
 
     private static final Vector2 direction = new Vector2(0,-1f);
 

@@ -23,6 +23,8 @@ import com.icyvenom.needforghetto.model.World;
 import com.icyvenom.needforghetto.model.WorldFactory;
 import com.icyvenom.needforghetto.parallax.ParallaxBackground;
 import com.icyvenom.needforghetto.parallax.ParallaxLayer;
+import com.icyvenom.needforghetto.view.BackgroundRenderer;
+import com.icyvenom.needforghetto.view.StatusBarRenderer;
 import com.icyvenom.needforghetto.view.WorldRenderer;
 
 import java.util.Observable;
@@ -34,14 +36,14 @@ import java.util.Observer;
  * @author Marcus. Revisited by Amar.
  * @version 1.05
  */
-public class GameScreen implements Screen, Observer {
+public class GameScreen implements Screen {
 
     /**
      * An enum that says which state the game is in.
      */
     private static enum State{
         Running, Paused
-    };
+    }
 
     /**
      * The world model that is being played and supposed to be showed on screen.
@@ -51,30 +53,23 @@ public class GameScreen implements Screen, Observer {
     /**
      * The render object.
      */
-    private WorldRenderer renderer;
+    private WorldRenderer worldRenderer;
+    private StatusBarRenderer statusBarRenderer;
+    private BackgroundRenderer backgroundRenderer;
 
     /**
      * The controller for the game.
      */
     private PlayerController playerController;
 
-    private TextureAtlas backgroundAtlas = new TextureAtlas(Gdx.files.internal("skins/testbg.atlas"));
-
     /**
      * The background that is moving when the game is played.
      */
-    private ParallaxBackground background;
 
-    //current state of the game, we start with a running game
     /**
      * The current state that the game is in. It will always start running.
      */
     private State state = State.Running;
-
-    /**
-     * The stage for topMenu.
-     */
-    private Stage stage = new Stage();
 
     //We need a inputmultiplexer since we need to delegate events to diffrent inputcontrollers
     //One for Running state and one for paused state
@@ -91,19 +86,9 @@ public class GameScreen implements Screen, Observer {
     private InputMultiplexer inputMultiplexerPaused = new InputMultiplexer();
 
     /**
-     * The label on the gamescreen that shows the life of the player.
-     */
-    private Label lifeStatus;
-    /**
-     * The label on the gamescreen that shows the score of the player.
-     */
-    private Label scoreStatus;
-
-    /**
      * The inputprocessor for the back-key on the phone. We want to override the default behavior.
      */
     private InputAdapter backProcessor = new InputAdapter() {
-        // TODO: It is still killing the current screen, should we save state somehow?? maybe call pause()
         @Override
         public boolean keyDown(int keycode) {
             if(keycode == Input.Keys.BACK) {
@@ -118,19 +103,19 @@ public class GameScreen implements Screen, Observer {
     public void show() {
         //World
         world = WorldFactory.getWorld();
-        world.getPlayer().registerObserver(this);
         // true/false: debug flag
-        renderer = new WorldRenderer(world, true);
-        playerController = new PlayerController(world, renderer.getCamera());
+        worldRenderer = new WorldRenderer(world, true);
 
-        // Load textures and other things necessary for rendering menu on the top of the screen
-        loadTopMenu();
-        loadBackground();
+        statusBarRenderer = new StatusBarRenderer(world);
+        backgroundRenderer = new BackgroundRenderer();
+
+        playerController = new PlayerController(world, worldRenderer.getCamera());
+
         // Adds inputprocessors to multiplexer
-        inputMultiplexerPaused.addProcessor(stage);
+        inputMultiplexerPaused.addProcessor(statusBarRenderer.getStage());
         inputMultiplexerPaused.addProcessor(backProcessor);
 
-        inputMultiplexerRunning.addProcessor(stage);
+        inputMultiplexerRunning.addProcessor(statusBarRenderer.getStage());
         inputMultiplexerRunning.addProcessor(backProcessor);
         inputMultiplexerRunning.addProcessor(playerController);
 
@@ -143,8 +128,12 @@ public class GameScreen implements Screen, Observer {
     public void render(float delta) {
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        background.render(delta);
+//        background.render(delta);
+        backgroundRenderer.render(delta);
         // if we are in a paused state we dont update model
+        if(world.getPlayer().isDead())
+            System.err.println("Player is dead, render a pretty gameover screen or something.");
+
         switch (state) {
             case Running:
                 Gdx.input.setInputProcessor(inputMultiplexerRunning);
@@ -157,19 +146,15 @@ public class GameScreen implements Screen, Observer {
                 world.getSpawnTimer().stop();
                 break;
         }
-        renderer.render();
+        worldRenderer.render();
 
         // this is for menu on top of the screen
-        stage.act();
-        stage.draw();
-
-        this.lifeStatus.setText("Life: " + world.getPlayer().getLifes());
-        this.scoreStatus.setText("Score: " + world.getPlayer().getScore());
+        statusBarRenderer.render();
     }
 
     @Override
     public void resize(int width, int height) {
-        renderer.setSize(width, height);
+        worldRenderer.setSize(width, height);
     }
 
     @Override
@@ -190,71 +175,6 @@ public class GameScreen implements Screen, Observer {
     @Override
     public void dispose() {
         Gdx.input.setInputProcessor(null);
-    }
-
-    /**
-     * Loads the top menu. This menu is at the top of the screen and contains the number of lives
-     * the player has, the play/paus button and the score that the Player has.
-     */
-    private void loadTopMenu() {
-        Table table = new Table();
-        Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"),
-                new TextureAtlas(Gdx.files.internal("skins/uiskin.atlas")));
-
-        final TextButton buttonPause = new TextButton("Pause", skin);
-        this.lifeStatus = new Label("Life: "+world.getPlayer().getLifes(), skin);
-        this.scoreStatus = new Label("Score: " + world.getPlayer().getScore(), skin);
-
-        table.setDebug(false);
-        table.setFillParent(true);
-        table.add(scoreStatus).expandX();
-        table.add(lifeStatus).expandX();
-        table.add(buttonPause).size(80, 50);
-        table.right().top();
-
-        buttonPause.addListener(new ClickListener(){
-            public void clicked(InputEvent event, float x, float y) {
-                switch (state) {
-                    case Running:
-                        state = State.Paused;
-                        buttonPause.setText("Resume");
-                        world.getTimePointsTimer().stop();
-                        break;
-                    case Paused:
-                        state = State.Running;
-                        buttonPause.setText("Pause");
-                        world.getTimePointsTimer().start();
-                        break;
-                }
-            }
-        });
-        stage.addActor(table);
-    }
-
-    /**
-     * This method loads the moving background and makes sure that it's moving.
-     */
-    private void loadBackground(){
-        background = new ParallaxBackground(new ParallaxLayer[]{
-                //new ParallaxLayer(backgroundAtlas.findRegion("road"),new Vector2(),new Vector2(0, 0)),
-                new ParallaxLayer(backgroundAtlas.findRegion("road"),new Vector2(1.0f,1.0f),new Vector2(0, 0)),
-                //new ParallaxLayer(backgroundAtlas.findRegion("road"),new Vector2(0.1f,1.0f),new Vector2(00, 0),new Vector2(0, 0)),
-        }, 800, 480,new Vector2(0,300));
-    }
-
-    public World getWorld() {
-        return world;
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        if((Player.Event)arg == Player.Event.Gameover) {
-            //TODO maybe introduce new Gameover-state?
-            ((Game)Gdx.app.getApplicationListener()).setScreen(new StartScreen());
-        }
-        if((Player.Event)arg == Player.Event.Lostlife) {
-            System.err.println("pls no kill");
-        }
     }
 
 }
