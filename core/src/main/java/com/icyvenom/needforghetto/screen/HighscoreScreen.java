@@ -30,9 +30,13 @@ public class HighscoreScreen implements Screen {
         highscore = new Highscore();
 
         table.add(title).padBottom(10).row();
+
         for(int i = 0; i < 10; i++) {
-            highscoreLabels.add(new Label(highscore.getRank(i+1), skin));
-            table.add(highscoreLabels.get(i)).pad(10).row();
+            highscoreLabels.add(new Label(highscore.getNames().get(i)+"..."+highscore.getScores().get(i), skin));
+        }
+
+        for(Label label : highscoreLabels) {
+            table.add(label).pad(10).row();
         }
         table.setFillParent(true);
         stage.addActor(table);

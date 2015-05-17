@@ -131,8 +131,10 @@ public class GameScreen implements Screen {
 //        background.render(delta);
         backgroundRenderer.render(delta);
         // if we are in a paused state we dont update model
-        if(world.getPlayer().isDead())
-            System.err.println("Player is dead, render a pretty gameover screen or something.");
+        if(world.getPlayer().isDead()) {
+            GameOverScreen ble = new GameOverScreen(world.getPlayer().getScore());
+            ((Game) Gdx.app.getApplicationListener()).setScreen(ble);
+        }
 
         switch (state) {
             case Running:
