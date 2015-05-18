@@ -34,14 +34,14 @@ public class StatusBarRenderer {
 
         buttonPause = new TextButton("Pause", skin);
 
-        this.lifeStatus = new Label("Life: "+world.getPlayer().getLifes(), skin);
+        this.lifeStatus = new Label("Life: "+world.getPlayer().getLives(), skin);
         this.scoreStatus = new Label("Score: " + world.getPlayer().getScore(), skin);
 
         init();
     }
 
     public void render() {
-        this.lifeStatus.setText("Life: " + world.getPlayer().getLifes());
+        this.lifeStatus.setText("Life: " + world.getPlayer().getLives());
         this.scoreStatus.setText("Score: " + world.getPlayer().getScore());
 
         stage.act();

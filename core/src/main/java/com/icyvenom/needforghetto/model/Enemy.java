@@ -35,11 +35,10 @@ public abstract class Enemy {
      */
     private Weapon weapon;
 
-    /** The amount of lifes that the enemy has.
+    /** The amount of lives that the enemy has.
      *
      */
-
-    private int lifes;
+    private int lives;
     /**
      * The direction of the bullet of the enemy's weapon.
      */
@@ -53,10 +52,6 @@ public abstract class Enemy {
 
     /* Float that will determine the direction of the enemy.
      * Default for this will be downwards.
-     */
-    private float movementDirection = -1f;
-    /*
-     * Vector used to calculate the next position for the enemy.
      */
     private Vector2 goalPosition;
 
@@ -141,10 +136,10 @@ public abstract class Enemy {
     }
 
     /**
-     * Gets the amount of lifes of the enemy.
-     * @return Returns the amount of lifes the enemy has
+     * Gets the amount of lives of the enemy.
+     * @return Returns the amount of lives the enemy has
      */
-    public int getLifes() { return lifes; }
+    public int getLives() { return lives; }
 
     /**
      * Sets the position of the enemy.
@@ -158,12 +153,19 @@ public abstract class Enemy {
     }
 
     /**
-     * Sets the lifes for the enemy.
-     * @param lifes
+     * Sets the direction of the enemy.
+     * @param dir This will be the new direction of the enemy
      */
+    public void setDirection(Vector2 dir){
+        this.direction = dir.cpy();
+    }
 
-    public void setLifes(int lifes){
-        this.lifes = lifes;
+    /**
+     * Sets the lives for the enemy.
+     * @param lives This will be the new amount of lives of the enemy
+     */
+    public void setLives(int lives){
+        this.lives = lives;
     }
     /**
     * Updates the position of the enemy depending on its direction and speed.
@@ -173,8 +175,13 @@ public abstract class Enemy {
         setPosition(goalPosition);
     }
 
+    /**
+     * Lowers the health of the enemy and returns a boolean saying if the enemy died
+     * or not.
+     * @return boolean saying if the enemy has run out of lives
+     */
     public boolean kill(){
-        lifes--;
-        return ( lifes <= 0 );
+        lives--;
+        return ( lives <= 0 );
     }
 }

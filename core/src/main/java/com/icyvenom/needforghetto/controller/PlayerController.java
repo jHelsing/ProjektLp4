@@ -62,7 +62,7 @@ public class PlayerController implements InputProcessor{
      */
     public void update(){
         world.checkCollision();
-        if(world.getPlayer().getLifes() <= 0) {
+        if(world.getPlayer().getLives() <= 0) {
             // TODO: call method gameOver() and stop enemies from spawning and show gameover screen
             //System.err.println("Game Over");
         }

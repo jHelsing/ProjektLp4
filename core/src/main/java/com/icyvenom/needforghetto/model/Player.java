@@ -42,7 +42,7 @@ public class Player {
      * The number of lives the Player has left. The Player dies when
      * life's reach 0.
      */
-    private int lifes = 3;
+    private int lives = 3;
 
     /**
      * The position on screen for the Player.
@@ -150,11 +150,11 @@ public class Player {
      * to the start position.
      */
     public void kill(){
-        lifes--;
+        lives--;
         setPosition(DEFAULTPOSITION);
         goalPosition.set(DEFAULTPOSITION);
         weapon.setPosition(DEFAULTPOSITION);
-        if(lifes <= 0) isDead = true;
+        if(lives <= 0) isDead = true;
     }
 
     /**
@@ -182,11 +182,11 @@ public class Player {
     }
 
     /**
-     * Getter for the number of lifes the Player has.
-     * @return The number of lifes the Player has.
+     * Getter for the number of lives the Player has.
+     * @return The number of lives the Player has.
      */
-    public int getLifes() {
-        return lifes;
+    public int getLives() {
+        return lives;
     }
 
     /**
@@ -225,10 +225,10 @@ public class Player {
 
     /**
      * For testing purposes only!
-     * @param lifes The nbr of lifes the player should have
+     * @param lives The nbr of lives the player should have
      */
-    public void setLifes(int lifes) {
-        this.lifes = lifes;
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 
     public boolean isDead() {

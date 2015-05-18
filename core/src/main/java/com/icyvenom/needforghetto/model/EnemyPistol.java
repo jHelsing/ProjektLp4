@@ -16,8 +16,15 @@ public class EnemyPistol extends Enemy {
      */
     private static final float SPEED = 0.05f;
 
-
+    /**
+     * This is the direction of the enemy.
+     */
     private static final Vector2 direction = new Vector2(0,-1f);
+
+    /**
+     * The amount of lives the enemy will start with.
+     */
+    private static final int LIVES = 1;
 
     /**
      *  When a enemy is created, it's position, the hitbox and the speed are set according to
@@ -27,6 +34,6 @@ public class EnemyPistol extends Enemy {
     public EnemyPistol(Vector2 position){
         super(position, SPEED, new WeaponNineMM(Enemy.getBulletDirection()), direction);
 
-        this.setLifes(2);
+        this.setLives(LIVES);
     }
 }

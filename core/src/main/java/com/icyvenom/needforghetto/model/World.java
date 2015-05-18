@@ -335,9 +335,7 @@ public class World {
      */
     public void killEnemy(Enemy e) {
         bullets.addAll(e.getWeapon().getBullets());
-        System.err.println(e.getLifes());
         if ( e.kill() ) {
-            System.err.println(e.getLifes());
             enemies.remove(e);
         }
     }

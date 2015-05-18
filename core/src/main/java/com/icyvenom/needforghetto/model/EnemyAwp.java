@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * Created by Marcus on 2015-05-18.
  */
-public class EnemyStalker extends Enemy{
+public class EnemyAwp extends Enemy {
 
     /**
      * The amount of lives the enemy will start with.
@@ -15,8 +15,7 @@ public class EnemyStalker extends Enemy{
     /**
      * The speed of the enemy.
      */
-    private static final float SPEED = 0.05f;
-
+    private static final float SPEED = 0.01f;
 
     /**
      * When a enemy is created, it's position, the hitbox and the speed are set according to
@@ -25,13 +24,8 @@ public class EnemyStalker extends Enemy{
      * @param position  This is the given position for the enemy.
      * @param direction
      */
-    public EnemyStalker(Vector2 position, Vector2 direction) {
-        super(position, SPEED, null, direction);
-
+    public EnemyAwp(Vector2 position, Vector2 direction) {
+        super(position, SPEED, new WeaponAWP(Enemy.getBulletDirection()), direction);
         this.setLives(LIVES);
     }
-
-
-
-
 }
