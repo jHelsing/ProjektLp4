@@ -35,6 +35,11 @@ public abstract class Enemy {
      */
     private Weapon weapon;
 
+    /** The amount of lifes that the enemy has.
+     *
+     */
+
+    private int lifes;
     /**
      * The direction of the bullet of the enemy's weapon.
      */
@@ -136,6 +141,12 @@ public abstract class Enemy {
     }
 
     /**
+     * Gets the amount of lifes of the enemy.
+     * @return Returns the amount of lifes the enemy has
+     */
+    public int getLifes() { return lifes; }
+
+    /**
      * Sets the position of the enemy.
      * @param position This will be the new position of the enemy
      */
@@ -145,11 +156,25 @@ public abstract class Enemy {
         this.bounds.setY(this.position.y);
         this.weapon.setPosition(this.position);
     }
+
+    /**
+     * Sets the lifes for the enemy.
+     * @param lifes
+     */
+
+    public void setLifes(int lifes){
+        this.lifes = lifes;
+    }
     /**
     * Updates the position of the enemy depending on its direction and speed.
     */
     public void updatePosition() {
         goalPosition  = getPosition().cpy().add(direction.cpy().scl(SPEED));
         setPosition(goalPosition);
+    }
+
+    public boolean kill(){
+        lifes--;
+        return ( lifes <= 0 );
     }
 }

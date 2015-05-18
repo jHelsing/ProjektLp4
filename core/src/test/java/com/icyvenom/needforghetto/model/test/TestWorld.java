@@ -4,20 +4,14 @@ package com.icyvenom.needforghetto.model.test;
 import com.badlogic.gdx.math.Vector2;
 import com.icyvenom.needforghetto.model.Bullet;
 import com.icyvenom.needforghetto.model.BulletDirection;
-import com.icyvenom.needforghetto.model.BulletNineMM;
-import com.icyvenom.needforghetto.model.Enemy;
-import com.icyvenom.needforghetto.model.EnemySimple;
+import com.icyvenom.needforghetto.model.EnemyPistol;
 import com.icyvenom.needforghetto.model.Player;
-import com.icyvenom.needforghetto.model.Weapon;
-import com.icyvenom.needforghetto.model.WeaponNineMM;
 import com.icyvenom.needforghetto.model.World;
 import junit.framework.TestCase;
 import org.junit.Test;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Random;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -51,7 +45,7 @@ public class TestWorld extends TestCase {
         for(int i=0; i<100; i++) {
             float xCoord = playerPosition.x + playerWidth + diff;
             float yCoord = (random.nextFloat()*(playerPosition.y+playerHeight)) + playerPosition.y;
-            EnemySimple enemy = new EnemySimple(new Vector2(xCoord,yCoord));
+            EnemyPistol enemy = new EnemyPistol(new Vector2(xCoord,yCoord));
             world.getEnemies().add(enemy);
         }
         //Checks collisions
@@ -72,7 +66,7 @@ public class TestWorld extends TestCase {
          */
 
         for(int i=0; i<100; i++) {
-            EnemySimple enemy = new EnemySimple(new Vector2());
+            EnemyPistol enemy = new EnemyPistol(new Vector2());
             float xCoord = playerPosition.x + diff + enemy.getBounds().getWidth()*2;
             float yCoord = (random.nextFloat()*(playerPosition.y+playerHeight)) + playerPosition.y;
             enemy.setPosition(new Vector2(xCoord, yCoord));
@@ -96,7 +90,7 @@ public class TestWorld extends TestCase {
          * Now testing placing 100 random enemies above the player.
          */
         for(int i=0; i<100; i++) {
-            EnemySimple enemy = new EnemySimple(new Vector2());
+            EnemyPistol enemy = new EnemyPistol(new Vector2());
             float xCoord = (random.nextFloat()*(playerPosition.x+playerWidth)) + playerPosition.x;
             float yCoord = playerPosition.y + playerHeight + diff;
             enemy.setPosition(new Vector2(xCoord, yCoord));
@@ -120,7 +114,7 @@ public class TestWorld extends TestCase {
          * Now testing placing 100 random enemies below the player.
          */
         for(int i=0; i<100; i++) {
-            EnemySimple enemy = new EnemySimple(new Vector2());
+            EnemyPistol enemy = new EnemyPistol(new Vector2());
             float xCoord = (random.nextFloat()*(playerPosition.x + playerWidth)) + playerPosition.x;
             float yCoord = playerPosition.y + diff + enemy.getBounds().getHeight();
             enemy.setPosition(new Vector2(xCoord, yCoord));
@@ -155,7 +149,7 @@ public class TestWorld extends TestCase {
 
         // Makes sure that the weapon has a good position in front of Player
         world.getEnemies().clear();
-        EnemySimple enemy = new EnemySimple(new Vector2(4.5f, 5f));
+        EnemyPistol enemy = new EnemyPistol(new Vector2(4.5f, 5f));
         enemy.stopFire();
         world.getEnemies().add(enemy);
         enemy.getWeapon().getBullets().clear();
@@ -198,7 +192,7 @@ public class TestWorld extends TestCase {
         Random random = new Random();
 
         world.getEnemies().clear();
-        EnemySimple enemy = new EnemySimple(new Vector2(4.5f-player.getBounds().getWidth(),
+        EnemyPistol enemy = new EnemyPistol(new Vector2(4.5f-player.getBounds().getWidth(),
                 1.1f+player.getBounds().getHeight()));
         enemy.stopFire();
         world.getEnemies().add(enemy);
@@ -260,7 +254,7 @@ public class TestWorld extends TestCase {
 
         // Makes sure that the weapon has a good position below the Player
         world.getEnemies().clear();
-        EnemySimple enemy = new EnemySimple(new Vector2(4.5f, 1f));
+        EnemyPistol enemy = new EnemyPistol(new Vector2(4.5f, 1f));
         enemy.stopFire();
         world.getEnemies().add(enemy);
         enemy.getWeapon().getBullets().clear();

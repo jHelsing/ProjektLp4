@@ -10,11 +10,12 @@ import java.util.Vector;
  * @author Amar.
  * @version 2.0
  */
-public class EnemySimple extends Enemy {
+public class EnemyPistol extends Enemy {
     /**
      * The speed of the enemy.
      */
     private static final float SPEED = 0.05f;
+
 
     private static final Vector2 direction = new Vector2(0,-1f);
 
@@ -23,7 +24,9 @@ public class EnemySimple extends Enemy {
      *  the parameter and variables.
      * @param position This is the given position for the enemy.
      */
-    public EnemySimple(Vector2 position){
+    public EnemyPistol(Vector2 position){
         super(position, SPEED, new WeaponNineMM(Enemy.getBulletDirection()), direction);
+
+        this.setLifes(2);
     }
 }

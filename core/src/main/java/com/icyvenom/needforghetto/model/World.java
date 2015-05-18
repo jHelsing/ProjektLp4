@@ -325,9 +325,7 @@ public class World {
                     enemiesToRemove.add(e);
                 }
             }
-            for (Enemy e : enemiesToRemove) {
-                killEnemy(e);
-            }
+            enemies.removeAll(enemiesToRemove);
         }
     }
 
@@ -337,7 +335,11 @@ public class World {
      */
     public void killEnemy(Enemy e) {
         bullets.addAll(e.getWeapon().getBullets());
-        enemies.remove(e);
+        System.err.println(e.getLifes());
+        if ( e.kill() ) {
+            System.err.println(e.getLifes());
+            enemies.remove(e);
+        }
     }
 
     /**

@@ -18,10 +18,10 @@ public class SimpleWave extends Timer.Task {
 
     @Override
     public void run() {
-        enemies.add(new EnemySimple(new Vector2(1.5f, 11f)));
-        enemies.add(new EnemySimple(new Vector2(3f, 11f)));
-        enemies.add(new EnemySimple(new Vector2(4.5f, 11f)));
-        enemies.add(new EnemySimple(new Vector2(6f, 11f)));
-        enemies.add(new EnemySimple(new Vector2(7.5f, 11f)));
+        enemies.add(new EnemyPistol(new Vector2(1.5f, 11f)));
+        enemies.add(new EnemyPistol(new Vector2(3f, 11f)));
+        enemies.add(new EnemyPistol(new Vector2(4.5f, 11f)));
+        enemies.add(new EnemyPistol(new Vector2(6f, 11f)));
+        enemies.add(new EnemyPistol(new Vector2(7.5f, 11f)));
     }
 }

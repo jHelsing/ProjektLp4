@@ -2,13 +2,12 @@ package com.icyvenom.needforghetto.model.test;
 
 import com.badlogic.gdx.math.Vector2;
 import com.icyvenom.needforghetto.model.Enemy;
-import com.icyvenom.needforghetto.model.EnemySimple;
+import com.icyvenom.needforghetto.model.EnemyPistol;
 
 import junit.framework.TestCase;
 
-import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -22,7 +21,7 @@ public class TestEnemySimple extends TestCase {
     public void testConstructor() {
         String[] s = new String[20];
         HeadlessLauncher.main(s);
-        Enemy enemy = new EnemySimple(new Vector2(1,1));
+        Enemy enemy = new EnemyPistol(new Vector2(1,1));
         boolean b = false;
         if(enemy.getPosition().x == 1 && enemy.getPosition().y == 1){
             b = true;
@@ -43,7 +42,7 @@ public class TestEnemySimple extends TestCase {
             public void run() {
                 try {
                     while(bSleep) {
-                        Enemy enemy = new EnemySimple(new Vector2(1,1));
+                        Enemy enemy = new EnemyPistol(new Vector2(1,1));
                         enemy.fire();
                         sleep(100);
                         bSleep = false;
@@ -67,7 +66,7 @@ public class TestEnemySimple extends TestCase {
     public void testStopFire(){
         String[] s = new String[20];
         HeadlessLauncher.main(s);
-        Enemy enemy = new EnemySimple(new Vector2(2,8));
+        Enemy enemy = new EnemyPistol(new Vector2(2,8));
         enemy.stopFire();
         boolean b= false;
         if(enemy.getWeapon().getBullets().isEmpty()){
