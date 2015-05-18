@@ -1,0 +1,30 @@
+﻿    Meeting Agenda
+
+      Date: 18/5-16
+
+      Facilitator: Marcus
+
+      Participants: Jonathan, Anton, Amar and Marcus
+
+    1. Objectives (5 min). Resolve any issues preventing the team to continue.
+
+	Make some more enemies
+
+    2. Reports (15 min) from previous meeting
+	
+	There is now an enemyspawner, enemies are moving, tests have been made and 
+	there is now a score.
+
+    3. Discussion items (35 min) 
+	Make 2 more enemies?
+	Time to make a demo.
+	
+    4. Outcomes and assignments (5 min)
+	Marcus: Make 2 more enemies, give enemies lifes and general enemy improvements
+	Anton: Fix what was broken since last week
+	Amar: Rapport
+	Jonathan: Make images for enemies
+
+    5. Wrap up
+
+	- Meeting 18/5
