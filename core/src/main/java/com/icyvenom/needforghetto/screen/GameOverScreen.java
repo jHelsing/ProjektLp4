@@ -129,7 +129,7 @@ public class GameOverScreen implements Screen{
 
             @Override
             public void canceled() {
-
+                highscoreManager.addHighscore(new Score("AAA", score));
             }
         };
 

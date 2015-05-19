@@ -82,6 +82,8 @@ public class GameScreen implements Screen {
         statusBarRenderer = new StatusBarRenderer(world);
         backgroundRenderer = new BackgroundRenderer();
 
+        GameState.currentState = GameState.State.RUNNING;
+
         playerController = new PlayerController(world, worldRenderer.getCamera());
 
         // Adds inputprocessors to multiplexer
