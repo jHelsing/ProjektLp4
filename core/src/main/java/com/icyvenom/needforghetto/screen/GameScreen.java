@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Timer;
 import com.icyvenom.needforghetto.controller.PlayerController;
+import com.icyvenom.needforghetto.gamestate.Gamestate;
 import com.icyvenom.needforghetto.model.Player;
 import com.icyvenom.needforghetto.model.World;
 import com.icyvenom.needforghetto.model.WorldFactory;
@@ -136,13 +137,13 @@ public class GameScreen implements Screen {
             ((Game) Gdx.app.getApplicationListener()).setScreen(ble);
         }
 
-        switch (state) {
-            case Running:
+        switch (Gamestate.currentState) {
+            case RUNNING:
                 Gdx.input.setInputProcessor(inputMultiplexerRunning);
                 playerController.update();
                 world.getSpawnTimer().start();
                 break;
-            case Paused:
+            case PAUSED:
                 playerController.move(null); //Resets the movement of the car
                 Gdx.input.setInputProcessor(inputMultiplexerPaused);
                 world.getSpawnTimer().stop();

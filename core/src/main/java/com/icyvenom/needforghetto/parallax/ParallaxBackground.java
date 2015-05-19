@@ -48,4 +48,9 @@ public class ParallaxBackground {
             batch.end();
         }
     }
+
+    public void setSpeed(float x, float y) {
+        this.speed.x = x;
+        this.speed.y = y;
+    }
 }
