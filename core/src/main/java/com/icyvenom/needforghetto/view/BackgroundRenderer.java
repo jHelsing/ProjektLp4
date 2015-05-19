@@ -3,6 +3,7 @@ package com.icyvenom.needforghetto.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.icyvenom.needforghetto.gamestate.Gamestate;
 import com.icyvenom.needforghetto.parallax.ParallaxBackground;
 import com.icyvenom.needforghetto.parallax.ParallaxLayer;
 
@@ -25,6 +26,15 @@ public class BackgroundRenderer {
     }
 
     public void render(float delta) {
+        switch (Gamestate.currentState) {
+            case RUNNING:
+                background.setSpeed(0, 300);
+                break;
+            case PAUSED:
+                background.setSpeed(0,0);
+                break;
+        }
         this.background.render(delta);
+
     }
 }
