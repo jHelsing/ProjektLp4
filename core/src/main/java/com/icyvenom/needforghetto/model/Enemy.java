@@ -120,6 +120,12 @@ public abstract class Enemy {
     }
 
     /**
+     * Gets the direction of the enemy.
+     * @return Returns the direction of the enemy.
+     */
+    public Vector2 getDirection() { return direction.cpy(); }
+
+    /**
      * Gets the direction of the bullet of the enemy's weapon
      * @return Returns the direction of the bullet of the enemy's weapon.
      */
@@ -169,8 +175,9 @@ public abstract class Enemy {
     }
     /**
     * Updates the position of the enemy depending on its direction and speed.
+     * @param vec Needed for being able to give Stalker a new direction.
     */
-    public void updatePosition() {
+    public void updatePosition(Vector2 vec) {
         goalPosition  = getPosition().cpy().add(direction.cpy().scl(SPEED));
         setPosition(goalPosition);
     }
