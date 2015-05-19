@@ -131,10 +131,12 @@ public class Player {
      * @param position The Player's new position.
      */
     public void setPosition(Vector2 position) {
-        this.position = position.cpy();
-        this.bounds.setX(this.position.x);
-        this.bounds.setY(this.position.y);
-        this.weapon.setPosition(this.position);
+        if (this.position != position) {
+            this.position = position.cpy();
+            this.bounds.setX(this.position.x);
+            this.bounds.setY(this.position.y);
+            this.weapon.setPosition(this.position.cpy().add(SIZE/3, SIZE));
+        }
     }
 
     /**

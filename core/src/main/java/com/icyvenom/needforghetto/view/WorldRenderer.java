@@ -97,6 +97,7 @@ public class WorldRenderer {
 
     /**
      * Draws the bullets on to the screen.
+     * Flips the texture of the enemy bullets.
      */
     public void drawBullets(){
         if(!world.getPlayer().getWeapon().getBullets().isEmpty()) {
@@ -110,15 +111,17 @@ public class WorldRenderer {
                 if(!e.getWeapon().getBullets().isEmpty()){
                     for (Bullet b : e.getWeapon().getBullets()) {
                         spriteBatch.draw(bulletTexture, b.getPosition().x * ppuX, b.getPosition().y
-                                * ppuY, b.SIZE * ppuX, b.SIZE * ppuY);
+                                * ppuY, b.SIZE * ppuX, b.SIZE * ppuY, 0, 0, bulletTexture.getWidth(),
+                                bulletTexture.getHeight(), false, true);
                     }
                 }
             }
         }
         if(!world.getBullets().isEmpty()) {
             for(Bullet b : world.getBullets()){
-                    spriteBatch.draw(bulletTexture, b.getPosition().x * ppuX, b.getPosition().y * ppuY,
-                            b.SIZE * ppuX, b.SIZE * ppuY);
+                spriteBatch.draw(bulletTexture, b.getPosition().x * ppuX, b.getPosition().y
+                        * ppuY, b.SIZE * ppuX, b.SIZE * ppuY, 0, 0, bulletTexture.getWidth(),
+                         bulletTexture.getHeight(), false, true);
             }
         }
     }

@@ -13,7 +13,7 @@ public abstract class Bullet {
     /**
      * The width and the height of the bullet.
      */
-    public static final float SIZE = 0.5f;
+    public static final float SIZE = 0.25f;
     /**
      * The position of the bullet.
      */
