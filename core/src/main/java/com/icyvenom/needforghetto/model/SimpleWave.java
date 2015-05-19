@@ -21,7 +21,7 @@ public class SimpleWave extends Timer.Task {
         enemies.add(new EnemyPistol(new Vector2(1.5f, 11f)));
         enemies.add(new EnemyPistol(new Vector2(3f, 11f)));
         enemies.add(new EnemyPistol(new Vector2(4.5f, 11f)));
-        enemies.add(new EnemyAwp(new Vector2(6f, 11f)));
-        enemies.add(new EnemyPistol(new Vector2(7.5f, 11f)));
+        enemies.add(new EnemyStalker(new Vector2(6f, 11f)));
+        enemies.add(new EnemyAwp(new Vector2(7.5f, 11f)));
     }
 }

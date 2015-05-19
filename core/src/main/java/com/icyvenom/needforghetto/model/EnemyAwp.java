@@ -10,7 +10,7 @@ public class EnemyAwp extends Enemy {
     /**
      * The amount of lives the enemy will start with.
      */
-    private static final int LIVES = 3;
+    private static final int LIVES = 1;
 
     /**
      * The speed of the enemy.

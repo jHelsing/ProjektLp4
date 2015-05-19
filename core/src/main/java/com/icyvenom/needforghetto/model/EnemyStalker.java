@@ -15,18 +15,20 @@ public class EnemyStalker extends Enemy{
     /**
      * The speed of the enemy.
      */
-    private static final float SPEED = 0.05f;
-
+    private static final float SPEED = 0.01f;
+    /**
+     * This is the direction of the enemy.
+     */
+    private static final Vector2 direction = new Vector2(0,-1f);
 
     /**
      * When a enemy is created, it's position, the hitbox and the speed are set according to
      * the parameter and variables.
      *
      * @param position  This is the given position for the enemy.
-     * @param direction
      */
-    public EnemyStalker(Vector2 position, Vector2 direction) {
-        super(position, SPEED, null, direction);
+    public EnemyStalker(Vector2 position) {
+        super(position, SPEED, new WeaponNothing(), direction);
 
         this.setLives(LIVES);
     }

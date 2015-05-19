@@ -89,7 +89,7 @@ public class WorldRenderer {
                 spriteBatch.draw(enemyAWPTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
                         enemy.SIZE * ppuX, enemy.SIZE * ppuY);
             }else if (enemy instanceof EnemyStalker){
-                spriteBatch.draw(enemyAWPTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
+                spriteBatch.draw(enemyStalkerTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
                         enemy.SIZE * ppuX, enemy.SIZE * ppuY);
             }
         }
