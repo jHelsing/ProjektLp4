@@ -3,7 +3,7 @@ package com.icyvenom.needforghetto.gamestate;
 /**
  * Created by anton on 2015-05-19.
  */
-public class Gamestate {
+public class GameState {
 
     public enum State {
         PAUSED,

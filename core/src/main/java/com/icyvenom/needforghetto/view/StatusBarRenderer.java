@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.icyvenom.needforghetto.gamestate.Gamestate;
+import com.icyvenom.needforghetto.gamestate.GameState;
 import com.icyvenom.needforghetto.model.World;
 
 /**
@@ -60,14 +60,14 @@ public class StatusBarRenderer {
 
         buttonPause.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                switch (Gamestate.currentState) {
+                switch (GameState.currentState) {
                     case RUNNING:
-                        Gamestate.currentState = Gamestate.State.PAUSED;
+                        GameState.currentState = GameState.State.PAUSED;
                         buttonPause.setText("Resume");
                         world.getTimePointsTimer().stop();
                         break;
                     case PAUSED:
-                        Gamestate.currentState = Gamestate.State.RUNNING;
+                        GameState.currentState = GameState.State.RUNNING;
                         buttonPause.setText("Pause");
                         world.getTimePointsTimer().start();
                         break;

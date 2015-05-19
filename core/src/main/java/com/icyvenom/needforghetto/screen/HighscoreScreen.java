@@ -1,6 +1,8 @@
 package com.icyvenom.needforghetto.screen;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -8,7 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.icyvenom.needforghetto.highscore.Highscore;
+import com.icyvenom.needforghetto.highscore.HighscoreManager;
+import com.icyvenom.needforghetto.highscore.Score;
 
 import java.util.ArrayList;
 
@@ -23,16 +26,16 @@ public class HighscoreScreen implements Screen {
             new TextureAtlas(Gdx.files.internal("skins/uiskin.atlas")));
     private Label title = new Label("Highscores: ", skin);
     private ArrayList<Label> highscoreLabels = new ArrayList<Label>();
-    private Highscore highscore;
+    private HighscoreManager highscoreManager;
 
     @Override
     public void show() {
-        highscore = new Highscore();
+        highscoreManager = new HighscoreManager();
 
         table.add(title).padBottom(10).row();
 
-        for(int i = 0; i < 10; i++) {
-            highscoreLabels.add(new Label(highscore.getNames().get(i)+"..."+highscore.getScores().get(i), skin));
+        for(Score score : highscoreManager.getScoreList()) {
+            highscoreLabels.add(new Label(score.getName()+"..."+score.getScore(), skin));
         }
 
         for(Label label : highscoreLabels) {
@@ -40,12 +43,18 @@ public class HighscoreScreen implements Screen {
         }
         table.setFillParent(true);
         stage.addActor(table);
+        Gdx.input.setCatchBackKey(true);
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        if(Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+            Gdx.input.setCatchBackKey(false);
+            ((Game)Gdx.app.getApplicationListener()).setScreen(new StartScreen());
+        }
 
         stage.act();
         stage.draw();

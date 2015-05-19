@@ -13,7 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.icyvenom.needforghetto.highscore.Highscore;
+import com.icyvenom.needforghetto.highscore.HighscoreManager;
+import com.icyvenom.needforghetto.highscore.Score;
 
 /**
  * Created by anton on 2015-05-17.
@@ -30,7 +31,7 @@ public class GameOverScreen implements Screen{
     private TextButton restartButton;
     private TextButton exitButton;
 
-    private Highscore highscore;
+    private HighscoreManager highscoreManager;
 
     public GameOverScreen(int score) {
         this.score = score;
@@ -38,6 +39,7 @@ public class GameOverScreen implements Screen{
 
     @Override
     public void show() {
+        this.highscoreManager = new HighscoreManager();
         this.stage = new Stage();
         this.table = new Table();
         this.skin = new Skin(Gdx.files.internal("skins/uiskin.json"),
@@ -49,9 +51,10 @@ public class GameOverScreen implements Screen{
         this.restartButton = new TextButton("Play again!", skin);
         this.exitButton = new TextButton("Ragequit", skin);
         init();
-        if(highscore.isHighscore(score)) {
+        if(highscoreManager.isHighscore(score)) {
             highscoreDialog();
         }
+        Gdx.input.setCatchBackKey(false);
     }
 
     @Override
@@ -121,15 +124,15 @@ public class GameOverScreen implements Screen{
         Input.TextInputListener dialog = new Input.TextInputListener() {
             @Override
             public void input(String text) {
-                highscore.addHighscore(text, score);
+                highscoreManager.addHighscore(new Score(text, score));
             }
 
             @Override
             public void canceled() {
-
+                highscoreManager.addHighscore(new Score("AAA", score));
             }
         };
 
-        Gdx.input.getTextInput(dialog, "New Highscore: "+score, "", "You name here");
+        Gdx.input.getTextInput(dialog, "New Highscore: "+score, "AAA", "You name here");
     }
 }
