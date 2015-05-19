@@ -4,12 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.icyvenom.needforghetto.model.Bullet;
 import com.icyvenom.needforghetto.model.Enemy;
+import com.icyvenom.needforghetto.model.EnemyAwp;
+import com.icyvenom.needforghetto.model.EnemyPistol;
+import com.icyvenom.needforghetto.model.EnemyStalker;
 import com.icyvenom.needforghetto.model.Player;
 import com.icyvenom.needforghetto.model.World;
 
@@ -28,7 +30,9 @@ public class WorldRenderer {
     ShapeRenderer debugRenderer = new ShapeRenderer();
 
     private Texture playerTexture;
-    private Texture enemyTexture;
+    private Texture enemyPistolTexture;
+    private Texture enemyAWPTexture;
+    private Texture enemyStalkerTexture;
     private Texture bulletTexture;
 
     private SpriteBatch spriteBatch;
@@ -73,13 +77,21 @@ public class WorldRenderer {
     }
 
     /**
-     * Draws the enemy spries on to the screen.
+     * Draws the enemy sprites on to the screen.
      */
     public void drawEnemies(){
         for (Object e : world.getEnemies()) {
             Enemy enemy = (Enemy) e;
-            spriteBatch.draw(enemyTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
-                            enemy.SIZE * ppuX, enemy.SIZE * ppuY);
+            if (enemy instanceof EnemyPistol) {
+                spriteBatch.draw(enemyPistolTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
+                        enemy.SIZE * ppuX, enemy.SIZE * ppuY);
+            }else if (enemy instanceof EnemyAwp){
+                spriteBatch.draw(enemyAWPTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
+                        enemy.SIZE * ppuX, enemy.SIZE * ppuY);
+            }else if (enemy instanceof EnemyStalker){
+                spriteBatch.draw(enemyAWPTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
+                        enemy.SIZE * ppuX, enemy.SIZE * ppuY);
+            }
         }
     }
 
@@ -129,7 +141,9 @@ public class WorldRenderer {
      */
     public void loadTextures(){
         playerTexture = new Texture(Gdx.files.internal("images/car.png"));
-        enemyTexture = new Texture(Gdx.files.internal("images/enemyCar.jpg"));
+        enemyPistolTexture = new Texture(Gdx.files.internal("images/enemyPistol.jpg"));
+        enemyAWPTexture = new Texture(Gdx.files.internal("images/enemyAWP.png"));
+        enemyStalkerTexture = new Texture(Gdx.files.internal("images/enemyStalker.png"));
         bulletTexture = new Texture(Gdx.files.internal("images/bullet.png"));
     }
 

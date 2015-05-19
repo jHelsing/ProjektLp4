@@ -2,8 +2,6 @@ package com.icyvenom.needforghetto.model;
 
 import com.badlogic.gdx.math.Vector2;
 
-import java.util.Vector;
-
 /**
  * This class is creating a specific enemy and contains basic
  * functionality.
