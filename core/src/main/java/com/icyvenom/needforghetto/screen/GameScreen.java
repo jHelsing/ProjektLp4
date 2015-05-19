@@ -7,29 +7,13 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Timer;
 import com.icyvenom.needforghetto.controller.PlayerController;
-import com.icyvenom.needforghetto.gamestate.Gamestate;
-import com.icyvenom.needforghetto.model.Player;
+import com.icyvenom.needforghetto.gamestate.GameState;
 import com.icyvenom.needforghetto.model.World;
 import com.icyvenom.needforghetto.model.WorldFactory;
-import com.icyvenom.needforghetto.parallax.ParallaxBackground;
-import com.icyvenom.needforghetto.parallax.ParallaxLayer;
 import com.icyvenom.needforghetto.view.BackgroundRenderer;
 import com.icyvenom.needforghetto.view.StatusBarRenderer;
 import com.icyvenom.needforghetto.view.WorldRenderer;
-
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * This class handles the graphics for the game when the game is played
@@ -38,13 +22,6 @@ import java.util.Observer;
  * @version 1.05
  */
 public class GameScreen implements Screen {
-
-    /**
-     * An enum that says which state the game is in.
-     */
-    private static enum State{
-        Running, Paused
-    }
 
     /**
      * The world model that is being played and supposed to be showed on screen.
@@ -66,11 +43,6 @@ public class GameScreen implements Screen {
     /**
      * The background that is moving when the game is played.
      */
-
-    /**
-     * The current state that the game is in. It will always start running.
-     */
-    private State state = State.Running;
 
     //We need a inputmultiplexer since we need to delegate events to diffrent inputcontrollers
     //One for Running state and one for paused state
@@ -129,15 +101,15 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//        background.render(delta);
+
         backgroundRenderer.render(delta);
-        // if we are in a paused state we dont update model
+
         if(world.getPlayer().isDead()) {
             GameOverScreen ble = new GameOverScreen(world.getPlayer().getScore());
             ((Game) Gdx.app.getApplicationListener()).setScreen(ble);
         }
 
-        switch (Gamestate.currentState) {
+        switch (GameState.currentState) {
             case RUNNING:
                 Gdx.input.setInputProcessor(inputMultiplexerRunning);
                 playerController.update();
@@ -149,8 +121,8 @@ public class GameScreen implements Screen {
                 world.getSpawnTimer().stop();
                 break;
         }
-        worldRenderer.render();
 
+        worldRenderer.render();
         // this is for menu on top of the screen
         statusBarRenderer.render();
     }
@@ -162,12 +134,12 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
-        state = State.Paused;
+        GameState.currentState = GameState.State.PAUSED;
     }
 
     @Override
     public void resume() {
-        state = State.Running;
+        GameState.currentState = GameState.State.RUNNING;
     }
 
     @Override

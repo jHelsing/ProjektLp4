@@ -8,7 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.icyvenom.needforghetto.highscore.Highscore;
+import com.icyvenom.needforghetto.highscore.HighscoreManager;
+import com.icyvenom.needforghetto.highscore.Score;
 
 import java.util.ArrayList;
 
@@ -23,16 +24,16 @@ public class HighscoreScreen implements Screen {
             new TextureAtlas(Gdx.files.internal("skins/uiskin.atlas")));
     private Label title = new Label("Highscores: ", skin);
     private ArrayList<Label> highscoreLabels = new ArrayList<Label>();
-    private Highscore highscore;
+    private HighscoreManager highscoreManager;
 
     @Override
     public void show() {
-        highscore = new Highscore();
+        highscoreManager = new HighscoreManager();
 
         table.add(title).padBottom(10).row();
 
-        for(int i = 0; i < 10; i++) {
-            highscoreLabels.add(new Label(highscore.getNames().get(i)+"..."+highscore.getScores().get(i), skin));
+        for(Score score : highscoreManager.getScoreList()) {
+            highscoreLabels.add(new Label(score.getName()+"..."+score.getScore(), skin));
         }
 
         for(Label label : highscoreLabels) {
