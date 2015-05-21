@@ -13,4 +13,6 @@ public class GameState {
     // Initial state is running
     public static State currentState = State.RUNNING;
 
+    public static boolean GODMODE = false;
+
 }

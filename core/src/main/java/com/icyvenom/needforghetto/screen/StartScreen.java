@@ -2,6 +2,7 @@ package com.icyvenom.needforghetto.screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,6 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.icyvenom.needforghetto.gamestate.GameState;
+import com.icyvenom.needforghetto.highscore.Score;
 
 /**
  * This is the first screen that is shown when the application is first opened.
@@ -54,7 +57,7 @@ public class StartScreen implements Screen{
     /**
      * Creates a new settings button that will hold the text Settings.
      */
-    private TextButton buttonSettings = new TextButton("Settings", skin);
+    private TextButton buttonCheat = new TextButton("Cheats", skin);
 
     /**
      * Creates a new highscore button that will hold the text Highscore
@@ -91,9 +94,23 @@ public class StartScreen implements Screen{
             }
         });
 
-        buttonSettings.addListener(new ClickListener(){
+        buttonCheat.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
+                Input.TextInputListener dialog = new Input.TextInputListener() {
+                    @Override
+                    public void input(String text) {
+                        String code = text.toLowerCase();
+                        if(code.equals("shall fight")) {
+                            GameState.GODMODE = true;
+                        }
+                    }
+
+                    @Override
+                    public void canceled() {
+                    }
+                };
+
+                Gdx.input.getTextInput(dialog, "Cheat", "", "Enter cheatcode");
             }
         });
 
@@ -108,7 +125,7 @@ public class StartScreen implements Screen{
         table.add(title3).padBottom(50).row();
         table.add(buttonPlay).size(150,40).padBottom(20).row();
         table.add(buttonHighscores).size(150,40).padBottom(20).row();
-        table.add(buttonSettings).size(150,40).padBottom(20).row();
+        table.add(buttonCheat).size(150,40).padBottom(20).row();
         table.add(buttonExit).size(150,40).padBottom(20).row();
 
         table.setFillParent(true);

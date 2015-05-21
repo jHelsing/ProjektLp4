@@ -3,9 +3,9 @@ package com.icyvenom.needforghetto.model;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
+import com.icyvenom.needforghetto.gamestate.GameState;
 
 import java.util.ArrayList;
-import java.util.Observable;
 import java.util.Observer;
 
 /**
@@ -82,6 +82,7 @@ public class Player {
     private Timer attackSpeed= new Timer();
 
     private boolean isDead = false;
+
     /**
      * The constructor for a new Player object. The given position will be
      * used to determine where the player will start. Makes sure the attack rate
@@ -152,11 +153,13 @@ public class Player {
      * to the start position.
      */
     public void kill(){
-        lives--;
-        setPosition(DEFAULTPOSITION);
-        goalPosition.set(DEFAULTPOSITION);
-        weapon.setPosition(DEFAULTPOSITION);
-        if(lives <= 0) isDead = true;
+        if(!GameState.GODMODE) {
+            lives--;
+            setPosition(DEFAULTPOSITION);
+            goalPosition.set(DEFAULTPOSITION);
+            weapon.setPosition(DEFAULTPOSITION);
+            if (lives <= 0) isDead = true;
+        }
     }
 
     /**
