@@ -1,0 +1,32 @@
+﻿    Meeting Agenda
+
+      Date: 21/5-16
+
+      Facilitator: Marcus
+
+      Participants: Jonathan, Anton and Amar
+
+    1. Objectives (5 min). Resolve any issues preventing the team to continue.
+
+	Make a different spawner to make the game playable.
+	Keeps getting points are game is paused.
+
+    2. Reports (15 min) from previous meeting
+	
+	There are now different enemies, Anton has made game work.
+
+    3. Discussion items (35 min) 
+	
+	Should implement a timer that stops the timer for moving after dying.
+	"God mode" will player can't move.
+	Make a nice enemyspawner, reading from text?
+	
+    4. Outcomes and assignments (5 min)
+	Marcus: Make an enemy spawner that reads from file.
+	Anton: Fix the points being paused when game is paused if time look into stopping player and god mode.
+	Amar: RAD & SDD
+	Jonathan: Keep on the images and RAD
+
+    5. Wrap up
+
+	- Meeting 25/5
