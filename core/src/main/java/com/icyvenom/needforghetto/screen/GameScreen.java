@@ -40,10 +40,6 @@ public class GameScreen implements Screen {
      */
     private PlayerController playerController;
 
-    /**
-     * The background that is moving when the game is played.
-     */
-
     //We need a inputmultiplexer since we need to delegate events to diffrent inputcontrollers
     //One for Running state and one for paused state
     /**

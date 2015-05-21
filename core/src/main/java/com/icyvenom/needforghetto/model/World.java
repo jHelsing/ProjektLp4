@@ -264,10 +264,10 @@ public class World {
 
             @Override
             public void run() {
-                player.addPoints(100);
+                player.addPoints(1);
             }
 
-        }, 30, 30);
+        }, 0.5f, 0.5f);
     }
 
     public void restartTimePointsTimer(){
