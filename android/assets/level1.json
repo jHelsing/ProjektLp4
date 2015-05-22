@@ -1,0 +1,14 @@
+{
+    "templates": [
+        {
+            "class": "enemyTemplate",
+            "enemyType": "EnemyPistol",
+            "startPos": 200
+        },
+        {
+            "class": "enemyTemplate",
+            "enemyType": "EnemyPistol",
+            "startPos": 8
+        }
+    ]
+}
