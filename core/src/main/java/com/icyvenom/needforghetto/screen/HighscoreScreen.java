@@ -24,7 +24,7 @@ public class HighscoreScreen implements Screen {
     private Table table = new Table();
     private Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"),
             new TextureAtlas(Gdx.files.internal("skins/uiskin.atlas")));
-    private Label title = new Label("Highscores: ", skin);
+    private Label title = new Label("Highscores ", skin);
     private ArrayList<Label> highscoreLabels = new ArrayList<Label>();
     private HighscoreManager highscoreManager;
 
@@ -32,14 +32,29 @@ public class HighscoreScreen implements Screen {
     public void show() {
         highscoreManager = new HighscoreManager();
 
-        table.add(title).padBottom(10).row();
-
+        table.add(title).padBottom(15).row();
+        int rank=1;
+        String suffix;
+        highscoreLabels.add(new Label("Rank" + "        " + "Score" + "         " + "Name", skin));
         for(Score score : highscoreManager.getScoreList()) {
-            highscoreLabels.add(new Label(score.getName()+"..."+score.getScore(), skin));
+            if(rank==1){
+                suffix="st";
+            }
+            else if(rank==2){
+                suffix="nd";
+            }
+            else if(rank==3){
+                suffix="rd";
+            }
+            else{
+                suffix="th";
+            }
+            highscoreLabels.add(new Label( rank + suffix + "           "+score.getScore()+"             "+score.getName(), skin));
+            rank++;
         }
 
         for(Label label : highscoreLabels) {
-            table.add(label).pad(10).row();
+            table.add(label).pad(5).row();
         }
         table.setFillParent(true);
         stage.addActor(table);
