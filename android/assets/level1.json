@@ -3,12 +3,14 @@
         {
             "class": "enemyTemplate",
             "enemyType": "EnemyPistol",
-            "startPos": 2
+            "startPosX": 2
+            "startPosY": 10
         },
         {
             "class": "enemyTemplate",
             "enemyType": "EnemyPistol",
-            "startPos": 8
+            "startPosX": 8
+            "startPosY": 10
         }
     ]
 }

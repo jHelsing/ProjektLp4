@@ -14,7 +14,7 @@ public class EnemyFactory {
     public Enemy CreateEnemy(int id){
         EnemyTemplate et = templates.get(id);
         if (et.enemyType.equals("EnemyPistol")){
-            EnemyPistol e = new EnemyPistol(new Vector2(et.startPos, 10f));
+            EnemyPistol e = new EnemyPistol(new Vector2(et.startPosX, et.startPosY));
             return e;
         }else {
             return null;

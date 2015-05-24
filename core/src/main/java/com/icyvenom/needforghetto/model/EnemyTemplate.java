@@ -6,7 +6,8 @@ package com.icyvenom.needforghetto.model;
 public class EnemyTemplate {
 
     public String enemyType;
-    public int startPos;
+    public int startPosX;
+    public int startPosY;
 
     public EnemyTemplate(){    }
 }
