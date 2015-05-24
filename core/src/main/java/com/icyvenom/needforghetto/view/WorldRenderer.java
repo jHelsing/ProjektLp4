@@ -73,7 +73,7 @@ public class WorldRenderer {
     public void drawPlayer(){
         Player player = world.getPlayer();
         spriteBatch.draw(playerTexture, player.getPosition().x * ppuX, player.getPosition().y * ppuY,
-                player.SIZE * ppuX, player.SIZE * ppuY);
+                player.WIDTH * ppuX, player.HEIGHT * ppuY);
     }
 
     /**

@@ -29,9 +29,15 @@ public class Player {
     public static final float SPEED = 0.05f;
 
     /**
-     * The size of the Player.
+     * The width of the Player.
      */
-    public static final float SIZE = 1f;
+    public static final float WIDTH = 0.9f;
+
+    /**
+     * The height of the Player.
+     */
+    public static final float HEIGHT = 1f;
+
 
     /**
      * The starting position on screen for the Player.
@@ -91,8 +97,8 @@ public class Player {
      */
     public Player(Vector2 position){
         this.position = position.cpy();
-        this.bounds.height = SIZE;
-        this.bounds.width = SIZE;
+        this.bounds.height= HEIGHT;
+        this.bounds.width = WIDTH;
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
         this.weapon.setPosition(this.position);
@@ -136,7 +142,7 @@ public class Player {
             this.position = position.cpy();
             this.bounds.setX(this.position.x);
             this.bounds.setY(this.position.y);
-            this.weapon.setPosition(this.position.cpy().add(SIZE/3, SIZE/2));
+            this.weapon.setPosition(this.position.cpy().add(HEIGHT/3, WIDTH/2));
         }
     }
 
@@ -223,7 +229,7 @@ public class Player {
      */
     public void setGoalPosition(Vector2 goalPos) {
         if (goalPos != null) {
-            goalPosition = goalPos.sub(new Vector2(SIZE / 2, SIZE / 5));
+            goalPosition = goalPos.sub(new Vector2(WIDTH / 2, HEIGHT / 5));
             this.velocity = goalPos.cpy().sub(getPosition());
         }
     }
