@@ -2,11 +2,7 @@ package com.icyvenom.needforghetto.model;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.Base64Coder;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonValue;
-import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Timer;
 
 import java.util.ArrayList;
@@ -33,7 +29,7 @@ public class WaveSpawner extends Timer.Task {
         EnemyFactory factory = json.fromJson(EnemyFactory.class,
                 Gdx.files.internal("level1.json"));
 
-        enemies.add(factory.CreateEnemy(0));
+        enemies.addAll(factory.MakeAllEnemies());
     }
 
 }
