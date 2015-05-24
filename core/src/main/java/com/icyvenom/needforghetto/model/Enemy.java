@@ -16,10 +16,16 @@ public abstract class Enemy {
      * The speed of the enemy.
      */
     private float SPEED;
+
     /**
-     * The width and the height of the enemy.
+     * The width of the enemy.
      */
-    public static final float SIZE = 1f;
+    public static final float WIDTH = 0.9f;
+
+    /**
+     * The height of the enemy.
+     */
+    public static final float HEIGHT = 1f;
 
     /**
      * The position of the enemy.
@@ -68,12 +74,12 @@ public abstract class Enemy {
     public Enemy(Vector2 position, float speed, final Weapon weapon, Vector2 direction){
         this.position = position.cpy();
         this.SPEED = speed;
-        this.bounds.height = SIZE;
-        this.bounds.width = SIZE;
+        this.bounds.height = HEIGHT;
+        this.bounds.width = WIDTH;
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
         this.weapon= weapon;
-        this.weapon.setPosition(this.position.cpy().add(SIZE / 3, SIZE / 4));
+        this.weapon.setPosition(this.position.cpy().add(WIDTH / 3, HEIGHT / 4));
         this.direction = direction;
         //Schedule's a new task for the enemy weapons attack speed.
         attackSpeed.scheduleTask(new Timer.Task() {
@@ -155,7 +161,7 @@ public abstract class Enemy {
         this.position = position.cpy();
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
-        this.weapon.setPosition(this.position.cpy().add(SIZE/3, SIZE/4));
+        this.weapon.setPosition(this.position.cpy().add(WIDTH/3, HEIGHT/4));
     }
 
     /**

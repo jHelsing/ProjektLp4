@@ -84,13 +84,13 @@ public class WorldRenderer {
             Enemy enemy = (Enemy) e;
             if (enemy instanceof EnemyPistol) {
                 spriteBatch.draw(enemyPistolTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
-                        enemy.SIZE * ppuX, enemy.SIZE * ppuY);
+                        enemy.WIDTH * ppuX, enemy.HEIGHT * ppuY);
             }else if (enemy instanceof EnemyAwp){
                 spriteBatch.draw(enemyAWPTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
-                        enemy.SIZE * ppuX, enemy.SIZE * ppuY);
+                        enemy.WIDTH * ppuX, enemy.HEIGHT * ppuY);
             }else if (enemy instanceof EnemyStalker){
                 spriteBatch.draw(enemyStalkerTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
-                        enemy.SIZE * ppuX, enemy.SIZE * ppuY);
+                        enemy.WIDTH * ppuX, enemy.HEIGHT * ppuY);
             }
         }
     }
