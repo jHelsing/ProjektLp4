@@ -1,15 +1,29 @@
 {
-    "templates": [
+    "wave1": [
         {
             "class": "enemyTemplate",
             "enemyType": "EnemyPistol",
-            "startPosX": 2
+            "startPosX": 2,
             "startPosY": 10
         },
         {
             "class": "enemyTemplate",
             "enemyType": "EnemyPistol",
-            "startPosX": 8
+            "startPosX": 8,
+            "startPosY": 10
+        }
+    ],
+    "wave2": [
+        {
+            "class": "enemyTemplate",
+            "enemyType": "EnemyPistol",
+            "startPosX": 4,
+            "startPosY": 10
+        },
+        {
+            "class": "enemyTemplate",
+            "enemyType": "EnemyPistol",
+            "startPosX": 6,
             "startPosY": 10
         }
     ]

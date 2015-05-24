@@ -1,6 +1,5 @@
 package com.icyvenom.needforghetto.model;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import java.util.ArrayList;
 import java.util.List;
@@ -255,7 +254,7 @@ public class World {
         spawnTimer.scheduleTask(new SimpleWave(this.enemies), 18);
         spawnTimer.scheduleTask(new SimpleWave(this.enemies), 23);
         */
-        spawnTimer.scheduleTask( new WaveSpawner(this.enemies), 1);
+        spawnTimer.scheduleTask( new WaveSpawner(this.enemies), 1, 2, 2);
 
     }
 
