@@ -73,7 +73,7 @@ public abstract class Enemy {
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
         this.weapon= weapon;
-        this.weapon.setPosition(this.position);
+        this.weapon.setPosition(this.position.cpy().add(SIZE / 3, SIZE / 4));
         this.direction = direction;
         //Schedule's a new task for the enemy weapons attack speed.
         attackSpeed.scheduleTask(new Timer.Task() {
@@ -155,7 +155,7 @@ public abstract class Enemy {
         this.position = position.cpy();
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
-        this.weapon.setPosition(this.position);
+        this.weapon.setPosition(this.position.cpy().add(SIZE/3, SIZE/4));
     }
 
     /**

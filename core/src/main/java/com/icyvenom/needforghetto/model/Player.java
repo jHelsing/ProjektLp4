@@ -136,7 +136,7 @@ public class Player {
             this.position = position.cpy();
             this.bounds.setX(this.position.x);
             this.bounds.setY(this.position.y);
-            this.weapon.setPosition(this.position.cpy().add(SIZE/3, SIZE));
+            this.weapon.setPosition(this.position.cpy().add(SIZE/3, SIZE/2));
         }
     }
 

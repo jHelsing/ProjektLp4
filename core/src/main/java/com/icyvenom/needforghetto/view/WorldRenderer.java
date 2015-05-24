@@ -144,7 +144,7 @@ public class WorldRenderer {
      */
     public void loadTextures(){
         playerTexture = new Texture(Gdx.files.internal("images/car.png"));
-        enemyPistolTexture = new Texture(Gdx.files.internal("images/enemyPistol.jpg"));
+        enemyPistolTexture = new Texture(Gdx.files.internal("images/enemyPistol.png"));
         enemyAWPTexture = new Texture(Gdx.files.internal("images/enemyAWP.png"));
         enemyStalkerTexture = new Texture(Gdx.files.internal("images/enemyStalker.png"));
         bulletTexture = new Texture(Gdx.files.internal("images/bullet.png"));
