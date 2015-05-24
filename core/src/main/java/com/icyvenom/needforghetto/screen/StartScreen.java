@@ -73,7 +73,7 @@ public class StartScreen implements Screen{
 
 
     private SpriteBatch spriteBatch = new SpriteBatch();
-    private Texture bgTexture = new Texture("images/car.png");
+    private Texture bgTexture = new Texture("images/bg.jpg");
     private Sprite bgSprite = new Sprite(bgTexture);
 
     public StartScreen() {
