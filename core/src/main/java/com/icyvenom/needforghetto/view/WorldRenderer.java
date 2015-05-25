@@ -30,6 +30,7 @@ public class WorldRenderer {
     ShapeRenderer debugRenderer = new ShapeRenderer();
 
     private Texture playerTexture;
+    private Texture fadedPlayerTexture;
     private Texture enemyPistolTexture;
     private Texture enemyAWPTexture;
     private Texture enemyStalkerTexture;
@@ -72,8 +73,13 @@ public class WorldRenderer {
      */
     public void drawPlayer(){
         Player player = world.getPlayer();
-        spriteBatch.draw(playerTexture, player.getPosition().x * ppuX, player.getPosition().y * ppuY,
-                player.WIDTH * ppuX, player.HEIGHT * ppuY);
+        if(player.isGod()) {
+            spriteBatch.draw(fadedPlayerTexture,player.getPosition().x * ppuX, player.getPosition().y * ppuY,
+                    player.WIDTH * ppuX, player.HEIGHT * ppuY);
+        } else {
+            spriteBatch.draw(playerTexture, player.getPosition().x * ppuX, player.getPosition().y * ppuY,
+                    player.WIDTH * ppuX, player.HEIGHT * ppuY);
+        }
     }
 
     /**
@@ -148,6 +154,7 @@ public class WorldRenderer {
         enemyAWPTexture = new Texture(Gdx.files.internal("images/enemyAWP.png"));
         enemyStalkerTexture = new Texture(Gdx.files.internal("images/enemyStalker.png"));
         bulletTexture = new Texture(Gdx.files.internal("images/bullet.png"));
+        fadedPlayerTexture = new Texture(Gdx.files.internal("images/carFaded.png"));
     }
 
     public OrthographicCamera getCamera(){
