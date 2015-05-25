@@ -38,7 +38,6 @@ public class Player {
      */
     public static final float HEIGHT = 1f;
 
-
     /**
      * The starting position on screen for the Player.
      */

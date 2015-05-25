@@ -1,0 +1,36 @@
+﻿    Meeting Agenda
+
+      Date: 25/5-16
+
+      Facilitator: Marcus
+
+      Participants: Jonathan, Anton and Amar
+
+    1. Objectives (5 min). Resolve any issues preventing the team to continue.
+
+	Decide how to do presentation
+	Scale buttons in startview
+	Make more waves
+
+    2. Reports (15 min) from previous meeting
+	
+	New images has been made and added
+	Game reads from .json file to create enemies
+	RAD is pretty much done
+	God mode and pause issue resolved.
+
+    3. Discussion items (35 min) 
+	
+	Presentation and SDD need to be finished.
+	Start by doing 5 waves for the game.
+	Stop player from moving after death for a short while, change image?
+	
+    4. Outcomes and assignments (5 min)
+	Marcus: SDD, UMLs and .json-file
+	Anton: SDD and UML
+	Amar: RAD & Start working on presentation if time
+	Jonathan: RAD & Start working on presentation if time
+
+    5. Wrap up
+
+	- Meeting 28/5

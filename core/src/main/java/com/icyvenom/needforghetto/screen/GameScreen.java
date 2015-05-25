@@ -73,7 +73,7 @@ public class GameScreen implements Screen {
         //World
         world = WorldFactory.getWorld();
         // true/false: debug flag
-        worldRenderer = new WorldRenderer(world, true);
+        worldRenderer = new WorldRenderer(world, false);
 
         statusBarRenderer = new StatusBarRenderer(world);
         backgroundRenderer = new BackgroundRenderer();

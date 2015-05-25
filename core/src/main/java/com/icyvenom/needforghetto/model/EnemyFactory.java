@@ -17,6 +17,12 @@ public class EnemyFactory {
         if (et.enemyType.equals("EnemyPistol")){
             EnemyPistol e = new EnemyPistol(new Vector2(et.startPosX, et.startPosY));
             return e;
+        }else if(et.enemyType.equals("EnemyAwp")){
+            EnemyAwp e = new EnemyAwp(new Vector2(et.startPosX, et.startPosY));
+            return e;
+        }else if(et.enemyType.equals("EnemyStalker")){
+            EnemyStalker e = new EnemyStalker(new Vector2(et.startPosX, et.startPosY));
+            return e;
         }else {
             return null;
         }
