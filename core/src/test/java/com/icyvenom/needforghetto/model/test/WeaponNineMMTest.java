@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  * @author Amar.
  * @version 1.0
  */
-public class WeaponNineMMTest extends TestCase {
+public class WeaponNineMMTest {
     @Test
     public void testAddBullet(){
         String[] s = new String[20];

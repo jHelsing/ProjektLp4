@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Jonathan on 2015-05-11.
  */
-public class TestPlayer extends TestCase {
+public class TestPlayer {
 
     @Test
     public void testSetPosition() throws Exception {
