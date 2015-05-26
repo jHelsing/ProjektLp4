@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
  * @author Jonathan.
  * @version 2.0
  */
-public class TestWorld extends TestCase {
+public class TestWorld {
 
     @Test
     public void testCreateBasicWorld() throws Exception {
@@ -144,7 +144,7 @@ public class TestWorld extends TestCase {
         Player player = world.getPlayer();
         Vector2 playerPosition = new Vector2(4.5f, 1f);
         player.setPosition(playerPosition.cpy());
-        player.setLifes(Integer.MAX_VALUE);
+        player.setLives(Integer.MAX_VALUE);
         Random random = new Random();
 
         // Makes sure that the weapon has a good position in front of Player
@@ -208,7 +208,7 @@ public class TestWorld extends TestCase {
         world.checkCollision();
 
         boolean bulletToTheLeftOfPlayer = false;
-        if(player.getLifes()==2 && enemy.getWeapon().getBullets().isEmpty()) {
+        if(player.getLives()==2 && enemy.getWeapon().getBullets().isEmpty()) {
             bulletToTheLeftOfPlayer = true;
         }
 
@@ -229,7 +229,7 @@ public class TestWorld extends TestCase {
         world.checkCollision();
 
         boolean bulletToTheRightOfPlayer = false;
-        if(player.getLifes()==1 && enemy.getWeapon().getBullets().isEmpty()) {
+        if(player.getLives()==1 && enemy.getWeapon().getBullets().isEmpty()) {
             bulletToTheRightOfPlayer = true;
         }
 
@@ -249,7 +249,7 @@ public class TestWorld extends TestCase {
         Player player = world.getPlayer();
         Vector2 playerPosition = new Vector2(4.5f, 5f);
         player.setPosition(playerPosition.cpy());
-        player.setLifes(Integer.MAX_VALUE);
+        player.setLives(Integer.MAX_VALUE);
         Random random = new Random();
 
         // Makes sure that the weapon has a good position below the Player

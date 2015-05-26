@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Jonathan on 2015-05-13.
  */
-public class TestEnemySimple extends TestCase {
+public class TestEnemySimple {
 
     
     @Test

@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
  * @author Amar.
  * @version 1.0
  */
-public class TestWeaponAWP extends TestCase {
+public class TestWeaponAWP {
     @Test
     public void testAddBullet(){
         String[] s = new String[20];
