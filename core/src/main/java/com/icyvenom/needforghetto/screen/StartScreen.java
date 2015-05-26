@@ -4,11 +4,14 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -67,14 +70,18 @@ public class StartScreen implements Screen{
     /**
      * Creates 3 new title label that are used to show the game title.
      */
-    private Label title1 = new Label("Need", skin);
-    private Label title2 = new Label("For", skin);
-    private Label title3 = new Label("Ghetto", skin);
+    private Label title1;
+    private Label title2;
+    private Label title3;
+
+    FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DroidSerif-Regular.ttf"));
+    FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
 
     private SpriteBatch spriteBatch = new SpriteBatch();
     private Texture bgTexture = new Texture("images/bg.jpg");
     private Sprite bgSprite = new Sprite(bgTexture);
+
 
     public StartScreen() {
 
@@ -82,6 +89,9 @@ public class StartScreen implements Screen{
 
     @Override
     public void show() {
+
+        loadFonts();
+
         buttonPlay.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
                 ((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen());
@@ -123,10 +133,10 @@ public class StartScreen implements Screen{
         table.add(title1).padBottom(-10).row();
         table.add(title2).padBottom(-10).row();
         table.add(title3).padBottom(50).row();
-        table.add(buttonPlay).size(150,40).padBottom(20).row();
-        table.add(buttonHighscores).size(150,40).padBottom(20).row();
-        table.add(buttonCheat).size(150,40).padBottom(20).row();
-        table.add(buttonExit).size(150,40).padBottom(20).row();
+        table.add(buttonPlay).size(550,100).padBottom(20).row();
+        table.add(buttonHighscores).size(550,100).padBottom(20).row();
+        table.add(buttonCheat).size(550,100).padBottom(20).row();
+        table.add(buttonExit).size(550,100).padBottom(20).row();
 
         table.setFillParent(true);
         stage.addActor(table);
@@ -172,6 +182,31 @@ public class StartScreen implements Screen{
     public void dispose() {
         stage.dispose();
         skin.dispose();
+        generator.dispose();
+    }
+
+    private void loadFonts() {
+
+        // title font size is 100
+        parameter.size = 100;
+        BitmapFont titlefont = generator.generateFont(parameter);
+
+        //button font size is 50
+        parameter.size = 50;
+        BitmapFont buttonfont = generator.generateFont(parameter);
+
+        Label.LabelStyle titlestyle = new Label.LabelStyle(titlefont, Color.WHITE);
+        Label.LabelStyle buttontyle = new Label.LabelStyle(buttonfont, Color.WHITE);
+
+        title1 = new Label("Need", titlestyle);
+        title2 = new Label("For", titlestyle);
+        title3 = new Label("Ghetto", titlestyle);
+
+        buttonPlay.getLabel().setStyle(buttontyle);
+        buttonHighscores.getLabel().setStyle(buttontyle);
+        buttonCheat.getLabel().setStyle(buttontyle);
+        buttonExit.getLabel().setStyle(buttontyle);
+
     }
 
 }
