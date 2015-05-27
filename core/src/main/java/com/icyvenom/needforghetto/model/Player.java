@@ -163,6 +163,16 @@ public class Player {
             setPosition(DEFAULTPOSITION);
             goalPosition.set(DEFAULTPOSITION);
             weapon.setPosition(DEFAULTPOSITION);
+            GameState.GODMODE = true;
+            Timer godModeTimer = new Timer();
+            godModeTimer.scheduleTask(new Timer.Task() {
+
+                @Override
+                public void run() {
+                    GameState.GODMODE = false;
+                }
+
+            }, 1, 1f,1);
             if (lives <= 0) isDead = true;
         }
     }
@@ -243,5 +253,9 @@ public class Player {
 
     public boolean isDead() {
         return isDead;
+    }
+
+    public boolean isGod() {
+        return GameState.GODMODE;
     }
 }

@@ -4,8 +4,11 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -27,6 +30,10 @@ public class HighscoreScreen implements Screen {
     private Label title = new Label("Highscores ", skin);
     private ArrayList<Label> highscoreLabels = new ArrayList<Label>();
     private HighscoreManager highscoreManager;
+
+    FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DroidSerif-Regular.ttf"));
+    FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+
 
     @Override
     public void show() {
@@ -52,6 +59,8 @@ public class HighscoreScreen implements Screen {
             highscoreLabels.add(new Label( rank + suffix + "           "+score.getScore()+"             "+score.getName(), skin));
             rank++;
         }
+
+        setFontStyles();
 
         for(Label label : highscoreLabels) {
             table.add(label).pad(5).row();
@@ -99,4 +108,21 @@ public class HighscoreScreen implements Screen {
     public void dispose() {
 
     }
+
+    private void setFontStyles() {
+        parameter.size = 40;
+        BitmapFont titlefont = generator.generateFont(parameter);
+        title.setStyle(new Label.LabelStyle(titlefont, Color.WHITE));
+
+        parameter.size = 30;
+        BitmapFont scorefont = generator.generateFont(parameter);
+        Label.LabelStyle scorestyle = new Label.LabelStyle(scorefont, Color.WHITE);
+
+        for(Label l : highscoreLabels) {
+            l.setStyle(scorestyle);
+        }
+
+
+    }
+
 }

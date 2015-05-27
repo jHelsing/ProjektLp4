@@ -1,7 +1,10 @@
 package com.icyvenom.needforghetto.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -26,6 +29,10 @@ public class StatusBarRenderer {
     private Label lifeStatus;
     private Label scoreStatus;
 
+    FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DroidSerif-Regular.ttf"));
+    FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+
+
     public StatusBarRenderer ( World world) {
         this.world = world;
         this.stage = new Stage();
@@ -39,6 +46,7 @@ public class StatusBarRenderer {
         this.scoreStatus = new Label("Score: " + world.getPlayer().getScore(), skin);
 
         init();
+        setFontStyles();
     }
 
     public void render() {
@@ -55,7 +63,7 @@ public class StatusBarRenderer {
         table.setFillParent(true);
         table.add(scoreStatus).expandX();
         table.add(lifeStatus).expandX();
-        table.add(buttonPause).size(80, 50);
+        table.add(buttonPause).size(120, 70);
         table.right().top();
 
         buttonPause.addListener(new ClickListener(){
@@ -75,6 +83,16 @@ public class StatusBarRenderer {
             }
         });
         stage.addActor(table);
+    }
+
+    private void setFontStyles() {
+        parameter.size = 30;
+        BitmapFont labelfont = generator.generateFont(parameter);
+        Label.LabelStyle labelStyle = new Label.LabelStyle(labelfont, Color.WHITE);
+        lifeStatus.setStyle(labelStyle);
+        scoreStatus.setStyle(labelStyle);
+
+        buttonPause.getLabel().setStyle(labelStyle);
     }
 
     public Stage getStage() {

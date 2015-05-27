@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  * @author Amar.
  * @version 1.0
  */
-public class TestWeaponMFourAOne extends TestCase {
+public class TestWeaponMFourAOne {
 
     @Test
     public void testAddBullet(){
