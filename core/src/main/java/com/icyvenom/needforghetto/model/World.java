@@ -59,6 +59,8 @@ public class World {
      * Checks for collisions between player and enemies and bullets.
      */
     public void checkCollision(){
+        //Player is immortal when faded
+        if(!getPlayer().isGod()){
         //Starts by checking if there are enemies on screen.
         if(enemies != null) {
             //Creates 4 float's at each max and min value for the player. These are used to
@@ -239,7 +241,7 @@ public class World {
             }
         }
     }
-
+}
 
 
     /**
