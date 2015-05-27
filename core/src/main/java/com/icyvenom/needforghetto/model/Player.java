@@ -170,7 +170,7 @@ public class Player {
                     GameState.GODMODE = false;
                 }
 
-            }, 1, 1f,1);
+            }, 4, 4f,1);
             if (lives <= 0) isDead = true;
         }
     }
@@ -188,7 +188,9 @@ public class Player {
      * now be firing bullets.
      */
     public void fire() {
-        attackSpeed.start();
+        if(!isGod()){
+            attackSpeed.start();
+        }
     }
 
     /**
