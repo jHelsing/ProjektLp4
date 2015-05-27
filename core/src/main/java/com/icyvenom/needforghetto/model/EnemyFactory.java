@@ -13,7 +13,7 @@ public class EnemyFactory {
     private ArrayList<EnemyTemplate> wave1;
     private ArrayList<EnemyTemplate> wave2;
 
-    public Enemy CreateEnemy(EnemyTemplate et){
+    public Enemy createEnemy(EnemyTemplate et){
         if (et.enemyType.equals("EnemyPistol")){
             EnemyPistol e = new EnemyPistol(new Vector2(et.startPosX, et.startPosY));
             return e;
@@ -28,22 +28,22 @@ public class EnemyFactory {
         }
     }
 
-    public ArrayList<Enemy> MakeAllEnemies(ArrayList<EnemyTemplate> templates){
+    public ArrayList<Enemy> makeAllEnemies(ArrayList<EnemyTemplate> templates){
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
         if (!templates.isEmpty()) {
             for (int i = 0; i < templates.size(); i++) {
-                enemies.add(CreateEnemy(templates.get(i)));
+                enemies.add(createEnemy(templates.get(i)));
             }
         }
         return enemies;
     }
 
-    public void CreateNewWave(List<Enemy> enemies, int wave){
+    public void createNewWave(List<Enemy> enemies, int wave){
         System.err.println("Making " + wave);
         switch(wave){
-            case 1: enemies.addAll(MakeAllEnemies(wave1)); break;
+            case 1: enemies.addAll(makeAllEnemies(wave1)); break;
 
-            case 2: enemies.addAll(MakeAllEnemies(wave2)); break;
+            case 2: enemies.addAll(makeAllEnemies(wave2)); break;
         }
     }
 }

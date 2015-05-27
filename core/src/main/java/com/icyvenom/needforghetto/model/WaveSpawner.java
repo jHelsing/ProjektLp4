@@ -32,7 +32,7 @@ public class WaveSpawner extends Timer.Task {
     @Override
     public void run() {
         if (!(currentWave > 2)) {
-            factory.CreateNewWave(enemies, currentWave);
+            factory.createNewWave(enemies, currentWave);
             currentWave++;
         }
     }

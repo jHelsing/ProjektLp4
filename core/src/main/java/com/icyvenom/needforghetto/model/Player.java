@@ -16,8 +16,6 @@ import java.util.Observer;
  */
 public class Player {
 
-    private ArrayList<Observer> obsxervers = new ArrayList<Observer>();
-
     /**
      * Score of the player.
      */
