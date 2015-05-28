@@ -54,7 +54,7 @@ public abstract class Enemy {
      * The timer for the attack speed of the enemy. Sets how often
      * the enemy should fire bullets.
      */
-    private Timer attackSpeed= new Timer();
+    protected Timer attackSpeed= new Timer();
 
     /* Float that will determine the direction of the enemy.
      * Default for this will be downwards.
