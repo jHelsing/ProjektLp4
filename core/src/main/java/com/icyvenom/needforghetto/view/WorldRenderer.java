@@ -160,7 +160,7 @@ public class WorldRenderer {
         enemyStalkerTexture = new Texture(Gdx.files.internal("images/enemyStalker.png"));
         bulletTexture = new Texture(Gdx.files.internal("images/bullet.png"));
         fadedPlayerTexture = new Texture(Gdx.files.internal("images/carFaded.png"));
-        enemyBossTexture = new Texture(Gdx.files.internal("images/kfc.jpg"));
+        enemyBossTexture = new Texture(Gdx.files.internal("images/enemyBoss.png"));
     }
 
     public OrthographicCamera getCamera(){

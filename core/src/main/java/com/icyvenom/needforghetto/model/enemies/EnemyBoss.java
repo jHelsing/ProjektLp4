@@ -41,13 +41,14 @@ public class EnemyBoss extends Enemy {
     public EnemyBoss(Vector2 position) {
         super(position, SPEED, new WeaponBoss(Enemy.getBulletDirection()), STRAIGHT);
         this.WIDTH = 8f;
+        this.HEIGHT = 2.5f;
         this.setBounds(WIDTH, 1f);
         this.setLives(LIVES);
     }
 
     @Override
     public void updatePosition(Vector2 playerPos) {
-        if (getPosition().y <= 9f) {
+        if (getPosition().y <= 8.5f) {
             if (playerPos.x < this.getPosition().x + WIDTH/2 - 0.5f) {
                 setDirection(LEFT);
             } else {
