@@ -248,15 +248,7 @@ public class World {
      * Initiates the spawn timer for enemies.
      */
     private void initSpawnTimer() {
-        // in the case that we need a more advanced system we could always make a custom timer/task
-        /*
-        spawnTimer.scheduleTask(new SimpleWave(this.enemies), 5);
-        spawnTimer.scheduleTask(new SimpleWave(this.enemies), 10);
-        spawnTimer.scheduleTask(new SimpleWave(this.enemies), 13);
-        spawnTimer.scheduleTask(new SimpleWave(this.enemies), 18);
-        spawnTimer.scheduleTask(new SimpleWave(this.enemies), 23);
-        */
-        spawnTimer.scheduleTask( new WaveSpawner(this.enemies), 1, 2, 2);
+        spawnTimer.scheduleTask( new WaveSpawner(this.enemies), 1, 3);
 
     }
 

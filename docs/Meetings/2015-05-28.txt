@@ -1,0 +1,29 @@
+﻿    Meeting Agenda
+
+      Date: 28/5-16
+
+      Facilitator: Marcus
+
+      Participants: Jonathan, Anton and Amar
+
+    1. Objectives (5 min). Resolve any issues preventing the team to continue.
+
+	Get presentation going
+
+    2. Reports (15 min) from previous meeting
+	
+	Spawner isn't really working as intended.
+	RAD - done
+	SDD - in progress
+
+    3. Discussion items (35 min) 
+	
+	Split the presentation into 4 parts, 1 part each.
+	The things the mentor told us in the meeting.
+	
+    4. Outcomes and assignments (5 min)
+	Marcus: spawner, presentation
+	Anton: presentation, sdd
+	Amar: presentation
+	Jonathan: presentation
+    5. Wrap up

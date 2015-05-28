@@ -1,17 +1,23 @@
 package com.icyvenom.needforghetto.model;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.JsonValue;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Created by Marcus on 2015-05-22.
  */
 public class EnemyFactory {
-
+    /*
     private ArrayList<EnemyTemplate> wave1;
     private ArrayList<EnemyTemplate> wave2;
+    */
+    private List waves;
+    private Array currentWave;
 
     public Enemy createEnemy(EnemyTemplate et){
         if (et.enemyType.equals("EnemyPistol")){
@@ -37,7 +43,7 @@ public class EnemyFactory {
         }
         return enemies;
     }
-
+    /*
     public void createNewWave(List<Enemy> enemies, int wave){
         System.err.println("Making " + wave);
         switch(wave){
@@ -46,4 +52,15 @@ public class EnemyFactory {
             case 2: enemies.addAll(makeAllEnemies(wave2)); break;
         }
     }
+    */
+
+    public Enemy printWaves(){
+        currentWave = (Array)waves.get(0);
+        System.err.println(waves.get(0));
+        return createEnemy((EnemyTemplate)currentWave.get(1));
+    }
+    public int getNumberOfWaves(){
+        return waves.size();
+    }
+
 }
