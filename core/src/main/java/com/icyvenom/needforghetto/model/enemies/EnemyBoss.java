@@ -42,7 +42,7 @@ public class EnemyBoss extends Enemy {
         super(position, SPEED, new WeaponBoss(Enemy.getBulletDirection()), STRAIGHT);
         this.WIDTH = 8f;
         this.HEIGHT = 2.5f;
-        this.setBounds(WIDTH, 1f);
+        this.setBounds(WIDTH, HEIGHT);
         this.setLives(LIVES);
     }
 
