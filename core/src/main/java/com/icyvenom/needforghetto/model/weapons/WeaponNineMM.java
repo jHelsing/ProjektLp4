@@ -1,6 +1,7 @@
-package com.icyvenom.needforghetto.model;
+package com.icyvenom.needforghetto.model.weapons;
 
 import com.badlogic.gdx.math.Vector2;
+import com.icyvenom.needforghetto.model.bullets.BulletNineMM;
 
 /**
  * A class for a 9mm pistol weapon. Can be used by both enemies and Players.
@@ -25,7 +26,7 @@ public class WeaponNineMM extends Weapon {
         super.setDamage(WEAPON_DAMAGE);
     }
 
-    public WeaponNineMM(BulletDirection bulletDirection) {
+    public WeaponNineMM(com.icyvenom.needforghetto.model.bullets.BulletDirection bulletDirection) {
         super(bulletDirection);
         super.setAttackRate(WEAPON_ATTACK_RATE);
         super.setDamage(WEAPON_DAMAGE);

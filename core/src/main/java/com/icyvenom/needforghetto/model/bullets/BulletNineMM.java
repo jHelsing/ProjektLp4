@@ -1,4 +1,4 @@
-package com.icyvenom.needforghetto.model;
+package com.icyvenom.needforghetto.model.bullets;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -19,7 +19,7 @@ public class BulletNineMM extends Bullet {
      *  and variables.
      * @param position This is the given position for the bullet.
      */
-    public BulletNineMM(Vector2 position, BulletDirection bulletDirection) {
+    public BulletNineMM(Vector2 position, com.icyvenom.needforghetto.model.bullets.BulletDirection bulletDirection) {
         super(position, VELOCITY_VECTOR.cpy(), bulletDirection);
     }
 }

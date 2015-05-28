@@ -1,4 +1,4 @@
-package com.icyvenom.needforghetto.model;
+package com.icyvenom.needforghetto.model.enemies;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -39,7 +39,7 @@ public abstract class Enemy {
     /**
      * The enemy's weapon.
      */
-    private Weapon weapon;
+    private com.icyvenom.needforghetto.model.weapons.Weapon weapon;
 
     /** The amount of lives that the enemy has.
      *
@@ -48,7 +48,7 @@ public abstract class Enemy {
     /**
      * The direction of the bullet of the enemy's weapon.
      */
-    private static BulletDirection bulletDirection = BulletDirection.DOWN;
+    private static com.icyvenom.needforghetto.model.bullets.BulletDirection bulletDirection = com.icyvenom.needforghetto.model.bullets.BulletDirection.DOWN;
 
     /**
      * The timer for the attack speed of the enemy. Sets how often
@@ -71,7 +71,7 @@ public abstract class Enemy {
      *  the parameter and variables.
      * @param position This is the given position for the enemy.
      */
-    public Enemy(Vector2 position, float speed, final Weapon weapon, Vector2 direction){
+    public Enemy(Vector2 position, float speed, final com.icyvenom.needforghetto.model.weapons.Weapon weapon, Vector2 direction){
         this.position = position.cpy();
         this.SPEED = speed;
         this.bounds.height = HEIGHT;
@@ -135,7 +135,7 @@ public abstract class Enemy {
      * Gets the direction of the bullet of the enemy's weapon
      * @return Returns the direction of the bullet of the enemy's weapon.
      */
-    public static BulletDirection getBulletDirection() {
+    public static com.icyvenom.needforghetto.model.bullets.BulletDirection getBulletDirection() {
         return bulletDirection;
     }
 
@@ -143,7 +143,7 @@ public abstract class Enemy {
      * Gets the weapon of the enemy.
      * @return  Returns the weapon of the enemy.
      */
-    public Weapon getWeapon() {
+    public com.icyvenom.needforghetto.model.weapons.Weapon getWeapon() {
         return weapon;
     }
 

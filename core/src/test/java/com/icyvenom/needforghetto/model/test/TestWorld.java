@@ -2,12 +2,12 @@ package com.icyvenom.needforghetto.model.test;
 
 
 import com.badlogic.gdx.math.Vector2;
-import com.icyvenom.needforghetto.model.Bullet;
-import com.icyvenom.needforghetto.model.BulletDirection;
-import com.icyvenom.needforghetto.model.EnemyPistol;
+import com.icyvenom.needforghetto.model.bullets.Bullet;
+import com.icyvenom.needforghetto.model.bullets.BulletDirection;
+import com.icyvenom.needforghetto.model.enemies.EnemyPistol;
 import com.icyvenom.needforghetto.model.Player;
 import com.icyvenom.needforghetto.model.World;
-import junit.framework.TestCase;
+
 import org.junit.Test;
 
 import java.util.Random;

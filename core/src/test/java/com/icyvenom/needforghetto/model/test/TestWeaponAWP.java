@@ -1,11 +1,9 @@
 package com.icyvenom.needforghetto.model.test;
 
 import com.badlogic.gdx.math.Vector2;
-import com.icyvenom.needforghetto.model.BulletDirection;
-import com.icyvenom.needforghetto.model.Weapon;
-import com.icyvenom.needforghetto.model.WeaponAWP;
-
-import junit.framework.TestCase;
+import com.icyvenom.needforghetto.model.bullets.BulletDirection;
+import com.icyvenom.needforghetto.model.weapons.Weapon;
+import com.icyvenom.needforghetto.model.weapons.WeaponAWP;
 
 import org.junit.Test;
 

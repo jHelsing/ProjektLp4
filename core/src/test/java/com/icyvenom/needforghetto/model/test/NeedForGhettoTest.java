@@ -1,8 +1,8 @@
 package com.icyvenom.needforghetto.model.test;
 
 import com.badlogic.gdx.Game;
-import com.icyvenom.needforghetto.model.EnemyPistol;
-import com.icyvenom.needforghetto.model.WeaponAWP;
+import com.icyvenom.needforghetto.model.enemies.EnemyPistol;
+import com.icyvenom.needforghetto.model.weapons.WeaponAWP;
 import com.icyvenom.needforghetto.model.World;
 
 /**

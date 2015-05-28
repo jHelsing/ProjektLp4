@@ -1,11 +1,11 @@
-package com.icyvenom.needforghetto.model;
+package com.icyvenom.needforghetto.model.enemies;
 
 import com.badlogic.gdx.math.Vector2;
 
 /**
  * Created by Marcus on 2015-05-18.
  */
-public class EnemyStalker extends Enemy{
+public class EnemyStalker extends Enemy {
 
     /**
      * The amount of lives the enemy will start with.
@@ -35,7 +35,7 @@ public class EnemyStalker extends Enemy{
      * @param position  This is the given position for the enemy.
      */
     public EnemyStalker(Vector2 position) {
-        super(position, SPEED, new WeaponNothing(), STRAIGHT);
+        super(position, SPEED, new com.icyvenom.needforghetto.model.weapons.WeaponNothing(), STRAIGHT);
 
         this.setLives(LIVES);
     }

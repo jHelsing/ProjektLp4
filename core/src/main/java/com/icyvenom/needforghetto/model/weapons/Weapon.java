@@ -1,6 +1,8 @@
-package com.icyvenom.needforghetto.model;
+package com.icyvenom.needforghetto.model.weapons;
 
 import com.badlogic.gdx.math.Vector2;
+import com.icyvenom.needforghetto.model.bullets.BulletDirection;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,15 +31,15 @@ public abstract class Weapon {
     /**
      * The direction of the weapon's bullet.
      */
-    private BulletDirection bulletDirection;
+    private com.icyvenom.needforghetto.model.bullets.BulletDirection bulletDirection;
 
     /**
      * A list of all the bullets that are in the game that belongs to this weapon.
      */
-    private List<Bullet> bullets = new ArrayList<Bullet>();
+    private List<com.icyvenom.needforghetto.model.bullets.Bullet> bullets = new ArrayList<com.icyvenom.needforghetto.model.bullets.Bullet>();
 
     public Weapon(){}
-    public Weapon(BulletDirection bulletDirection) {
+    public Weapon(com.icyvenom.needforghetto.model.bullets.BulletDirection bulletDirection) {
         this.bulletDirection=bulletDirection;
     }
 
@@ -45,7 +47,7 @@ public abstract class Weapon {
      * Getter for the bullet's that belongs to this weapon
      * @return A list of bullets.
      */
-    public List<Bullet> getBullets() {
+    public List<com.icyvenom.needforghetto.model.bullets.Bullet> getBullets() {
         return bullets;
     }
 
@@ -85,9 +87,9 @@ public abstract class Weapon {
      * This method removes bullets that are out of bounds of the screen.
      */
     public void removeOutOfBoundsBullets(){
-        List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+        List<com.icyvenom.needforghetto.model.bullets.Bullet> bulletsToRemove = new ArrayList<com.icyvenom.needforghetto.model.bullets.Bullet>();
         if(!bullets.isEmpty()){
-            for(Bullet b: bullets){
+            for(com.icyvenom.needforghetto.model.bullets.Bullet b: bullets){
                 if(b.getPosition().x < 0f-b.getBounds().getWidth() || 10f < b.getPosition().x){
                     bulletsToRemove.add(b);
                 }
@@ -117,7 +119,7 @@ public abstract class Weapon {
      *
      * @return Returns the direction of the weapon's bullet.
      */
-    public BulletDirection getBulletDirection() {
+    public com.icyvenom.needforghetto.model.bullets.BulletDirection getBulletDirection() {
         return bulletDirection;
     }
 

@@ -1,6 +1,7 @@
-package com.icyvenom.needforghetto.model;
+package com.icyvenom.needforghetto.model.weapons;
 
 import com.badlogic.gdx.math.Vector2;
+import com.icyvenom.needforghetto.model.bullets.BulletNatoFive;
 
 /**
  * A class for a M4A1 assault rifle. Can be used by both enemies and Players.
@@ -33,7 +34,7 @@ public class WeaponMFourAOne extends Weapon {
     /**
      * Constructor for a new M4A1
      */
-    public WeaponMFourAOne(BulletDirection bulletDirection) {
+    public WeaponMFourAOne(com.icyvenom.needforghetto.model.bullets.BulletDirection bulletDirection) {
         super(bulletDirection);
         super.setAttackRate(WEAPON_ATTACK_RATE);
         super.setDamage(WEAPON_DAMAGE);

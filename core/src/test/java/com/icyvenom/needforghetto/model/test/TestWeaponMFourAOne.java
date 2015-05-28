@@ -1,10 +1,8 @@
 package com.icyvenom.needforghetto.model.test;
 
-import com.icyvenom.needforghetto.model.BulletDirection;
-import com.icyvenom.needforghetto.model.Weapon;
-import com.icyvenom.needforghetto.model.WeaponMFourAOne;
-
-import junit.framework.TestCase;
+import com.icyvenom.needforghetto.model.bullets.BulletDirection;
+import com.icyvenom.needforghetto.model.weapons.Weapon;
+import com.icyvenom.needforghetto.model.weapons.WeaponMFourAOne;
 
 import org.junit.Test;
 

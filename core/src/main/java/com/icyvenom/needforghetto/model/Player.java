@@ -4,9 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.icyvenom.needforghetto.gamestate.GameState;
-
-import java.util.ArrayList;
-import java.util.Observer;
+import com.icyvenom.needforghetto.model.weapons.WeaponNineMM;
 
 /**
  * The Player class is the model for what the user does in game. Contains
@@ -77,7 +75,7 @@ public class Player {
     /**
      * The Players weapon.
      */
-    private Weapon weapon = new WeaponNineMM(BulletDirection.UP);
+    private com.icyvenom.needforghetto.model.weapons.Weapon weapon = new WeaponNineMM(com.icyvenom.needforghetto.model.bullets.BulletDirection.UP);
     /**
      * The timer for the attack speed of the player. Sets how often
      * the Player should fire bullets.
@@ -179,7 +177,7 @@ public class Player {
      * The getter for the Player's weapon.
      * @return The Player's weapon.
      */
-    public Weapon getWeapon() {
+    public com.icyvenom.needforghetto.model.weapons.Weapon getWeapon() {
         return weapon;
     }
 

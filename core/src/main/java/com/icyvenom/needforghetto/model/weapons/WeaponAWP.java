@@ -1,6 +1,7 @@
-package com.icyvenom.needforghetto.model;
+package com.icyvenom.needforghetto.model.weapons;
 
 import com.badlogic.gdx.math.Vector2;
+import com.icyvenom.needforghetto.model.bullets.BulletNatoSeven;
 
 /**
  * A class for a AWP sniper rifle with high damage and high attackrate. Can be used by
@@ -25,7 +26,7 @@ public class WeaponAWP extends Weapon {
         super.setDamage(WEAPON_DAMAGE);
     }
 
-    public WeaponAWP(BulletDirection bulletDirection) {
+    public WeaponAWP(com.icyvenom.needforghetto.model.bullets.BulletDirection bulletDirection) {
         super(bulletDirection);
         super.setAttackRate(WEAPON_ATTACK_RATE);
         super.setDamage(WEAPON_DAMAGE);

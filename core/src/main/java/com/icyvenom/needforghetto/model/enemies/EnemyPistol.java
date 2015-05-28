@@ -1,4 +1,4 @@
-package com.icyvenom.needforghetto.model;
+package com.icyvenom.needforghetto.model.enemies;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -30,7 +30,7 @@ public class EnemyPistol extends Enemy {
      * @param position This is the given position for the enemy.
      */
     public EnemyPistol(Vector2 position){
-        super(position, SPEED, new WeaponNineMM(Enemy.getBulletDirection()), direction);
+        super(position, SPEED, new com.icyvenom.needforghetto.model.weapons.WeaponNineMM(Enemy.getBulletDirection()), direction);
 
         this.setLives(LIVES);
     }

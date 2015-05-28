@@ -1,4 +1,4 @@
-package com.icyvenom.needforghetto.model;
+package com.icyvenom.needforghetto.model.bullets;
 
 /**
  * This Enum determine the direction of the object.

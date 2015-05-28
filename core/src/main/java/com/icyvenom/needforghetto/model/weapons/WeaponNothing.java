@@ -1,4 +1,4 @@
-package com.icyvenom.needforghetto.model;
+package com.icyvenom.needforghetto.model.weapons;
 
 /**
  * Created by Marcus on 2015-05-19.

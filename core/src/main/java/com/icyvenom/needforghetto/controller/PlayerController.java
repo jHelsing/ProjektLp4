@@ -4,9 +4,8 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.icyvenom.needforghetto.model.Bullet;
-import com.icyvenom.needforghetto.model.Enemy;
-import com.icyvenom.needforghetto.model.EnemyStalker;
+import com.icyvenom.needforghetto.model.bullets.Bullet;
+import com.icyvenom.needforghetto.model.enemies.Enemy;
 import com.icyvenom.needforghetto.model.Player;
 import com.icyvenom.needforghetto.model.World;
 

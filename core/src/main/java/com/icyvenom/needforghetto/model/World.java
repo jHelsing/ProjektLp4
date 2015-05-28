@@ -1,6 +1,7 @@
 package com.icyvenom.needforghetto.model;
 
 import com.badlogic.gdx.utils.Timer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,12 +17,12 @@ public class World {
      * This is a list containing all the Enemies that matter to the game. Enemies that are not on
      * the screen are not in this list.
      */
-    private List<Enemy> enemies = new ArrayList<Enemy>();
+    private List<com.icyvenom.needforghetto.model.enemies.Enemy> enemies = new ArrayList<com.icyvenom.needforghetto.model.enemies.Enemy>();
 
     /**
      * This is a list containing the bullets of the enemies that have died.
      */
-    private List<Bullet> bullets = new ArrayList<Bullet>();
+    private List<com.icyvenom.needforghetto.model.bullets.Bullet> bullets = new ArrayList<com.icyvenom.needforghetto.model.bullets.Bullet>();
 
     /**
      * The Player object that is in the game.
@@ -71,7 +72,7 @@ public class World {
             float pMaxY = pMinY + player.getBounds().getHeight();
             //Checking collisions between all enemies and the player
             for(int i = 0; i<enemies.size(); i++) {
-                Enemy e = enemies.get(i);
+                com.icyvenom.needforghetto.model.enemies.Enemy e = enemies.get(i);
                 //Creates 4 float's for each max and min value for the enemy position.
                 float eMinX = e.getBounds().getX();
                 float eMaxX = eMinX + e.getBounds().getWidth();
@@ -118,10 +119,10 @@ public class World {
             if(!player.getWeapon().getBullets().isEmpty()) {
                 //So we do not interfere with the enemy loop we create this List to keep track of
                 //the enemies we need to remove
-                List<Enemy> enemiesToRemove = new ArrayList<Enemy>();
+                List<com.icyvenom.needforghetto.model.enemies.Enemy> enemiesToRemove = new ArrayList<com.icyvenom.needforghetto.model.enemies.Enemy>();
 
                 for (int i=0; i<enemies.size(); i++) {
-                    Enemy e = enemies.get(i);
+                    com.icyvenom.needforghetto.model.enemies.Enemy e = enemies.get(i);
                     //Creates 4 float's for each max and min value for the enemy position.
                     float eMinX = e.getBounds().getX();
                     float eMaxX = eMinX + e.getBounds().getWidth();
@@ -129,10 +130,10 @@ public class World {
                     float eMaxY = eMinY + e.getBounds().getHeight();
                     //Creates a list of bullets we need to remove so that we do not interfere with
                     //the loop
-                    List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+                    List<com.icyvenom.needforghetto.model.bullets.Bullet> bulletsToRemove = new ArrayList<com.icyvenom.needforghetto.model.bullets.Bullet>();
 
                     for(int j=0; j<player.getWeapon().getBullets().size(); j++) {
-                        Bullet b = player.getWeapon().getBullets().get(j);
+                        com.icyvenom.needforghetto.model.bullets.Bullet b = player.getWeapon().getBullets().get(j);
                         //Creates 4 float's for each max and min value for the Bullet position.
                         float bMinX = b.getBounds().getX();
                         float bMaxX = bMinX + b.getBounds().getWidth();
@@ -167,18 +168,18 @@ public class World {
 
                     player.getWeapon().getBullets().removeAll(bulletsToRemove);
                 }
-                for (Enemy e : enemiesToRemove){
+                for (com.icyvenom.needforghetto.model.enemies.Enemy e : enemiesToRemove){
                     killEnemy(e);
                 }
 
             }
 
             for(int i=0; i<enemies.size(); i++) {
-                Enemy e = enemies.get(i);
+                com.icyvenom.needforghetto.model.enemies.Enemy e = enemies.get(i);
                 //Creates a list of bullets that will be removed
-                List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+                List<com.icyvenom.needforghetto.model.bullets.Bullet> bulletsToRemove = new ArrayList<com.icyvenom.needforghetto.model.bullets.Bullet>();
                 for(int j=0; j<e.getWeapon().getBullets().size(); j++) {
-                    Bullet b = e.getWeapon().getBullets().get(j);
+                    com.icyvenom.needforghetto.model.bullets.Bullet b = e.getWeapon().getBullets().get(j);
                     //Creates 4 float's for each max and min value for the Bullet position.
                     float bMinX = b.getBounds().getX();
                     float bMaxX = bMinX + b.getBounds().getWidth();
@@ -211,8 +212,8 @@ public class World {
                 e.getWeapon().getBullets().removeAll(bulletsToRemove);
             }
             if (!bullets.isEmpty()){
-                List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
-                for (Bullet b : bullets) {
+                List<com.icyvenom.needforghetto.model.bullets.Bullet> bulletsToRemove = new ArrayList<com.icyvenom.needforghetto.model.bullets.Bullet>();
+                for (com.icyvenom.needforghetto.model.bullets.Bullet b : bullets) {
                     float bMinX = b.getBounds().getX();
                     float bMaxX = bMinX + b.getBounds().getWidth();
                     float bMinY = b.getBounds().getY();
@@ -275,7 +276,7 @@ public class World {
      * Getter for the list of enemies that are relevant to the game.
      * @return A list of enemies.
      */
-    public List<Enemy> getEnemies(){
+    public List<com.icyvenom.needforghetto.model.enemies.Enemy> getEnemies(){
         return enemies;
     }
 
@@ -305,7 +306,7 @@ public class World {
      *  Getter for the list of bullet
      * @return The list of bullets.
      */
-    public List<Bullet> getBullets() { return bullets; }
+    public List<com.icyvenom.needforghetto.model.bullets.Bullet> getBullets() { return bullets; }
 
     /**
      * Checks the list of Enemies for any enemies that have out of the bounds of the game
@@ -313,9 +314,9 @@ public class World {
      */
 
     public void removeOutOfBoundsEnemies(){
-        List<Enemy> enemiesToRemove = new ArrayList<Enemy>();
+        List<com.icyvenom.needforghetto.model.enemies.Enemy> enemiesToRemove = new ArrayList<com.icyvenom.needforghetto.model.enemies.Enemy>();
         if (!enemies.isEmpty()) {
-            for (Enemy e : enemies) {
+            for (com.icyvenom.needforghetto.model.enemies.Enemy e : enemies) {
                 if ((e.getBounds().getY() + e.getBounds().getHeight()) < 0f || e.getBounds().getX() < 0.5f
                         || e.getBounds().getX() + e.getBounds().getHeight() > 10.5f) {
                     enemiesToRemove.add(e);
@@ -329,7 +330,7 @@ public class World {
      * Removes a killed enemy from the game and gives the bullets it owns to the world.
      * @param e enemy to be removed
      */
-    public void killEnemy(Enemy e) {
+    public void killEnemy(com.icyvenom.needforghetto.model.enemies.Enemy e) {
         bullets.addAll(e.getWeapon().getBullets());
         if ( e.kill() ) {
             enemies.remove(e);
@@ -341,9 +342,9 @@ public class World {
      * and removes them if they are not.
      */
     public void removeOutOfBoundsBullets(){
-        List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+        List<com.icyvenom.needforghetto.model.bullets.Bullet> bulletsToRemove = new ArrayList<com.icyvenom.needforghetto.model.bullets.Bullet>();
         if(!bullets.isEmpty()) {
-            for (Bullet b : getBullets()) {
+            for (com.icyvenom.needforghetto.model.bullets.Bullet b : getBullets()) {
                 if ( (b.getBounds().getY() + b.getBounds().height < 0f) || b.getBounds().getX() < -0.5f
                         || b.getBounds().getX() + b.getBounds().getWidth() > 10.5f){
                     bulletsToRemove.add(b);

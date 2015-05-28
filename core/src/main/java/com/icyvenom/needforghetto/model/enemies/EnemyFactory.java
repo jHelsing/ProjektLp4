@@ -1,14 +1,16 @@
-package com.icyvenom.needforghetto.model;
+package com.icyvenom.needforghetto.model.enemies;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.JsonValue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 /**
+ * A factory used by the wavespawner class to create enemies.
+ * It reads a provided json file and spawns the different waves when asked.
+ *
  * Created by Marcus on 2015-05-22.
  */
 public class EnemyFactory {
@@ -32,7 +34,7 @@ public class EnemyFactory {
     }
 
     public ArrayList makeAllEnemies(Array templates){
-        ArrayList<Enemy> enemiesToMake = new ArrayList<Enemy>();
+        ArrayList<com.icyvenom.needforghetto.model.enemies.Enemy> enemiesToMake = new ArrayList<com.icyvenom.needforghetto.model.enemies.Enemy>();
         if (templates.size != 0) {
             for (int i = 0; i < templates.size; i++) {
                 enemiesToMake.add(createEnemy((EnemyTemplate)templates.get(i)));
@@ -40,7 +42,7 @@ public class EnemyFactory {
         }
         return enemiesToMake;
     }
-    public void createNewWave(List<Enemy> enemies, int wave){
+    public void createNewWave(List<com.icyvenom.needforghetto.model.enemies.Enemy> enemies, int wave){
         System.err.println("Making " + wave);
         currentWave = (Array)waves.get(wave);
         enemies.addAll(makeAllEnemies(currentWave));
