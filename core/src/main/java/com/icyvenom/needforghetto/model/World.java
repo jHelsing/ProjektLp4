@@ -220,7 +220,7 @@ public class World {
             bullets.removeAll(bulletsToRemove);
         }
     }
-    
+
     private void checkCollisionsPlayerVsBullets() {
         //Creates 4 float's at each max and min value for the player. These are used to
         // calculate overlaping between player and enemy or bullet.
