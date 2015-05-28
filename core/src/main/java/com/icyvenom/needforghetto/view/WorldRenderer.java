@@ -35,6 +35,7 @@ public class WorldRenderer {
     private Texture enemyPistolTexture;
     private Texture enemyAWPTexture;
     private Texture enemyStalkerTexture;
+    private Texture enemyBossTexture;
     private Texture bulletTexture;
 
     private SpriteBatch spriteBatch;
@@ -99,7 +100,7 @@ public class WorldRenderer {
                 spriteBatch.draw(enemyStalkerTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
                         enemy.WIDTH * ppuX, enemy.HEIGHT * ppuY);
             }else if (enemy instanceof EnemyBoss){
-                spriteBatch.draw(enemyStalkerTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
+                spriteBatch.draw(enemyBossTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
                         enemy.WIDTH * ppuX, enemy.HEIGHT * ppuY);
             }
         }
@@ -159,6 +160,7 @@ public class WorldRenderer {
         enemyStalkerTexture = new Texture(Gdx.files.internal("images/enemyStalker.png"));
         bulletTexture = new Texture(Gdx.files.internal("images/bullet.png"));
         fadedPlayerTexture = new Texture(Gdx.files.internal("images/carFaded.png"));
+        enemyBossTexture = new Texture(Gdx.files.internal("images/kfc.jpg"));
     }
 
     public OrthographicCamera getCamera(){
