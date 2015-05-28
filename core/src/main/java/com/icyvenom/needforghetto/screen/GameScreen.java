@@ -128,6 +128,7 @@ public class GameScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         worldRenderer.setSize(width, height);
+        statusBarRenderer.setSize(width, height);
     }
 
     @Override

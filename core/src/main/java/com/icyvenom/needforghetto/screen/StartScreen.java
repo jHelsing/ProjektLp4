@@ -31,6 +31,10 @@ import com.icyvenom.needforghetto.highscore.Score;
  */
 public class StartScreen implements Screen{
 
+    private float screenWidth;
+    private float screenHeight;
+
+
     /**
      * Sets the stage.
      */
@@ -70,9 +74,9 @@ public class StartScreen implements Screen{
     /**
      * Creates 3 new title label that are used to show the game title.
      */
-    private Label title1;
-    private Label title2;
-    private Label title3;
+    private Label title1 = new Label("Need", skin);
+    private Label title2 = new Label("For", skin);
+    private Label title3 = new Label("Ghetto", skin);
 
     FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DroidSerif-Regular.ttf"));
     FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -90,7 +94,6 @@ public class StartScreen implements Screen{
     @Override
     public void show() {
 
-        loadFonts();
 
         buttonPlay.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
@@ -130,6 +133,7 @@ public class StartScreen implements Screen{
             }
         });
 
+
         table.add(title1).padBottom(-10).row();
         table.add(title2).padBottom(-10).row();
         table.add(title3).padBottom(50).row();
@@ -160,7 +164,9 @@ public class StartScreen implements Screen{
 
     @Override
     public void resize(int width, int height) {
-
+        this.screenWidth = width;
+        this.screenHeight = height;
+        loadFonts();
     }
 
     @Override
@@ -188,25 +194,29 @@ public class StartScreen implements Screen{
     private void loadFonts() {
 
         // title font size is 100
-        parameter.size = 100;
+        parameter.size = (int) (screenHeight * 0.09f);
         BitmapFont titlefont = generator.generateFont(parameter);
 
         //button font size is 50
-        parameter.size = 50;
+        parameter.size = (int) (screenHeight * 0.04f);
         BitmapFont buttonfont = generator.generateFont(parameter);
 
         Label.LabelStyle titlestyle = new Label.LabelStyle(titlefont, Color.WHITE);
         Label.LabelStyle buttontyle = new Label.LabelStyle(buttonfont, Color.WHITE);
 
-        title1 = new Label("Need", titlestyle);
-        title2 = new Label("For", titlestyle);
-        title3 = new Label("Ghetto", titlestyle);
+        title1.setStyle(titlestyle);
+        title2.setStyle(titlestyle);
+        title3.setStyle(titlestyle);
 
         buttonPlay.getLabel().setStyle(buttontyle);
         buttonHighscores.getLabel().setStyle(buttontyle);
         buttonCheat.getLabel().setStyle(buttontyle);
         buttonExit.getLabel().setStyle(buttontyle);
 
+        table.getCell(buttonPlay).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f));
+        table.getCell(buttonHighscores).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f));
+        table.getCell(buttonCheat).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f));
+        table.getCell(buttonExit).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f));
     }
 
 }

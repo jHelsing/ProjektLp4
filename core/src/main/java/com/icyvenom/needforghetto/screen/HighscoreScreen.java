@@ -23,6 +23,9 @@ import java.util.ArrayList;
  */
 public class HighscoreScreen implements Screen {
 
+    private float screenWidth;
+    private float screenHeight;
+
     private Stage stage = new Stage();
     private Table table = new Table();
     private Skin skin = new Skin(Gdx.files.internal("skins/uiskin.json"),
@@ -60,8 +63,6 @@ public class HighscoreScreen implements Screen {
             rank++;
         }
 
-        setFontStyles();
-
         for(Label label : highscoreLabels) {
             table.add(label).pad(5).row();
         }
@@ -86,7 +87,9 @@ public class HighscoreScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        this.screenWidth = width;
+        this.screenHeight = height;
+        setFontStyles();
     }
 
     @Override
@@ -110,11 +113,11 @@ public class HighscoreScreen implements Screen {
     }
 
     private void setFontStyles() {
-        parameter.size = 40;
+        parameter.size = (int)(screenHeight*0.03f);
         BitmapFont titlefont = generator.generateFont(parameter);
         title.setStyle(new Label.LabelStyle(titlefont, Color.WHITE));
 
-        parameter.size = 30;
+        parameter.size = (int)(screenHeight*0.02f);
         BitmapFont scorefont = generator.generateFont(parameter);
         Label.LabelStyle scorestyle = new Label.LabelStyle(scorefont, Color.WHITE);
 

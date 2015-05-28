@@ -29,6 +29,9 @@ public class StatusBarRenderer {
     private Label lifeStatus;
     private Label scoreStatus;
 
+    private float screenWidth;
+    private float screenHeight;
+
     FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DroidSerif-Regular.ttf"));
     FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
@@ -46,7 +49,6 @@ public class StatusBarRenderer {
         this.scoreStatus = new Label("Score: " + world.getPlayer().getScore(), skin);
 
         init();
-        setFontStyles();
     }
 
     public void render() {
@@ -86,16 +88,23 @@ public class StatusBarRenderer {
     }
 
     private void setFontStyles() {
-        parameter.size = 30;
+        parameter.size = (int)(screenHeight*0.02f);
         BitmapFont labelfont = generator.generateFont(parameter);
         Label.LabelStyle labelStyle = new Label.LabelStyle(labelfont, Color.WHITE);
         lifeStatus.setStyle(labelStyle);
         scoreStatus.setStyle(labelStyle);
 
         buttonPause.getLabel().setStyle(labelStyle);
+        table.getCell(buttonPause).size((int)(screenWidth*0.15f), (int)(screenHeight*0.06f));
     }
 
     public Stage getStage() {
         return stage;
+    }
+
+    public void setSize(float width, float height) {
+        this.screenWidth = width;
+        this.screenHeight = height;
+        setFontStyles();
     }
 }
