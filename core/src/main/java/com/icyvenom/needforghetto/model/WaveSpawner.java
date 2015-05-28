@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Timer;
-import com.icyvenom.needforghetto.model.enemies.EnemyFactory;
 import com.icyvenom.needforghetto.model.enemies.EnemyTemplate;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public class WaveSpawner extends Timer.Task {
 
     private List<com.icyvenom.needforghetto.model.enemies.Enemy> enemies;
     private int currentWave = 0;
-    private com.icyvenom.needforghetto.model.enemies.EnemyFactory factory;
+    private EnemyFactory factory;
 
     public WaveSpawner(List<com.icyvenom.needforghetto.model.enemies.Enemy> enemies) {
         this.enemies = enemies;

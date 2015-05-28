@@ -1,7 +1,13 @@
-package com.icyvenom.needforghetto.model.enemies;
+package com.icyvenom.needforghetto.model;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.icyvenom.needforghetto.model.enemies.Enemy;
+import com.icyvenom.needforghetto.model.enemies.EnemyAwp;
+import com.icyvenom.needforghetto.model.enemies.EnemyBoss;
+import com.icyvenom.needforghetto.model.enemies.EnemyPistol;
+import com.icyvenom.needforghetto.model.enemies.EnemyStalker;
+import com.icyvenom.needforghetto.model.enemies.EnemyTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +31,11 @@ public class EnemyFactory {
         }else if(et.enemyType.equals("EnemyAwp")){
             EnemyAwp e = new EnemyAwp(new Vector2(et.startPosX, et.startPosY));
             return e;
-        }else if(et.enemyType.equals("EnemyStalker")){
+        }else if(et.enemyType.equals("EnemyStalker")) {
             EnemyStalker e = new EnemyStalker(new Vector2(et.startPosX, et.startPosY));
+            return e;
+        }else if(et.enemyType.equals("EnemyBoss")){
+            EnemyBoss e = new EnemyBoss(new Vector2(et.startPosX, et.startPosY));
             return e;
         }else {
             return null;

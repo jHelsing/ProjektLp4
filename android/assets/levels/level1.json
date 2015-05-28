@@ -3,7 +3,7 @@
         [
             {
                 "class": "enemyTemplate",
-                "enemyType": "EnemyPistol",
+                "enemyType": "EnemyBoss",
                 "startPosX": 2,
                 "startPosY": 10
             },

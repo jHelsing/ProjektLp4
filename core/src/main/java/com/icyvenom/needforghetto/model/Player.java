@@ -4,6 +4,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.icyvenom.needforghetto.gamestate.GameState;
+import com.icyvenom.needforghetto.model.bullets.BulletDirection;
+import com.icyvenom.needforghetto.model.weapons.Weapon;
+import com.icyvenom.needforghetto.model.weapons.WeaponMFourAOne;
 import com.icyvenom.needforghetto.model.weapons.WeaponNineMM;
 
 /**
@@ -75,7 +78,7 @@ public class Player {
     /**
      * The Players weapon.
      */
-    private com.icyvenom.needforghetto.model.weapons.Weapon weapon = new WeaponNineMM(com.icyvenom.needforghetto.model.bullets.BulletDirection.UP);
+    private Weapon weapon = new WeaponMFourAOne(BulletDirection.UP);
     /**
      * The timer for the attack speed of the player. Sets how often
      * the Player should fire bullets.

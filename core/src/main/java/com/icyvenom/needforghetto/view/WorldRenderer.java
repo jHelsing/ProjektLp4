@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.icyvenom.needforghetto.model.bullets.Bullet;
 import com.icyvenom.needforghetto.model.enemies.Enemy;
 import com.icyvenom.needforghetto.model.enemies.EnemyAwp;
+import com.icyvenom.needforghetto.model.enemies.EnemyBoss;
 import com.icyvenom.needforghetto.model.enemies.EnemyPistol;
 import com.icyvenom.needforghetto.model.enemies.EnemyStalker;
 import com.icyvenom.needforghetto.model.Player;
@@ -95,6 +96,9 @@ public class WorldRenderer {
                 spriteBatch.draw(enemyAWPTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
                         enemy.WIDTH * ppuX, enemy.HEIGHT * ppuY);
             }else if (enemy instanceof EnemyStalker){
+                spriteBatch.draw(enemyStalkerTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
+                        enemy.WIDTH * ppuX, enemy.HEIGHT * ppuY);
+            }else if (enemy instanceof EnemyBoss){
                 spriteBatch.draw(enemyStalkerTexture, enemy.getPosition().x * ppuX, enemy.getPosition().y * ppuY,
                         enemy.WIDTH * ppuX, enemy.HEIGHT * ppuY);
             }

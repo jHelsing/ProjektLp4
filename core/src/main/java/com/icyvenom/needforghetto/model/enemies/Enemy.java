@@ -20,12 +20,12 @@ public abstract class Enemy {
     /**
      * The width of the enemy.
      */
-    public static final float WIDTH = 0.9f;
+    public float WIDTH = 0.9f;
 
     /**
      * The height of the enemy.
      */
-    public static final float HEIGHT = 1f;
+    public float HEIGHT = 1f;
 
     /**
      * The position of the enemy.
@@ -34,7 +34,7 @@ public abstract class Enemy {
     /**
      * The hitbox of the enemy.
      */
-    private Rectangle bounds = new Rectangle();
+    private Rectangle bounds;
 
     /**
      * The enemy's weapon.
@@ -74,8 +74,8 @@ public abstract class Enemy {
     public Enemy(Vector2 position, float speed, final com.icyvenom.needforghetto.model.weapons.Weapon weapon, Vector2 direction){
         this.position = position.cpy();
         this.SPEED = speed;
-        this.bounds.height = HEIGHT;
-        this.bounds.width = WIDTH;
+        this.bounds = new Rectangle();
+        setBounds(WIDTH, HEIGHT);
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
         this.weapon= weapon;
@@ -164,6 +164,11 @@ public abstract class Enemy {
         this.weapon.setPosition(this.position.cpy().add(WIDTH/3, HEIGHT/4));
     }
 
+    public void setBounds(float xVal, float yVal){
+        this.bounds.width = xVal;
+        this.bounds.height = yVal;
+    }
+
     /**
      * Sets the direction of the enemy.
      * @param dir This will be the new direction of the enemy
@@ -179,6 +184,7 @@ public abstract class Enemy {
     public void setLives(int lives){
         this.lives = lives;
     }
+
     /**
     * Updates the position of the enemy depending on its direction and speed.
      * @param vec Needed for being able to give Stalker a new direction.
