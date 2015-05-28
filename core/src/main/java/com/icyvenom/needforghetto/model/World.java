@@ -1,7 +1,8 @@
 package com.icyvenom.needforghetto.model;
 
 import com.badlogic.gdx.utils.Timer;
-
+import com.icyvenom.needforghetto.model.bullets.Bullet;
+import com.icyvenom.needforghetto.model.enemies.Enemy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * The model of the world. This is the main Model-object. It has access to all the other Model
  * objects.
  * @author Marcus. Revisited by Jonathan 2015-05-13. Revisited by Amar by 2015-05-14.
- * @version 2.0
+ * @version 2.5
  */
 public class World {
 
@@ -17,12 +18,12 @@ public class World {
      * This is a list containing all the Enemies that matter to the game. Enemies that are not on
      * the screen are not in this list.
      */
-    private List<com.icyvenom.needforghetto.model.enemies.Enemy> enemies = new ArrayList<com.icyvenom.needforghetto.model.enemies.Enemy>();
+    private List<Enemy> enemies = new ArrayList<Enemy>();
 
     /**
      * This is a list containing the bullets of the enemies that have died.
      */
-    private List<com.icyvenom.needforghetto.model.bullets.Bullet> bullets = new ArrayList<com.icyvenom.needforghetto.model.bullets.Bullet>();
+    private List<Bullet> bullets = new ArrayList<Bullet>();
 
     /**
      * The Player object that is in the game.
@@ -60,190 +61,211 @@ public class World {
      * Checks for collisions between player and enemies and bullets.
      */
     public void checkCollision(){
-        //Player is immortal when faded
-        if(!getPlayer().isGod()){
         //Starts by checking if there are enemies on screen.
         if(enemies != null) {
-            //Creates 4 float's at each max and min value for the player. These are used to
-            // calculate overlaping between player and enemy or bullet.
-            float pMinX = player.getBounds().getX();
-            float pMaxX = pMinX + player.getBounds().getWidth();
-            float pMinY = player.getBounds().getY();
-            float pMaxY = pMinY + player.getBounds().getHeight();
-            //Checking collisions between all enemies and the player
-            for(int i = 0; i<enemies.size(); i++) {
-                com.icyvenom.needforghetto.model.enemies.Enemy e = enemies.get(i);
+            checkCollisionPlayerVsEnemy();
+            checkCollisionBulletsVsEnemies();
+            checkCollisionsPlayerVsBullets();
+            checkCollisionPlayerVsWorldBullets();
+        }
+    }
+
+    private void checkCollisionPlayerVsEnemy() {
+        //Creates 4 float's at each max and min value for the player. These are used to
+        // calculate overlaping between player and enemy or bullet.
+        float pMinX = player.getBounds().getX();
+        float pMaxX = pMinX + player.getBounds().getWidth();
+        float pMinY = player.getBounds().getY();
+        float pMaxY = pMinY + player.getBounds().getHeight();
+        //Checking collisions between all enemies and the player
+        for(int i = 0; i<enemies.size(); i++) {
+            Enemy e = enemies.get(i);
+            //Creates 4 float's for each max and min value for the enemy position.
+            float eMinX = e.getBounds().getX();
+            float eMaxX = eMinX + e.getBounds().getWidth();
+            float eMinY = e.getBounds().getY();
+            float eMaxY = eMinY + e.getBounds().getHeight();
+            //Checks if the enemy is comming from above the player
+            if(eMinY <= pMaxY && pMinY <= eMinY) {
+                //Checks if the enemy is comming from the left (from above)
+                if(pMinX <= eMaxX && eMaxX <= pMaxX) {
+                    //Collision between Player and Enemy has happened and we make sure to kill
+                    //the player and remove the enemy from the game.
+                    killEnemy(e);
+                    player.kill();
+                    restartTimePointsTimer();
+                    // Checks if the enemy is coming from the right (from above)
+                } else if(eMinX <= pMaxX && pMinX <= eMinX) {
+                    //Collision between Player and Enemy has happened and we make sure to kill
+                    //the player and remove the enemy from the game.
+                    killEnemy(e);
+                    player.kill();
+                    restartTimePointsTimer();
+                }
+                //Checks if the enemy is coming from below the player
+            } else if(pMinY <= eMaxY && eMaxY <= pMaxY) {
+                //Checks if the enemy is coming from the left (from below)
+                if(pMinX <= eMaxX && eMaxX <= pMaxX) {
+                    //Collision between Player and Enemy has happened and we make sure to kill
+                    //the player and remove the enemy from the game.
+                    killEnemy(e);
+                    player.kill();
+                    restartTimePointsTimer();
+                    // Checks if the enemy is coming from the right (from below)
+                } else if(eMinX <= pMaxX && pMinX <= eMinX) {
+                    //Collision between Player and Enemy has happened and we make sure to kill
+                    //the player and remove the enemy from the game.
+                    killEnemy(e);
+                    player.kill();
+                    restartTimePointsTimer();
+                }
+            }
+        }
+    }
+
+    private void checkCollisionBulletsVsEnemies() {
+        if(!player.getWeapon().getBullets().isEmpty()) {
+            //So we do not interfere with the enemy loop we create this List to keep track of
+            //the enemies we need to remove
+            List<Enemy> enemiesToRemove = new ArrayList<Enemy>();
+
+            for (int i=0; i<enemies.size(); i++) {
+                Enemy e = enemies.get(i);
                 //Creates 4 float's for each max and min value for the enemy position.
                 float eMinX = e.getBounds().getX();
                 float eMaxX = eMinX + e.getBounds().getWidth();
                 float eMinY = e.getBounds().getY();
                 float eMaxY = eMinY + e.getBounds().getHeight();
-                //Checks if the enemy is comming from above the player
-                if(eMinY <= pMaxY && pMinY <= eMinY) {
-                    //Checks if the enemy is comming from the left (from above)
-                    if(pMinX <= eMaxX && eMaxX <= pMaxX) {
-                        //Collision between Player and Enemy has happened and we make sure to kill
-                        //the player and remove the enemy from the game.
-                        killEnemy(e);
-                        player.kill();
-                        restartTimePointsTimer();
-                    // Checks if the enemy is coming from the right (from above)
-                    } else if(eMinX <= pMaxX && pMinX <= eMinX) {
-                        //Collision between Player and Enemy has happened and we make sure to kill
-                        //the player and remove the enemy from the game.
-                        killEnemy(e);
-                        player.kill();
-                        restartTimePointsTimer();
-                    }
-                //Checks if the enemy is coming from below the player
-                } else if(pMinY <= eMaxY && eMaxY <= pMaxY) {
-                    //Checks if the enemy is coming from the left (from below)
-                    if(pMinX <= eMaxX && eMaxX <= pMaxX) {
-                        //Collision between Player and Enemy has happened and we make sure to kill
-                        //the player and remove the enemy from the game.
-                        killEnemy(e);
-                        player.kill();
-                        restartTimePointsTimer();
-                    // Checks if the enemy is coming from the right (from below)
-                    } else if(eMinX <= pMaxX && pMinX <= eMinX) {
-                        //Collision between Player and Enemy has happened and we make sure to kill
-                        //the player and remove the enemy from the game.
-                        killEnemy(e);
-                        player.kill();
-                        restartTimePointsTimer();
-                    }
-                }
-            }
+                //Creates a list of bullets we need to remove so that we do not interfere with
+                //the loop
+                List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
 
-            //Starts checking for collisions between player bullets and enemies
-            if(!player.getWeapon().getBullets().isEmpty()) {
-                //So we do not interfere with the enemy loop we create this List to keep track of
-                //the enemies we need to remove
-                List<com.icyvenom.needforghetto.model.enemies.Enemy> enemiesToRemove = new ArrayList<com.icyvenom.needforghetto.model.enemies.Enemy>();
-
-                for (int i=0; i<enemies.size(); i++) {
-                    com.icyvenom.needforghetto.model.enemies.Enemy e = enemies.get(i);
-                    //Creates 4 float's for each max and min value for the enemy position.
-                    float eMinX = e.getBounds().getX();
-                    float eMaxX = eMinX + e.getBounds().getWidth();
-                    float eMinY = e.getBounds().getY();
-                    float eMaxY = eMinY + e.getBounds().getHeight();
-                    //Creates a list of bullets we need to remove so that we do not interfere with
-                    //the loop
-                    List<com.icyvenom.needforghetto.model.bullets.Bullet> bulletsToRemove = new ArrayList<com.icyvenom.needforghetto.model.bullets.Bullet>();
-
-                    for(int j=0; j<player.getWeapon().getBullets().size(); j++) {
-                        com.icyvenom.needforghetto.model.bullets.Bullet b = player.getWeapon().getBullets().get(j);
-                        //Creates 4 float's for each max and min value for the Bullet position.
-                        float bMinX = b.getBounds().getX();
-                        float bMaxX = bMinX + b.getBounds().getWidth();
-                        float bMinY = b.getBounds().getY();
-                        float bMaxY = bMinY + b.getBounds().getHeight();
-                        //These if-cases are done the exact same way as the one above but the
-                        //order of the if-case are changed to be more optimized for this calculation
-                        if(eMinY <= bMaxY && bMaxY <= eMaxY) {
-                            //From below
-                            if(eMinX <= bMaxX && bMaxX <= eMaxX) {
-                                bulletsToRemove.add(b);
-                                enemiesToRemove.add(e);
-                                player.addPoints(10);
-                            } else if(eMinX <= bMinX && bMinX <= eMaxX) {
-                                bulletsToRemove.add(b);
-                                enemiesToRemove.add(e);
-                                player.addPoints(10);
-                            }
-                        } else if(eMinY <= bMaxY && bMinY <= eMaxY){
-                            if(eMinX <= bMaxX && bMaxX <= eMaxX) {
-                                bulletsToRemove.add(b);
-                                enemiesToRemove.add(e);
-                                player.addPoints(10);
-                            } else if(eMinX <= bMinX && bMinX <= eMaxX) {
-                                bulletsToRemove.add(b);
-                                enemiesToRemove.add(e);
-                                player.addPoints(10);
-                            }
-                        }
-
-                    }
-
-                    player.getWeapon().getBullets().removeAll(bulletsToRemove);
-                }
-                for (com.icyvenom.needforghetto.model.enemies.Enemy e : enemiesToRemove){
-                    killEnemy(e);
-                }
-
-            }
-
-            for(int i=0; i<enemies.size(); i++) {
-                com.icyvenom.needforghetto.model.enemies.Enemy e = enemies.get(i);
-                //Creates a list of bullets that will be removed
-                List<com.icyvenom.needforghetto.model.bullets.Bullet> bulletsToRemove = new ArrayList<com.icyvenom.needforghetto.model.bullets.Bullet>();
-                for(int j=0; j<e.getWeapon().getBullets().size(); j++) {
-                    com.icyvenom.needforghetto.model.bullets.Bullet b = e.getWeapon().getBullets().get(j);
+                for(int j=0; j<player.getWeapon().getBullets().size(); j++) {
+                    Bullet b = player.getWeapon().getBullets().get(j);
                     //Creates 4 float's for each max and min value for the Bullet position.
                     float bMinX = b.getBounds().getX();
                     float bMaxX = bMinX + b.getBounds().getWidth();
                     float bMinY = b.getBounds().getY();
                     float bMaxY = bMinY + b.getBounds().getHeight();
-                    //These if-cases are done the exact same way as the ones above but the
+                    //These if-cases are done the exact same way as the one above but the
                     //order of the if-case are changed to be more optimized for this calculation
-                    if(pMinY <= bMaxY && bMinY <= pMaxY){
-                        if(pMinX <= bMaxX && bMaxX <= pMaxX) {
+                    if(eMinY <= bMaxY && bMaxY <= eMaxY) {
+                        //From below
+                        if(eMinX <= bMaxX && bMaxX <= eMaxX) {
                             bulletsToRemove.add(b);
-                            player.kill();
-                            restartTimePointsTimer();
-                        } else if(pMinX <= bMinX && bMinX <= pMaxX) {
+                            enemiesToRemove.add(e);
+                            player.addPoints(10);
+                        } else if(eMinX <= bMinX && bMinX <= eMaxX) {
                             bulletsToRemove.add(b);
-                            player.kill();
-                            restartTimePointsTimer();
+                            enemiesToRemove.add(e);
+                            player.addPoints(10);
                         }
-                    } else if(pMinY <= bMaxY && bMaxY <= pMaxY) {
-                        if(pMinX <= bMaxX && bMaxX <= pMaxX) {
+                    } else if(eMinY <= bMaxY && bMinY <= eMaxY){
+                        if(eMinX <= bMaxX && bMaxX <= eMaxX) {
                             bulletsToRemove.add(b);
-                            player.kill();
-                            restartTimePointsTimer();
-                        } else if(pMinX <= bMinX && bMinX <= pMaxX) {
+                            enemiesToRemove.add(e);
+                            player.addPoints(10);
+                        } else if(eMinX <= bMinX && bMinX <= eMaxX) {
                             bulletsToRemove.add(b);
-                            player.kill();
-                            restartTimePointsTimer();
-                        }
-                    }
-                }
-                e.getWeapon().getBullets().removeAll(bulletsToRemove);
-            }
-            if (!bullets.isEmpty()){
-                List<com.icyvenom.needforghetto.model.bullets.Bullet> bulletsToRemove = new ArrayList<com.icyvenom.needforghetto.model.bullets.Bullet>();
-                for (com.icyvenom.needforghetto.model.bullets.Bullet b : bullets) {
-                    float bMinX = b.getBounds().getX();
-                    float bMaxX = bMinX + b.getBounds().getWidth();
-                    float bMinY = b.getBounds().getY();
-                    float bMaxY = bMinY + b.getBounds().getHeight();
-
-                    if(pMinY <= bMaxY && bMinY <= pMaxY){
-                        if(pMinX <= bMaxX && bMaxX <= pMaxX) {
-                            bulletsToRemove.add(b);
-                            player.kill();
-                        } else if(pMinX <= bMinX && bMinX <= pMaxX) {
-                            bulletsToRemove.add(b);
-                            player.kill();
-                        }
-                    } else if(pMinY <= bMaxY && bMaxY <= pMaxY) {
-                        if(pMinX <= bMaxX && bMaxX <= pMaxX) {
-                            bulletsToRemove.add(b);
-                            player.kill();
-                        } else if(pMinX <= bMinX && bMinX <= pMaxX) {
-                            bulletsToRemove.add(b);
-                            player.kill();
+                            enemiesToRemove.add(e);
+                            player.addPoints(10);
                         }
                     }
 
                 }
-                bullets.removeAll(bulletsToRemove);
+
+                player.getWeapon().getBullets().removeAll(bulletsToRemove);
             }
+            for (Enemy e : enemiesToRemove){
+                killEnemy(e);
+            }
+
         }
     }
-}
 
+    private void checkCollisionPlayerVsWorldBullets() {
+        //Creates 4 float's at each max and min value for the player. These are used to
+        // calculate overlaping between player and enemy or bullet.
+        float pMinX = player.getBounds().getX();
+        float pMaxX = pMinX + player.getBounds().getWidth();
+        float pMinY = player.getBounds().getY();
+        float pMaxY = pMinY + player.getBounds().getHeight();
+        if (!bullets.isEmpty()){
+            List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+            for (Bullet b : bullets) {
+                float bMinX = b.getBounds().getX();
+                float bMaxX = bMinX + b.getBounds().getWidth();
+                float bMinY = b.getBounds().getY();
+                float bMaxY = bMinY + b.getBounds().getHeight();
+
+                if(pMinY <= bMaxY && bMinY <= pMaxY){
+                    if(pMinX <= bMaxX && bMaxX <= pMaxX) {
+                        bulletsToRemove.add(b);
+                        player.kill();
+                    } else if(pMinX <= bMinX && bMinX <= pMaxX) {
+                        bulletsToRemove.add(b);
+                        player.kill();
+                    }
+                } else if(pMinY <= bMaxY && bMaxY <= pMaxY) {
+                    if(pMinX <= bMaxX && bMaxX <= pMaxX) {
+                        bulletsToRemove.add(b);
+                        player.kill();
+                    } else if(pMinX <= bMinX && bMinX <= pMaxX) {
+                        bulletsToRemove.add(b);
+                        player.kill();
+                    }
+                }
+
+            }
+            bullets.removeAll(bulletsToRemove);
+        }
+    }
+    
+    private void checkCollisionsPlayerVsBullets() {
+        //Creates 4 float's at each max and min value for the player. These are used to
+        // calculate overlaping between player and enemy or bullet.
+        float pMinX = player.getBounds().getX();
+        float pMaxX = pMinX + player.getBounds().getWidth();
+        float pMinY = player.getBounds().getY();
+        float pMaxY = pMinY + player.getBounds().getHeight();
+        for(int i=0; i<enemies.size(); i++) {
+            Enemy e = enemies.get(i);
+            //Creates a list of bullets that will be removed
+            List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+            for(int j=0; j<e.getWeapon().getBullets().size(); j++) {
+                Bullet b = e.getWeapon().getBullets().get(j);
+                //Creates 4 float's for each max and min value for the Bullet position.
+                float bMinX = b.getBounds().getX();
+                float bMaxX = bMinX + b.getBounds().getWidth();
+                float bMinY = b.getBounds().getY();
+                float bMaxY = bMinY + b.getBounds().getHeight();
+                //These if-cases are done the exact same way as the ones above but the
+                //order of the if-case are changed to be more optimized for this calculation
+                if(pMinY <= bMaxY && bMinY <= pMaxY){
+                    if(pMinX <= bMaxX && bMaxX <= pMaxX) {
+                        bulletsToRemove.add(b);
+                        player.kill();
+                        restartTimePointsTimer();
+                    } else if(pMinX <= bMinX && bMinX <= pMaxX) {
+                        bulletsToRemove.add(b);
+                        player.kill();
+                        restartTimePointsTimer();
+                    }
+                } else if(pMinY <= bMaxY && bMaxY <= pMaxY) {
+                    if(pMinX <= bMaxX && bMaxX <= pMaxX) {
+                        bulletsToRemove.add(b);
+                        player.kill();
+                        restartTimePointsTimer();
+                    } else if(pMinX <= bMinX && bMinX <= pMaxX) {
+                        bulletsToRemove.add(b);
+                        player.kill();
+                        restartTimePointsTimer();
+                    }
+                }
+            }
+            e.getWeapon().getBullets().removeAll(bulletsToRemove);
+        }
+    }
 
     /**
      * Initiates the spawn timer for enemies.
@@ -276,7 +298,7 @@ public class World {
      * Getter for the list of enemies that are relevant to the game.
      * @return A list of enemies.
      */
-    public List<com.icyvenom.needforghetto.model.enemies.Enemy> getEnemies(){
+    public List<Enemy> getEnemies(){
         return enemies;
     }
 
@@ -306,7 +328,7 @@ public class World {
      *  Getter for the list of bullet
      * @return The list of bullets.
      */
-    public List<com.icyvenom.needforghetto.model.bullets.Bullet> getBullets() { return bullets; }
+    public List<Bullet> getBullets() { return bullets; }
 
     /**
      * Checks the list of Enemies for any enemies that have out of the bounds of the game
@@ -314,9 +336,9 @@ public class World {
      */
 
     public void removeOutOfBoundsEnemies(){
-        List<com.icyvenom.needforghetto.model.enemies.Enemy> enemiesToRemove = new ArrayList<com.icyvenom.needforghetto.model.enemies.Enemy>();
+        List<Enemy> enemiesToRemove = new ArrayList<Enemy>();
         if (!enemies.isEmpty()) {
-            for (com.icyvenom.needforghetto.model.enemies.Enemy e : enemies) {
+            for (Enemy e : enemies) {
                 if ((e.getBounds().getY() + e.getBounds().getHeight()) < 0f || e.getBounds().getX() < 0.5f
                         || e.getBounds().getX() + e.getBounds().getHeight() > 10.5f) {
                     enemiesToRemove.add(e);
@@ -330,7 +352,7 @@ public class World {
      * Removes a killed enemy from the game and gives the bullets it owns to the world.
      * @param e enemy to be removed
      */
-    public void killEnemy(com.icyvenom.needforghetto.model.enemies.Enemy e) {
+    public void killEnemy(Enemy e) {
         bullets.addAll(e.getWeapon().getBullets());
         if ( e.kill() ) {
             enemies.remove(e);
@@ -342,9 +364,9 @@ public class World {
      * and removes them if they are not.
      */
     public void removeOutOfBoundsBullets(){
-        List<com.icyvenom.needforghetto.model.bullets.Bullet> bulletsToRemove = new ArrayList<com.icyvenom.needforghetto.model.bullets.Bullet>();
+        List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
         if(!bullets.isEmpty()) {
-            for (com.icyvenom.needforghetto.model.bullets.Bullet b : getBullets()) {
+            for (Bullet b : getBullets()) {
                 if ( (b.getBounds().getY() + b.getBounds().height < 0f) || b.getBounds().getX() < -0.5f
                         || b.getBounds().getX() + b.getBounds().getWidth() > 10.5f){
                     bulletsToRemove.add(b);
