@@ -27,7 +27,7 @@ public class WaveSpawner extends Timer.Task {
 
     public WaveSpawner(List<com.icyvenom.needforghetto.model.enemies.Enemy> enemies) {
         this.enemies = enemies;
-        FileHandle file = Gdx.files.internal("level1.json");
+        FileHandle file = Gdx.files.internal("levels/level1.json");
 
         Json json = new Json();
         json.addClassTag("enemyTemplate", EnemyTemplate.class);
