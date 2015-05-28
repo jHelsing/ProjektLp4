@@ -34,8 +34,7 @@ public class WaveSpawner extends Timer.Task {
     @Override
     public void run() {
         if (currentWave < factory.getNumberOfWaves()) {
-            //factory.createNewWave(enemies, currentWave);
-            System.err.println(factory.getNumberOfWaves());
+            factory.createNewWave(enemies, currentWave);
             currentWave++;
         }
     }

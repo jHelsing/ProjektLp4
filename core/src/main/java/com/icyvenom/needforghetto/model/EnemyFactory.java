@@ -12,10 +12,7 @@ import java.util.List;
  * Created by Marcus on 2015-05-22.
  */
 public class EnemyFactory {
-    /*
-    private ArrayList<EnemyTemplate> wave1;
-    private ArrayList<EnemyTemplate> wave2;
-    */
+
     private List waves;
     private Array currentWave;
 
@@ -34,31 +31,21 @@ public class EnemyFactory {
         }
     }
 
-    public ArrayList<Enemy> makeAllEnemies(ArrayList<EnemyTemplate> templates){
-        ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-        if (!templates.isEmpty()) {
-            for (int i = 0; i < templates.size(); i++) {
-                enemies.add(createEnemy(templates.get(i)));
+    public ArrayList makeAllEnemies(Array templates){
+        ArrayList<Enemy> enemiesToMake = new ArrayList<Enemy>();
+        if (templates.size != 0) {
+            for (int i = 0; i < templates.size; i++) {
+                enemiesToMake.add(createEnemy((EnemyTemplate)templates.get(i)));
             }
         }
-        return enemies;
+        return enemiesToMake;
     }
-    /*
     public void createNewWave(List<Enemy> enemies, int wave){
         System.err.println("Making " + wave);
-        switch(wave){
-            case 1: enemies.addAll(makeAllEnemies(wave1)); break;
-
-            case 2: enemies.addAll(makeAllEnemies(wave2)); break;
-        }
+        currentWave = (Array)waves.get(wave);
+        enemies.addAll(makeAllEnemies(currentWave));
     }
-    */
 
-    public Enemy printWaves(){
-        currentWave = (Array)waves.get(0);
-        System.err.println(waves.get(0));
-        return createEnemy((EnemyTemplate)currentWave.get(1));
-    }
     public int getNumberOfWaves(){
         return waves.size();
     }
