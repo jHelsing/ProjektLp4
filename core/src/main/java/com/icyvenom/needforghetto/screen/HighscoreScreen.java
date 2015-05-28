@@ -13,7 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.icyvenom.needforghetto.highscore.HighscoreManager;
+import com.icyvenom.needforghetto.highscore.HighscoreFactory;
+import com.icyvenom.needforghetto.highscore.IHighscore;
 import com.icyvenom.needforghetto.highscore.Score;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class HighscoreScreen implements Screen {
             new TextureAtlas(Gdx.files.internal("skins/uiskin.atlas")));
     private Label title = new Label("Highscores ", skin);
     private ArrayList<Label> highscoreLabels = new ArrayList<Label>();
-    private HighscoreManager highscoreManager;
+    private IHighscore highscoreManager;
 
     FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DroidSerif-Regular.ttf"));
     FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -40,7 +41,7 @@ public class HighscoreScreen implements Screen {
 
     @Override
     public void show() {
-        highscoreManager = new HighscoreManager();
+        highscoreManager = HighscoreFactory.getHighscore();
 
         table.add(title).padBottom(15).row();
         int rank=1;

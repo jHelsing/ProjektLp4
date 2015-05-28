@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by anton on 2015-05-19.
  */
-public class HighscoreManager {
+class HighscoreManager implements IHighscore{
 
     List<Score> scoreList = new ArrayList<Score>();
     private Preferences preferences = Gdx.app.getPreferences("My preferences");
@@ -19,10 +19,12 @@ public class HighscoreManager {
         loadScorestoArray();
     }
 
+    @Override
     public boolean isHighscore(int score) {
         return scoreList.get(scoreList.size()-1).getScore() < score;
     }
 
+    @Override
     public void addHighscore(Score score) {
         scoreList.add(score);
         sort();
@@ -48,6 +50,7 @@ public class HighscoreManager {
         preferences.flush();
     }
 
+    @Override
     public List<Score> getScoreList() {
         return scoreList;
     }

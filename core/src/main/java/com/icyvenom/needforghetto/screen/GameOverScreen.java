@@ -13,7 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.icyvenom.needforghetto.highscore.HighscoreManager;
+import com.icyvenom.needforghetto.highscore.HighscoreFactory;
+import com.icyvenom.needforghetto.highscore.IHighscore;
 import com.icyvenom.needforghetto.highscore.Score;
 
 /**
@@ -31,7 +32,7 @@ public class GameOverScreen implements Screen{
     private TextButton restartButton;
     private TextButton exitButton;
 
-    private HighscoreManager highscoreManager;
+    private IHighscore highscoreManager;
 
     public GameOverScreen(int score) {
         this.score = score;
@@ -39,7 +40,7 @@ public class GameOverScreen implements Screen{
 
     @Override
     public void show() {
-        this.highscoreManager = new HighscoreManager();
+        this.highscoreManager = HighscoreFactory.getHighscore();
         this.stage = new Stage();
         this.table = new Table();
         this.skin = new Skin(Gdx.files.internal("skins/uiskin.json"),

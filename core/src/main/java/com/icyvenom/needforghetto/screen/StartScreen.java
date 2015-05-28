@@ -20,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.icyvenom.needforghetto.gamestate.GameState;
-import com.icyvenom.needforghetto.highscore.Score;
 
 /**
  * This is the first screen that is shown when the application is first opened.
