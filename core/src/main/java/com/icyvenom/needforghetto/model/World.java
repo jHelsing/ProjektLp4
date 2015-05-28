@@ -348,8 +348,7 @@ public class World {
         List<Enemy> enemiesToRemove = new ArrayList<Enemy>();
         if (!enemies.isEmpty()) {
             for (Enemy e : enemies) {
-                if ((e.getBounds().getY() + e.getBounds().getHeight()) < 0f || e.getBounds().getX() < 0.5f
-                        || e.getBounds().getX() + e.getBounds().getHeight() > 10.5f) {
+                if ((e.getBounds().getY() + e.getBounds().getHeight()) < 0f){
                     enemiesToRemove.add(e);
                 }
             }
