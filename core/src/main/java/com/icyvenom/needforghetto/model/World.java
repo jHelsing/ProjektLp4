@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * The model of the world. This is the main Model-object. It has access to all the other Model
  * objects.
- * @author Marcus. Revisited by Jonathan 2015-05-13. Revisited by Amar by 2015-05-14.
+ * @author Marcus. Revisited by Jonathan 2015-05-13 and 2015-05-28. Revisited by Amar by 2015-05-14.
  * @version 2.5
  */
 public class World {
@@ -70,6 +70,9 @@ public class World {
         }
     }
 
+    /**
+     * Checks for collisions between the player and enemies
+     */
     private void checkCollisionPlayerVsEnemy() {
         //Creates 4 float's at each max and min value for the player. These are used to
         // calculate overlaping between player and enemy or bullet.
@@ -123,6 +126,9 @@ public class World {
         }
     }
 
+    /**
+     * Checks for collisions between player bullets and enemies
+     */
     private void checkCollisionBulletsVsEnemies() {
         if(!player.getWeapon().getBullets().isEmpty()) {
             //So we do not interfere with the enemy loop we create this List to keep track of
@@ -183,9 +189,10 @@ public class World {
         }
     }
 
+    /**
+     * Checks for collisions between player and bullets from dead enemies
+     */
     private void checkCollisionPlayerVsWorldBullets() {
-        //Creates 4 float's at each max and min value for the player. These are used to
-        // calculate overlaping between player and enemy or bullet.
         float pMinX = player.getBounds().getX();
         float pMaxX = pMinX + player.getBounds().getWidth();
         float pMinY = player.getBounds().getY();
@@ -197,7 +204,6 @@ public class World {
                 float bMaxX = bMinX + b.getBounds().getWidth();
                 float bMinY = b.getBounds().getY();
                 float bMaxY = bMinY + b.getBounds().getHeight();
-
                 if(pMinY <= bMaxY && bMinY <= pMaxY){
                     if(pMinX <= bMaxX && bMaxX <= pMaxX) {
                         bulletsToRemove.add(b);
@@ -221,6 +227,9 @@ public class World {
         }
     }
 
+    /**
+     * Checks for collisions between player and enemy bullets
+     */
     private void checkCollisionsPlayerVsBullets() {
         //Creates 4 float's at each max and min value for the player. These are used to
         // calculate overlaping between player and enemy or bullet.
@@ -228,19 +237,19 @@ public class World {
         float pMaxX = pMinX + player.getBounds().getWidth();
         float pMinY = player.getBounds().getY();
         float pMaxY = pMinY + player.getBounds().getHeight();
+
         for(int i=0; i<enemies.size(); i++) {
             Enemy e = enemies.get(i);
             //Creates a list of bullets that will be removed
             List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
             for(int j=0; j<e.getWeapon().getBullets().size(); j++) {
                 Bullet b = e.getWeapon().getBullets().get(j);
-                //Creates 4 float's for each max and min value for the Bullet position.
                 float bMinX = b.getBounds().getX();
                 float bMaxX = bMinX + b.getBounds().getWidth();
                 float bMinY = b.getBounds().getY();
                 float bMaxY = bMinY + b.getBounds().getHeight();
-                //These if-cases are done the exact same way as the ones above but the
-                //order of the if-case are changed to be more optimized for this calculation
+                //Checks if the bullet and the player overlaps. This is done using the points from
+                // every corner of the player and the bullet.
                 if(pMinY <= bMaxY && bMinY <= pMaxY){
                     if(pMinX <= bMaxX && bMaxX <= pMaxX) {
                         bulletsToRemove.add(b);
