@@ -1,10 +1,6 @@
-paket för bullets och enemies?
-
 Bort med alla onödiga kommentarer, kommentera inte självförklarande grejer
 
 Förklara varför Bullet och Enemy abstrakta
-
-Använd inte en bestämd arraylist
 
 Förklara varför bulletdirection används
 
