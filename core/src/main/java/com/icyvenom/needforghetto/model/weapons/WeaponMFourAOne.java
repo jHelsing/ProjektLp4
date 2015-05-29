@@ -13,7 +13,7 @@ public class WeaponMFourAOne extends Weapon {
     /**
      * The damage of the M4A1 (assault rifle)
      */
-    private static final int WEAPON_DAMAGE = 3;
+    private static final int WEAPON_DAMAGE = 1;
 
     /**
      * The attack rate of the M4A1 (assault rifle)

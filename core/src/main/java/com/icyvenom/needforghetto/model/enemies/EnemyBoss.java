@@ -30,7 +30,7 @@ public class EnemyBoss extends Enemy {
 
     private Rectangle bounds = new Rectangle();
 
-    private static final int LIVES = 1337;
+    private static final int LIVES = 50;
 
     /**
      * When a enemy is created, it's position, the hitbox and the speed are set according to

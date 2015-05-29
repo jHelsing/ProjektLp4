@@ -3,8 +3,62 @@
         [
             {
                 "class": "enemyTemplate",
-                "enemyType": "EnemyBoss",
+                "enemyType": "EnemyPistol",
                 "startPosX": 2,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 7,
+                "startPosY": 10
+            }
+        ],
+        [
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 4,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 6,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 6,
+                "startPosY": 10
+            }
+        ],
+        [
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 4,
+                "startPosY": 10
+            }
+        ],
+        [
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 2,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyAwp",
+                "startPosX": 4,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyAwp",
+                "startPosX": 6,
                 "startPosY": 10
             },
             {
@@ -17,14 +71,32 @@
         [
             {
                 "class": "enemyTemplate",
-                "enemyType": "EnemyPistol",
-                "startPosX": 4,
+                "enemyType": "EnemyAwp",
+                "startPosX": 1,
                 "startPosY": 10
             },
             {
                 "class": "enemyTemplate",
-                "enemyType": "EnemyPistol",
-                "startPosX": 6,
+                "enemyType": "EnemyAwp",
+                "startPosX": 3,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyAwp",
+                "startPosX": 5,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyAwp",
+                "startPosX": 7,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyAwp",
+                "startPosX": 9,
                 "startPosY": 10
             }
         ],
@@ -32,6 +104,18 @@
             {
                 "class": "enemyTemplate",
                 "enemyType": "EnemyPistol",
+                "startPosX": 2,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 3,
+                "startPosY": 11
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
                 "startPosX": 4,
                 "startPosY": 10
             },
@@ -39,12 +123,74 @@
                 "class": "enemyTemplate",
                 "enemyType": "EnemyPistol",
                 "startPosX": 6,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 7,
+                "startPosY": 11
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 8,
                 "startPosY": 10
             }
         ],
         [
             {
                 "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 1,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 3,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyAwp",
+                "startPosX": 5,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 7,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 9,
+                "startPosY": 10
+            }
+        ],
+        [
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 1,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 2,
+                "startPosY": 12
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyAwp",
+                "startPosX": 3,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
                 "enemyType": "EnemyPistol",
                 "startPosX": 4,
                 "startPosY": 10
@@ -52,8 +198,212 @@
             {
                 "class": "enemyTemplate",
                 "enemyType": "EnemyPistol",
-                "startPosX": 6,
+                "startPosX": 5,
+                "startPosY": 12
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 7,
                 "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 9,
+                "startPosY": 10
+            }
+        ],
+        [
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 1,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 2,
+                "startPosY": 12
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyAwp",
+                "startPosX": 3,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 4,
+                "startPosY": 11
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyAwp",
+                "startPosX": 5,
+                "startPosY": 12
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 7,
+                "startPosY": 11
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 9,
+                "startPosY": 10
+            }
+        ],
+        [
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 1,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 6,
+                "startPosY": 12
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 8,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 9,
+                "startPosY": 10
+            }
+        ],
+        [
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 1,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 2,
+                "startPosY": 12
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyAwp",
+                "startPosX": 3,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 4,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 5,
+                "startPosY": 12
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 7,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 9,
+                "startPosY": 10
+            }
+        ],
+        [
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 1,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 6,
+                "startPosY": 12
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 8,
+                "startPosY": 11
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyAwp",
+                "startPosX": 9,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyAwp",
+                "startPosX": 2,
+                "startPosY": 12
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyAwp",
+                "startPosX": 5,
+                "startPosY": 10
+            }
+        ],
+        [
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyStalker",
+                "startPosX": 1,
+                "startPosY": 10
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 5,
+                "startPosY": 12
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 9,
+                "startPosY": 12
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyAwp",
+                "startPosX": 6,
+                "startPosY": 12
+            },
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyPistol",
+                "startPosX": 8,
+                "startPosY": 12
+            }
+        ],
+        [
+            {
+                "class": "enemyTemplate",
+                "enemyType": "EnemyBoss",
+                "startPosX": 5,
+                "startPosY": 12
             }
         ]
     ]

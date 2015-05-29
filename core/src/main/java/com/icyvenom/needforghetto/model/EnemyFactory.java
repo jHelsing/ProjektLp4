@@ -52,7 +52,7 @@ public class EnemyFactory {
         return enemiesToMake;
     }
     public void createNewWave(List<com.icyvenom.needforghetto.model.enemies.Enemy> enemies, int wave){
-        System.err.println("Making " + wave);
+        System.err.println("Spawning wave " + (wave + 1));
         currentWave = (Array)waves.get(wave);
         enemies.addAll(makeAllEnemies(currentWave));
     }
