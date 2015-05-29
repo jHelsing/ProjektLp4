@@ -20,7 +20,7 @@
 This version overrides all previous versions.
 
 \section{Introduction}
-\subsection{Desgin goals}
+\subsection{Design goals}
 The design must be modular to provide the possibility of switching the GUI, controller and/or logic. The design must be written in such a way that it is easy to maintain and change parts of the code.
  
 \subsection{Definitions, acronyms and abbreviations}
@@ -29,7 +29,7 @@ The design must be modular to provide the possibility of switching the GUI, cont
   \item Java, platform independent programming language.
   \item MVC, a way to partition an application with a GUI into distinct parts avoiding
   mixing GUI-code and application code.
-  \item JSON, fileformat used for transmitting data in a structured way.
+  \item JSON, file format used for transmitting data in a structured way.
   \item TrueType, a font format with high degree of control over how to the font is displayed.
   \item Android, mobile operating system. 
   \item libGDX, framework for developing games in Java.
@@ -111,7 +111,7 @@ see figure \ref{fig:stan}
 All concurrency is abstracted by libGDX.
 
 \subsection{Persistent data management}
-Assets, such as textures, fonts and level information, are persistent and operated on with functions provided by libGDX. The diffrent formats used for storing data are the following: 
+Assets, such as textures, fonts and level information, are persistent and operated on with functions provided by libGDX. The different formats used for storing data are the following: 
 \begin{itemize}
   \item Highscore data is handled through the preferences interface.
   \item Level design data is stored as JSON files.
@@ -127,9 +127,8 @@ The application is launched and exited as a normal android application.
 
 \section{References}
 \begin{enumerate}
-  \item ref1
-  \item ref2
-  \item ...
+  \item MVC, \url{http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller}
+  \item game type, \url{http://en.wikipedia.org/wiki/Shoot_%27em_up}
 \end{enumerate}
 
 \newpage
@@ -142,6 +141,23 @@ The application is launched and exited as a normal android application.
   \caption{Packages and classes within the \textit{model} package}
   \label{fig:model}
   \end{figure}  
+  
+Explanation of packages and classes:
+\begin{itemize}
+  \item packages
+  \begin{itemize}
+    \item bullets is the package containing different types of bullets and the abstract Bullet class.
+    \item weapons contains the abstract Weapon class and different types of weapons.
+    \item enemies package contains the different types of enemies and the abstract Enemy class, also contains a EnemyFactory used by the WaveSpawner.
+  \end{itemize}
+  \item classes
+  \begin{itemize}
+    \item WorldFactory builds a the complete model.
+    \item World is the main class for the model.
+    \item Player is what the user controls.
+    \item WaveSpawner is the class responsible for spawning waves of enemies.
+  \end{itemize}
+\end{itemize}
   
 \end{appendices}
 
