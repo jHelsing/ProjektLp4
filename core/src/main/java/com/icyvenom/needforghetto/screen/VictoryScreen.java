@@ -21,9 +21,9 @@ import com.icyvenom.needforghetto.highscore.IHighscore;
 import com.icyvenom.needforghetto.highscore.Score;
 
 /**
- * Created by anton on 2015-05-17.
+ * Created by anton on 2015-05-29.
  */
-public class GameOverScreen implements Screen {
+public class VictoryScreen implements Screen {
 
     private float screenWidth;
     private float screenHeight;
@@ -43,7 +43,7 @@ public class GameOverScreen implements Screen {
     FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DroidSerif-Regular.ttf"));
     FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
-    public GameOverScreen(int score) {
+    public VictoryScreen(int score) {
         this.score = score;
     }
 
@@ -55,7 +55,7 @@ public class GameOverScreen implements Screen {
         this.skin = new Skin(Gdx.files.internal("skins/uiskin.json"),
                 new TextureAtlas(Gdx.files.internal("skins/uiskin.atlas")));
 
-        this.gameOverLabel = new Label("Game Over!", skin);
+        this.gameOverLabel = new Label("Level cleared!", skin);
         this.scoreLabel = new Label("Your score:" + score, skin);
 
         this.restartButton = new TextButton("Play again!", skin);
@@ -162,7 +162,6 @@ public class GameOverScreen implements Screen {
 
         table.getCell(exitButton).size((int)(screenWidth*0.4f),(int)(screenHeight*0.09f));
         table.getCell(restartButton).size((int)(screenWidth*0.4f),(int)(screenHeight*0.09f));
-
     }
 
 }

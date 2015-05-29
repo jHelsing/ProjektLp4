@@ -118,6 +118,8 @@ public class GameScreen implements Screen {
                 Gdx.input.setInputProcessor(inputMultiplexerPaused);
                 world.getSpawnTimer().stop();
                 break;
+            case VICTORY:
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new VictoryScreen(world.getPlayer().getScore()));
         }
 
         worldRenderer.render();

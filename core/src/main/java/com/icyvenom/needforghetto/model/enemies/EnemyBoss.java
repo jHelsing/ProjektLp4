@@ -3,10 +3,12 @@ package com.icyvenom.needforghetto.model.enemies;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
+import com.icyvenom.needforghetto.gamestate.GameState;
 import com.icyvenom.needforghetto.model.weapons.Weapon;
 import com.icyvenom.needforghetto.model.weapons.WeaponBoss;
 import com.icyvenom.needforghetto.model.weapons.WeaponNineMM;
 import com.icyvenom.needforghetto.model.weapons.WeaponNothing;
+import com.icyvenom.needforghetto.screen.GameScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,5 +59,14 @@ public class EnemyBoss extends Enemy {
         }
             goalPosition = getPosition().cpy().add(getDirection().cpy().scl(SPEED));
             setPosition(goalPosition);
+    }
+
+    @Override
+    public boolean kill() {
+        boolean dead = super.kill();
+        if(dead) {
+            GameState.currentState = GameState.State.VICTORY;
+        }
+        return dead;
     }
 }

@@ -7,7 +7,8 @@ public class GameState {
 
     public enum State {
         PAUSED,
-        RUNNING
+        RUNNING,
+        VICTORY
     }
 
     // Initial state is running
