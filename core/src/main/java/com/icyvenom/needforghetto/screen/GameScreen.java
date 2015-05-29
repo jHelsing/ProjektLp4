@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.icyvenom.needforghetto.controller.PlayerController;
 import com.icyvenom.needforghetto.gamestate.GameState;
@@ -27,6 +28,7 @@ public class GameScreen implements Screen {
      * The world model that is being played and supposed to be showed on screen.
      */
     private World world;
+    private Music sound;
 
     /**
      * The render object.
@@ -70,6 +72,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
+        sound = Gdx.audio.newMusic(Gdx.files.internal("music/mp3.mp3"));
+        sound.play();
         //World
         world = WorldFactory.getWorld();
         // true/false: debug flag
@@ -105,6 +109,7 @@ public class GameScreen implements Screen {
         if(world.getPlayer().isDead()) {
             GameOverScreen ble = new GameOverScreen(world.getPlayer().getScore());
             ((Game) Gdx.app.getApplicationListener()).setScreen(ble);
+            this.dispose();
         }
 
         switch (GameState.currentState) {
@@ -120,6 +125,7 @@ public class GameScreen implements Screen {
                 break;
             case VICTORY:
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new VictoryScreen(world.getPlayer().getScore()));
+                this.dispose();
         }
 
         worldRenderer.render();
@@ -150,6 +156,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
+        sound.dispose();
         Gdx.input.setInputProcessor(null);
     }
 
