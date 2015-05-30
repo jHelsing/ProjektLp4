@@ -45,7 +45,7 @@ The application uses a modified version of the MVC pattern for Android.
 The entry point to the model is the World class. We split the model into different classes such as Player, Enemy etc, to keep the design modular and prevent the classes from getting unnecessarily long and complex.
 
 \subsubsection{Global lookups}
-The state of the game is tracked with a global variable. The game state can take on the values \textit{PAUSED} or \textit{RUNNING}, and is used to decide if we want to render or not in the \textit{gamescreen} class.
+The state of the game is tracked with a global variable. The game state can take on the values \textit{PAUSED}, \textit{RUNNING} or \textit{VICTORY}, and is used to decide if we want to render or not in the \textit{GameScreen} class, the VICTORY state is a special case to see if the user have won. Winning is defined as killing the boss of the level. 
  
 There is a special state called \textit{godmode} which is mainly used for testing purposes, it disables the collision control and makes the player invincible.
     
@@ -108,12 +108,12 @@ see figure \ref{fig:stan}
 \end{figure}
 
 \subsection{Concurrency issues}
-All concurrency is abstracted by libGDX.
+All concurrency is handled by libGDX.
 
 \subsection{Persistent data management}
 Assets, such as textures, fonts and level information, are persistent and operated on with functions provided by libGDX. The different formats used for storing data are the following: 
 \begin{itemize}
-  \item Highscore data is handled through the preferences interface.
+  \item High score data is handled through the preferences interface.
   \item Level design data is stored as JSON files.
   \item Fonts are stored as TrueType files.
 \end{itemize}
