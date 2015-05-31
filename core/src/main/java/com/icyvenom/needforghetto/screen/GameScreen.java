@@ -63,6 +63,7 @@ public class GameScreen implements Screen {
         @Override
         public boolean keyDown(int keycode) {
             if(keycode == Input.Keys.BACK) {
+                sound.stop();
                 ((Game)Gdx.app.getApplicationListener()).setScreen(new StartScreen());
 
             }
@@ -108,6 +109,8 @@ public class GameScreen implements Screen {
         backgroundRenderer.render(delta);
 
         if(world.getPlayer().isDead()) {
+            sound.stop();
+            sound.dispose();
             GameOverScreen ble = new GameOverScreen(world.getPlayer().getScore());
             ((Game) Gdx.app.getApplicationListener()).setScreen(ble);
             this.dispose();
@@ -145,11 +148,13 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
+        sound.stop();
         GameState.currentState = GameState.State.PAUSED;
     }
 
     @Override
     public void resume() {
+        sound.play();
         GameState.currentState = GameState.State.RUNNING;
     }
 
