@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Timer;
 import com.icyvenom.needforghetto.gamestate.GameState;
 
 /**
@@ -87,6 +88,7 @@ public class StartScreen implements Screen{
     private Sprite bgSprite = new Sprite(bgTexture);
 
     private Music sound;
+    private Timer musicTimer = new Timer();
 
 
     public StartScreen() {
@@ -95,12 +97,6 @@ public class StartScreen implements Screen{
 
     @Override
     public void show() {
-
-        sound = Gdx.audio.newMusic(Gdx.files.internal("music/menu.mp3"));
-        sound.setLooping(true);
-        sound.play();
-
-
         buttonPlay.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
                 ((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen());
@@ -143,9 +139,9 @@ public class StartScreen implements Screen{
         table.add(title1).padBottom(-10).row();
         table.add(title2).padBottom(-10).row();
         table.add(title3).padBottom(50).row();
-        table.add(buttonPlay).size(550,100).padBottom(20).row();
-        table.add(buttonHighscores).size(550,100).padBottom(20).row();
-        table.add(buttonCheat).size(550,100).padBottom(20).row();
+        table.add(buttonPlay).size(550, 100).padBottom(20).row();
+        table.add(buttonHighscores).size(550, 100).padBottom(20).row();
+        table.add(buttonCheat).size(550, 100).padBottom(20).row();
         table.add(buttonExit).size(550,100).padBottom(20).row();
 
         table.setFillParent(true);
@@ -153,6 +149,16 @@ public class StartScreen implements Screen{
 
         Gdx.input.setInputProcessor(stage);
         Gdx.input.setCatchBackKey(false);
+
+        sound = Gdx.audio.newMusic(Gdx.files.internal("music/menu.mp3"));
+        sound.play();
+        musicTimer.scheduleTask(new Timer.Task() {
+            @Override
+            public void run() {
+                sound.stop();
+                sound.play();
+            }
+        }, 0, 120, 120);
 
     }
 
@@ -192,6 +198,7 @@ public class StartScreen implements Screen{
 
     @Override
     public void dispose() {
+        musicTimer.stop();
         sound.stop();
         stage.dispose();
         skin.dispose();
