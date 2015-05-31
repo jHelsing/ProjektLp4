@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -85,6 +86,8 @@ public class StartScreen implements Screen{
     private Texture bgTexture = new Texture("images/bg.jpg");
     private Sprite bgSprite = new Sprite(bgTexture);
 
+    private Music sound;
+
 
     public StartScreen() {
 
@@ -92,6 +95,10 @@ public class StartScreen implements Screen{
 
     @Override
     public void show() {
+
+        sound = Gdx.audio.newMusic(Gdx.files.internal("music/menu.mp3"));
+        sound.setLooping(true);
+        sound.play();
 
 
         buttonPlay.addListener(new ClickListener(){
@@ -185,6 +192,7 @@ public class StartScreen implements Screen{
 
     @Override
     public void dispose() {
+        sound.stop();
         stage.dispose();
         skin.dispose();
         generator.dispose();

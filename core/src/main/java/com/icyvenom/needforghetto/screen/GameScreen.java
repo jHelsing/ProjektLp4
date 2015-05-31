@@ -72,7 +72,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        sound = Gdx.audio.newMusic(Gdx.files.internal("music/mp3.mp3"));
+        sound = Gdx.audio.newMusic(Gdx.files.internal("music/inGame.mp3"));
+        sound.setLooping(true);
         sound.play();
         //World
         world = WorldFactory.getWorld();
@@ -117,11 +118,13 @@ public class GameScreen implements Screen {
                 Gdx.input.setInputProcessor(inputMultiplexerRunning);
                 playerController.update();
                 world.getSpawnTimer().start();
+                sound.play();
                 break;
             case PAUSED:
                 playerController.move(null); //Resets the movement of the car
                 Gdx.input.setInputProcessor(inputMultiplexerPaused);
                 world.getSpawnTimer().stop();
+                sound.pause();
                 break;
             case VICTORY:
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new VictoryScreen(world.getPlayer().getScore()));
