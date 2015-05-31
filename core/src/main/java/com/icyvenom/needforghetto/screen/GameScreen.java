@@ -127,6 +127,7 @@ public class GameScreen implements Screen {
                 sound.pause();
                 break;
             case VICTORY:
+                sound.stop();
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new VictoryScreen(world.getPlayer().getScore()));
                 this.dispose();
         }
@@ -154,12 +155,13 @@ public class GameScreen implements Screen {
 
     @Override
     public void hide() {
+        sound.stop();
         Gdx.input.setInputProcessor(null);
     }
 
     @Override
     public void dispose() {
-        sound.dispose();
+        sound.stop();
         Gdx.input.setInputProcessor(null);
     }
 
