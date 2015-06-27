@@ -25,7 +25,7 @@ import com.icyvenom.needforghetto.gamestate.GameState;
 
 /**
  * This is the first screen that is shown when the application is first opened.
- * It basically contains a start menu. There's a button to start playing the game, exit the game,
+ * It basically contains a start menu. There's a button to start a new game, exit the game,
  * change the settings of the game and to view the highscore's list.
  * @author Anton. Revisited by Amar.
  * @version 1.05
@@ -53,9 +53,9 @@ public class StartScreen implements Screen{
             new TextureAtlas(Gdx.files.internal("skins/uiskin.atlas")));
 
     /**
-     * Creates a new play button that will hold the text Play.
+     * Creates a new game button that will hold the text New game.
      */
-    private TextButton buttonPlay = new TextButton("Play", skin);
+    private TextButton buttonNewGame = new TextButton("New game", skin);
 
     /**
      * Creates a new exit button that will hold the text Exit.
@@ -97,9 +97,9 @@ public class StartScreen implements Screen{
 
     @Override
     public void show() {
-        buttonPlay.addListener(new ClickListener(){
+        buttonNewGame.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen());
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new ChooseScreen(sound,musicTimer));
             }
         });
 
@@ -139,7 +139,7 @@ public class StartScreen implements Screen{
         table.add(title1).padBottom(-10).row();
         table.add(title2).padBottom(-10).row();
         table.add(title3).padBottom(50).row();
-        table.add(buttonPlay).size(550, 100).padBottom(20).row();
+        table.add(buttonNewGame).size(550, 100).padBottom(20).row();
         table.add(buttonHighscores).size(550, 100).padBottom(20).row();
         table.add(buttonCheat).size(550, 100).padBottom(20).row();
         table.add(buttonExit).size(550,100).padBottom(20).row();
@@ -198,8 +198,6 @@ public class StartScreen implements Screen{
 
     @Override
     public void dispose() {
-        musicTimer.stop();
-        sound.stop();
         stage.dispose();
         skin.dispose();
         generator.dispose();
@@ -222,12 +220,12 @@ public class StartScreen implements Screen{
         title2.setStyle(titlestyle);
         title3.setStyle(titlestyle);
 
-        buttonPlay.getLabel().setStyle(buttontyle);
+        buttonNewGame.getLabel().setStyle(buttontyle);
         buttonHighscores.getLabel().setStyle(buttontyle);
         buttonCheat.getLabel().setStyle(buttontyle);
         buttonExit.getLabel().setStyle(buttontyle);
 
-        table.getCell(buttonPlay).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f));
+        table.getCell(buttonNewGame).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f));
         table.getCell(buttonHighscores).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f));
         table.getCell(buttonCheat).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f));
         table.getCell(buttonExit).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f));
