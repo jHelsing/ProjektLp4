@@ -22,7 +22,7 @@ import com.icyvenom.needforghetto.highscore.Score;
 import java.util.ArrayList;
 
 /**
- * Created by anton on 2015-05-13.
+ * Created by anton on 2015-05-13. Revisited by Amar.
  */
 public class HighscoreScreen implements Screen {
 

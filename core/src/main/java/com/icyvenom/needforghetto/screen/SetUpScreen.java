@@ -10,10 +10,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Timer;
 
 /**
@@ -38,6 +42,17 @@ public class SetUpScreen implements Screen {
     FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
     private Label title = new Label("Set-up game ", skin);
+    private Label chooseWeaponLabel = new Label("Choose a weapon", skin);
+    private TextButton leftWeaponArrow = new TextButton("<", skin);
+    private Label weaponLabel = new Label("Walther PP", skin);
+    private TextButton rightWeaponArrow = new TextButton(">", skin);
+
+    private Label chooseCarColorLabel = new Label("Choose a car color", skin);
+    private TextButton leftCarColorArrow = new TextButton("<", skin);
+    private Label carColorLabel = new Label("Black", skin);
+    private TextButton rightCarColorArrow = new TextButton(">", skin);
+
+    private TextButton playButton = new TextButton("Play", skin);
 
     private Music sound;
     private Timer musicTimer;
@@ -49,9 +64,87 @@ public class SetUpScreen implements Screen {
 
     @Override
     public void show() {
-        table.add(title).row();
+
+        leftWeaponArrow.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                switch (weaponLabel.getText().toString()) {
+                    case "Walther PP":
+                        weaponLabel.setText("AWP (sniper)");
+                        break;
+                    case "M4A1":
+                        weaponLabel.setText("Walther PP");
+                        break;
+                    case "AWP (sniper)":
+                        weaponLabel.setText("M4A1");
+                        break;
+                }
+            }
+        });
+
+        rightWeaponArrow.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                switch (weaponLabel.getText().toString()) {
+                    case "Walther PP":
+                        weaponLabel.setText("M4A1");
+                        break;
+                    case "M4A1":
+                        weaponLabel.setText("AWP (sniper)");
+                        break;
+                    case "AWP (sniper)":
+                        weaponLabel.setText("Walther PP");
+                        break;
+                }
+            }
+        });
+
+        leftCarColorArrow.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                switch (carColorLabel.getText().toString()) {
+                    case "Black":
+                        carColorLabel.setText("White");
+                        break;
+                    case "White":
+                        carColorLabel.setText("Black");
+                        break;
+                }
+            }
+        });
+
+        rightCarColorArrow.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                switch (carColorLabel.getText().toString()) {
+                    case "Black":
+                        carColorLabel.setText("White");
+                        break;
+                    case "White":
+                        carColorLabel.setText("Black");
+                        break;
+                }
+            }
+        });
+
+        weaponLabel.setAlignment(Align.center);
+        carColorLabel.setAlignment(Align.center);
+
+        table.add(title).padBottom(60).colspan(3).center().padRight(-10);
+        table.row();
+        table.add(chooseWeaponLabel).colspan(3).center().padBottom(10);
+        table.row();
+        table.add(leftWeaponArrow).padLeft(-32).width(40);
+        table.add(weaponLabel).width(110).padLeft(-38);
+        table.add(rightWeaponArrow).padLeft(-7).width(40);
+        table.row();
+        table.add(chooseCarColorLabel).colspan(3).center().padBottom(10).padTop(50);
+        table.row();
+        table.add(leftCarColorArrow).padLeft(-32).width(40);
+        table.add(carColorLabel).width(110).padLeft(-38);
+        table.add(rightCarColorArrow).padLeft(-7).width(40);
+        table.row();
+        table.add(playButton).padTop(80).size(70,40);
+
         table.setFillParent(true);
         stage.addActor(table);
+        Gdx.input.setInputProcessor(stage);
         Gdx.input.setCatchBackKey(true);
     }
 
@@ -104,12 +197,27 @@ public class SetUpScreen implements Screen {
 
     private void setFontStyles() {
         parameter.size = (int)(screenHeight*0.07f);
-        BitmapFont titlefont = generator.generateFont(parameter);
-        title.setStyle(new Label.LabelStyle(titlefont, Color.WHITE));
+        BitmapFont titleFont = generator.generateFont(parameter);
+        Label.LabelStyle titleStyle = new Label.LabelStyle(titleFont, Color.WHITE);
+        title.setStyle(titleStyle);
 
-        parameter.size = (int)(screenHeight*0.02f);
+        parameter.size = (int)(screenHeight*0.04f);
+        BitmapFont headingFont = generator.generateFont(parameter);
+        Label.LabelStyle headingStyle = new Label.LabelStyle(headingFont, Color.WHITE);
+        chooseWeaponLabel.setStyle(headingStyle);
+        chooseCarColorLabel.setStyle(headingStyle);
+
+        parameter.size = (int)(screenHeight*0.03f);
         BitmapFont textFont = generator.generateFont(parameter);
         Label.LabelStyle textStyle = new Label.LabelStyle(textFont, Color.WHITE);
+        leftWeaponArrow.getLabel().setStyle(titleStyle);
+        leftCarColorArrow.getLabel().setStyle(titleStyle);
+        weaponLabel.setStyle(textStyle);
+        carColorLabel.setStyle(textStyle);
+        rightWeaponArrow.getLabel().setStyle(titleStyle);
+        rightCarColorArrow.getLabel().setStyle(titleStyle);
+
+        playButton.getLabel().setStyle(headingStyle);
 
     }
 }
