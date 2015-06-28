@@ -1,9 +1,12 @@
 package com.icyvenom.needforghetto.screen;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -37,7 +40,7 @@ public class SetUpScreen implements Screen {
     private Label title = new Label("Set-up game ", skin);
 
     private Music sound;
-    private Timer musicTimer = new Timer();
+    private Timer musicTimer;
 
     public SetUpScreen(Music sound, Timer musicTimer){
         this.sound=sound;
@@ -46,7 +49,7 @@ public class SetUpScreen implements Screen {
 
     @Override
     public void show() {
-        table.add(title).padBottom(15).row();
+        table.add(title).row();
         table.setFillParent(true);
         stage.addActor(table);
         Gdx.input.setCatchBackKey(true);
@@ -54,7 +57,16 @@ public class SetUpScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        if(Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+            Gdx.input.setCatchBackKey(false);
+            ((Game)Gdx.app.getApplicationListener()).setScreen(new StartScreen());
+        }
+
+        stage.act();
+        stage.draw();
     }
 
     @Override
@@ -91,12 +103,13 @@ public class SetUpScreen implements Screen {
     }
 
     private void setFontStyles() {
-        parameter.size = (int)(screenHeight*0.03f);
+        parameter.size = (int)(screenHeight*0.07f);
         BitmapFont titlefont = generator.generateFont(parameter);
         title.setStyle(new Label.LabelStyle(titlefont, Color.WHITE));
 
         parameter.size = (int)(screenHeight*0.02f);
-        BitmapFont scorefont = generator.generateFont(parameter);
+        BitmapFont textFont = generator.generateFont(parameter);
+        Label.LabelStyle textStyle = new Label.LabelStyle(textFont, Color.WHITE);
 
     }
 }

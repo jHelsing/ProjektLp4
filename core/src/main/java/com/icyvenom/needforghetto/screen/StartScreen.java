@@ -131,7 +131,7 @@ public class StartScreen implements Screen{
 
         buttonHighscores.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new HighscoreScreen());
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new HighscoreScreen(sound,musicTimer));
             }
         });
 
@@ -167,7 +167,7 @@ public class StartScreen implements Screen{
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         spriteBatch.begin();
-            bgSprite.draw(spriteBatch);
+        bgSprite.draw(spriteBatch);
         spriteBatch.end();
 
         stage.act();
