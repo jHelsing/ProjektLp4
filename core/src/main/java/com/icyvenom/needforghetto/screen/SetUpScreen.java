@@ -19,7 +19,7 @@ import com.badlogic.gdx.utils.Timer;
  * @author Amar.
  * @version 1.0
  */
-public class ChooseScreen implements Screen {
+public class SetUpScreen implements Screen {
 
     private float screenWidth;
     private float screenHeight;
@@ -39,7 +39,7 @@ public class ChooseScreen implements Screen {
     private Music sound;
     private Timer musicTimer = new Timer();
 
-    public ChooseScreen (Music sound, Timer musicTimer){
+    public SetUpScreen(Music sound, Timer musicTimer){
         this.sound=sound;
         this.musicTimer=musicTimer;
     }

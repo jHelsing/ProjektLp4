@@ -99,7 +99,7 @@ public class StartScreen implements Screen{
     public void show() {
         buttonNewGame.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new ChooseScreen(sound,musicTimer));
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new SetUpScreen(sound,musicTimer));
             }
         });
 
