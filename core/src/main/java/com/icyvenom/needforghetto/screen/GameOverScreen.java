@@ -21,7 +21,7 @@ import com.icyvenom.needforghetto.highscore.IHighscore;
 import com.icyvenom.needforghetto.highscore.Score;
 
 /**
- * Created by anton on 2015-05-17.
+ * Created by anton on 2015-05-17. Revisited by Amar.
  */
 public class GameOverScreen implements Screen {
 
@@ -61,12 +61,12 @@ public class GameOverScreen implements Screen {
         this.skin = new Skin(Gdx.files.internal("skins/uiskin.json"),
                 new TextureAtlas(Gdx.files.internal("skins/uiskin.atlas")));
 
-        this.gameOverLabel = new Label("Game Over!", skin);
+        this.gameOverLabel = new Label("Game Over", skin);
         this.scoreLabel = new Label("Your score:" + score, skin);
 
         this.restartButton = new TextButton("Replay", skin);
         this.newGameButton = new TextButton("New game", skin);
-        this.returnButton = new TextButton("Return to main menu", skin);
+        this.returnButton = new TextButton("Main menu", skin);
         init();
         if(highscoreManager.isHighscore(score)) {
             highscoreDialog();
@@ -114,10 +114,10 @@ public class GameOverScreen implements Screen {
         table.setDebug(false);
         table.setFillParent(true);
         table.add(gameOverLabel).colspan(2).expandX().row();
-        table.add(scoreLabel).padBottom(40).colspan(2).expandX().row();
-        table.add(restartButton).size(100, 50).padBottom(20).colspan(3).center().row();
-        table.add(newGameButton).size(100, 50).padBottom(20).colspan(3).center().row();
-        table.add(returnButton).size(100, 50).colspan(3).center();
+        table.add(scoreLabel).colspan(2).expandX().row();
+        table.add(restartButton).colspan(3).center().row();
+        table.add(newGameButton).colspan(3).center().row();
+        table.add(returnButton).colspan(3).center();
         table.row();
 
 
@@ -164,21 +164,25 @@ public class GameOverScreen implements Screen {
     }
 
     private void setFontStyles() {
-        parameter.size = (int)(screenHeight*0.03f);
+        parameter.size = (int)(screenHeight*0.04f);
         BitmapFont titlefont = generator.generateFont(parameter);
         gameOverLabel.setStyle(new Label.LabelStyle(titlefont, Color.WHITE));
-        scoreLabel.setStyle(new Label.LabelStyle(titlefont, Color.WHITE));
 
-        parameter.size = (int)(screenHeight*0.02f);
+
+        parameter.size = (int)(screenHeight*0.03f);
         BitmapFont buttonfont = generator.generateFont(parameter);
 
+        scoreLabel.setStyle(new Label.LabelStyle(buttonfont, Color.WHITE));
         returnButton.getLabel().setStyle(new Label.LabelStyle(buttonfont, Color.WHITE));
         restartButton.getLabel().setStyle(new Label.LabelStyle(buttonfont, Color.WHITE));
         newGameButton.getLabel().setStyle(new Label.LabelStyle(buttonfont, Color.WHITE));
 
-        table.getCell(newGameButton).size((int) (screenWidth * 0.4f), (int) (screenHeight * 0.09f));
+        table.getCell(newGameButton).size((int) (screenWidth * 0.4f), (int) (screenHeight * 0.09f)).
+                padBottom((int)(screenHeight * 0.042f));
         table.getCell(returnButton).size((int) (screenWidth * 0.4f), (int) (screenHeight * 0.09f));
-        table.getCell(restartButton).size((int)(screenWidth*0.4f),(int)(screenHeight*0.09f));
+        table.getCell(restartButton).size((int)(screenWidth*0.4f),(int)(screenHeight*0.09f)).
+                padBottom((int)(screenHeight * 0.042f));
+        table.getCell(scoreLabel).padBottom((int)(screenHeight * 0.084f));
 
     }
 
