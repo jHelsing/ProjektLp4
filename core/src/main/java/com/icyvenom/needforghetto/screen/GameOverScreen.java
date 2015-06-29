@@ -160,7 +160,7 @@ public class GameOverScreen implements Screen {
             }
         };
 
-        Gdx.input.getTextInput(dialog, "New Highscore: "+score, "AAA", "You name here");
+        Gdx.input.getTextInput(dialog, "New Highscore: "+score, null, "Your name here");
     }
 
     private void setFontStyles() {
