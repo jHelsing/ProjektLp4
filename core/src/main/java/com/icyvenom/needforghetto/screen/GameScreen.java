@@ -37,6 +37,9 @@ public class GameScreen implements Screen {
     private StatusBarRenderer statusBarRenderer;
     private BackgroundRenderer backgroundRenderer;
 
+    private String playerWeapon;
+    private String playerCarColor;
+
     /**
      * The controller for the game.
      */
@@ -71,15 +74,20 @@ public class GameScreen implements Screen {
         }
     };
 
+    public GameScreen(String playerWeapon, String playerCarColor) {
+        this.playerWeapon=playerWeapon;
+        this.playerCarColor=playerCarColor;
+    }
+
     @Override
     public void show() {
         sound = Gdx.audio.newMusic(Gdx.files.internal("music/inGame.mp3"));
         sound.setLooping(true);
         sound.play();
         //World
-        world = WorldFactory.getWorld();
+        world = WorldFactory.generateWorld(playerWeapon);
         // true/false: debug flag
-        worldRenderer = new WorldRenderer(world, false);
+        worldRenderer = new WorldRenderer(world, false, playerCarColor);
 
         statusBarRenderer = new StatusBarRenderer(world);
         backgroundRenderer = new BackgroundRenderer();
@@ -111,7 +119,8 @@ public class GameScreen implements Screen {
         if(world.getPlayer().isDead()) {
             sound.stop();
             sound.dispose();
-            GameOverScreen ble = new GameOverScreen(world.getPlayer().getScore());
+            GameOverScreen ble = new GameOverScreen(world.getPlayer().getScore(), playerWeapon,
+                    playerCarColor);
             ((Game) Gdx.app.getApplicationListener()).setScreen(ble);
             this.dispose();
         }
@@ -131,7 +140,8 @@ public class GameScreen implements Screen {
                 break;
             case VICTORY:
                 sound.stop();
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new VictoryScreen(world.getPlayer().getScore()));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new VictoryScreen(
+                        world.getPlayer().getScore(), playerWeapon, playerCarColor));
                 this.dispose();
         }
 

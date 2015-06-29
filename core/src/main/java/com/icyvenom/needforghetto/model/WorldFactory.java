@@ -6,8 +6,8 @@ package com.icyvenom.needforghetto.model;
  */
 public class WorldFactory {
 
-    public static World getWorld() {
-        return new World();
+    public static World generateWorld(String playerWeapon) {
+        return new World(playerWeapon);
     }
 
 }

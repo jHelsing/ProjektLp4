@@ -123,6 +123,13 @@ public class SetUpScreen implements Screen {
             }
         });
 
+        playButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(weaponLabel.
+                        getText().toString(), carColorLabel.getText().toString()));
+            }
+        });
+
         weaponLabel.setAlignment(Align.center);
         carColorLabel.setAlignment(Align.center);
 

@@ -38,13 +38,18 @@ public class GameOverScreen implements Screen {
     private TextButton restartButton;
     private TextButton exitButton;
 
+    private String playerWeapon;
+    private String playerCarColor;
+
     private IHighscore highscoreManager;
 
     FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DroidSerif-Regular.ttf"));
     FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
-    public GameOverScreen(int score) {
+    public GameOverScreen(int score, String playerWeapon, String playerCarColor) {
         this.score = score;
+        this.playerWeapon = playerWeapon;
+        this.playerCarColor = playerCarColor;
     }
 
     @Override
@@ -117,7 +122,7 @@ public class GameOverScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.err.println("restart button pressed!");
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen());
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen(playerWeapon,playerCarColor));
             }
         });
 

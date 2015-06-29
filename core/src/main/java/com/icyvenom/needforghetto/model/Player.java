@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.icyvenom.needforghetto.gamestate.GameState;
 import com.icyvenom.needforghetto.model.bullets.BulletDirection;
 import com.icyvenom.needforghetto.model.weapons.Weapon;
+import com.icyvenom.needforghetto.model.weapons.WeaponAWP;
 import com.icyvenom.needforghetto.model.weapons.WeaponMFourAOne;
 import com.icyvenom.needforghetto.model.weapons.WeaponNineMM;
 
@@ -78,7 +79,7 @@ public class Player {
     /**
      * The Players weapon.
      */
-    private Weapon weapon = new WeaponMFourAOne(BulletDirection.UP);
+    private Weapon weapon;
     /**
      * The timer for the attack speed of the player. Sets how often
      * the Player should fire bullets.
@@ -93,8 +94,9 @@ public class Player {
      * timer is setup and ready to use.
      * @param position The spawn position of the Player object.
      */
-    public Player(Vector2 position){
+    public Player(Vector2 position, String playerWeapon){
         this.position = position.cpy();
+        setWeapon(playerWeapon);
         this.bounds.height= HEIGHT;
         this.bounds.width = WIDTH;
         this.bounds.setX(this.position.x);
@@ -142,6 +144,21 @@ public class Player {
             this.bounds.setY(this.position.y);
             this.weapon.setPosition(this.position.cpy().add(HEIGHT/3, WIDTH/2));
         }
+    }
+
+    public void setWeapon(String playerWeapon){
+        switch (playerWeapon){
+            case "Walther PP":
+                weapon = new WeaponNineMM(BulletDirection.UP);
+                break;
+            case "M4A1":
+                weapon = new WeaponMFourAOne(BulletDirection.UP);
+                break;
+            case "AWP":
+                weapon = new WeaponAWP(BulletDirection.UP);
+                break;
+        }
+
     }
 
     /**

@@ -40,16 +40,18 @@ public class WorldRenderer {
 
     private SpriteBatch spriteBatch;
     private boolean debug = false;
+    private String playerCarColor;
     private int width;
     private int height;
     private float ppuX; // pixels per unit on the X axis
     private float ppuY; // pixels per unit on the Y axis
 
-    public WorldRenderer(World world, boolean debug){
+    public WorldRenderer(World world, boolean debug, String playerCarColor){
         this.world = world;
         this.cam = new OrthographicCamera(10, 10);
         this.cam.position.set(5, 5, 0);
         this.cam.update();
+        this.playerCarColor=playerCarColor;
         spriteBatch = new SpriteBatch();
         this.debug = debug;
         loadTextures();
@@ -154,12 +156,21 @@ public class WorldRenderer {
      * Loads the correct textures into the memory for drawing purposes.
      */
     public void loadTextures(){
-        playerTexture = new Texture(Gdx.files.internal("images/car.png"));
+        switch (playerCarColor){
+            case "Black":
+                playerTexture = new Texture(Gdx.files.internal("images/playerCarBlack.png"));
+                fadedPlayerTexture = new Texture(Gdx.files.internal("images/playerCarBlackFaded.png"));
+                break;
+            case "White":
+                playerTexture = new Texture(Gdx.files.internal("images/playerCarWhite.png"));
+                fadedPlayerTexture = new Texture(Gdx.files.internal("images/playerCarWhiteFaded.png"));
+                break;
+        }
+
         enemyPistolTexture = new Texture(Gdx.files.internal("images/enemyPistol.png"));
         enemyAWPTexture = new Texture(Gdx.files.internal("images/enemyAWP.png"));
         enemyStalkerTexture = new Texture(Gdx.files.internal("images/enemyStalker.png"));
         bulletTexture = new Texture(Gdx.files.internal("images/bullet.png"));
-        fadedPlayerTexture = new Texture(Gdx.files.internal("images/carFaded.png"));
         enemyBossTexture = new Texture(Gdx.files.internal("images/enemyBoss.png"));
     }
 

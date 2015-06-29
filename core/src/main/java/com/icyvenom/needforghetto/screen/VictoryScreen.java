@@ -33,6 +33,9 @@ public class VictoryScreen implements Screen {
     private Skin skin;
     private Stage stage;
 
+    private String playerWeapon;
+    private String playerCarColor;
+
     private Label gameOverLabel;
     private Label scoreLabel;
     private TextButton restartButton;
@@ -43,8 +46,10 @@ public class VictoryScreen implements Screen {
     FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DroidSerif-Regular.ttf"));
     FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
-    public VictoryScreen(int score) {
+    public VictoryScreen(int score, String playerWeapon, String playerCarColor) {
         this.score = score;
+        this.playerWeapon = playerWeapon;
+        this.playerCarColor = playerCarColor;
     }
 
     @Override
@@ -117,7 +122,7 @@ public class VictoryScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.err.println("restart button pressed!");
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen());
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen(playerWeapon,playerCarColor));
             }
         });
 
