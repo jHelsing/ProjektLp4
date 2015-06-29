@@ -142,13 +142,13 @@ public class StartScreen implements Screen{
         });
 
 
-        table.add(title1).padBottom(-10).row();
-        table.add(title2).padBottom(-10).row();
-        table.add(title3).padBottom(50).row();
-        table.add(buttonNewGame).size(550, 100).padBottom(20).row();
-        table.add(buttonHighscores).size(550, 100).padBottom(20).row();
-        table.add(buttonCheat).size(550, 100).padBottom(20).row();
-        table.add(buttonExit).size(550,100).padBottom(20).row();
+        table.add(title1).row();
+        table.add(title2).row();
+        table.add(title3).row();
+        table.add(buttonNewGame).row();
+        table.add(buttonHighscores).row();
+        table.add(buttonCheat).row();
+        table.add(buttonExit).row();
 
         table.setFillParent(true);
         stage.addActor(table);
@@ -231,10 +231,17 @@ public class StartScreen implements Screen{
         buttonCheat.getLabel().setStyle(buttontyle);
         buttonExit.getLabel().setStyle(buttontyle);
 
-        table.getCell(buttonNewGame).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f));
-        table.getCell(buttonHighscores).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f));
-        table.getCell(buttonCheat).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f));
-        table.getCell(buttonExit).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f));
+        table.getCell(buttonNewGame).size((int) (screenWidth * 0.8f), (int) (screenHeight * 0.09f)).
+                padBottom((int) (screenHeight * 0.042f));
+        table.getCell(buttonHighscores).size((int) (screenWidth * 0.8f), (int) (screenHeight * 0.09f)).
+                padBottom((int) (screenHeight * 0.042f));
+        table.getCell(buttonCheat).size((int) (screenWidth * 0.8f), (int) (screenHeight * 0.09f)).
+                padBottom((int) (screenHeight * 0.042f));
+        table.getCell(buttonExit).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f)).
+                padBottom((int)(screenHeight * 0.042f));
+        table.getCell(title1).padBottom((int)(screenHeight * 0.021f * (-1)));
+        table.getCell(title2).padBottom((int)(screenHeight * 0.021f * (-1)));
+        table.getCell(title3).padBottom((int)(screenHeight * 0.105f));
     }
 
 }
