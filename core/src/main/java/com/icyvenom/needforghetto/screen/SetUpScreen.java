@@ -69,12 +69,12 @@ public class SetUpScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 switch (weaponLabel.getText().toString()) {
                     case "Walther PP":
-                        weaponLabel.setText("AWP (sniper)");
+                        weaponLabel.setText("AWP");
                         break;
                     case "M4A1":
                         weaponLabel.setText("Walther PP");
                         break;
-                    case "AWP (sniper)":
+                    case "AWP":
                         weaponLabel.setText("M4A1");
                         break;
                 }
@@ -88,9 +88,9 @@ public class SetUpScreen implements Screen {
                         weaponLabel.setText("M4A1");
                         break;
                     case "M4A1":
-                        weaponLabel.setText("AWP (sniper)");
+                        weaponLabel.setText("AWP");
                         break;
-                    case "AWP (sniper)":
+                    case "AWP":
                         weaponLabel.setText("Walther PP");
                         break;
                 }
@@ -130,17 +130,17 @@ public class SetUpScreen implements Screen {
         table.row();
         table.add(chooseWeaponLabel).colspan(3).center().padBottom(10);
         table.row();
-        table.add(leftWeaponArrow).padLeft(-32).width(40);
-        table.add(weaponLabel).width(110).padLeft(-38);
-        table.add(rightWeaponArrow).padLeft(-7).width(40);
+        table.add(leftWeaponArrow).width(40);
+        table.add(weaponLabel).width(110);
+        table.add(rightWeaponArrow).width(40);
         table.row();
         table.add(chooseCarColorLabel).colspan(3).center().padBottom(10).padTop(50);
         table.row();
-        table.add(leftCarColorArrow).padLeft(-32).width(40);
-        table.add(carColorLabel).width(110).padLeft(-38);
-        table.add(rightCarColorArrow).padLeft(-7).width(40);
+        table.add(leftCarColorArrow).width(40);
+        table.add(carColorLabel).width(110);
+        table.add(rightCarColorArrow).width(40);
         table.row();
-        table.add(playButton).padTop(80).size(70,40);
+        table.add(playButton).padTop(80).size(195,40).colspan(3).center();
 
         table.setFillParent(true);
         stage.addActor(table);
