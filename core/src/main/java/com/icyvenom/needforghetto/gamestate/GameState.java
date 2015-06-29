@@ -16,4 +16,6 @@ public class GameState {
 
     public static boolean GODMODE = false;
 
+    public static boolean GODMODE_CHEAT = false;
+
 }

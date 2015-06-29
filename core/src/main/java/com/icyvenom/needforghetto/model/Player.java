@@ -206,7 +206,7 @@ public class Player {
      * now be firing bullets.
      */
     public void fire() {
-        if(!isGod()){
+        if(!isGod() || isGodCheating()){
             attackSpeed.start();
         }
     }
@@ -275,5 +275,9 @@ public class Player {
 
     public boolean isGod() {
         return GameState.GODMODE;
+    }
+
+    public boolean isGodCheating(){
+        return GameState.GODMODE_CHEAT;
     }
 }

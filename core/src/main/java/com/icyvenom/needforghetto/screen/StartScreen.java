@@ -115,8 +115,14 @@ public class StartScreen implements Screen{
                     @Override
                     public void input(String text) {
                         String code = text.toLowerCase();
-                        if(code.equals("shall fight")) {
+                        if(code.equals("godmode 1")) {
                             GameState.GODMODE = true;
+                            GameState.GODMODE_CHEAT = true;
+                        }
+
+                        if(code.equals("godmode 0")) {
+                            GameState.GODMODE = false;
+                            GameState.GODMODE_CHEAT = false;
                         }
                     }
 
