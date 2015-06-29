@@ -146,21 +146,21 @@ public class SetUpScreen implements Screen {
         weaponLabel.setAlignment(Align.center);
         carColorLabel.setAlignment(Align.center);
 
-        table.add(title).padBottom(60).colspan(3).center().padRight(-10);
+        table.add(title).colspan(3).center();
         table.row();
-        table.add(chooseWeaponLabel).colspan(3).center().padBottom(10);
+        table.add(chooseWeaponLabel).colspan(3).center();
         table.row();
-        table.add(leftWeaponArrow).width(40);
-        table.add(weaponLabel).width(110);
-        table.add(rightWeaponArrow).width(40);
+        table.add(leftWeaponArrow);
+        table.add(weaponLabel);
+        table.add(rightWeaponArrow);
         table.row();
-        table.add(chooseCarColorLabel).colspan(3).center().padBottom(10).padTop(50);
+        table.add(chooseCarColorLabel).colspan(3).center();
         table.row();
-        table.add(leftCarColorArrow).width(40);
-        table.add(carColorLabel).width(110);
-        table.add(rightCarColorArrow).width(40);
+        table.add(leftCarColorArrow);
+        table.add(carColorLabel);
+        table.add(rightCarColorArrow);
         table.row();
-        table.add(playButton).padTop(80).size(195,40).colspan(3).center();
+        table.add(playButton).colspan(3).center();
 
         table.setFillParent(true);
         stage.addActor(table);
@@ -238,6 +238,19 @@ public class SetUpScreen implements Screen {
         rightCarColorArrow.getLabel().setStyle(titleStyle);
 
         playButton.getLabel().setStyle(headingStyle);
+
+        table.getCell(playButton).size((int) (screenWidth * 0.61f), (int) (screenHeight * 0.084f)).
+                padTop((int) (screenHeight * 0.167f));
+        table.getCell(leftWeaponArrow).width((int) (screenWidth * 0.125f));
+        table.getCell(leftCarColorArrow).width((int) (screenWidth * 0.125f));
+        table.getCell(rightWeaponArrow).width((int) (screenWidth * 0.125f));
+        table.getCell(rightCarColorArrow).width((int)(screenWidth * 0.125f));
+        table.getCell(weaponLabel).width((int)(screenWidth * 0.344f));
+        table.getCell(carColorLabel).width((int)(screenWidth * 0.344f));
+        table.getCell(title).padBottom((int)(screenHeight * 0.125f)).padRight((int)(screenWidth * 0.032f * (-1)));
+        table.getCell(chooseWeaponLabel).padBottom((int)(screenHeight * 0.021f));
+        table.getCell(chooseCarColorLabel).padBottom((int)(screenHeight * 0.021f)).
+                padTop((int)(screenHeight * 0.105f));
 
     }
 }
