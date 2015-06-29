@@ -62,6 +62,19 @@ public class SetUpScreen implements Screen {
         this.musicTimer=musicTimer;
     }
 
+    public SetUpScreen(){
+        this.musicTimer = new Timer();
+        sound = Gdx.audio.newMusic(Gdx.files.internal("music/menu.mp3"));
+        sound.play();
+        musicTimer.scheduleTask(new Timer.Task() {
+            @Override
+            public void run() {
+                sound.stop();
+                sound.play();
+            }
+        }, 0, 120, 120);
+    }
+
     @Override
     public void show() {
 

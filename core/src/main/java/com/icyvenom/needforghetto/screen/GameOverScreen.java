@@ -36,7 +36,8 @@ public class GameOverScreen implements Screen {
     private Label gameOverLabel;
     private Label scoreLabel;
     private TextButton restartButton;
-    private TextButton exitButton;
+    private TextButton newGameButton;
+    private TextButton returnButton;
 
     private String playerWeapon;
     private String playerCarColor;
@@ -63,8 +64,9 @@ public class GameOverScreen implements Screen {
         this.gameOverLabel = new Label("Game Over!", skin);
         this.scoreLabel = new Label("Your score:" + score, skin);
 
-        this.restartButton = new TextButton("Play again!", skin);
-        this.exitButton = new TextButton("Ragequit", skin);
+        this.restartButton = new TextButton("Replay", skin);
+        this.newGameButton = new TextButton("New game", skin);
+        this.returnButton = new TextButton("Return to main menu", skin);
         init();
         if(highscoreManager.isHighscore(score)) {
             highscoreDialog();
@@ -112,9 +114,10 @@ public class GameOverScreen implements Screen {
         table.setDebug(false);
         table.setFillParent(true);
         table.add(gameOverLabel).colspan(2).expandX().row();
-        table.add(scoreLabel).colspan(2).expandX().row();
-        table.add(restartButton).size(100, 50);
-        table.add(exitButton).size(100, 50);
+        table.add(scoreLabel).padBottom(40).colspan(2).expandX().row();
+        table.add(restartButton).size(100, 50).padBottom(20).colspan(3).center().row();
+        table.add(newGameButton).size(100, 50).padBottom(20).colspan(3).center().row();
+        table.add(returnButton).size(100, 50).colspan(3).center();
         table.row();
 
 
@@ -122,14 +125,21 @@ public class GameOverScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.err.println("restart button pressed!");
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen(playerWeapon,playerCarColor));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(playerWeapon, playerCarColor));
             }
         });
 
-        exitButton.addListener(new ClickListener(){
+        newGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new SetUpScreen());
+            }
+        });
+
+        returnButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new StartScreen());
             }
         });
 
@@ -162,10 +172,12 @@ public class GameOverScreen implements Screen {
         parameter.size = (int)(screenHeight*0.02f);
         BitmapFont buttonfont = generator.generateFont(parameter);
 
-        exitButton.getLabel().setStyle(new Label.LabelStyle(buttonfont, Color.WHITE));
+        returnButton.getLabel().setStyle(new Label.LabelStyle(buttonfont, Color.WHITE));
         restartButton.getLabel().setStyle(new Label.LabelStyle(buttonfont, Color.WHITE));
+        newGameButton.getLabel().setStyle(new Label.LabelStyle(buttonfont, Color.WHITE));
 
-        table.getCell(exitButton).size((int)(screenWidth*0.4f),(int)(screenHeight*0.09f));
+        table.getCell(newGameButton).size((int) (screenWidth * 0.4f), (int) (screenHeight * 0.09f));
+        table.getCell(returnButton).size((int) (screenWidth * 0.4f), (int) (screenHeight * 0.09f));
         table.getCell(restartButton).size((int)(screenWidth*0.4f),(int)(screenHeight*0.09f));
 
     }
