@@ -53,10 +53,10 @@ public class HighscoreScreen implements Screen {
     public void show() {
         highscoreManager = HighscoreFactory.getHighscore();
 
-        table.add(title).padBottom(15).row();
+        table.add(title).row();
         int rank=1;
         String suffix;
-        highscoreLabels.add(new Label("Rank" + "        " + "Score" + "         " + "Name", skin));
+        highscoreLabels.add(new Label("Rank" + "         " + "Score" + "         " + "Name", skin));
         for(Score score : highscoreManager.getScoreList()) {
             if(rank==1){
                 suffix="st";
@@ -75,7 +75,7 @@ public class HighscoreScreen implements Screen {
         }
 
         for(Label label : highscoreLabels) {
-            table.add(label).pad(5).row();
+            table.add(label).row();
         }
         table.setFillParent(true);
         stage.addActor(table);
@@ -129,19 +129,19 @@ public class HighscoreScreen implements Screen {
     }
 
     private void setFontStyles() {
-        parameter.size = (int)(screenHeight*0.03f);
+        parameter.size = (int)(screenHeight*0.04f);
         BitmapFont titlefont = generator.generateFont(parameter);
         title.setStyle(new Label.LabelStyle(titlefont, Color.WHITE));
 
-        parameter.size = (int)(screenHeight*0.02f);
+        parameter.size = (int)(screenHeight*0.03f);
         BitmapFont scorefont = generator.generateFont(parameter);
         Label.LabelStyle scorestyle = new Label.LabelStyle(scorefont, Color.WHITE);
 
+        table.getCell(title).padBottom((int)(screenHeight*0.0235f));
+
         for(Label l : highscoreLabels) {
             l.setStyle(scorestyle);
+            table.getCell(l).pad((int)(screenWidth*0.02f));
         }
-
-
     }
-
 }
