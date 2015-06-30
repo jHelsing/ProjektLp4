@@ -68,6 +68,11 @@ public class StartScreen implements Screen{
     private TextButton buttonCheat = new TextButton("Cheats", skin);
 
     /**
+     * Creates a new settings button that will hold the text Settings.
+     */
+    private TextButton buttonSettings = new TextButton("Settings", skin);
+
+    /**
      * Creates a new highscore button that will hold the text Highscore
      */
     private TextButton buttonHighscores = new TextButton("Highscore", skin);
@@ -97,6 +102,13 @@ public class StartScreen implements Screen{
 
     @Override
     public void show() {
+
+        buttonSettings.addListener(new ClickListener(){
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new SettingsScreen(sound,musicTimer));
+            }
+        });
+
         buttonNewGame.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
                 ((Game)Gdx.app.getApplicationListener()).setScreen(new SetUpScreen(sound,musicTimer));
@@ -137,7 +149,7 @@ public class StartScreen implements Screen{
 
         buttonHighscores.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new HighscoreScreen(sound,musicTimer));
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new HighscoreScreen(sound, musicTimer));
             }
         });
 
@@ -147,6 +159,7 @@ public class StartScreen implements Screen{
         table.add(title3).row();
         table.add(buttonNewGame).row();
         table.add(buttonHighscores).row();
+        table.add(buttonSettings).row();
         table.add(buttonCheat).row();
         table.add(buttonExit).row();
 
@@ -228,6 +241,7 @@ public class StartScreen implements Screen{
 
         buttonNewGame.getLabel().setStyle(buttontyle);
         buttonHighscores.getLabel().setStyle(buttontyle);
+        buttonSettings.getLabel().setStyle(buttontyle);
         buttonCheat.getLabel().setStyle(buttontyle);
         buttonExit.getLabel().setStyle(buttontyle);
 
@@ -235,13 +249,15 @@ public class StartScreen implements Screen{
                 padBottom((int) (screenHeight * 0.042f));
         table.getCell(buttonHighscores).size((int) (screenWidth * 0.8f), (int) (screenHeight * 0.09f)).
                 padBottom((int) (screenHeight * 0.042f));
+        table.getCell(buttonSettings).size((int) (screenWidth * 0.8f), (int) (screenHeight * 0.09f)).
+                padBottom((int) (screenHeight * 0.042f));
         table.getCell(buttonCheat).size((int) (screenWidth * 0.8f), (int) (screenHeight * 0.09f)).
                 padBottom((int) (screenHeight * 0.042f));
         table.getCell(buttonExit).size((int)(screenWidth*0.8f),(int)(screenHeight*0.09f)).
                 padBottom((int)(screenHeight * 0.042f));
         table.getCell(title1).padBottom((int)(screenHeight * 0.021f * (-1)));
         table.getCell(title2).padBottom((int)(screenHeight * 0.021f * (-1)));
-        table.getCell(title3).padBottom((int)(screenHeight * 0.105f));
+        table.getCell(title3).padBottom((int)(screenHeight * 0.04f));
     }
 
 }

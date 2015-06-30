@@ -41,7 +41,7 @@ public class SetUpScreen implements Screen {
     FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DroidSerif-Regular.ttf"));
     FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
-    private Label title = new Label("Set-up game ", skin);
+    private Label title = new Label("Set-up game", skin);
     private Label chooseWeaponLabel = new Label("Choose a weapon", skin);
     private TextButton leftWeaponArrow = new TextButton("<", skin);
     private Label weaponLabel = new Label("Walther PP", skin);
@@ -247,7 +247,7 @@ public class SetUpScreen implements Screen {
         table.getCell(rightCarColorArrow).width((int)(screenWidth * 0.125f));
         table.getCell(weaponLabel).width((int)(screenWidth * 0.344f));
         table.getCell(carColorLabel).width((int)(screenWidth * 0.344f));
-        table.getCell(title).padBottom((int)(screenHeight * 0.125f)).padRight((int)(screenWidth * 0.032f * (-1)));
+        table.getCell(title).padBottom((int)(screenHeight * 0.125f));
         table.getCell(chooseWeaponLabel).padBottom((int)(screenHeight * 0.021f));
         table.getCell(chooseCarColorLabel).padBottom((int)(screenHeight * 0.021f)).
                 padTop((int)(screenHeight * 0.105f));

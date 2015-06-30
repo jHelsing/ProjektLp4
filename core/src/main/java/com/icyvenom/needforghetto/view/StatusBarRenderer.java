@@ -65,7 +65,7 @@ public class StatusBarRenderer {
         table.setFillParent(true);
         table.add(scoreStatus).expandX();
         table.add(lifeStatus).expandX();
-        table.add(buttonPause).size(120, 70);
+        table.add(buttonPause);
         table.right().top();
 
         buttonPause.addListener(new ClickListener(){
