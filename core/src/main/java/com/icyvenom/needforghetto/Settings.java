@@ -13,18 +13,18 @@ public class Settings {
 
     public static void setControlType(String controlType){
         Settings.controlType = controlType;
-        SaveControlType();
+        saveControlType();
     }
 
-    public static void SaveControlType(){
+    public static void saveControlType(){
         String fileName = "Settings.txt";
         FileHandle handle = SAVE_LOCATION.child(fileName);
         if(handle.exists()){
             String allSettings = handle.readString();
-            allSettings.substring(1);
-            if(handle.readString().contains("#")){
+            allSettings = allSettings.substring(1);
+            if(allSettings.contains("#")){
                 //ControlType setting will always be first in the textfile.
-                allSettings.substring(allSettings.indexOf("#"));
+                allSettings=allSettings.substring(allSettings.indexOf("#"));
                 allSettings = "#ControlType=" + Settings.controlType + allSettings;
                 handle.writeString(allSettings, false);
             }
@@ -39,8 +39,28 @@ public class Settings {
         }
     }
 
-    public static String LoadControlType(){
-        
-        return ;
+    private static void loadControlType(FileHandle handle){
+        if(handle.readString().contains("Touchpad")){
+            Settings.controlType="Touchpad";
+        }
+        else{
+            Settings.controlType="Drag";
+        }
+    }
+
+    public static void init(){
+        String defaultValue="Drag";
+        String fileName = "Settings.txt";
+        FileHandle handle = SAVE_LOCATION.child(fileName);
+        if(handle.exists()){
+            loadControlType(handle);
+        }
+        else{
+            setControlType(defaultValue);
+        }
+    }
+
+    public static String getControlType(){
+        return Settings.controlType;
     }
 }

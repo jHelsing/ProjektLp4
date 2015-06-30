@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Timer;
+import com.icyvenom.needforghetto.Settings;
 import com.icyvenom.needforghetto.gamestate.GameState;
 
 /**
@@ -102,6 +103,8 @@ public class StartScreen implements Screen{
 
     @Override
     public void show() {
+
+        Settings.init();
 
         buttonSettings.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {

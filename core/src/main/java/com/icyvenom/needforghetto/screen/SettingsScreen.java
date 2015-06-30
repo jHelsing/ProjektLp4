@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Timer;
+import com.icyvenom.needforghetto.Settings;
 
 /**
  * Created by amar__000 on 2015-06-29.
@@ -41,7 +42,7 @@ public class SettingsScreen implements Screen {
     private Label title = new Label("Settings", skin);
     private Label chooseControllerLabel = new Label("Choose controller", skin);
     private TextButton leftControllerArrow = new TextButton("<", skin);
-    private Label controllerLabel = new Label("Drag", skin);
+    private Label controllerLabel = new Label(Settings.getControlType(), skin);
     private TextButton rightControllerArrow = new TextButton(">", skin);
 
     private Music sound;
@@ -133,6 +134,7 @@ public class SettingsScreen implements Screen {
 
     @Override
     public void dispose() {
+        Settings.setControlType(controllerLabel.getText().toString());
         Gdx.input.setInputProcessor(null);
         musicTimer.stop();
         sound.stop();
