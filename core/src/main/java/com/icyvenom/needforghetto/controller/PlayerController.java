@@ -4,6 +4,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.icyvenom.needforghetto.Settings;
 import com.icyvenom.needforghetto.model.bullets.Bullet;
 import com.icyvenom.needforghetto.model.enemies.Enemy;
 import com.icyvenom.needforghetto.model.Player;
@@ -32,6 +33,8 @@ public class PlayerController implements InputProcessor{
      */
     OrthographicCamera camera;
 
+    private boolean dragControltypeOn;
+
     /**
      * The constructor for a new controller to control the given world-model.
      * @param world The world-model to control.
@@ -47,6 +50,8 @@ public class PlayerController implements InputProcessor{
         this.world = world;
         this.player = world.getPlayer();
         this.camera = camera;
+        this.dragControltypeOn=isDragControltypeOn();
+
     }
 
     /**
@@ -106,26 +111,32 @@ public class PlayerController implements InputProcessor{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        Vector3 pos = camera.unproject(new Vector3(screenX, screenY, 0));
-        move(new Vector2(pos.x, pos.y));
-        player.fire();
-        this.move = true;
+        if(dragControltypeOn){
+            Vector3 pos = camera.unproject(new Vector3(screenX, screenY, 0));
+            move(new Vector2(pos.x, pos.y));
+            player.fire();
+            this.move = true;
+        }
         return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        //TODO: implement fireStop(); this should stop the timer for bullets
-        player.stopFire();
-        this.move = false;
+        if(dragControltypeOn){
+            //TODO: implement fireStop(); this should stop the timer for bullets
+            player.stopFire();
+            this.move = false;
+        }
         return true;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        Vector3 pos = camera.unproject(new Vector3(screenX, screenY, 0));
-        move(new Vector2(pos.x, pos.y));
-        this.move = true;
+        if(dragControltypeOn){
+            Vector3 pos = camera.unproject(new Vector3(screenX, screenY, 0));
+            move(new Vector2(pos.x, pos.y));
+            this.move = true;
+        }
         return true;
     }
 
@@ -137,5 +148,13 @@ public class PlayerController implements InputProcessor{
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    /**
+     * This method is telling us the controltype is Drag.
+     * @return Returns a boolean with  the value true if Drag-Controltype is on.
+     */
+    private boolean isDragControltypeOn(){
+        return Settings.getControlType().equals("Drag");
     }
 }
