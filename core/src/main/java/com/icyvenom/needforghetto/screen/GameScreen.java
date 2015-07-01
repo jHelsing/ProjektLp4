@@ -8,12 +8,14 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
+import com.icyvenom.needforghetto.Settings;
 import com.icyvenom.needforghetto.controller.PlayerController;
 import com.icyvenom.needforghetto.gamestate.GameState;
 import com.icyvenom.needforghetto.model.World;
 import com.icyvenom.needforghetto.model.WorldFactory;
 import com.icyvenom.needforghetto.view.BackgroundRenderer;
 import com.icyvenom.needforghetto.view.StatusBarRenderer;
+import com.icyvenom.needforghetto.view.TouchPadRenderer;
 import com.icyvenom.needforghetto.view.WorldRenderer;
 
 /**
@@ -36,9 +38,12 @@ public class GameScreen implements Screen {
     private WorldRenderer worldRenderer;
     private StatusBarRenderer statusBarRenderer;
     private BackgroundRenderer backgroundRenderer;
+    private TouchPadRenderer touchpadRenderer;
 
     private String playerWeapon;
     private String playerCarColor;
+
+    private boolean touchpadControltypeOn;
 
     /**
      * The controller for the game.
@@ -77,6 +82,7 @@ public class GameScreen implements Screen {
     public GameScreen(String playerWeapon, String playerCarColor) {
         this.playerWeapon=playerWeapon;
         this.playerCarColor=playerCarColor;
+        this.touchpadControltypeOn=isTouchpadControltypeOn();
     }
 
     @Override
@@ -92,9 +98,18 @@ public class GameScreen implements Screen {
         statusBarRenderer = new StatusBarRenderer(world);
         backgroundRenderer = new BackgroundRenderer();
 
-        GameState.currentState = GameState.State.RUNNING;
+        if(touchpadControltypeOn){
+            touchpadRenderer = new TouchPadRenderer();
+            playerController = new PlayerController(world, worldRenderer.getCamera(), touchpadRenderer,
+                    touchpadControltypeOn);
+            inputMultiplexerPaused.addProcessor(touchpadRenderer.getStage());
+            inputMultiplexerRunning.addProcessor(touchpadRenderer.getStage());
+        }
+        else{
+            playerController = new PlayerController(world, worldRenderer.getCamera(), touchpadControltypeOn);
+        }
 
-        playerController = new PlayerController(world, worldRenderer.getCamera());
+        GameState.currentState = GameState.State.RUNNING;
 
         // Adds inputprocessors to multiplexer
         inputMultiplexerPaused.addProcessor(statusBarRenderer.getStage());
@@ -148,12 +163,28 @@ public class GameScreen implements Screen {
         worldRenderer.render();
         // this is for menu on top of the screen
         statusBarRenderer.render();
+
+        if(touchpadControltypeOn){
+            touchpadRenderer.render();
+        }
     }
 
     @Override
     public void resize(int width, int height) {
         worldRenderer.setSize(width, height);
         statusBarRenderer.setSize(width, height);
+
+        if(touchpadControltypeOn){
+            touchpadRenderer.setSize(width, height);
+        }
+    }
+
+    /**
+     * This method tells us if the controltype is Touchpad.
+     * @return Returns a boolean with  the value true if Touchpad-Controltype is on.
+     */
+    public boolean isTouchpadControltypeOn(){
+        return Settings.getControlType().equals("Touchpad");
     }
 
     @Override

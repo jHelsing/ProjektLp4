@@ -9,13 +9,17 @@ import com.icyvenom.needforghetto.model.bullets.Bullet;
 import com.icyvenom.needforghetto.model.enemies.Enemy;
 import com.icyvenom.needforghetto.model.Player;
 import com.icyvenom.needforghetto.model.World;
+import com.icyvenom.needforghetto.view.TouchPadRenderer;
+
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * This is the controller for the game.
  * @author Marcus. Revisited by Amar.
  * @version 1.0
  */
-public class PlayerController implements InputProcessor{
+public class PlayerController implements InputProcessor, Observer{
 
     /**
      * The world object.
@@ -27,6 +31,8 @@ public class PlayerController implements InputProcessor{
      */
     Player player;
 
+    private TouchPadRenderer touchpadRenderer;
+
     /**
      * This is the OrthographicCamera object.
      * It is needed to convert from pixel to unit.
@@ -34,6 +40,8 @@ public class PlayerController implements InputProcessor{
     OrthographicCamera camera;
 
     private boolean dragControltypeOn;
+
+    private boolean touchControltypeOn;
 
     /**
      * The constructor for a new controller to control the given world-model.
@@ -46,11 +54,23 @@ public class PlayerController implements InputProcessor{
      */
     private boolean move = false;
 
-    public PlayerController(World world, OrthographicCamera camera){
+    public PlayerController(World world, OrthographicCamera camera, boolean touchControltypeOn){
         this.world = world;
         this.player = world.getPlayer();
         this.camera = camera;
+        this.touchControltypeOn=touchControltypeOn;
         this.dragControltypeOn=isDragControltypeOn();
+    }
+
+    public PlayerController(World world, OrthographicCamera camera, TouchPadRenderer touchPadRenderer,
+                            boolean touchControltypeOn){
+        this.world = world;
+        this.player = world.getPlayer();
+        this.camera = camera;
+        this.touchControltypeOn=touchControltypeOn;
+        this.touchpadRenderer=touchPadRenderer;
+        this.dragControltypeOn=isDragControltypeOn();
+        this.touchpadRenderer.addObserver(this);
 
     }
 
@@ -58,8 +78,14 @@ public class PlayerController implements InputProcessor{
      * The move method for the player. Gives the player a velocity.
      * @param goalPos The vector that the player should move in.
      */
-    public void move(Vector2 goalPos){
+    public void move(Vector2 goalPos) {
         player.setGoalPosition(goalPos);
+    }
+
+    public void movePlayerWithTouchpad(){
+        float nextX=player.getPosition().x + touchpadRenderer.getTouchpad().getKnobPercentX()*player.SPEED*100;
+        float nextY=player.getPosition().y + touchpadRenderer.getTouchpad().getKnobPercentY() * player.SPEED * 100;
+        move(new Vector2(nextX, nextY));
     }
 
     /**
@@ -92,6 +118,9 @@ public class PlayerController implements InputProcessor{
         world.getPlayer().getWeapon().removeOutOfBoundsBullets();
         world.removeOutOfBoundsEnemies();
         world.removeOutOfBoundsBullets();
+        if(touchControltypeOn){
+            movePlayerWithTouchpad();
+        }
     }
 
     @Override
@@ -151,10 +180,20 @@ public class PlayerController implements InputProcessor{
     }
 
     /**
-     * This method is telling us the controltype is Drag.
+     * This method tells us if the controltype is Drag.
      * @return Returns a boolean with  the value true if Drag-Controltype is on.
      */
     private boolean isDragControltypeOn(){
         return Settings.getControlType().equals("Drag");
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        if((Integer) o == 1){
+            player.fire();
+        }
+        else{
+            player.stopFire();
+        }
     }
 }
