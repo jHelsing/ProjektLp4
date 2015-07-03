@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.icyvenom.needforghetto.Settings;
 
 import java.util.Observable;
 
@@ -30,8 +29,8 @@ public class TouchPadRenderer extends Observable {
     private TextButton fireButton;
     private Touchpad touchpad;
     private Touchpad.TouchpadStyle touchpadStyle;
-    private Drawable touchBackground;
-    private Drawable touchKnob;
+    private Drawable touchpadBackground;
+    private Drawable touchpadKnob;
 
     private float screenWidth;
     private float screenHeight;
@@ -45,6 +44,8 @@ public class TouchPadRenderer extends Observable {
         this.skin = new Skin(Gdx.files.internal("skins/uiskin.json"),
                 new TextureAtlas(Gdx.files.internal("skins/uiskin.atlas")));
         fireButton = new TextButton("Fire", skin);
+        fireButton.setColor(255, 255, 255, 0.35f);
+        fireButton.setRound(true);
 
         init();
     }
@@ -61,37 +62,39 @@ public class TouchPadRenderer extends Observable {
         fireButton.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                setChanged();
                 notifyObservers(1);
-                System.err.print("SKJUTER SONDER!");
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                setChanged();
                 notifyObservers(0);
             }
         });
 
-        skin.add("touchBackground", new Texture(Gdx.files.internal("images/touchBackground.png")));
+        skin.add("touchpadBackground", new Texture(Gdx.files.internal("images/touchpadBackground.png")));
 
-        skin.add("touchKnob", new Texture(Gdx.files.internal("images/touchKnob.png")));
+        skin.add("touchpadKnob", new Texture(Gdx.files.internal("images/touchpadKnob.png")));
 
         touchpadStyle = new Touchpad.TouchpadStyle();
 
-        touchBackground = skin.getDrawable("touchBackground");
-        touchKnob = skin.getDrawable("touchKnob");
+        touchpadBackground = skin.getDrawable("touchpadBackground");
+        touchpadKnob = skin.getDrawable("touchpadKnob");
 
-        touchpadStyle.background = touchBackground;
-        touchpadStyle.knob = touchKnob;
+        touchpadStyle.background = touchpadBackground;
+        touchpadStyle.knob = touchpadKnob;
 
-        touchpad = new Touchpad(10, touchpadStyle);
+        touchpad = new Touchpad(7, touchpadStyle);
 
-        touchpad.setBounds(15, 15, 200, 200);
-
+        table.left().bottom();
         table.add(touchpad);
         table.add(fireButton);
 
         stage.addActor(table);
+
+        Gdx.input.setInputProcessor(stage);
 
     }
 
@@ -104,12 +107,18 @@ public class TouchPadRenderer extends Observable {
     }
 
     private void setFontStyles() {
-        parameter.size = (int)(screenHeight*0.02f);
-        BitmapFont labelfont = generator.generateFont(parameter);
-        Label.LabelStyle labelStyle = new Label.LabelStyle(labelfont, Color.WHITE);
-        fireButton.getLabel().setStyle(labelStyle);
+        parameter.size = (int)(screenHeight*0.04f);
+        BitmapFont fireLabelFont = generator.generateFont(parameter);
+        Label.LabelStyle fireLabelStyle = new Label.LabelStyle(fireLabelFont, Color.WHITE);
+        fireButton.getLabel().setStyle(fireLabelStyle);
 
-        table.getCell(fireButton).size((int) (screenWidth * 0.15f), (int) (screenHeight * 0.06f));
+        table.getCell(fireButton).size((int) (screenWidth * 0.25f), (int) (screenHeight * 0.1f)).
+                padLeft((int) (screenWidth * 0.41f)).bottom().padBottom((int) (screenHeight * 0.01f));
+
+        table.getCell(touchpad).padLeft((int) (screenHeight * 0.01f)).padBottom((int) (screenHeight * 0.01f));
+
+        touchpad.setBounds(7.5f, 7.5f, (int) (screenWidth * 0.3125f),  (int) (screenHeight * 0.2084f));
+
     }
 
     public void setSize(float width, float height) {

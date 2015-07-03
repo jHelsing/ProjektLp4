@@ -41,7 +41,7 @@ public class Player {
     /**
      * The starting position on screen for the Player.
      */
-    public static final Vector2 DEFAULTPOSITION = new Vector2(4.5f, 1f);
+    public static final Vector2 DEFAULTPOSITION = new Vector2(4.5f, 2f);
 
     /**
      * The number of lives the Player has left. The Player dies when
@@ -101,13 +101,15 @@ public class Player {
         this.bounds.width = WIDTH;
         this.bounds.setX(this.position.x);
         this.bounds.setY(this.position.y);
-        this.weapon.setPosition(this.position);
+        this.weapon.setPosition(this.position.cpy().add(WIDTH / 3, HEIGHT / 4));
         //Schedule's a new task for the Player weapons attack speed.
         attackSpeed.scheduleTask(new Timer.Task() {
 
             @Override
             public void run() {
-                weapon.addBullet();
+                if(!isGod() || isGodCheating()){
+                    weapon.addBullet();
+                }
             }
 
         }, 0, weapon.getAttackRate());
@@ -139,12 +141,13 @@ public class Player {
      */
     public void setPosition(Vector2 position) {
         if (this.position != position) {
-            this.position = position.cpy();
-            this.bounds.setX(this.position.x);
-            this.bounds.setY(this.position.y);
-            this.weapon.setPosition(this.position.cpy().add(HEIGHT/3, WIDTH/2));
+                this.position = position.cpy();
+                this.bounds.setX(this.position.x);
+                this.bounds.setY(this.position.y);
+                putWithinBounds();
+                this.weapon.setPosition(this.position.cpy().add(WIDTH/3, HEIGHT/4));
+            }
         }
-    }
 
     public void setWeapon(String playerWeapon){
         switch (playerWeapon){
@@ -206,9 +209,7 @@ public class Player {
      * now be firing bullets.
      */
     public void fire() {
-        if(!isGod() || isGodCheating()){
             attackSpeed.start();
-        }
     }
 
     /**
@@ -256,7 +257,7 @@ public class Player {
      */
     public void setGoalPosition(Vector2 goalPos) {
         if (goalPos != null) {
-            goalPosition = goalPos.sub(new Vector2(WIDTH / 2, HEIGHT / 5));
+            goalPosition = goalPos;
             this.velocity = goalPos.cpy().sub(getPosition());
         }
     }
@@ -279,5 +280,27 @@ public class Player {
 
     public boolean isGodCheating(){
         return GameState.GODMODE_CHEAT;
+    }
+
+    /**
+     * This method moves the player within bounds if it gets out of bounds.
+     */
+    public void putWithinBounds(){
+        if(bounds.getY() < 0f){
+            this.position.y = 0f;
+            this.bounds.y = this.position.y;
+        }
+        if(bounds.getY() + bounds.getHeight() > 10f){
+            this.position.y = 9f;
+            this.bounds.y = this.position.y;
+        }
+        if(bounds.getX() < 0f){
+            this.position.x = 0f;
+            this.bounds.x = this.position.x;
+        }
+        if(bounds.getX() + bounds.getWidth() > 10f){
+            this.position.x= 9.1f;
+            this.bounds.x = this.position.x;
+        }
     }
 }

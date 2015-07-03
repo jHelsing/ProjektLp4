@@ -82,9 +82,22 @@ public class PlayerController implements InputProcessor, Observer{
         player.setGoalPosition(goalPos);
     }
 
-    public void movePlayerWithTouchpad(){
-        float nextX=player.getPosition().x + touchpadRenderer.getTouchpad().getKnobPercentX()*player.SPEED*100;
-        float nextY=player.getPosition().y + touchpadRenderer.getTouchpad().getKnobPercentY() * player.SPEED * 100;
+    public void moveWithTouchpad(){
+
+        if(touchpadRenderer.getTouchpad().isTouched()){
+
+            if(move == false){
+                this.move = true;
+            }
+        }
+        else{
+            if(move == true){
+                this.move = false;
+            }
+        }
+
+        float nextX=player.getPosition().x + touchpadRenderer.getTouchpad().getKnobPercentX()*player.SPEED*20;
+        float nextY=player.getPosition().y + touchpadRenderer.getTouchpad().getKnobPercentY() * player.SPEED*20;
         move(new Vector2(nextX, nextY));
     }
 
@@ -92,6 +105,7 @@ public class PlayerController implements InputProcessor, Observer{
      * Updates the models and makes the necessary stuff to draw the next frame.
      */
     public void update(){
+
         world.checkCollision();
         if(world.getPlayer().getLives() <= 0) {
             // TODO: call method gameOver() and stop enemies from spawning and show gameover screen
@@ -111,6 +125,11 @@ public class PlayerController implements InputProcessor, Observer{
             }
             e.getWeapon().removeOutOfBoundsBullets();
         }
+
+        if(touchControltypeOn){
+            moveWithTouchpad();
+        }
+
         if (move) {
             world.getPlayer().updatePosition();
         }
@@ -118,9 +137,6 @@ public class PlayerController implements InputProcessor, Observer{
         world.getPlayer().getWeapon().removeOutOfBoundsBullets();
         world.removeOutOfBoundsEnemies();
         world.removeOutOfBoundsBullets();
-        if(touchControltypeOn){
-            movePlayerWithTouchpad();
-        }
     }
 
     @Override
