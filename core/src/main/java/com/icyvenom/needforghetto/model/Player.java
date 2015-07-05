@@ -189,7 +189,7 @@ public class Player {
                 public void run() {
                         GameState.GODMODE = false;
                 }
-            }, 4, 4f, 1);
+            }, 4, 0, 0);
             if (lives <= 0) isDead = true;
         }
     }
