@@ -86,7 +86,7 @@ public class TouchPadRenderer extends Observable {
         touchpadStyle.background = touchpadBackground;
         touchpadStyle.knob = touchpadKnob;
 
-        touchpad = new Touchpad(7, touchpadStyle);
+        touchpad = new Touchpad((int) (Gdx.graphics.getWidth() * 0.022f), touchpadStyle);
 
         table.left().bottom();
         table.add(touchpad);
