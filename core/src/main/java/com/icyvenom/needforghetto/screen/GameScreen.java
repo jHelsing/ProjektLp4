@@ -24,7 +24,7 @@ import com.icyvenom.needforghetto.view.WorldRenderer;
  * @author Marcus. Revisited by Amar.
  * @version 1.05
  */
-public class GameScreen implements Screen {
+public class GameScreen implements Screen{
 
     /**
      * The world model that is being played and supposed to be showed on screen.
@@ -83,6 +83,7 @@ public class GameScreen implements Screen {
         this.playerWeapon=playerWeapon;
         this.playerCarColor=playerCarColor;
         this.touchpadControltypeOn=isTouchpadControltypeOn();
+        GameState.GODMODE = false;
     }
 
     @Override
@@ -126,6 +127,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -144,14 +146,10 @@ public class GameScreen implements Screen {
             case RUNNING:
                 Gdx.input.setInputProcessor(inputMultiplexerRunning);
                 playerController.update();
-                world.getSpawnTimer().start();
-                sound.play();
                 break;
             case PAUSED:
                 playerController.move(null); //Resets the movement of the car
                 Gdx.input.setInputProcessor(inputMultiplexerPaused);
-                world.getSpawnTimer().stop();
-                sound.pause();
                 break;
             case VICTORY:
                 sound.stop();
@@ -191,24 +189,23 @@ public class GameScreen implements Screen {
     public void pause() {
         sound.stop();
         GameState.currentState = GameState.State.PAUSED;
+
     }
 
     @Override
     public void resume() {
         sound.play();
-        GameState.currentState = GameState.State.RUNNING;
     }
 
     @Override
     public void hide() {
-        sound.stop();
-        Gdx.input.setInputProcessor(null);
+        dispose();
     }
 
     @Override
     public void dispose() {
         sound.stop();
         Gdx.input.setInputProcessor(null);
+        GameState.GODMODE = false;
     }
-
 }

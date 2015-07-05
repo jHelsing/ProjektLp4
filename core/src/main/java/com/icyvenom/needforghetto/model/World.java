@@ -100,14 +100,12 @@ public class World {
                         //the player and remove the enemy from the game.
                         killEnemy(e);
                         player.kill();
-                        restartTimePointsTimer();
                         // Checks if the enemy is coming from the right (from above)
                     } else if (eMinX <= pMaxX && pMinX <= eMinX) {
                         //Collision between Player and Enemy has happened and we make sure to kill
                         //the player and remove the enemy from the game.
                         killEnemy(e);
                         player.kill();
-                        restartTimePointsTimer();
                     }
                     //Checks if the enemy is coming from below the player
                 } else if (pMinY <= eMaxY && eMaxY <= pMaxY) {
@@ -117,14 +115,12 @@ public class World {
                         //the player and remove the enemy from the game.
                         killEnemy(e);
                         player.kill();
-                        restartTimePointsTimer();
                         // Checks if the enemy is coming from the right (from below)
                     } else if (eMinX <= pMaxX && pMinX <= eMinX) {
                         //Collision between Player and Enemy has happened and we make sure to kill
                         //the player and remove the enemy from the game.
                         killEnemy(e);
                         player.kill();
-                        restartTimePointsTimer();
                     }
                 }
             }
@@ -262,21 +258,17 @@ public class World {
                         if (pMinX <= bMaxX && bMaxX <= pMaxX) {
                             bulletsToRemove.add(b);
                             player.kill();
-                            restartTimePointsTimer();
                         } else if (pMinX <= bMinX && bMinX <= pMaxX) {
                             bulletsToRemove.add(b);
                             player.kill();
-                            restartTimePointsTimer();
                         }
                     } else if (pMinY <= bMaxY && bMaxY <= pMaxY) {
                         if (pMinX <= bMaxX && bMaxX <= pMaxX) {
                             bulletsToRemove.add(b);
                             player.kill();
-                            restartTimePointsTimer();
                         } else if (pMinX <= bMinX && bMinX <= pMaxX) {
                             bulletsToRemove.add(b);
                             player.kill();
-                            restartTimePointsTimer();
                         }
                     }
                 }

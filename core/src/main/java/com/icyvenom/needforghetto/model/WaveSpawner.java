@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Timer;
+import com.icyvenom.needforghetto.gamestate.GameState;
 import com.icyvenom.needforghetto.model.enemies.EnemyTemplate;
 
 import java.util.List;
@@ -37,9 +38,11 @@ public class WaveSpawner extends Timer.Task {
 
     @Override
     public void run() {
-        if (currentWave < factory.getNumberOfWaves()) {
-            factory.createNewWave(enemies, currentWave);
-            currentWave++;
+        if(GameState.currentState == GameState.State.RUNNING){
+            if (currentWave < factory.getNumberOfWaves()) {
+                factory.createNewWave(enemies, currentWave);
+                currentWave++;
+            }
         }
     }
 

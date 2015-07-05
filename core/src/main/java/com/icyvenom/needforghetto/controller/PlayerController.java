@@ -79,7 +79,7 @@ public class PlayerController implements InputProcessor, Observer{
      * @param goalPos The vector that the player should move in.
      */
     public void move(Vector2 goalPos) {
-        player.setGoalPosition(goalPos);
+        player.setGoalPosition(goalPos, dragControltypeOn);
     }
 
     public void moveWithTouchpad(){

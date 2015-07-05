@@ -185,13 +185,11 @@ public class Player {
             GameState.GODMODE = true;
             Timer godModeTimer = new Timer();
             godModeTimer.scheduleTask(new Timer.Task() {
-
                 @Override
                 public void run() {
-                    GameState.GODMODE = false;
+                        GameState.GODMODE = false;
                 }
-
-            }, 4, 4f,1);
+            }, 4, 4f, 1);
             if (lives <= 0) isDead = true;
         }
     }
@@ -255,9 +253,14 @@ public class Player {
      * velocity = goalPosition - currentPosition.
      * @param goalPos The new goalPosition.
      */
-    public void setGoalPosition(Vector2 goalPos) {
+    public void setGoalPosition(Vector2 goalPos, boolean dragControltypeOn) {
         if (goalPos != null) {
-            goalPosition = goalPos;
+            if(dragControltypeOn){
+                goalPosition = goalPos.sub(new Vector2(WIDTH / 2, HEIGHT / 5));
+            }
+            else{
+                goalPosition = goalPos;
+            }
             this.velocity = goalPos.cpy().sub(getPosition());
         }
     }

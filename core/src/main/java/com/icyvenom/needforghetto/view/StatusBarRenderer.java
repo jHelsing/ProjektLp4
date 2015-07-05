@@ -55,6 +55,8 @@ public class StatusBarRenderer {
         this.lifeStatus.setText("Life: " + world.getPlayer().getLives());
         this.scoreStatus.setText("Score: " + world.getPlayer().getScore());
 
+        manageCurrentGamestate();
+
         stage.act();
         stage.draw();
     }
@@ -68,23 +70,39 @@ public class StatusBarRenderer {
         table.add(buttonPause);
         table.right().top();
 
-        buttonPause.addListener(new ClickListener(){
+        buttonPause.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 switch (GameState.currentState) {
                     case RUNNING:
                         GameState.currentState = GameState.State.PAUSED;
-                        buttonPause.setText("Resume");
-                        world.getTimePointsTimer().stop();
                         break;
                     case PAUSED:
                         GameState.currentState = GameState.State.RUNNING;
-                        buttonPause.setText("Pause");
-                        world.getTimePointsTimer().start();
                         break;
                 }
             }
         });
         stage.addActor(table);
+    }
+
+    public void manageCurrentGamestate(){
+
+        if(GameState.currentState == GameState.State.PAUSED){
+            if(buttonPause.getLabel().getText().toString().equals("Pause")){
+                world.getTimePointsTimer().stop();
+                world.getSpawnTimer().stop();
+                buttonPause.setText("Resume");
+            }
+
+        }
+        else{
+            if(buttonPause.getLabel().getText().toString().equals("Resume")){
+                world.getTimePointsTimer().start();
+                world.getSpawnTimer().start();
+                buttonPause.setText("Pause");
+                world.restartTimePointsTimer();
+            }
+        }
     }
 
     private void setFontStyles() {
