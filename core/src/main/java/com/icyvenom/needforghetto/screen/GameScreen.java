@@ -83,7 +83,6 @@ public class GameScreen implements Screen{
         this.playerWeapon=playerWeapon;
         this.playerCarColor=playerCarColor;
         this.touchpadControltypeOn=isTouchpadControltypeOn();
-        GameState.GODMODE = false;
     }
 
     @Override
@@ -206,6 +205,5 @@ public class GameScreen implements Screen{
     public void dispose() {
         sound.stop();
         Gdx.input.setInputProcessor(null);
-        GameState.GODMODE = false;
     }
 }
